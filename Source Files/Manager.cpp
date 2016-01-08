@@ -19,9 +19,9 @@ Manager::Manager() {
 
 void Manager::splashScreen() {
 	sfe::Movie movie;
-	if (!movie.openFromFile(workingPath + "Resource Files/HolumSplashScreen.mp4"))
+	if (!movie.openFromFile("Resource Files/HolumSplashScreen.mp4"))
 	{
-		cout << "Errore 003: Caricamento splash screen non riuscito."<< endl;
+		cout << "Errore 003: Caricamento splash screen non riuscito."<<endl;
 	}
 
 	movie.fit(0, 0, width, height);
@@ -39,7 +39,7 @@ void Manager::splashScreen() {
 }
 
 void Manager::init() {
-	window = new RenderWindow(VideoMode(width, height), "Holum");
+	window = new RenderWindow(VideoMode(width, height), "Holum", Style::Fullscreen);
 
 	VIEW_DIMENSION = 0.32;
 
@@ -72,7 +72,7 @@ void Manager::init() {
 	viewBottom.setRotation(0);
 	viewBottom.setViewport(FloatRect(VIEW_POSITION_BOTTOM_X, VIEW_POSITION_BOTTOM_Y, VIEW_DIMENSION, VIEW_DIMENSION));
 
-	currentStatus = THREED_STATUS;
+	currentStatus = VIDEO_STATUS;
 
 }
 
@@ -110,11 +110,12 @@ void Manager::manageMenu() {
 }
 
 void Manager::manageVideos() {
-    video.videoEvents();
+	video.videoEvents();
+	drawOn(video.getObjectsVector());
 }
 
 void Manager::manageThreeD() {
-    threeD.threeDEvents();
+
 }
 
 void Manager::manageGames() {
@@ -133,13 +134,25 @@ void Manager::windowEvents() {
 		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
 			window->close();
 		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Left) {
-			if (!menu.getRightAnimation()) {
-				menu.setLeftAnimation(true);
+			if (currentStatus == MENU_STATUS){
+				if (!menu.getRightAnimation()) {
+					menu.setLeftAnimation(true);
+				}
+			}
+			else if (currentStatus == VIDEO_STATUS)
+			{
+
 			}
 		}
 		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Right) {
-			if (!menu.getLeftAnimation()) {
-				menu.setRightAnimation(true);
+			if (currentStatus == MENU_STATUS){
+				if (!menu.getLeftAnimation()) {
+					menu.setRightAnimation(true);
+				}
+			}
+			else if (currentStatus == VIDEO_STATUS)
+			{
+
 			}
 		}
 	}

@@ -27,7 +27,7 @@ void Menu::init() {
 	strip.setPosition(0, (height / 2) - (height / 8));
 	strip.setFillColor(Color(127, 140, 141));
 
-	if (!menuFont.loadFromFile(workingPath + "Resource Files/Montserrat-Regular.otf")) {
+	if (!menuFont.loadFromFile("Resource Files/Montserrat-Regular.otf")) {
 		#ifdef DEBUG
 			cout << "Errore 002: Caricamento font non riuscito." << endl;
 		#endif

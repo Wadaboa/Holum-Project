@@ -30,10 +30,6 @@ extern enum MANAGER_STATUS {
 	SETTINGS_STATUS
 };
 
-#ifndef _WIN32
-    extern string workingPath;
-#endif
-
 
 extern void initGlobal();
 

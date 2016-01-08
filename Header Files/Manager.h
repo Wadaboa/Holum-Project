@@ -38,8 +38,9 @@ class Manager {
 		MANAGER_STATUS currentStatus;
 		
 		// Oggetti delle classi del menu
-		Menu menu;
 		Video video;
+		Menu menu;
+		
 		ThreeD threeD;
 		Game game;
 		Settings settings;

@@ -17,9 +17,6 @@ double diagonalAngle;
 RectangleShape mainDiagonal;
 RectangleShape secondaryDiagonal;
 
-#ifndef _WIN32
-    string workingPath("/Users/Jobs/Documents/Xcode/HolumV0.1/HolumV0.1/");
-#endif
 
 extern void initGlobal() {
 #ifdef SCREEN

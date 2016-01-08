@@ -11,7 +11,7 @@ class Menu {
 	private:
 		vector<Drawable*> toDraw;
 		RectangleShape strip;
-
+		
 		unsigned int textSize;
 		Text centralText;
 		Text rightText;

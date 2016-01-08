@@ -9,13 +9,18 @@
 #include <FileVideo.h>
 
 class Video {
-	private:
-		void init();
-        void loadVideos();
-        bool checkExtension(string videoName, int videoNameLen);
-	public:
-		Video();
-		MANAGER_STATUS videoEvents();
-        vector<FileVideo> videoFiles;
-		vector<Drawable*> getObjectsVector();
+private:
+	vector<Drawable*> toDraw;
+	vector<FileVideo> videoFiles;
+	FileVideo fv;			  //prova
+	RectangleShape thumbnail; //prova
+	RectangleShape strip;	  //prova
+	void init();
+	void loadVideos();
+	bool checkExtension(string videoName, int videoNameLen);
+public:
+	Video();
+	MANAGER_STATUS videoEvents();
+	
+	vector<Drawable*> getObjectsVector();
 };

@@ -9,37 +9,48 @@
 #include <Global.h>
 #include <FileVideo.h>
 
+FileVideo::FileVideo() {
+
+}
 
 FileVideo::FileVideo(string videoPath, string videoTitle) {
-    this->videoPath = videoPath;
-    this->videoTitle = videoTitle;
-    init();
+	this->videoPath = videoPath;
+	this->videoTitle = videoTitle;
+	init();
 }
 
 void FileVideo::init() {
-    
+	thumbnail = RectangleShape(Vector2f(500, 700));
+	thumbnail.setFillColor(Color::Blue);
+	FloatRect thumbnailBounds = thumbnail.getLocalBounds();
+	thumbnail.setOrigin(thumbnailBounds.left + thumbnailBounds.width / 2.0f, thumbnailBounds.top + thumbnailBounds.height / 2.0f);
+	thumbnail.setPosition(Vector2f(width / 2, height / 2));
 }
 
-string FileVideo::setVideoPath(string videoPath) {
-    this->videoPath = videoPath;
+void FileVideo::setVideoPath(string videoPath) {
+	this->videoPath = videoPath;
 }
 
-void FileVideo::getVideoPath() {
-    return videoPath;
+string FileVideo::getVideoPath() {
+	return videoPath;
 }
 
-string FileVideo::setThumbnailPath(string thumbnailPath) {
-    this->thumbnailPath = thumbnailPath;
+void FileVideo::setThumbnailPath(string thumbnailPath) {
+	this->thumbnailPath = thumbnailPath;
 }
 
-void FileVideo::getThumbnailPath() {
-    return thumbnailPath;
+string FileVideo::getThumbnailPath() {
+	return thumbnailPath;
 }
 
-string FileVideo::setVideoTitle(string videoTitle) {
-    this->videoTitle = videoTitle;
+void FileVideo::setVideoTitle(string videoTitle) {
+	this->videoTitle = videoTitle;
 }
 
-void FileVideo::getVideoTitle() {
-    return videoTitle;
+string FileVideo::getVideoTitle() {
+	return videoTitle;
+}
+
+RectangleShape FileVideo::getThumbnail() {
+	return thumbnail;
 }
