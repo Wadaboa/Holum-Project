@@ -72,7 +72,7 @@ void Manager::init() {
 	viewBottom.setRotation(0);
 	viewBottom.setViewport(FloatRect(VIEW_POSITION_BOTTOM_X, VIEW_POSITION_BOTTOM_Y, VIEW_DIMENSION, VIEW_DIMENSION));
 
-	currentStatus = MENU_STATUS;
+	currentStatus = THREED_STATUS;
 
 }
 
@@ -114,7 +114,7 @@ void Manager::manageVideos() {
 }
 
 void Manager::manageThreeD() {
-
+    threeD.threeDEvents();
 }
 
 void Manager::manageGames() {
