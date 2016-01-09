@@ -19,9 +19,13 @@ Video::Video() {
 void Video::init() {
 	loadVideos();
 
+	for (int i = 1; i < nVideo; i++) {
+		videoFiles.at(i).setThumbnailSize(240, 360);
+	}
+
+	videoFiles.at(nVideo - 1).setThumbnailPosition( videoFiles.at(nVideo - 1).getThumbnailSize().x / 2, height / 2);
+	videoFiles.at(1).setThumbnailPosition(width - ( videoFiles.at(1).getThumbnailSize().x / 2), height / 2);
 	/*prove*/
-	fv = FileVideo("d", "d");
-	thumbnail = fv.getThumbnail();
 	strip = RectangleShape(Vector2f(width, height / 4));
 	strip.setPosition(0, (height / 2) - (height / 8));
 	strip.setFillColor(Color(127, 140, 141));
@@ -34,7 +38,14 @@ MANAGER_STATUS Video::videoEvents() {
 	/*prove*/
 	toDraw = vector <Drawable*>();
 	toDraw.push_back(&strip);
-	toDraw.push_back(&thumbnail);
+	FileVideo* fv;
+	for (int i = 0; i < videoFiles.size(); i++) {
+		fv = &videoFiles.at(i);
+		fv->getThumbnail()->setTexture(fv->getThumbnailTexture());
+		toDraw.push_back(fv->getThumbnail());
+	}
+
+	
 	/******/
 	return VIDEO_STATUS;
 	
@@ -70,6 +81,7 @@ void Video::loadVideos() {
 			videoFiles.push_back(fv);
 		}
 	}
+	nVideo = videoFiles.size();
 	closedir(dp);
 }
 

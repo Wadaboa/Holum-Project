@@ -9,6 +9,8 @@
 
 #include <Global.h>
 
+string workingPath;
+
 int width;
 int height;
 
@@ -19,6 +21,7 @@ RectangleShape secondaryDiagonal;
 
 
 extern void initGlobal() {
+	workingPath = "Resource Files";
 #ifdef SCREEN
 	width = VideoMode::getDesktopMode().width;
 	height = VideoMode::getDesktopMode().height;

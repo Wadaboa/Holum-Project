@@ -12,8 +12,7 @@ class Video {
 private:
 	vector<Drawable*> toDraw;
 	vector<FileVideo> videoFiles;
-	FileVideo fv;			  //prova
-	RectangleShape thumbnail; //prova
+	int nVideo;
 	RectangleShape strip;	  //prova
 	void init();
 	void loadVideos();

@@ -39,7 +39,7 @@ void Manager::splashScreen() {
 }
 
 void Manager::init() {
-	window = new RenderWindow(VideoMode(width, height), "Holum", Style::Fullscreen);
+	window = new RenderWindow(VideoMode(width, height), "Holum");//, Style::Fullscreen);
 
 	VIEW_DIMENSION = 0.32;
 

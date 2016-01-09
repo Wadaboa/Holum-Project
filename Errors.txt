@@ -1,4 +1,5 @@
 Errore 001: Stato del menu non gestito.
 Errore 002: Caricamento font non riuscito.
 Errore 003: Caricamento splash screen non riuscito.
-Errore 004: Il percorso della directory non esiste o non Ã¨ definito.
+Errore 004: Il percorso della directory video non esiste o non è definito.
+Errore 005: Caricamento texture copertina non riuscito.

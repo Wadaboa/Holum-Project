@@ -14,6 +14,8 @@
 #define PI 3.14159265
 #define DEBUG
 
+extern string workingPath;
+
 extern int width;
 extern int height;
 

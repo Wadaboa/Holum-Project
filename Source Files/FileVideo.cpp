@@ -16,12 +16,19 @@ FileVideo::FileVideo() {
 FileVideo::FileVideo(string videoPath, string videoTitle) {
 	this->videoPath = videoPath;
 	this->videoTitle = videoTitle;
+	string thumbnailPath = videoTitle + ".png";
+	this->thumbnailPath = workingPath + "/" + thumbnailPath;
 	init();
 }
 
 void FileVideo::init() {
-	thumbnail = RectangleShape(Vector2f(500, 700));
-	thumbnail.setFillColor(Color::Blue);
+	rectWidth = 480;
+	rectHeight = 720;
+
+	if (!thumbnailTexture.loadFromFile(thumbnailPath)) {
+		cout << "Errore 005: Caricamento texture copertina non riuscito." << endl;
+	}
+	thumbnail = RectangleShape(Vector2f(rectWidth, rectHeight));
 	FloatRect thumbnailBounds = thumbnail.getLocalBounds();
 	thumbnail.setOrigin(thumbnailBounds.left + thumbnailBounds.width / 2.0f, thumbnailBounds.top + thumbnailBounds.height / 2.0f);
 	thumbnail.setPosition(Vector2f(width / 2, height / 2));
@@ -51,6 +58,24 @@ string FileVideo::getVideoTitle() {
 	return videoTitle;
 }
 
-RectangleShape FileVideo::getThumbnail() {
-	return thumbnail;
+RectangleShape* FileVideo::getThumbnail() {
+	return &thumbnail;
+}
+
+Texture* FileVideo::getThumbnailTexture() {
+	return &thumbnailTexture;
+}
+
+void FileVideo::setThumbnailSize(float x, float y) {
+	thumbnail.setSize(Vector2f(x, y));
+	FloatRect thumbnailBounds = thumbnail.getLocalBounds();
+	thumbnail.setOrigin(thumbnailBounds.left + thumbnailBounds.width / 2.0f, thumbnailBounds.top + thumbnailBounds.height / 2.0f);
+}
+
+void FileVideo::setThumbnailPosition(float x, float y) {
+	thumbnail.setPosition(Vector2f(x, y));
+}
+
+Vector2f FileVideo::getThumbnailSize() {
+	return thumbnail.getSize();
 }

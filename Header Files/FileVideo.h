@@ -8,10 +8,13 @@
 
 class FileVideo {
 private:
+	float rectWidth;
+	float rectHeight;
 	string videoPath;
 	string thumbnailPath;
 	string videoTitle;
 	RectangleShape thumbnail;
+	Texture thumbnailTexture;
 
 	void init();
 public:
@@ -23,5 +26,9 @@ public:
 	string getThumbnailPath();
 	void setVideoTitle(string videoTitle);
 	string getVideoTitle();
-	RectangleShape getThumbnail();
+	RectangleShape* getThumbnail();
+	Texture* getThumbnailTexture();
+	void setThumbnailSize(float x, float y);
+	void setThumbnailPosition(float x, float y);
+	Vector2f getThumbnailSize();
 };
