@@ -39,14 +39,6 @@ class Menu {
 		float outLeftPosAnimation;
 		float outRightPosAnimation;
 
-		enum ANIMATION_STATUS {
-			CENTRAL_STATUS,
-			LEFT_STATUS,
-			RIGHT_STATUS,
-			OUT_RIGHT_STATUS,
-			OUT_LEFT_STATUS
-		};
-
 		ANIMATION_STATUS currentAnimationStatus = CENTRAL_STATUS;
 		
 		void init();
@@ -60,4 +52,5 @@ class Menu {
 		void setRightAnimation(bool rightAnimation);
 		bool getLeftAnimation();
 		bool getRightAnimation();
+		ANIMATION_STATUS getAnimationStatus();
 };

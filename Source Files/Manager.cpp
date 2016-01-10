@@ -13,7 +13,7 @@
 
 Manager::Manager() {
 	init();
-	//splashScreen();
+	splashScreen();
 	run();
 }
 
@@ -39,7 +39,7 @@ void Manager::splashScreen() {
 }
 
 void Manager::init() {
-	window = new RenderWindow(VideoMode(width, height), "Holum");//, Style::Fullscreen);
+	window = new RenderWindow(VideoMode(width, height), "Holum", Style::Fullscreen);
 
 	VIEW_DIMENSION = 0.32;
 
@@ -72,13 +72,14 @@ void Manager::init() {
 	viewBottom.setRotation(0);
 	viewBottom.setViewport(FloatRect(VIEW_POSITION_BOTTOM_X, VIEW_POSITION_BOTTOM_Y, VIEW_DIMENSION, VIEW_DIMENSION));
 
-	currentStatus = VIDEO_STATUS;
+	currentStatus = MENU_STATUS;
 
 }
 
 void Manager::run() {
 	while (window->isOpen()) {
 		windowEvents();
+		checkErrors();
 		switch (currentStatus) {
 			case MENU_STATUS:
 				manageMenu();
@@ -141,7 +142,12 @@ void Manager::windowEvents() {
 			}
 			else if (currentStatus == VIDEO_STATUS)
 			{
-
+				if (!video.getRightAnimation()) {
+					if (!video.getLeftAnimation()) {  //controllo essenziale
+						video.setLeftAnimation(true);
+						video.checkPositions();
+					}
+				}
 			}
 		}
 		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Right) {
@@ -152,7 +158,18 @@ void Manager::windowEvents() {
 			}
 			else if (currentStatus == VIDEO_STATUS)
 			{
+				if (!video.getLeftAnimation()) {
+					if (!video.getRightAnimation()) {  //controllo essenziale
+						video.setRightAnimation(true);
+						video.checkPositions();
+					}		
+				}
 
+			}
+		}
+		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Return) {
+			if (menu.getAnimationStatus() == CENTRAL_STATUS) {
+				currentStatus = VIDEO_STATUS;
 			}
 		}
 	}
@@ -188,7 +205,11 @@ void Manager::drawObjects(vector<Drawable*> toDraw) {
 	}
 }
 
-
+void Manager::checkErrors() {
+	if (quit == true) {
+		window->close();
+	}
+}
 
 int main() {
 	initGlobal();

@@ -59,6 +59,7 @@ class Manager {
 		void windowEvents();
 		void drawOn(vector<Drawable*> toDraw);
 		void drawObjects(vector<Drawable*> toDraw);
+		void checkErrors();
 
 	public:
 		Manager();

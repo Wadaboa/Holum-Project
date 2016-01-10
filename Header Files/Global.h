@@ -14,6 +14,8 @@
 #define PI 3.14159265
 #define DEBUG
 
+extern bool quit;
+
 extern string workingPath;
 
 extern int width;
@@ -30,6 +32,14 @@ extern enum MANAGER_STATUS {
 	THREED_STATUS,
 	GAMES_STATUS,
 	SETTINGS_STATUS
+};
+
+extern enum ANIMATION_STATUS {
+	CENTRAL_STATUS,
+	LEFT_STATUS,
+	RIGHT_STATUS,
+	OUT_RIGHT_STATUS,
+	OUT_LEFT_STATUS
 };
 
 

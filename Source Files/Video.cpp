@@ -19,34 +19,59 @@ Video::Video() {
 void Video::init() {
 	loadVideos();
 
+	leftAnimation = false;
+	rightAnimation = false;
+
+	stepTime = microseconds(8000);
+
+	scaleFactor = 1;
+
+	firstVideoPosition = 0;
+	
+
 	for (int i = 1; i < nVideo; i++) {
-		videoFiles.at(i).setThumbnailSize(240, 360);
+		
+		videoFiles.at(i).setThumbnailScale(0.5f, 0.5f);
 	}
+	
+	
 
-	videoFiles.at(nVideo - 1).setThumbnailPosition( videoFiles.at(nVideo - 1).getThumbnailSize().x / 2, height / 2);
-	videoFiles.at(1).setThumbnailPosition(width - ( videoFiles.at(1).getThumbnailSize().x / 2), height / 2);
-	/*prove*/
-	strip = RectangleShape(Vector2f(width, height / 4));
-	strip.setPosition(0, (height / 2) - (height / 8));
-	strip.setFillColor(Color(127, 140, 141));
-	/******/
-
+	if (nVideo >= 4) {
+		animationSpeed = ((width / 2) - (videoFiles.at(1).getThumbnailSize().x / 2)) / 50;
+		videoFiles.at(0).setThumbnailPosition(width / 2, height / 2);
+		videoFiles.at(nVideo - 1).setThumbnailPosition(videoFiles.at(nVideo - 1).getThumbnailSize().x / 2, height / 2);
+		videoFiles.at(nVideo - 2).setThumbnailPosition(0 - (width / 2) + (videoFiles.at(nVideo - 2).getThumbnailSize().x), height / 2);
+		videoFiles.at(1).setThumbnailPosition(width - (videoFiles.at(1).getThumbnailSize().x / 2), height / 2);
+		for (int i = 2; i < nVideo - 2; i++){
+			videoFiles.at(i).setThumbnailPosition(0 - (width / 2) + (videoFiles.at(i).getThumbnailSize().x), height / 2);
+		}
+	}
+	else
+	{
+		cout << "Errore 006: numero dei video insufficiente"<<endl;
+		quit = true;
+	}
+	checkPositions();
 }
 
 MANAGER_STATUS Video::videoEvents() {
 
-	/*prove*/
 	toDraw = vector <Drawable*>();
-	toDraw.push_back(&strip);
+	
+	if (leftAnimation == true) {
+		animateLeft();
+	}
+	else if (rightAnimation == true) {
+		animateRight();
+	}
 	FileVideo* fv;
-	for (int i = 0; i < videoFiles.size(); i++) {
+	for (int i = 0; i < nVideo; i++) {
 		fv = &videoFiles.at(i);
-		fv->getThumbnail()->setTexture(fv->getThumbnailTexture());
+		fv->getThumbnail()->setTexture(fv->getThumbnailTexture(),false);
 		toDraw.push_back(fv->getThumbnail());
+		
 	}
 
-	
-	/******/
 	return VIDEO_STATUS;
 	
 }
@@ -120,3 +145,107 @@ bool Video::checkExtension(string videoName, int videoNameLen) {
 	}
 	return false;
 }
+
+void Video::checkPositions() {
+	if (rightAnimation) {
+		rightPosition = firstVideoPosition + 1;
+		leftPosition = firstVideoPosition - 1;
+		outPosition = firstVideoPosition - 2;
+
+		if (firstVideoPosition + 1 >= nVideo) {
+			rightPosition = 0;
+		}
+		if (firstVideoPosition - 1 < 0) {
+			leftPosition = nVideo - 1;
+			outPosition = nVideo - 2;
+			
+		}
+		else if (firstVideoPosition - 2 < 0) {
+			leftPosition = 0;
+			outPosition = nVideo - 1;
+		}
+		videoFiles.at(outPosition).setThumbnailPosition(0 - (width / 2) + (videoFiles.at(outPosition).getThumbnailSize().x), height / 2);
+	}
+	else if (leftAnimation) {
+		rightPosition = firstVideoPosition + 1;
+		leftPosition = firstVideoPosition - 1;
+		outPosition = firstVideoPosition + 2;
+
+		if (firstVideoPosition + 1 >= nVideo) {
+			rightPosition = 0;
+			outPosition = 1;
+		}
+		else if (firstVideoPosition + 2 >= nVideo) {
+			rightPosition = nVideo - 1;
+			outPosition = 0;
+		}
+
+		if (firstVideoPosition - 1 < 0) {
+			leftPosition = nVideo - 1;
+		}
+		videoFiles.at(outPosition).setThumbnailPosition(width + (width / 2) - (videoFiles.at(outPosition).getThumbnailSize().x), height / 2);
+	}
+}
+
+void Video::animateLeft(){
+	if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
+	{
+		if (scaleFactor <= 0.51) {
+			leftAnimation = false;
+			scaleFactor = 1;
+			firstVideoPosition = rightPosition;
+		}
+		else {
+			clock.restart();
+
+			scaleFactor = scaleFactor - 0.01f;
+			videoFiles.at(firstVideoPosition).setThumbnailScale(scaleFactor, scaleFactor);
+			videoFiles.at(rightPosition).setThumbnailScale(1.5 - scaleFactor, 1.5 - scaleFactor);
+
+			videoFiles.at(firstVideoPosition).moveThumbnail(0 - animationSpeed, 0);
+			videoFiles.at(rightPosition).moveThumbnail(0 - animationSpeed, 0);
+			videoFiles.at(leftPosition).moveThumbnail(0 - animationSpeed, 0);
+			videoFiles.at(outPosition).moveThumbnail(0 - animationSpeed, 0);
+		}
+	}
+}
+
+void Video::animateRight() {
+	if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
+	{
+		if (scaleFactor <= 0.51) {
+			rightAnimation = false;
+			scaleFactor = 1;
+			firstVideoPosition = leftPosition;
+		}
+		else {
+			clock.restart();
+
+			scaleFactor = scaleFactor - 0.01f;
+			videoFiles.at(firstVideoPosition).setThumbnailScale(scaleFactor, scaleFactor);
+			videoFiles.at(leftPosition).setThumbnailScale(1.5 - scaleFactor, 1.5 - scaleFactor);
+
+			videoFiles.at(firstVideoPosition).moveThumbnail(animationSpeed, 0);
+			videoFiles.at(rightPosition).moveThumbnail(animationSpeed, 0);
+			videoFiles.at(leftPosition).moveThumbnail(animationSpeed, 0);
+			videoFiles.at(outPosition).moveThumbnail(animationSpeed, 0);
+		}
+	}
+}
+
+void Video::setLeftAnimation(bool leftAnimation) {
+	this->leftAnimation = leftAnimation;
+}
+
+void Video::setRightAnimation(bool rightAnimation) {
+	this->rightAnimation = rightAnimation;
+}
+
+bool Video::getLeftAnimation() {
+	return leftAnimation;
+}
+
+bool Video::getRightAnimation() {
+	return rightAnimation;
+}
+

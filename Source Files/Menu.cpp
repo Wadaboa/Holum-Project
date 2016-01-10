@@ -295,3 +295,7 @@ void Menu::animateRight() {
 	else if (currentAnimationStatus == OUT_LEFT_STATUS)
 		rightAnimation = false;
 }
+
+ANIMATION_STATUS Menu::getAnimationStatus() {
+	return currentAnimationStatus;
+}

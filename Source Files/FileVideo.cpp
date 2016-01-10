@@ -27,10 +27,11 @@ void FileVideo::init() {
 
 	if (!thumbnailTexture.loadFromFile(thumbnailPath)) {
 		cout << "Errore 005: Caricamento texture copertina non riuscito." << endl;
+		quit = true;
 	}
 	thumbnail = RectangleShape(Vector2f(rectWidth, rectHeight));
-	FloatRect thumbnailBounds = thumbnail.getLocalBounds();
-	thumbnail.setOrigin(thumbnailBounds.left + thumbnailBounds.width / 2.0f, thumbnailBounds.top + thumbnailBounds.height / 2.0f);
+	FloatRect thumbnailBounds = thumbnail.getGlobalBounds();
+	thumbnail.setOrigin(thumbnailBounds.left + (thumbnailBounds.width / 2.0f), thumbnailBounds.top + (thumbnailBounds.height / 2.0f));
 	thumbnail.setPosition(Vector2f(width / 2, height / 2));
 }
 
@@ -68,8 +69,6 @@ Texture* FileVideo::getThumbnailTexture() {
 
 void FileVideo::setThumbnailSize(float x, float y) {
 	thumbnail.setSize(Vector2f(x, y));
-	FloatRect thumbnailBounds = thumbnail.getLocalBounds();
-	thumbnail.setOrigin(thumbnailBounds.left + thumbnailBounds.width / 2.0f, thumbnailBounds.top + thumbnailBounds.height / 2.0f);
 }
 
 void FileVideo::setThumbnailPosition(float x, float y) {
@@ -77,5 +76,13 @@ void FileVideo::setThumbnailPosition(float x, float y) {
 }
 
 Vector2f FileVideo::getThumbnailSize() {
-	return thumbnail.getSize();
+	return Vector2f(thumbnail.getGlobalBounds().width, thumbnail.getGlobalBounds().height);
+}
+
+void FileVideo::setThumbnailScale(float x, float y) {
+	thumbnail.setScale(Vector2f(x, y));
+}
+
+void FileVideo::moveThumbnail(float x, float y) {
+	thumbnail.move(x, y);
 }
