@@ -30,6 +30,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
+#include <SFML/Audio.hpp>
 #include <sfeMovie/Movie.hpp>
 
 using namespace std;
