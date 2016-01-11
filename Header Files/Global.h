@@ -14,6 +14,10 @@
 #define PI 3.14159265
 #define DEBUG
 
+extern bool quit;
+
+extern string workingPath;
+
 extern int width;
 extern int height;
 
@@ -22,17 +26,21 @@ extern double diagonalAngle;
 extern RectangleShape mainDiagonal;
 extern RectangleShape secondaryDiagonal;
 
-extern enum MANAGER_STATUS {
+typedef enum {
 	MENU_STATUS,
 	VIDEO_STATUS,
 	THREED_STATUS,
 	GAMES_STATUS,
 	SETTINGS_STATUS
-};
+} MANAGER_STATUS;
 
-#ifndef _WIN32
-    extern string workingPath;
-#endif
+typedef enum {
+	CENTRAL_STATUS,
+	LEFT_STATUS,
+	RIGHT_STATUS,
+	OUT_RIGHT_STATUS,
+	OUT_LEFT_STATUS
+} ANIMATION_STATUS;
 
 
 extern void initGlobal();

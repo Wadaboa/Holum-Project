@@ -8,10 +8,10 @@
 
 
 class Game {
-    private:
-        void init();
-    public:
-        Game();
-        MANAGER_STATUS gameEvents();
-        vector<Drawable*> getObjectsVector();
+private:
+	void init();
+public:
+	Game();
+	MANAGER_STATUS gameEvents();
+	vector<Drawable*> getObjectsVector();
 };
