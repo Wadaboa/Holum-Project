@@ -19,27 +19,22 @@ Manager::Manager() {
 
 void Manager::splashScreen() {
 	sfe::Movie movie;
-	if (!movie.openFromFile("Resource Files/HolumSplashScreen.mp4"))
-	{
-		cout << "Errore 003: Caricamento splash screen non riuscito."<<endl;
+	if (!movie.openFromFile(workingPath + "HolumSplashScreen.mp4")) {
+        #ifdef DEBUG
+            cout << "Errore 003: Caricamento splash screen non riuscito." << endl;
+        #endif
 	}
 
-	movie.fit(0, 0, width, height);
-	movie.play();
-	vector<Drawable*> toDraw;
-	Clock clock;
-	while (movie.getDuration() >= clock.getElapsedTime())
-	{
-		movie.update();
-		toDraw.push_back(&movie);
-		drawOn(toDraw);
-		toDraw = vector<Drawable*>();
-	}
+	playVideo(&movie);
 	
 }
 
 void Manager::init() {
-	window = new RenderWindow(VideoMode(width, height), "Holum", Style::Fullscreen);
+	#ifdef DEBUG
+        window = new RenderWindow(VideoMode(width, height, VideoMode().getDesktopMode().bitsPerPixel), "Holum");
+    #else
+        window = new RenderWindow(VideoMode(width, height, VideoMode().getDesktopMode().bitsPerPixel), "Holum" , Style::Fullscreen);
+    #endif
 
 	VIEW_DIMENSION = 0.32;
 
@@ -55,10 +50,10 @@ void Manager::init() {
 	VIEW_POSITION_RIGHT_X = 1 - VIEW_DIMENSION_X;
 	VIEW_POSITION_RIGHT_Y = 0.5 - (VIEW_DIMENSION_Y / 2);
 
-	viewTop = View(Vector2f((width / 2), (height / 2)), Vector2f(width, height));
-	viewLeft = View(Vector2f((width / 2), (height / 2)), Vector2f(height, width));
-	viewRight = View(Vector2f((width / 2), (height / 2)), Vector2f(height, width));
-	viewBottom = View(Vector2f((width / 2), (height / 2)), Vector2f(width, height));
+	viewTop = View(Vector2f((width / 2), (height / 2)), Vector2f(0 - width, height));
+	viewLeft = View(Vector2f((width / 2), (height / 2)), Vector2f(height, 0 - width));
+	viewRight= View(Vector2f((width / 2), (height / 2)), Vector2f(height, 0 - width));
+	viewBottom = View(Vector2f((width / 2), (height / 2)), Vector2f(0 - width, height));
 
 	viewTop.setRotation(180);
 	viewTop.setViewport(FloatRect(VIEW_POSITION_TOP_X, VIEW_POSITION_TOP_Y, VIEW_DIMENSION, VIEW_DIMENSION));
@@ -131,19 +126,33 @@ void Manager::windowEvents() {
 	Event event;
 	while (window->pollEvent(event)) {
 		if (event.type == Event::Closed)
-			window->close();
-		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
-			window->close();
+            window->close();
+		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
+			if (currentStatus == MENU_STATUS)
+                window->close();
+			else
+				currentStatus = MENU_STATUS;
+		}
 		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Left) {
-			if (currentStatus == MENU_STATUS){
+			if (currentStatus == MENU_STATUS) {
 				if (!menu.getRightAnimation()) {
 					menu.setLeftAnimation(true);
+                    if(menu.getAnimationStatus() == OUT_RIGHT_STATUS) {
+                        Music errorSound;
+                        if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
+                            #ifdef DEBUG
+                                cout << "Errore 009: Suono non trovato." << endl;
+                            #endif
+                        }
+                        else {
+                            errorSound.play();
+                        }
+                    }
 				}
 			}
-			else if (currentStatus == VIDEO_STATUS)
-			{
+			else if (currentStatus == VIDEO_STATUS) {
 				if (!video.getRightAnimation()) {
-					if (!video.getLeftAnimation()) {  //controllo essenziale
+					if (!video.getLeftAnimation()) {  // Controllo essenziale
 						video.setLeftAnimation(true);
 						video.checkPositions();
 					}
@@ -151,25 +160,51 @@ void Manager::windowEvents() {
 			}
 		}
 		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Right) {
-			if (currentStatus == MENU_STATUS){
-				if (!menu.getLeftAnimation()) {
-					menu.setRightAnimation(true);
-				}
-			}
-			else if (currentStatus == VIDEO_STATUS)
-			{
+            if (currentStatus == MENU_STATUS){
+                if (!menu.getLeftAnimation()) {
+                    menu.setRightAnimation(true);
+                    if(menu.getAnimationStatus() == OUT_LEFT_STATUS) {
+                        Music errorSound;
+                        if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
+                            #ifdef DEBUG
+                                cout << "Errore 009: Suono non trovato." << endl;
+                            #endif
+                        }
+                        else {
+                            errorSound.play();
+                        }
+                    }
+                }
+            }
+			else if (currentStatus == VIDEO_STATUS) {
 				if (!video.getLeftAnimation()) {
-					if (!video.getRightAnimation()) {  //controllo essenziale
+					if (!video.getRightAnimation()) {  // Controllo essenziale
 						video.setRightAnimation(true);
 						video.checkPositions();
-					}		
+					}
 				}
-
 			}
 		}
 		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Return) {
-			if (menu.getAnimationStatus() == CENTRAL_STATUS) {
-				currentStatus = VIDEO_STATUS;
+			if (currentStatus == MENU_STATUS) {
+				if (menu.getAnimationStatus() == CENTRAL_STATUS) {
+					currentStatus = VIDEO_STATUS;
+				}
+                else if (menu.getAnimationStatus() == LEFT_STATUS) {
+                    currentStatus = SETTINGS_STATUS;
+                }
+                else if (menu.getAnimationStatus() == OUT_LEFT_STATUS) { // EXIT_STATUS
+                    window->close();
+                }
+                else if (menu.getAnimationStatus() == RIGHT_STATUS) {
+                    currentStatus = THREED_STATUS;
+                }
+                else if (menu.getAnimationStatus() == OUT_RIGHT_STATUS) {
+                    currentStatus = GAMES_STATUS;
+                }
+			}
+			else if (currentStatus == VIDEO_STATUS) {
+				playVideo(video.getVideoToPlay());	
 			}
 		}
 	}
@@ -189,13 +224,14 @@ void Manager::drawOn(vector<Drawable*> toDraw) {
 	window->setView(viewBottom);
 	drawObjects(toDraw);
 
-#ifdef DIAGONAL
-	window->setView(window->getDefaultView());
-	toDraw = vector<Drawable*>();
-	toDraw.push_back(&mainDiagonal);
-	toDraw.push_back(&secondaryDiagonal);
-	drawObjects(toDraw);
-#endif
+    #ifdef DIAGONAL
+        window->setView(window->getDefaultView());
+        toDraw = vector<Drawable*>();
+        toDraw.push_back(&mainDiagonal);
+        toDraw.push_back(&secondaryDiagonal);
+        drawObjects(toDraw);
+    #endif
+    
 	window->display();
 }
 
@@ -206,8 +242,31 @@ void Manager::drawObjects(vector<Drawable*> toDraw) {
 }
 
 void Manager::checkErrors() {
-	if (quit == true) {
-		window->close();
+    if (quit == true) {
+        window->close();
+    }
+}
+
+void Manager::playVideo(sfe::Movie* movie) {
+	movie->fit(0, 0, width, height);
+	movie->play();
+	vector<Drawable*> toDraw;
+	Clock clock;
+	bool stopVideo = false;
+
+	while (movie->getDuration() >= clock.getElapsedTime() && !stopVideo) {
+		Event event;
+		while (window->pollEvent(event)) {
+			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
+				movie->stop();
+				stopVideo = true;
+			}
+
+        }
+        movie->update();
+        toDraw.push_back(movie);
+        drawOn(toDraw);
+        toDraw = vector<Drawable*>();
 	}
 }
 

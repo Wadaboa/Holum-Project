@@ -27,7 +27,7 @@ void Menu::init() {
 	strip.setPosition(0, (height / 2) - (height / 8));
 	strip.setFillColor(Color(127, 140, 141));
 
-	if (!menuFont.loadFromFile("Resource Files/Montserrat-Regular.otf")) {
+	if (!menuFont.loadFromFile(workingPath + "Montserrat-Regular.otf")) {
 		#ifdef DEBUG
 			cout << "Errore 002: Caricamento font non riuscito." << endl;
 		#endif
@@ -68,7 +68,7 @@ void Menu::init() {
 	centralText.setPosition(Vector2f(width / 2 , height / 2));
 	rightText.setPosition(Vector2f(width - (rightTextBounds.width / 2), height / 2));
 	leftText.setPosition(Vector2f(leftTextBounds.width / 2, height / 2));
-	outLeftText.setPosition(Vector2f(0 - (width / 2) + (outLeftTextBounds.width), height / 2)); //?????????????????????????????
+    outLeftText.setPosition(Vector2f(0 - (width / 2) + (outLeftTextBounds.width), height / 2));
 	outRightText.setPosition(Vector2f(width + (width / 2) - (outRightTextBounds.width), height / 2));
 
 	centralPosAnimation = ((width / 2) - (centralTextBounds.width / 4)) / 50;

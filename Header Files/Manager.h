@@ -60,6 +60,7 @@ class Manager {
 		void drawOn(vector<Drawable*> toDraw);
 		void drawObjects(vector<Drawable*> toDraw);
 		void checkErrors();
+		void playVideo(sfe::Movie* movie);
 
 	public:
 		Manager();

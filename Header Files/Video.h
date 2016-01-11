@@ -31,6 +31,8 @@ private:
 
 	void animateLeft();
 	void animateRight();
+
+	sfe::Movie movie;
 public:
 	Video();
 	MANAGER_STATUS videoEvents();
@@ -40,4 +42,5 @@ public:
 	bool getLeftAnimation();
 	bool getRightAnimation();
 	void checkPositions();
+	sfe::Movie* getVideoToPlay();
 };

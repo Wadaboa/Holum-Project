@@ -23,19 +23,14 @@ void Video::init() {
 	rightAnimation = false;
 
 	stepTime = microseconds(8000);
-
 	scaleFactor = 1;
 
 	firstVideoPosition = 0;
 	
-
 	for (int i = 1; i < nVideo; i++) {
-		
 		videoFiles.at(i).setThumbnailScale(0.5f, 0.5f);
 	}
 	
-	
-
 	if (nVideo >= 4) {
 		animationSpeed = ((width / 2) - (videoFiles.at(1).getThumbnailSize().x / 2)) / 50;
 		videoFiles.at(0).setThumbnailPosition(width / 2, height / 2);
@@ -46,16 +41,16 @@ void Video::init() {
 			videoFiles.at(i).setThumbnailPosition(0 - (width / 2) + (videoFiles.at(i).getThumbnailSize().x), height / 2);
 		}
 	}
-	else
-	{
-		cout << "Errore 006: numero dei video insufficiente"<<endl;
+	else {
+        #ifdef DEBUG
+            cout << "Errore 006: Numero dei video insufficiente." << endl;
+        #endif
 		quit = true;
 	}
 	checkPositions();
 }
 
 MANAGER_STATUS Video::videoEvents() {
-
 	toDraw = vector <Drawable*>();
 	
 	if (leftAnimation == true) {
@@ -69,7 +64,6 @@ MANAGER_STATUS Video::videoEvents() {
 		fv = &videoFiles.at(i);
 		fv->getThumbnail()->setTexture(fv->getThumbnailTexture(),false);
 		toDraw.push_back(fv->getThumbnail());
-		
 	}
 
 	return VIDEO_STATUS;
@@ -81,20 +75,17 @@ vector<Drawable*> Video::getObjectsVector() {
 }
 
 void Video::loadVideos() {
-
-	#ifdef _WIN32
-		const char *path ="Resource Files";
-	#else
-		const char *path = "/Users/Jobs/Documents/Xcode/HolumV0.1/HolumV0.1/Resource Files";
-	#endif
+    const char *path = workingPath.c_str();
 	string videoPath(path);
 	struct dirent *entry;
 	DIR *dp;
 
 	dp = opendir(path);
 	if (dp == NULL) {
-		cout << "Errore 004: Il percorso della directory video non esiste o non è definito.";
-		return (void)-1;
+        #ifdef DEBUG
+            cout << "Errore 004: Il percorso della directory video non esiste." << endl;
+        #endif
+		return (void)(-1);
 	}
 
 	while ((entry = readdir(dp))) {
@@ -103,6 +94,7 @@ void Video::loadVideos() {
 		if (checkExtension(videoName, videoNameLen)) {
 			videoPath += "/" + videoName;
 			FileVideo fv(videoPath, videoName.substr(0, videoName.find(".")));
+			videoPath = path;
 			videoFiles.push_back(fv);
 		}
 	}
@@ -231,6 +223,15 @@ void Video::animateRight() {
 			videoFiles.at(outPosition).moveThumbnail(animationSpeed, 0);
 		}
 	}
+}
+
+sfe::Movie* Video::getVideoToPlay() {
+	if (!movie.openFromFile(videoFiles.at(firstVideoPosition).getVideoPath())) {
+        #ifdef DEBUG
+            cout << "Errore 007: Errore caricamento video." << endl;
+        #endif
+	}
+	return &movie;
 }
 
 void Video::setLeftAnimation(bool leftAnimation) {
