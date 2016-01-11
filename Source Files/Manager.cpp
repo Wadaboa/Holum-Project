@@ -30,11 +30,13 @@ void Manager::splashScreen() {
 }
 
 void Manager::init() {
-	#ifdef DEBUG
-        window = new RenderWindow(VideoMode(width, height, VideoMode().getDesktopMode().bitsPerPixel), "Holum");
+    #ifdef DEBUG
+        fullscreen = false;
     #else
-        window = new RenderWindow(VideoMode(width, height, VideoMode().getDesktopMode().bitsPerPixel), "Holum" , Style::Fullscreen);
+        fullscreen = true;
     #endif
+    
+    window = new RenderWindow(VideoMode(width, height, VideoMode(width, height).getDesktopMode().bitsPerPixel), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
 
 	VIEW_DIMENSION = 0.32;
 
@@ -207,6 +209,10 @@ void Manager::windowEvents() {
 				playVideo(video.getVideoToPlay());	
 			}
 		}
+        if (event.type == Event::KeyPressed && event.key.code == Keyboard::F11) {
+            fullscreen = !fullscreen;
+            window->create(VideoMode(width, height, VideoMode(width, height).getDesktopMode().bitsPerPixel), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
+        }
 	}
 }
 

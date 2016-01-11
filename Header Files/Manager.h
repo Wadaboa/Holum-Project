@@ -46,6 +46,7 @@ class Manager {
 		Settings settings;
 
 		RenderWindow* window;
+        bool fullscreen;
 
 
 		void splashScreen();
