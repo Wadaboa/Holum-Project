@@ -36,21 +36,21 @@ void Manager::init() {
         fullscreen = true;
     #endif
     
-    window = new RenderWindow(VideoMode(width, height, VideoMode(width, height).getDesktopMode().bitsPerPixel), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
+		window = new RenderWindow(VideoMode((unsigned int)width, (unsigned int)height, VideoMode((unsigned int)width, (unsigned int)height).getDesktopMode().bitsPerPixel), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
 
-	VIEW_DIMENSION = 0.32;
+	VIEW_DIMENSION = 0.32f;
 
 	VIEW_DIMENSION_X = (height * VIEW_DIMENSION) / width;
 	VIEW_DIMENSION_Y = (width * VIEW_DIMENSION) / height;
 
-	VIEW_POSITION_TOP_X = 0.5 - (VIEW_DIMENSION / 2);
+	VIEW_POSITION_TOP_X = 0.5f - (VIEW_DIMENSION / 2);
 	VIEW_POSITION_TOP_Y = 0.0;
-	VIEW_POSITION_BOTTOM_X = 0.5 - (VIEW_DIMENSION / 2);
+	VIEW_POSITION_BOTTOM_X = 0.5f - (VIEW_DIMENSION / 2);
 	VIEW_POSITION_BOTTOM_Y = 1 - VIEW_DIMENSION;
 	VIEW_POSITION_LEFT_X = 0.0;
-	VIEW_POSITION_LEFT_Y = 0.5 - (VIEW_DIMENSION_Y / 2);
+	VIEW_POSITION_LEFT_Y = 0.5f - (VIEW_DIMENSION_Y / 2);
 	VIEW_POSITION_RIGHT_X = 1 - VIEW_DIMENSION_X;
-	VIEW_POSITION_RIGHT_Y = 0.5 - (VIEW_DIMENSION_Y / 2);
+	VIEW_POSITION_RIGHT_Y = 0.5f - (VIEW_DIMENSION_Y / 2);
 
 	viewTop = View(Vector2f((width / 2), (height / 2)), Vector2f(0 - width, height));
 	viewLeft = View(Vector2f((width / 2), (height / 2)), Vector2f(height, 0 - width));
@@ -211,7 +211,7 @@ void Manager::windowEvents() {
 		}
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::F11) {
             fullscreen = !fullscreen;
-            window->create(VideoMode(width, height, VideoMode(width, height).getDesktopMode().bitsPerPixel), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
+			window->create(VideoMode((unsigned int)width, (unsigned int)height, VideoMode((unsigned int)width, (unsigned int)height).getDesktopMode().bitsPerPixel), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
         }
 	}
 }
@@ -242,7 +242,7 @@ void Manager::drawOn(vector<Drawable*> toDraw) {
 }
 
 void Manager::drawObjects(vector<Drawable*> toDraw) {
-	for(int i = 0; i < toDraw.size(); i++) {
+	for(unsigned int i = 0; i < toDraw.size(); i++) {
 		window->draw(*toDraw.at(i));
 	}
 }

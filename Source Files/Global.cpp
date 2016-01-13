@@ -13,8 +13,8 @@ bool quit;
 
 string workingPath;
 
-int width;
-int height;
+float width;
+float height;
 
 double pit;
 double diagonalAngle;
@@ -31,8 +31,8 @@ extern void initGlobal() {
     #endif
     
     #ifdef SCREEN
-        width = VideoMode::getDesktopMode().width;
-        height = VideoMode::getDesktopMode().height;
+        width = (float)VideoMode::getDesktopMode().width;
+        height = (float)VideoMode::getDesktopMode().height;
     #else
         width = 1280;
         height = 1024;
@@ -44,7 +44,7 @@ extern void initGlobal() {
         mainDiagonal = RectangleShape(Vector2f((float)pit, 2));
         secondaryDiagonal = RectangleShape(Vector2f((float)pit, 2));
         secondaryDiagonal.setPosition(Vector2f(0, height));
-        mainDiagonal.setRotation(90 - diagonalAngle);
-        secondaryDiagonal.setRotation(0 - (90 - diagonalAngle));
+        mainDiagonal.setRotation((float)(90 - diagonalAngle));
+        secondaryDiagonal.setRotation((float) (0 - (90 - diagonalAngle)));
     #endif
 }
