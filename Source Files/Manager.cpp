@@ -30,11 +30,13 @@ void Manager::splashScreen() {
 }
 
 void Manager::init() {
-	#ifdef DEBUG
-        window = new RenderWindow(VideoMode(width, height, VideoMode().getDesktopMode().bitsPerPixel), "Holum");
+    #ifdef DEBUG
+        fullscreen = false;
     #else
-        window = new RenderWindow(VideoMode(width, height, VideoMode().getDesktopMode().bitsPerPixel), "Holum" , Style::Fullscreen);
+        fullscreen = true;
     #endif
+    
+    window = new RenderWindow(VideoMode(width, height, VideoMode(width, height).getDesktopMode().bitsPerPixel), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
 
 	VIEW_DIMENSION = 0.32;
 
@@ -160,22 +162,22 @@ void Manager::windowEvents() {
 			}
 		}
 		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Right) {
-            if (currentStatus == MENU_STATUS){
-                if (!menu.getLeftAnimation()) {
-                    menu.setRightAnimation(true);
-                    if(menu.getAnimationStatus() == OUT_LEFT_STATUS) {
-                        Music errorSound;
-                        if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
-                            #ifdef DEBUG
-                                cout << "Errore 009: Suono non trovato." << endl;
-                            #endif
-                        }
-                        else {
-                            errorSound.play();
-                        }
-                    }
-                }
-            }
+			if (currentStatus == MENU_STATUS){
+				if (!menu.getLeftAnimation()) {
+					menu.setRightAnimation(true);
+					if (menu.getAnimationStatus() == OUT_LEFT_STATUS) {
+						Music errorSound;
+						if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
+							#ifdef DEBUG
+								cout << "Errore 009: Suono non trovato." << endl;
+							#endif
+						}
+						else {
+							errorSound.play();
+						}
+					}
+				}
+			}
 			else if (currentStatus == VIDEO_STATUS) {
 				if (!video.getLeftAnimation()) {
 					if (!video.getRightAnimation()) {  // Controllo essenziale
@@ -185,7 +187,7 @@ void Manager::windowEvents() {
 				}
 			}
 		}
-		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Return) {
+			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Return) {
 			if (currentStatus == MENU_STATUS) {
 				if (menu.getAnimationStatus() == CENTRAL_STATUS) {
 					currentStatus = VIDEO_STATUS;
@@ -207,6 +209,10 @@ void Manager::windowEvents() {
 				playVideo(video.getVideoToPlay());	
 			}
 		}
+        if (event.type == Event::KeyPressed && event.key.code == Keyboard::F11) {
+            fullscreen = !fullscreen;
+            window->create(VideoMode(width, height, VideoMode(width, height).getDesktopMode().bitsPerPixel), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
+        }
 	}
 }
 
@@ -260,13 +266,17 @@ void Manager::playVideo(sfe::Movie* movie) {
 			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
 				movie->stop();
 				stopVideo = true;
+				toDraw = vector<Drawable*>();
 			}
 
         }
-        movie->update();
-        toDraw.push_back(movie);
-        drawOn(toDraw);
-        toDraw = vector<Drawable*>();
+		if (!stopVideo) {
+			movie->update();
+			toDraw.push_back(movie);
+			drawOn(toDraw);
+			toDraw = vector<Drawable*>();
+		}
+        
 	}
 }
 

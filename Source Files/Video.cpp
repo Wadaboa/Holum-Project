@@ -226,6 +226,7 @@ void Video::animateRight() {
 }
 
 sfe::Movie* Video::getVideoToPlay() {
+	movie = sfe::Movie();
 	if (!movie.openFromFile(videoFiles.at(firstVideoPosition).getVideoPath())) {
         #ifdef DEBUG
             cout << "Errore 007: Errore caricamento video." << endl;
