@@ -62,7 +62,7 @@ class Manager {
 		void drawObjects(vector<Drawable*> toDraw);
 		void checkErrors();
 		void playVideo(sfe::Movie* movie);
-
+    
 	public:
 		Manager();
 };

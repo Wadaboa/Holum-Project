@@ -42,6 +42,5 @@ typedef enum {
 	OUT_LEFT_STATUS
 } ANIMATION_STATUS;
 
-
 extern void initGlobal();
 

@@ -45,6 +45,6 @@ extern void initGlobal() {
         secondaryDiagonal = RectangleShape(Vector2f((float)pit, 2));
         secondaryDiagonal.setPosition(Vector2f(0, height));
         mainDiagonal.setRotation((float)(90 - diagonalAngle));
-        secondaryDiagonal.setRotation((float) (0 - (90 - diagonalAngle)));   
-	#endif
+        secondaryDiagonal.setRotation((float) (0 - (90 - diagonalAngle)));
+    #endif
 }

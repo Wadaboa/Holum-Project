@@ -18,13 +18,16 @@ Menu::Menu() {
 void Menu::init() {
 	leftAnimation = false;
 	rightAnimation = false;
+    upAnimation = true;
+    downAnimation = false;
 
 	stepTime = microseconds(8000);
+    udStepTime = microseconds(2000);
 
 	scaleFactor = 1;
 
 	strip = RectangleShape(Vector2f(width, height / 4));
-	strip.setPosition(0, (height / 2) - (height / 8));
+	strip.setPosition(0, height);
 	strip.setFillColor(Color(127, 140, 141));
 
 	if (!menuFont.loadFromFile(workingPath + "Montserrat-Regular.otf")) {
@@ -65,9 +68,9 @@ void Menu::init() {
 	outLeftTextBounds = outLeftText.getGlobalBounds();
 	outRightTextBounds = outRightText.getGlobalBounds();
 
-	centralText.setPosition(Vector2f(width / 2 , height / 2));
-	rightText.setPosition(Vector2f(width - (rightTextBounds.width / 2), height / 2));
-	leftText.setPosition(Vector2f(leftTextBounds.width / 2, height / 2));
+	centralText.setPosition(Vector2f(width / 2 , (height + centralTextBounds.height / 2)));
+	rightText.setPosition(Vector2f(width - (rightTextBounds.width / 2), (height + rightTextBounds.height / 2)));
+	leftText.setPosition(Vector2f(leftTextBounds.width / 2, (height + leftTextBounds.height / 2)));
     outLeftText.setPosition(Vector2f(0 - (width / 2) + (outLeftTextBounds.width), height / 2));
 	outRightText.setPosition(Vector2f(width + (width / 2) - (outRightTextBounds.width), height / 2));
 
@@ -76,15 +79,26 @@ void Menu::init() {
 	rightPosAnimation = ((width / 2) - (rightTextBounds.width / 2)) / 50;
 	outLeftPosAnimation = ((width / 2) - (outLeftTextBounds.width / 2)) / 50;
 	outRightPosAnimation = ((width / 2) - (outRightTextBounds.width / 2)) / 50;
+    
+    initCentralPosAnimation = ((height + centralTextBounds.height / 2) - (height / 2)) / 50;
+    initLeftPosAnimation = ((height + leftTextBounds.height / 2) - (height / 2)) / 50;
+    initRightPosAnimation = ((height + rightTextBounds.height / 2) - (height / 2)) / 50;
+    initStripPosAnimation = (height - (height / 2 - (strip.getLocalBounds().height / 2))) / 50;
 }
 
 MANAGER_STATUS Menu::menuEvents() {
-	if (leftAnimation == true) {
+    if(upAnimation == true) {
+        animateUp();
+    }
+	else if (leftAnimation == true) {
 		animateLeft();
 	}
 	else if (rightAnimation == true) {
 		animateRight();
 	}
+    if(downAnimation == true) {
+        animateDown();
+    }
 	
 	toDraw = vector <Drawable*>();
 
@@ -110,6 +124,14 @@ void Menu::setRightAnimation(bool rightAnimation) {
 	this->rightAnimation = rightAnimation;
 }
 
+void Menu::setDownAnimation(bool downAnimation) {
+    this->downAnimation = downAnimation;
+}
+
+void Menu::setUpAnimation(bool upAnimation) {
+    this->upAnimation = upAnimation;
+}
+
 bool Menu::getLeftAnimation() {
 	return leftAnimation;
 }
@@ -120,8 +142,7 @@ bool Menu::getRightAnimation() {
 
 void Menu::animateLeft() {
 	if (currentAnimationStatus == CENTRAL_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
-		{
+		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
 			if (scaleFactor <= 0.51) {
 				leftAnimation = false;
 				currentAnimationStatus = RIGHT_STATUS;
@@ -141,8 +162,7 @@ void Menu::animateLeft() {
 		}
 	}
 	else if (currentAnimationStatus == RIGHT_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
-		{
+		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
 			if (scaleFactor <= 0.51) {
 				leftAnimation = false;
 				currentAnimationStatus = OUT_RIGHT_STATUS;
@@ -162,8 +182,7 @@ void Menu::animateLeft() {
 		}
 	}
 	else if (currentAnimationStatus == LEFT_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
-		{
+		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
 			if (scaleFactor <= 0.51) {
 				leftAnimation = false;
 				currentAnimationStatus = CENTRAL_STATUS;
@@ -183,8 +202,7 @@ void Menu::animateLeft() {
 		}
 	}
 	else if (currentAnimationStatus == OUT_LEFT_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
-		{
+		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
 			if (scaleFactor <= 0.51) {
 				leftAnimation = false;
 				currentAnimationStatus = LEFT_STATUS;
@@ -209,8 +227,7 @@ void Menu::animateLeft() {
 
 void Menu::animateRight() {
 	if (currentAnimationStatus == CENTRAL_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
-		{
+		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
 			if (scaleFactor <= 0.51) {
 				rightAnimation = false;
 				currentAnimationStatus = LEFT_STATUS;
@@ -230,8 +247,7 @@ void Menu::animateRight() {
 		}
 	}
 	else if (currentAnimationStatus == RIGHT_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
-		{
+		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
 			if (scaleFactor <= 0.51) {
 				rightAnimation = false;
 				currentAnimationStatus = CENTRAL_STATUS;
@@ -251,8 +267,7 @@ void Menu::animateRight() {
 		}
 	}
 	else if (currentAnimationStatus == LEFT_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
-		{
+		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
 			if (scaleFactor <= 0.51) {
 				rightAnimation = false;
 				currentAnimationStatus = OUT_LEFT_STATUS;
@@ -272,8 +287,7 @@ void Menu::animateRight() {
 		}
 	}
 	else if (currentAnimationStatus == OUT_RIGHT_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
-		{
+		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
 			if (scaleFactor <= 0.51) {
 				rightAnimation = false;
 				currentAnimationStatus = RIGHT_STATUS;
@@ -294,6 +308,40 @@ void Menu::animateRight() {
 	}
 	else if (currentAnimationStatus == OUT_LEFT_STATUS)
 		rightAnimation = false;
+}
+
+void Menu::animateUp() {
+    if (clock.getElapsedTime().asMicroseconds() >= udStepTime.asMicroseconds()) {
+        if (scaleFactor <= 0.51) {
+            upAnimation = false;
+            currentAnimationStatus = CENTRAL_STATUS;
+            scaleFactor = 1;
+        }
+        else {
+            clock.restart();
+            scaleFactor = scaleFactor - 0.01f;
+            centralText.move(0, 0 - initCentralPosAnimation);
+            leftText.move(0, 0 - initLeftPosAnimation);
+            rightText.move(0, 0 - initRightPosAnimation);
+            strip.move(0, 0 - initStripPosAnimation);
+        }
+    }
+}
+
+void Menu::animateDown() {
+    if (clock.getElapsedTime().asMicroseconds() >= udStepTime.asMicroseconds()) {
+        if (scaleFactor <= 0.51) {
+            quit = true;
+        }
+        else {
+            clock.restart();
+            scaleFactor = scaleFactor - 0.01f;
+            centralText.move(0, initCentralPosAnimation);
+            leftText.move(0, initLeftPosAnimation);
+            rightText.move(0, initRightPosAnimation);
+            strip.move(0, initStripPosAnimation);
+        }
+    }
 }
 
 ANIMATION_STATUS Menu::getAnimationStatus() {
