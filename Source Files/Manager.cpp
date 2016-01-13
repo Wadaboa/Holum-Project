@@ -141,7 +141,7 @@ void Manager::windowEvents() {
 					menu.setLeftAnimation(true);
                     if(menu.getAnimationStatus() == OUT_RIGHT_STATUS) {
                         Music errorSound;
-                        if (!errorSound.openFromFile("errorSound.wav")) {
+                        if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
                             #ifdef DEBUG
                                 cout << "Errore 009: Suono non trovato." << endl;
                             #endif
@@ -167,7 +167,7 @@ void Manager::windowEvents() {
                     menu.setRightAnimation(true);
                     if(menu.getAnimationStatus() == OUT_LEFT_STATUS) {
                         Music errorSound;
-                        if (!errorSound.openFromFile("errorSound.wav")) {
+                        if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
                             #ifdef DEBUG
                                 cout << "Errore 009: Suono non trovato." << endl;
                             #endif
