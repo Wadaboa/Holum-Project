@@ -131,7 +131,7 @@ void Menu::animateLeft() {
 				clock.restart();
 				scaleFactor = scaleFactor - 0.01f;
 				centralText.setScale(Vector2f(scaleFactor, scaleFactor));
-				rightText.setScale(Vector2f(1.5 - scaleFactor, 1.5 - scaleFactor));
+				rightText.setScale(Vector2f((float)1.5 - scaleFactor, (float)1.5 - scaleFactor));
 				centralText.move(0 - centralPosAnimation, 0);
 				leftText.move(0 - leftPosAnimation, 0);
 				rightText.move(0 - rightPosAnimation, 0);
@@ -152,7 +152,7 @@ void Menu::animateLeft() {
 				clock.restart();
 				scaleFactor = scaleFactor - 0.01f;
 				rightText.setScale(Vector2f(scaleFactor, scaleFactor));
-				outRightText.setScale(Vector2f(1.5 - scaleFactor, 1.5 - scaleFactor));
+				outRightText.setScale(Vector2f((float)1.5 - scaleFactor, (float)1.5 - scaleFactor));
 				centralText.move(0 - centralPosAnimation, 0);
 				leftText.move(0 - leftPosAnimation, 0);
 				rightText.move(0 - rightPosAnimation, 0);
@@ -173,7 +173,7 @@ void Menu::animateLeft() {
 				clock.restart();
 				scaleFactor = scaleFactor - 0.01f;
 				leftText.setScale(Vector2f(scaleFactor, scaleFactor));
-				centralText.setScale(Vector2f(1.5 - scaleFactor, 1.5 - scaleFactor));
+				centralText.setScale(Vector2f((float)1.5 - scaleFactor, (float)1.5 - scaleFactor));
 				centralText.move(0 - centralPosAnimation, 0);
 				leftText.move(0 - leftPosAnimation, 0);
 				rightText.move(0 - rightPosAnimation, 0);
@@ -194,7 +194,7 @@ void Menu::animateLeft() {
 				clock.restart();
 				scaleFactor = scaleFactor - 0.01f;
 				outLeftText.setScale(Vector2f(scaleFactor, scaleFactor));
-				leftText.setScale(Vector2f(1.5 - scaleFactor, 1.5 - scaleFactor));
+				leftText.setScale(Vector2f((float)1.5 - scaleFactor, (float)1.5 - scaleFactor));
 				centralText.move(0 - centralPosAnimation, 0);
 				leftText.move(0 - leftPosAnimation, 0);
 				rightText.move(0 - rightPosAnimation, 0);
@@ -220,7 +220,7 @@ void Menu::animateRight() {
 				clock.restart();
 				scaleFactor = scaleFactor - 0.01f;
 				centralText.setScale(Vector2f(scaleFactor, scaleFactor));
-				leftText.setScale(Vector2f(1.5 - scaleFactor, 1.5 - scaleFactor));
+				leftText.setScale(Vector2f((float)1.5 - scaleFactor, (float)1.5 - scaleFactor));
 				centralText.move(centralPosAnimation, 0);
 				leftText.move(leftPosAnimation, 0);
 				rightText.move(rightPosAnimation, 0);
@@ -241,7 +241,7 @@ void Menu::animateRight() {
 				clock.restart();
 				scaleFactor = scaleFactor - 0.01f;
 				rightText.setScale(Vector2f(scaleFactor, scaleFactor));
-				centralText.setScale(Vector2f(1.5 - scaleFactor, 1.5 - scaleFactor));
+				centralText.setScale(Vector2f((float)1.5 - scaleFactor, (float) 1.5 - scaleFactor));
 				centralText.move(centralPosAnimation, 0);
 				leftText.move(leftPosAnimation, 0);
 				rightText.move(rightPosAnimation, 0);
@@ -262,7 +262,7 @@ void Menu::animateRight() {
 				clock.restart();
 				scaleFactor = scaleFactor - 0.01f;
 				leftText.setScale(Vector2f(scaleFactor, scaleFactor));
-				outLeftText.setScale(Vector2f(1.5 - scaleFactor, 1.5 - scaleFactor));
+				outLeftText.setScale(Vector2f((float)1.5 - scaleFactor, (float)1.5 - scaleFactor));
 				centralText.move(centralPosAnimation, 0);
 				leftText.move(leftPosAnimation, 0);
 				rightText.move(rightPosAnimation, 0);
@@ -283,7 +283,7 @@ void Menu::animateRight() {
 				clock.restart();
 				scaleFactor = scaleFactor - 0.01f;
 				outRightText.setScale(Vector2f(scaleFactor, scaleFactor));
-				rightText.setScale(Vector2f(1.5 - scaleFactor, 1.5 - scaleFactor));
+				rightText.setScale(Vector2f((float)1.5 - scaleFactor, (float) 1.5 - scaleFactor));
 				centralText.move(centralPosAnimation, 0);
 				leftText.move(leftPosAnimation, 0);
 				rightText.move(rightPosAnimation, 0);

@@ -18,8 +18,8 @@ extern bool quit;
 
 extern string workingPath;
 
-extern int width;
-extern int height;
+extern float width;
+extern float height;
 
 extern double pit;
 extern double diagonalAngle;
