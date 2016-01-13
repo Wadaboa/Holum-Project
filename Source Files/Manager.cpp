@@ -162,32 +162,32 @@ void Manager::windowEvents() {
 			}
 		}
 		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Right) {
-            if (currentStatus == MENU_STATUS){
-                if (!menu.getLeftAnimation()) {
-                    menu.setRightAnimation(true);
-                    if(menu.getAnimationStatus() == OUT_LEFT_STATUS) {
-                        Music errorSound;
-                        if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
-                            #ifdef DEBUG
-                                cout << "Errore 009: Suono non trovato." << endl;
-                            #endif
-                        }
-                        else {
-                            errorSound.play();
-                        }
-                    }
-                }
-            }
-        }
-        else if (currentStatus == VIDEO_STATUS) {
-            if (!video.getLeftAnimation()) {
-                if (!video.getRightAnimation()) {  // Controllo essenziale
-                    video.setRightAnimation(true);
-                    video.checkPositions();
-                }
-            }
-        }
-		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Return) {
+			if (currentStatus == MENU_STATUS){
+				if (!menu.getLeftAnimation()) {
+					menu.setRightAnimation(true);
+					if (menu.getAnimationStatus() == OUT_LEFT_STATUS) {
+						Music errorSound;
+						if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
+							#ifdef DEBUG
+								cout << "Errore 009: Suono non trovato." << endl;
+							#endif
+						}
+						else {
+							errorSound.play();
+						}
+					}
+				}
+			}
+			else if (currentStatus == VIDEO_STATUS) {
+				if (!video.getLeftAnimation()) {
+					if (!video.getRightAnimation()) {  // Controllo essenziale
+						video.setRightAnimation(true);
+						video.checkPositions();
+					}
+				}
+			}
+		}
+			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Return) {
 			if (currentStatus == MENU_STATUS) {
 				if (menu.getAnimationStatus() == CENTRAL_STATUS) {
 					currentStatus = VIDEO_STATUS;
