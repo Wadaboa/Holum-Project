@@ -11,6 +11,7 @@
 #include <Game.h>
 #include <ThreeD.h>
 #include <Settings.h>
+#include <MyoConnector.h>
 
 class Manager {
 	private:
@@ -47,6 +48,10 @@ class Manager {
 
 		RenderWindow* window;
         bool fullscreen;
+    
+        Hub* hub;
+        Myo* myoArmband;
+        MyoConnector myoConnector;
 
 
 		void splashScreen();
@@ -62,6 +67,7 @@ class Manager {
 		void drawObjects(vector<Drawable*> toDraw);
 		void checkErrors();
 		void playVideo(sfe::Movie* movie);
+        void initMyo();
     
 	public:
 		Manager();

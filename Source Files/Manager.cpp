@@ -13,7 +13,8 @@
 
 Manager::Manager() {
     init();
-    //splashScreen();
+    initMyo();
+    splashScreen();
     run();
 }
 
@@ -27,6 +28,26 @@ void Manager::splashScreen() {
     
     playVideo(&movie);
     
+}
+
+void Manager::initMyo() {
+    try {
+        hub = new Hub("com.jobs.holum-project");
+        myoArmband = hub->waitForMyo(10000);
+        
+        if (!myoArmband) {
+            #ifdef DEBUG
+                cout << "Errore 010: Impossibile trovare Myo Armband." << endl;
+            #endif
+        }
+        
+        hub->addListener(&myoConnector);
+        
+    } catch (const std::exception& e) {
+        #ifdef DEBUG
+            cout << "Errore 011: Errore inizializzazione Myo Armband." << endl;
+        #endif
+    }
 }
 
 void Manager::init() {
@@ -75,8 +96,10 @@ void Manager::init() {
 
 void Manager::run() {
     while (window->isOpen()) {
+        hub->runOnce(1);
         windowEvents();
         checkErrors();
+        // myoConnector.print();
         switch (currentStatus) {
             case MENU_STATUS:
                 manageMenu();
@@ -127,8 +150,12 @@ void Manager::manageSettings() {
 void Manager::windowEvents() {
     Event event;
     while (window->pollEvent(event)) {
-        if (event.type == Event::Closed)
+        if (event.type == Event::Closed) {
+            hub->removeListener(&myoConnector);
+            delete hub;
+        
             window->close();
+        }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
             if (currentStatus == MENU_STATUS)
                 menu.setDownAnimation(true);

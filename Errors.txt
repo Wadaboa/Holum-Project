@@ -7,3 +7,5 @@ Errore 006: Numero dei video insufficiente.
 Errore 007: Errore caricamento video.
 Errore 008: Caricamento texture copertina di default non riuscito.
 Errore 009: Suono non trovato.
+Errore 010: Impossibile trovare Myo Armband.
+Errore 011: Errore inizializzazione Myo Armband.

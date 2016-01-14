@@ -9,11 +9,14 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <cstring>
+#include <string>
 #include <cmath>
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <iomanip>
+#include <stdexcept>
+#include <myo/myo.hpp>
 
 #ifdef _WIN32
     #include <glew.h>
@@ -35,3 +38,4 @@
 
 using namespace std;
 using namespace sf;
+using namespace myo;

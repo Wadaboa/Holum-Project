@@ -9,9 +9,7 @@
 #include <Global.h>
 #include <FileVideo.h>
 
-FileVideo::FileVideo() {
-
-}
+FileVideo::FileVideo() {}
 
 FileVideo::FileVideo(string videoPath, string videoTitle) {
 	this->videoPath = videoPath;
