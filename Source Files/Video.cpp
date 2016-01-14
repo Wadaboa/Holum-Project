@@ -28,6 +28,7 @@ void Video::init() {
 	firstVideoPosition = 0;
 	
 	for (int i = 1; i < nVideo; i++) {
+
 		videoFiles.at(i).setThumbnailScale(0.5f, 0.5f);
 	}
 	
@@ -193,7 +194,6 @@ void Video::animateLeft(){
 			scaleFactor = scaleFactor - 0.01f;
 			videoFiles.at(firstVideoPosition).setThumbnailScale(scaleFactor, scaleFactor);
 			videoFiles.at(rightPosition).setThumbnailScale((float)1.5 - scaleFactor, (float)1.5 - scaleFactor);
-
 			videoFiles.at(firstVideoPosition).moveThumbnail(0 - animationSpeed, 0);
 			videoFiles.at(rightPosition).moveThumbnail(0 - animationSpeed, 0);
 			videoFiles.at(leftPosition).moveThumbnail(0 - animationSpeed, 0);
@@ -216,7 +216,6 @@ void Video::animateRight() {
 			scaleFactor = scaleFactor - 0.01f;
 			videoFiles.at(firstVideoPosition).setThumbnailScale(scaleFactor, scaleFactor);
 			videoFiles.at(leftPosition).setThumbnailScale((float)1.5 - scaleFactor, (float)1.5 - scaleFactor);
-
 			videoFiles.at(firstVideoPosition).moveThumbnail(animationSpeed, 0);
 			videoFiles.at(rightPosition).moveThumbnail(animationSpeed, 0);
 			videoFiles.at(leftPosition).moveThumbnail(animationSpeed, 0);

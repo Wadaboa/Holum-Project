@@ -31,7 +31,8 @@ typedef enum {
 	VIDEO_STATUS,
 	THREED_STATUS,
 	GAMES_STATUS,
-	SETTINGS_STATUS
+	SETTINGS_STATUS,
+	EXIT_STATUS
 } MANAGER_STATUS;
 
 typedef enum {
@@ -41,7 +42,6 @@ typedef enum {
 	OUT_RIGHT_STATUS,
 	OUT_LEFT_STATUS
 } ANIMATION_STATUS;
-
 
 extern void initGlobal();
 
