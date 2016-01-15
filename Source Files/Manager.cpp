@@ -15,7 +15,7 @@ Manager::Manager() {
     init();
     initMyo();
     splashScreen();
-    run();
+	run();
 }
 
 void Manager::splashScreen() {
@@ -27,7 +27,6 @@ void Manager::splashScreen() {
     }
     
     playVideo(&movie);
-    
 }
 
 void Manager::initMyo() {
@@ -116,6 +115,9 @@ void Manager::run() {
             case SETTINGS_STATUS:
                 manageSettings();
                 break;
+			case EXIT_STATUS:
+				window->close();
+				break;
             default:
                 #ifdef DEBUG
                     cout << "Errore 001: Stato del menu non gestito." << endl;
@@ -164,44 +166,50 @@ void Manager::windowEvents() {
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::Left) {
             if (currentStatus == MENU_STATUS) {
-                if (!menu.getRightAnimation()) {
-                    menu.setLeftAnimation(true);
-                    if(menu.getAnimationStatus() == OUT_RIGHT_STATUS) {
-                        Music errorSound;
-                        if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
-                            #ifdef DEBUG
-                                cout << "Errore 009: Suono non trovato." << endl;
-                            #endif
-                        }
-                        else {
-                            errorSound.play();
-                        }
+				if (!menu.getRightAnimation()) {
+					if (!menu.getLeftAnimation()) {  // Controllo essenziale
+						menu.setLeftAnimation(true);
+						menu.checkPositions();
+					}
+				}
+                if(menu.getAnimationStatus() == OUT_RIGHT_STATUS) {
+                    Music errorSound;
+                    if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
+                        #ifdef DEBUG
+                            cout << "Errore 009: Suono non trovato." << endl;
+                        #endif
+                    }
+                    else {
+                        errorSound.play();
                     }
                 }
-            }
-            else if (currentStatus == VIDEO_STATUS) {
-                if (!video.getRightAnimation()) {
-                    if (!video.getLeftAnimation()) {  // Controllo essenziale
-                        video.setLeftAnimation(true);
-                        video.checkPositions();
-                    }
-                }
-            }
+			}
+			else if (currentStatus == VIDEO_STATUS) {
+				if (!video.getRightAnimation()) {
+					if (!video.getLeftAnimation()) {  // Controllo essenziale
+						video.setLeftAnimation(true);
+						video.checkPositions();
+					}
+				}
+			}
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::Right) {
-            if (currentStatus == MENU_STATUS){
-                if (!menu.getLeftAnimation()) {
-                    menu.setRightAnimation(true);
-                    if (menu.getAnimationStatus() == OUT_LEFT_STATUS) {
-                        Music errorSound;
-                        if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
-                            #ifdef DEBUG
-                                cout << "Errore 009: Suono non trovato." << endl;
-                            #endif
-                        }
-                        else {
-                            errorSound.play();
-                        }
+            if (currentStatus == MENU_STATUS) {
+				if (!menu.getLeftAnimation()) {
+					if (!menu.getRightAnimation()) {  // Controllo essenziale
+						menu.setRightAnimation(true);
+						menu.checkPositions();
+					}
+				}
+                if (menu.getAnimationStatus() == OUT_LEFT_STATUS) {
+                    Music errorSound;
+                    if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
+                        #ifdef DEBUG
+                            cout << "Errore 009: Suono non trovato." << endl;
+                        #endif
+                    }
+                    else {
+                        errorSound.play();
                     }
                 }
             }
@@ -216,21 +224,7 @@ void Manager::windowEvents() {
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::Return) {
             if (currentStatus == MENU_STATUS) {
-                if (menu.getAnimationStatus() == CENTRAL_STATUS) {
-                    currentStatus = VIDEO_STATUS;
-                }
-                else if (menu.getAnimationStatus() == LEFT_STATUS) {
-                    currentStatus = SETTINGS_STATUS;
-                }
-                else if (menu.getAnimationStatus() == OUT_LEFT_STATUS) { // EXIT_STATUS
-                    window->close();
-                }
-                else if (menu.getAnimationStatus() == RIGHT_STATUS) {
-                    currentStatus = THREED_STATUS;
-                }
-                else if (menu.getAnimationStatus() == OUT_RIGHT_STATUS) {
-                    currentStatus = GAMES_STATUS;
-                }
+				currentStatus = menu.getCurrentStatus();
             }
             else if (currentStatus == VIDEO_STATUS) {
                 playVideo(video.getVideoToPlay());

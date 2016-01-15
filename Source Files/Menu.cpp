@@ -18,6 +18,7 @@ Menu::Menu() {
 void Menu::init() {
 	leftAnimation = false;
 	rightAnimation = false;
+
     upAnimation = true;
     downAnimation = false;
 
@@ -27,7 +28,8 @@ void Menu::init() {
 	scaleFactor = 1;
 
 	strip = RectangleShape(Vector2f(width, height / 4));
-	strip.setPosition(0, height);
+	strip.setOrigin(Vector2f(width / 2, height / 8));
+	strip.setPosition(width / 2, 1.5f * height);// height / 2 - height / 8);
 	strip.setFillColor(Color(127, 140, 141));
 
 	if (!menuFont.loadFromFile(workingPath + "Montserrat-Regular.otf")) {
@@ -38,56 +40,44 @@ void Menu::init() {
 
 	textSize = 100;
 
-	centralText = Text("VIDEO", menuFont, textSize);
-	rightText = Text("3D", menuFont, textSize);
-	leftText = Text("SETTINGS", menuFont, textSize);
-	outLeftText = Text("EXIT", menuFont, textSize);
-	outRightText = Text("GAMES", menuFont, textSize);
+	Text appText;
+	appText = Text("VIDEO", menuFont, textSize);
+	menuTexts.push_back(appText);
+	appText = Text("3D", menuFont, textSize);
+	menuTexts.push_back(appText);
+	appText = Text("GAMES", menuFont, textSize);
+	menuTexts.push_back(appText);
+	appText = Text("EXIT", menuFont, textSize);
+	menuTexts.push_back(appText);
+	appText = Text("SETTINGS", menuFont, textSize);
+	menuTexts.push_back(appText);
 
-	centralTextBounds = centralText.getLocalBounds();
-	leftTextBounds = leftText.getLocalBounds();
-	rightTextBounds = rightText.getLocalBounds();
-	outLeftTextBounds = outLeftText.getLocalBounds();
-	outRightTextBounds = outRightText.getLocalBounds();
-	
-	centralText.setOrigin(centralTextBounds.left + centralTextBounds.width / 2.0f, centralTextBounds.top + centralTextBounds.height / 2.0f);
-	leftText.setOrigin(leftTextBounds.left + leftTextBounds.width / 2.0f, leftTextBounds.top + leftTextBounds.height / 2.0f);
-	rightText.setOrigin(rightTextBounds.left + rightTextBounds.width / 2.0f, rightTextBounds.top + rightTextBounds.height / 2.0f);
-	outLeftText.setOrigin(outLeftTextBounds.left + outLeftTextBounds.width / 2.0f, outLeftTextBounds.top + outLeftTextBounds.height / 2.0f);
-	outRightText.setOrigin(outRightTextBounds.left + outRightTextBounds.width / 2.0f, outRightTextBounds.top + outRightTextBounds.height / 2.0f);
+	nText = menuTexts.size();
+	firstTextPosition = 0;
 
-	centralText.setScale(1, 1);
-	rightText.setScale(0.5, 0.5);
-	leftText.setScale(0.5, 0.5);
-	outLeftText.setScale(0.5, 0.5);
-	outRightText.setScale(0.5, 0.5);
+	FloatRect appBounds;
+	for (int i = 0; i < nText; i++) {
+		appBounds = menuTexts.at(i).getGlobalBounds();
+		menuTexts.at(i).setOrigin(appBounds.left + (appBounds.width / 2.0f), appBounds.top + (appBounds.height / 2.0f));
+		menuTexts.at(i).setScale(0.5f, 0.5f);
+	}
+	menuTexts.at(firstTextPosition).setScale(1.f, 1.f);
 
-	centralTextBounds = centralText.getGlobalBounds();
-	leftTextBounds = leftText.getGlobalBounds();
-	rightTextBounds = rightText.getGlobalBounds();
-	outLeftTextBounds = outLeftText.getGlobalBounds();
-	outRightTextBounds = outRightText.getGlobalBounds();
+	menuTexts.at(0).setPosition(Vector2f(width / 2, height * 1.5f));
+	menuTexts.at(1).setPosition(Vector2f(width - (menuTexts.at(1).getGlobalBounds().width / 2), height * 1.5f));
+	menuTexts.at(nText - 1).setPosition(Vector2f(menuTexts.at(nText - 1).getGlobalBounds().width / 2, height * 1.5f));
+	for (int i = 2; i < nText - 1; i++){
+		menuTexts.at(i).setPosition(Vector2f(0 - (width / 2) + (menuTexts.at(i).getGlobalBounds().width), height * 1.5f));
+	}
 
-	centralText.setPosition(Vector2f(width / 2 , (height + centralTextBounds.height / 2)));
-	rightText.setPosition(Vector2f(width - (rightTextBounds.width / 2), (height + rightTextBounds.height / 2)));
-	leftText.setPosition(Vector2f(leftTextBounds.width / 2, (height + leftTextBounds.height / 2)));
-    outLeftText.setPosition(Vector2f(0 - (width / 2) + (outLeftTextBounds.width), height / 2));
-	outRightText.setPosition(Vector2f(width + (width / 2) - (outRightTextBounds.width), height / 2));
+	animationSpeed = height / 50;
 
-	centralPosAnimation = ((width / 2) - (centralTextBounds.width / 4)) / 50;
-	leftPosAnimation = ((width / 2) - (leftTextBounds.width / 2)) / 50;
-	rightPosAnimation = ((width / 2) - (rightTextBounds.width / 2)) / 50;
-	outLeftPosAnimation = ((width / 2) - (outLeftTextBounds.width / 2)) / 50;
-	outRightPosAnimation = ((width / 2) - (outRightTextBounds.width / 2)) / 50;
-    
-    initCentralPosAnimation = ((height + centralTextBounds.height / 2) - (height / 2)) / 50;
-    initLeftPosAnimation = ((height + leftTextBounds.height / 2) - (height / 2)) / 50;
-    initRightPosAnimation = ((height + rightTextBounds.height / 2) - (height / 2)) / 50;
-    initStripPosAnimation = (height - (height / 2 - (strip.getLocalBounds().height / 2))) / 50;
+	checkPositions();
+
 }
 
 MANAGER_STATUS Menu::menuEvents() {
-    if(upAnimation == true) {
+	if(upAnimation == true) {
         animateUp();
     }
 	else if (leftAnimation == true) {
@@ -96,18 +86,15 @@ MANAGER_STATUS Menu::menuEvents() {
 	else if (rightAnimation == true) {
 		animateRight();
 	}
-    if(downAnimation == true) {
-        animateDown();
-    }
-	
+	if (downAnimation == true) {
+		checkPositions();
+		animateDown();
+	}
+    
 	toDraw = vector <Drawable*>();
-
 	toDraw.push_back(&strip);
-	toDraw.push_back(&centralText);
-	toDraw.push_back(&leftText);
-	toDraw.push_back(&rightText);
-	toDraw.push_back(&outLeftText);
-	toDraw.push_back(&outRightText);
+	for (int i = 0; i < nText; i++)
+		toDraw.push_back(&menuTexts.at(i));
 	
 	return MENU_STATUS;
 }
@@ -141,189 +128,63 @@ bool Menu::getRightAnimation() {
 }
 
 void Menu::animateLeft() {
-	if (currentAnimationStatus == CENTRAL_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
-			if (scaleFactor <= 0.51) {
-				leftAnimation = false;
-				currentAnimationStatus = RIGHT_STATUS;
-				scaleFactor = 1;
-			}
-			else {
-				clock.restart();
-				scaleFactor = scaleFactor - 0.01f;
-				centralText.setScale(Vector2f(scaleFactor, scaleFactor));
-				rightText.setScale(Vector2f((float)1.5 - scaleFactor, (float)1.5 - scaleFactor));
-				centralText.move(0 - centralPosAnimation, 0);
-				leftText.move(0 - leftPosAnimation, 0);
-				rightText.move(0 - rightPosAnimation, 0);
-				outLeftText.move(0 - outLeftPosAnimation, 0);
-				outRightText.move(0 - outRightPosAnimation, 0);
-			}
+	if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
+	{
+		if (scaleFactor <= 0.51) {
+			leftAnimation = false;
+			scaleFactor = 1;
+			firstTextPosition = rightPosition;
+		}
+		else {
+			clock.restart();
+
+			scaleFactor = scaleFactor - 0.01f;
+			menuTexts.at(firstTextPosition).setScale(scaleFactor, scaleFactor);
+			menuTexts.at(rightPosition).setScale((float)1.5 - scaleFactor, (float)1.5 - scaleFactor);
+			menuTexts.at(firstTextPosition).move((0 - (width / 2) + (menuTexts.at(firstTextPosition).getLocalBounds().width / 4)) / 50, 0);
+			menuTexts.at(rightPosition).move((0 - (width / 2) + (menuTexts.at(rightPosition).getLocalBounds().width / 4)) / 50, 0);
+			menuTexts.at(leftPosition).move((0 - (width / 2) + (menuTexts.at(leftPosition).getLocalBounds().width / 4)) / 50, 0);
+			menuTexts.at(outPosition).move((0 - (width / 2) + (menuTexts.at(outPosition).getLocalBounds().width / 4)) / 50, 0);
 		}
 	}
-	else if (currentAnimationStatus == RIGHT_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
-			if (scaleFactor <= 0.51) {
-				leftAnimation = false;
-				currentAnimationStatus = OUT_RIGHT_STATUS;
-				scaleFactor = 1;
-			}
-			else {
-				clock.restart();
-				scaleFactor = scaleFactor - 0.01f;
-				rightText.setScale(Vector2f(scaleFactor, scaleFactor));
-				outRightText.setScale(Vector2f((float)1.5 - scaleFactor, (float)1.5 - scaleFactor));
-				centralText.move(0 - centralPosAnimation, 0);
-				leftText.move(0 - leftPosAnimation, 0);
-				rightText.move(0 - rightPosAnimation, 0);
-				outLeftText.move(0 - outLeftPosAnimation, 0);
-				outRightText.move(0 - outRightPosAnimation, 0);
-			}
-		}
-	}
-	else if (currentAnimationStatus == LEFT_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
-			if (scaleFactor <= 0.51) {
-				leftAnimation = false;
-				currentAnimationStatus = CENTRAL_STATUS;
-				scaleFactor = 1;
-			}
-			else {
-				clock.restart();
-				scaleFactor = scaleFactor - 0.01f;
-				leftText.setScale(Vector2f(scaleFactor, scaleFactor));
-				centralText.setScale(Vector2f((float)1.5 - scaleFactor, (float)1.5 - scaleFactor));
-				centralText.move(0 - centralPosAnimation, 0);
-				leftText.move(0 - leftPosAnimation, 0);
-				rightText.move(0 - rightPosAnimation, 0);
-				outLeftText.move(0 - outLeftPosAnimation, 0);
-				outRightText.move(0 - outRightPosAnimation, 0);
-			}
-		}
-	}
-	else if (currentAnimationStatus == OUT_LEFT_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
-			if (scaleFactor <= 0.51) {
-				leftAnimation = false;
-				currentAnimationStatus = LEFT_STATUS;
-				scaleFactor = 1;
-			}
-			else {
-				clock.restart();
-				scaleFactor = scaleFactor - 0.01f;
-				outLeftText.setScale(Vector2f(scaleFactor, scaleFactor));
-				leftText.setScale(Vector2f((float)1.5 - scaleFactor, (float)1.5 - scaleFactor));
-				centralText.move(0 - centralPosAnimation, 0);
-				leftText.move(0 - leftPosAnimation, 0);
-				rightText.move(0 - rightPosAnimation, 0);
-				outLeftText.move(0 - outLeftPosAnimation, 0);
-				outRightText.move(0 - outRightPosAnimation, 0);
-			}
-		}
-	}
-	else if (currentAnimationStatus == OUT_RIGHT_STATUS)
-		leftAnimation = false;
 }
 
 void Menu::animateRight() {
-	if (currentAnimationStatus == CENTRAL_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
-			if (scaleFactor <= 0.51) {
-				rightAnimation = false;
-				currentAnimationStatus = LEFT_STATUS;
-				scaleFactor = 1;
-			}
-			else {
-				clock.restart();
-				scaleFactor = scaleFactor - 0.01f;
-				centralText.setScale(Vector2f(scaleFactor, scaleFactor));
-				leftText.setScale(Vector2f((float)1.5 - scaleFactor, (float)1.5 - scaleFactor));
-				centralText.move(centralPosAnimation, 0);
-				leftText.move(leftPosAnimation, 0);
-				rightText.move(rightPosAnimation, 0);
-				outLeftText.move(outLeftPosAnimation, 0);
-				outRightText.move(outRightPosAnimation, 0);
-			}
+	if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
+	{
+		if (scaleFactor <= 0.51) {
+			rightAnimation = false;
+			scaleFactor = 1;
+			firstTextPosition = leftPosition;
+		}
+		else {
+			clock.restart();
+
+			scaleFactor = scaleFactor - 0.01f;
+			menuTexts.at(firstTextPosition).setScale(scaleFactor, scaleFactor);
+			menuTexts.at(leftPosition).setScale((float)1.5 - scaleFactor, (float)1.5 - scaleFactor);
+			menuTexts.at(firstTextPosition).move(( (width / 2) - (menuTexts.at(firstTextPosition).getLocalBounds().width / 4)) / 50, 0);
+			menuTexts.at(rightPosition).move(( (width / 2) - (menuTexts.at(rightPosition).getLocalBounds().width / 4)) / 50, 0);
+			menuTexts.at(leftPosition).move(( (width / 2) - (menuTexts.at(leftPosition).getLocalBounds().width / 4)) / 50, 0);
+			menuTexts.at(outPosition).move(( (width / 2) - (menuTexts.at(outPosition).getLocalBounds().width / 4)) / 50, 0);
 		}
 	}
-	else if (currentAnimationStatus == RIGHT_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
-			if (scaleFactor <= 0.51) {
-				rightAnimation = false;
-				currentAnimationStatus = CENTRAL_STATUS;
-				scaleFactor = 1;
-			}
-			else {
-				clock.restart();
-				scaleFactor = scaleFactor - 0.01f;
-				rightText.setScale(Vector2f(scaleFactor, scaleFactor));
-				centralText.setScale(Vector2f((float)1.5 - scaleFactor, (float) 1.5 - scaleFactor));
-				centralText.move(centralPosAnimation, 0);
-				leftText.move(leftPosAnimation, 0);
-				rightText.move(rightPosAnimation, 0);
-				outLeftText.move(outLeftPosAnimation, 0);
-				outRightText.move(outRightPosAnimation, 0);
-			}
-		}
-	}
-	else if (currentAnimationStatus == LEFT_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
-			if (scaleFactor <= 0.51) {
-				rightAnimation = false;
-				currentAnimationStatus = OUT_LEFT_STATUS;
-				scaleFactor = 1;
-			}
-			else {
-				clock.restart();
-				scaleFactor = scaleFactor - 0.01f;
-				leftText.setScale(Vector2f(scaleFactor, scaleFactor));
-				outLeftText.setScale(Vector2f((float)1.5 - scaleFactor, (float)1.5 - scaleFactor));
-				centralText.move(centralPosAnimation, 0);
-				leftText.move(leftPosAnimation, 0);
-				rightText.move(rightPosAnimation, 0);
-				outLeftText.move(outLeftPosAnimation, 0);
-				outRightText.move(outRightPosAnimation, 0);
-			}
-		}
-	}
-	else if (currentAnimationStatus == OUT_RIGHT_STATUS) {
-		if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
-			if (scaleFactor <= 0.51) {
-				rightAnimation = false;
-				currentAnimationStatus = RIGHT_STATUS;
-				scaleFactor = 1;
-			}
-			else {
-				clock.restart();
-				scaleFactor = scaleFactor - 0.01f;
-				outRightText.setScale(Vector2f(scaleFactor, scaleFactor));
-				rightText.setScale(Vector2f((float)1.5 - scaleFactor, (float) 1.5 - scaleFactor));
-				centralText.move(centralPosAnimation, 0);
-				leftText.move(leftPosAnimation, 0);
-				rightText.move(rightPosAnimation, 0);
-				outLeftText.move(outLeftPosAnimation, 0);
-				outRightText.move(outRightPosAnimation, 0);
-			}
-		}
-	}
-	else if (currentAnimationStatus == OUT_LEFT_STATUS)
-		rightAnimation = false;
 }
 
 void Menu::animateUp() {
     if (clock.getElapsedTime().asMicroseconds() >= udStepTime.asMicroseconds()) {
         if (scaleFactor <= 0.51) {
             upAnimation = false;
-            currentAnimationStatus = CENTRAL_STATUS;
             scaleFactor = 1;
         }
         else {
             clock.restart();
             scaleFactor = scaleFactor - 0.01f;
-            centralText.move(0, 0 - initCentralPosAnimation);
-            leftText.move(0, 0 - initLeftPosAnimation);
-            rightText.move(0, 0 - initRightPosAnimation);
-            strip.move(0, 0 - initStripPosAnimation);
+			menuTexts.at(firstTextPosition).move(0, 0 - animationSpeed);
+			menuTexts.at(leftPosition).move(0, 0 - animationSpeed);
+			menuTexts.at(rightPosition).move(0, 0 - animationSpeed);
+			menuTexts.at(outPosition).move(0, 0 - animationSpeed);
+			strip.move(0, 0 - animationSpeed);
         }
     }
 }
@@ -336,14 +197,109 @@ void Menu::animateDown() {
         else {
             clock.restart();
             scaleFactor = scaleFactor - 0.01f;
-            centralText.move(0, initCentralPosAnimation);
-            leftText.move(0, initLeftPosAnimation);
-            rightText.move(0, initRightPosAnimation);
-            strip.move(0, initStripPosAnimation);
+			menuTexts.at(firstTextPosition).move(0, animationSpeed);
+			menuTexts.at(leftPosition).move(0, animationSpeed);
+			menuTexts.at(rightPosition).move(0, animationSpeed);
+			menuTexts.at(outPosition).move(0, animationSpeed);
+			strip.move(0, animationSpeed);
         }
     }
 }
 
-ANIMATION_STATUS Menu::getAnimationStatus() {
-	return currentAnimationStatus;
+void Menu::checkPositions() {
+
+	if (upAnimation){
+		rightPosition = firstTextPosition + 1;
+		leftPosition = firstTextPosition - 1;
+		outPosition = firstTextPosition - 2;
+
+		if (firstTextPosition + 1 >= nText) {
+			rightPosition = 0;
+		}
+		if (firstTextPosition - 1 < 0) {
+			leftPosition = nText - 1;
+			outPosition = nText - 2;
+
+		}
+		else if (firstTextPosition - 2 < 0) {
+			leftPosition = 0;
+			outPosition = nText - 1;
+		}
+	}
+	else if (downAnimation) {
+		rightPosition = firstTextPosition + 1;
+		leftPosition = firstTextPosition - 1;
+		outPosition = firstTextPosition - 2;
+
+		if (firstTextPosition + 1 >= nText) {
+			rightPosition = 0;
+		}
+		if (firstTextPosition - 1 < 0) {
+			leftPosition = nText - 1;
+			outPosition = nText - 2;
+
+		}
+		else if (firstTextPosition - 2 < 0) {
+			leftPosition = 0;
+			outPosition = nText - 1;
+		}
+	}
+	else if (rightAnimation) {
+		rightPosition = firstTextPosition + 1;
+		leftPosition = firstTextPosition - 1;
+		outPosition = firstTextPosition - 2;
+
+		if (firstTextPosition + 1 >= nText) {
+			rightPosition = 0;
+		}
+		if (firstTextPosition - 1 < 0) {
+			leftPosition = nText - 1;
+			outPosition = nText - 2;
+
+		}
+		else if (firstTextPosition - 2 < 0) {
+			leftPosition = 0;
+			outPosition = nText - 1;
+		}
+		menuTexts.at(outPosition).setPosition(Vector2f(0 - (width / 2) + (menuTexts.at(outPosition).getLocalBounds().width / 2), height / 2));
+	}
+	else if (leftAnimation) {
+		rightPosition = firstTextPosition + 1;
+		leftPosition = firstTextPosition - 1;
+		outPosition = firstTextPosition + 2;
+
+		if (firstTextPosition + 1 >= nText) {
+			rightPosition = 0;
+			outPosition = 1;
+		}
+		else if (firstTextPosition + 2 >= nText) {
+			rightPosition = nText - 1;
+			outPosition = 0;
+		}
+
+		if (firstTextPosition - 1 < 0) {
+			leftPosition = nText - 1;
+		}
+		menuTexts.at(outPosition).setPosition(Vector2f(width + (width / 2) - menuTexts.at(outPosition).getLocalBounds().width / 2, height / 2));
+	}
+}
+
+MANAGER_STATUS Menu::getCurrentStatus() {
+	if (menuTexts.at(firstTextPosition).getString() == "VIDEO")
+		return VIDEO_STATUS;
+	else if (menuTexts.at(firstTextPosition).getString() == "3D")
+		return THREED_STATUS;
+	else if (menuTexts.at(firstTextPosition).getString() == "SETTINGS")
+		return SETTINGS_STATUS;
+	else if (menuTexts.at(firstTextPosition).getString() == "GAMES")
+		return GAMES_STATUS;
+	else if (menuTexts.at(firstTextPosition).getString() == "EXIT")
+		return EXIT_STATUS;
+	else {
+		#ifdef DEBUG
+		cout << "Errore 010: Stato interno a menu non gestito." << endl;
+		#endif
+		return MENU_STATUS;
+	}
+		
 }

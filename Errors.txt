@@ -9,3 +9,4 @@ Errore 008: Caricamento texture copertina di default non riuscito.
 Errore 009: Suono non trovato.
 Errore 010: Impossibile trovare Myo Armband.
 Errore 011: Errore inizializzazione Myo Armband.
+Errore 012: Stato interno a menu non gestito.

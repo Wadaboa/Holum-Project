@@ -28,6 +28,7 @@ void Video::init() {
 	firstVideoPosition = 0;
 	
 	for (int i = 1; i < nVideo; i++) {
+
 		videoFiles.at(i).setThumbnailScale(0.5f, 0.5f);
 	}
 	
