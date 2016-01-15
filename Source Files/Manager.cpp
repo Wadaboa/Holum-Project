@@ -172,17 +172,6 @@ void Manager::windowEvents() {
 						menu.checkPositions();
 					}
 				}
-                if(menu.getAnimationStatus() == OUT_RIGHT_STATUS) {
-                    Music errorSound;
-                    if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
-                        #ifdef DEBUG
-                            cout << "Errore 009: Suono non trovato." << endl;
-                        #endif
-                    }
-                    else {
-                        errorSound.play();
-                    }
-                }
 			}
 			else if (currentStatus == VIDEO_STATUS) {
 				if (!video.getRightAnimation()) {
@@ -201,17 +190,6 @@ void Manager::windowEvents() {
 						menu.checkPositions();
 					}
 				}
-                if (menu.getAnimationStatus() == OUT_LEFT_STATUS) {
-                    Music errorSound;
-                    if (!errorSound.openFromFile(workingPath + "errorSound.wav")) {
-                        #ifdef DEBUG
-                            cout << "Errore 009: Suono non trovato." << endl;
-                        #endif
-                    }
-                    else {
-                        errorSound.play();
-                    }
-                }
             }
             else if (currentStatus == VIDEO_STATUS) {
                 if (!video.getLeftAnimation()) {
