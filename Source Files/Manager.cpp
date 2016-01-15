@@ -32,7 +32,7 @@ void Manager::splashScreen() {
 
 void Manager::initMyo() {
     try {
-        hub = new Hub("com.jobs.holum-project");
+        hub = new Hub("com.holum.holum-project");
         myoArmband = hub->waitForMyo(10000);
         
         if (!myoArmband) {
@@ -43,7 +43,7 @@ void Manager::initMyo() {
         
         hub->addListener(&myoConnector);
         
-    } catch (const std::exception& e) {
+    } catch (const exception& e) {
         #ifdef DEBUG
             cout << "Errore 011: Errore inizializzazione Myo Armband." << endl;
         #endif
@@ -153,7 +153,6 @@ void Manager::windowEvents() {
         if (event.type == Event::Closed) {
             hub->removeListener(&myoConnector);
             delete hub;
-        
             window->close();
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
