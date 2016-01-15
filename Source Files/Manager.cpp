@@ -42,6 +42,9 @@ void Manager::initMyo() {
         
         hub->addListener(&myoConnector);
         
+        myoLastPose = "unknown";
+        myoCurrentPose = "unknown";
+        
     } catch (const exception& e) {
         #ifdef DEBUG
             cout << "Errore 011: Errore inizializzazione Myo Armband." << endl;
@@ -151,20 +154,23 @@ void Manager::manageSettings() {
 
 void Manager::windowEvents() {
     Event event;
-    while (window->pollEvent(event)) {
+    if(myoLastPose != myoConnector.getCurrentPose()) {
+        myoCurrentPose = myoConnector.getCurrentPose();
+    }
+    while (window->pollEvent(event) || myoCurrentPose != "unknown") {
         if (event.type == Event::Closed) {
             hub->removeListener(&myoConnector);
             delete hub;
             window->close();
         }
-        if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
+        if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape ) || myoCurrentPose == "fist") {
             if (currentStatus == MENU_STATUS)
                 menu.setDownAnimation(true);
             else {
                 currentStatus = MENU_STATUS;
             }
         }
-        if (event.type == Event::KeyPressed && event.key.code == Keyboard::Left) {
+        if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Left) || myoCurrentPose == "waveIn") {
             if (currentStatus == MENU_STATUS) {
 				if (!menu.getRightAnimation()) {
 					if (!menu.getLeftAnimation()) {  // Controllo essenziale
@@ -182,7 +188,7 @@ void Manager::windowEvents() {
 				}
 			}
         }
-        if (event.type == Event::KeyPressed && event.key.code == Keyboard::Right) {
+        if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Right) || myoCurrentPose == "waveOut") {
             if (currentStatus == MENU_STATUS) {
 				if (!menu.getLeftAnimation()) {
 					if (!menu.getRightAnimation()) {  // Controllo essenziale
@@ -200,7 +206,7 @@ void Manager::windowEvents() {
                 }
             }
         }
-        if (event.type == Event::KeyPressed && event.key.code == Keyboard::Return) {
+        if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Return) || myoCurrentPose == "fingersSpread") {
             if (currentStatus == MENU_STATUS) {
 				currentStatus = menu.getCurrentStatus();
             }
@@ -212,6 +218,8 @@ void Manager::windowEvents() {
             fullscreen = !fullscreen;
             window->create(VideoMode((unsigned int)width, (unsigned int)height, VideoMode((unsigned int)width, (unsigned int)height).getDesktopMode().bitsPerPixel), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
         }
+        myoLastPose = myoCurrentPose;
+        myoCurrentPose = "unknown";
     }
 }
 
@@ -257,25 +265,21 @@ void Manager::playVideo(sfe::Movie* movie) {
     movie->play();
     vector<Drawable*> toDraw;
     Clock clock;
-    bool stopVideo = false;
     
-    while (movie->getDuration() >= clock.getElapsedTime() && !stopVideo) {
+    while (movie->getDuration() >= clock.getElapsedTime() && !(movie->getStatus() == sfe::Stopped)) {
         Event event;
-        while (window->pollEvent(event)) {
-            if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
+        if (window->pollEvent(event) || myoCurrentPose != "unknown") {
+            if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) || myoCurrentPose == "fist") {
                 movie->stop();
-                stopVideo = true;
                 toDraw = vector<Drawable*>();
             }
-            
         }
-        if (!stopVideo) {
+        if (!(movie->getStatus() == sfe::Stopped)) {
             movie->update();
             toDraw.push_back(movie);
             drawOn(toDraw);
             toDraw = vector<Drawable*>();
         }
-        
     }
 }
 

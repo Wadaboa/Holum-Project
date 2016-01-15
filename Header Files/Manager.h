@@ -52,6 +52,9 @@ class Manager {
         Hub* hub;
         Myo* myoArmband;
         MyoConnector myoConnector;
+    
+        string myoCurrentPose;
+        string myoLastPose;
 
 
 		void splashScreen();
