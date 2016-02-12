@@ -22,11 +22,11 @@ void ThreeD::init() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    string strModel = workingPath + "3D/Models/Nanosuit/nanosuit.obj";
+    string strModel = workingPath + "3D/Models/Can/Can.obj";
     modelPath = new GLchar[strModel.length() + 1];
     strcpy(modelPath, strModel.c_str());
     
-    shader = sh::Shader(vertexShaderPath, fragmentShaderPath);
+    shader = sh::Shader(vertexShaderPath.c_str(), fragmentShaderPath.c_str());
 }
 
 MANAGER_STATUS ThreeD::threeDEvents() {

@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <FileVideo.h>
+#include <File.h>
 
 class Video {
     private:
@@ -25,7 +25,7 @@ class Video {
 
         float scaleFactor;
         vector<Drawable*> toDraw;
-        vector<FileVideo> videoFiles;
+        vector<File> videoFiles;
         int nVideo;
         void init();
         void loadVideos();

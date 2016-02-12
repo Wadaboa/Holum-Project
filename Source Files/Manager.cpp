@@ -11,14 +11,16 @@
 
 Manager::Manager() {
     init();
-    initMyo();
+    #ifdef MYO
+        initMyo();
+    #endif
     //splashScreen();
 	run();
 }
 
 void Manager::splashScreen() {
     sfe::Movie movie;
-    if (!movie.openFromFile(workingPath + "HolumSplashScreen.mp4")) {
+    if (!movie.openFromFile(workingPath + "Video/" + "HolumSplashScreen.mp4")) {
         #ifdef DEBUG
             cout << "Errore 003: Caricamento splash screen non riuscito." << endl;
         #endif
@@ -39,10 +41,10 @@ void Manager::initMyo() {
             #endif
         }
         
-        hub->addListener(&myoConnector);
-        
         myoLastPose = "unknown";
         myoCurrentPose = "unknown";
+        
+        hub->addListener(&myoConnector);
         
     } catch (const exception& e) {
         #ifdef DEBUG
@@ -104,22 +106,22 @@ void Manager::init() {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    camera = Camera(vec3(0.0f, 0.0f, 3.0f));
     angleX = 0;
     angleY = 0;
     zoom = 45.0f;
     
     threeD.loadModel();
     
-    currentStatus = THREED_STATUS;
+    currentStatus = MENU_STATUS;
 }
 
 void Manager::run() {
     while (window->isOpen()) {
-        hub->runOnce(1);
+        #ifdef MYO
+            hub->runOnce(1);
+        #endif
         windowEvents();
         checkErrors();
-        // myoConnector.print();
         switch (currentStatus) {
             case MENU_STATUS:
                 manageMenu();
@@ -173,13 +175,17 @@ void Manager::manageSettings() {
 
 void Manager::windowEvents() {
     Event event;
-    if(myoLastPose != myoConnector.getCurrentPose()) {
-        myoCurrentPose = myoConnector.getCurrentPose();
-    }
+    #ifdef MYO
+        if(myoLastPose != myoConnector.getCurrentPose()) {
+            myoCurrentPose = myoConnector.getCurrentPose();
+        }
+    #endif
     while (window->pollEvent(event) || myoCurrentPose != "unknown") {
         if (event.type == Event::Closed) {
-            hub->removeListener(&myoConnector);
-            delete hub;
+            #ifdef MYO
+                hub->removeListener(&myoConnector);
+                delete hub;
+            #endif
             window->close();
         }
         if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape ) || myoCurrentPose == "fist") {
@@ -259,7 +265,7 @@ void Manager::windowEvents() {
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::F11) {
             fullscreen = !fullscreen;
-            window->create(VideoMode((unsigned int)width, (unsigned int)height, VideoMode((unsigned int)width, (unsigned int)height).getDesktopMode().bitsPerPixel), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
+            window->create(VideoMode((unsigned int)width, (unsigned int)height), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close), ContextSettings(24, 8, 4, 2, 1));
         }
         if (event.type == Event::Resized) {
             glViewport(0, 0, event.size.width, event.size.height);
@@ -281,7 +287,8 @@ void Manager::windowEvents() {
 
 void Manager::drawOn(vector<Drawable*> toDraw) {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    window->pushGLStates();
+    glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    window->resetGLStates();
     window->clear();
     
     window->setView(viewTop);
@@ -304,7 +311,7 @@ void Manager::drawOn(vector<Drawable*> toDraw) {
         drawObjects(toDraw);
     #endif
     
-    window->popGLStates();
+    glPopAttrib();
     window->display();
 }
 
@@ -368,13 +375,14 @@ void Manager::drawGL() {
     threeD.getModel()->draw(threeD.getShader());
     
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    window->pushGLStates();
+    glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    window->resetGLStates();
     #ifdef DIAGONAL
         window->setView(window->getDefaultView());
         window->draw(mainDiagonal);
         window->draw(secondaryDiagonal);
     #endif
-    window->popGLStates();
+    glPopAttrib();
     
     window->display();
 }
@@ -392,8 +400,10 @@ void Manager::playVideo(sfe::Movie* movie) {
     Clock clock;
     
     while (movie->getDuration() >= clock.getElapsedTime() && !(movie->getStatus() == sfe::Stopped)) {
-        hub->runOnce(1);
-        myoCurrentPose = myoConnector.getCurrentPose();
+        #ifdef MYO
+            hub->runOnce(1);
+            myoCurrentPose = myoConnector.getCurrentPose();
+        #endif
         Event event;
         if (window->pollEvent(event) || myoCurrentPose != "unknown" || myoCurrentPose != "rest") {
             if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) || myoCurrentPose == "fist") {

@@ -58,7 +58,7 @@ MANAGER_STATUS Video::videoEvents() {
 	else if (rightAnimation == true) {
 		animateRight();
 	}
-	FileVideo* fv;
+	File* fv;
 	for (int i = 0; i < nVideo; i++) {
 		fv = &videoFiles.at(i);
 		fv->getThumbnail()->setTexture(fv->getThumbnailTexture(), false);
@@ -92,7 +92,7 @@ void Video::loadVideos() {
 		int videoNameLen = strlen(videoName.c_str());
 		if (checkExtension(videoName, videoNameLen)) {
 			videoPath += "/" + videoName;
-			FileVideo fv(videoPath, videoName.substr(0, videoName.find(".")));
+			File fv(videoPath, videoName.substr(0, videoName.find(".")));
 			videoPath = workingPath + "Video";
 			videoFiles.push_back(fv);
 		}
@@ -224,7 +224,7 @@ void Video::animateRight() {
 
 sfe::Movie* Video::getVideoToPlay() {
 	movie = sfe::Movie();
-	if (!movie.openFromFile(videoFiles.at(firstVideoPosition).getVideoPath())) {
+	if (!movie.openFromFile(videoFiles.at(firstVideoPosition).getPath())) {
         #ifdef DEBUG
             cout << "Errore 007: Errore caricamento video." << endl;
         #endif

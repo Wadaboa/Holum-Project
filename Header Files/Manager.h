@@ -49,7 +49,6 @@ class Manager {
 		ThreeD threeD;
 		Game game;
 		Settings settings;
-        Camera camera;
 
 		RenderWindow* window;
         bool fullscreen;
@@ -57,13 +56,12 @@ class Manager {
         Hub* hub;
         Myo* myoArmband;
         MyoConnector myoConnector;
-        string myoCurrentPose;
         string myoLastPose;
+        string myoCurrentPose;
     
         float angleX;
         float angleY;
         float zoom;
-
 
 		void splashScreen();
 		void init();
