@@ -6,11 +6,9 @@
 //
 //
 
-
 #include <Global.h>
 #include <Video.h>
 #include <dirent.h>
-
 
 Video::Video() {
 	init();
@@ -63,7 +61,7 @@ MANAGER_STATUS Video::videoEvents() {
 	FileVideo* fv;
 	for (int i = 0; i < nVideo; i++) {
 		fv = &videoFiles.at(i);
-		fv->getThumbnail()->setTexture(fv->getThumbnailTexture(),false);
+		fv->getThumbnail()->setTexture(fv->getThumbnailTexture(), false);
 		toDraw.push_back(fv->getThumbnail());
 	}
 
@@ -76,8 +74,8 @@ vector<Drawable*> Video::getObjectsVector() {
 }
 
 void Video::loadVideos() {
-    const char *path = workingPath.c_str();
-	string videoPath(path);
+    string videoPath = workingPath + "Video";
+    const char *path = videoPath.c_str();
 	struct dirent *entry;
 	DIR *dp;
 
@@ -95,7 +93,7 @@ void Video::loadVideos() {
 		if (checkExtension(videoName, videoNameLen)) {
 			videoPath += "/" + videoName;
 			FileVideo fv(videoPath, videoName.substr(0, videoName.find(".")));
-			videoPath = path;
+			videoPath = workingPath + "Video";
 			videoFiles.push_back(fv);
 		}
 	}

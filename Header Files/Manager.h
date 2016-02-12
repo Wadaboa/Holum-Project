@@ -6,6 +6,8 @@
 //
 //
 
+#pragma once
+
 #include <Menu.h>
 #include <Video.h>
 #include <Game.h>
@@ -34,6 +36,9 @@ class Manager {
 		View viewLeft;
 		View viewRight;
 		View viewBottom;
+    
+        float viewWidth;
+        float viewHeight;
 
 		// Stato corrente della finestra
 		MANAGER_STATUS currentStatus;
@@ -41,10 +46,10 @@ class Manager {
 		// Oggetti delle classi del menu
 		Video video;
 		Menu menu;
-		
 		ThreeD threeD;
 		Game game;
 		Settings settings;
+        Camera camera;
 
 		RenderWindow* window;
         bool fullscreen;
@@ -52,9 +57,12 @@ class Manager {
         Hub* hub;
         Myo* myoArmband;
         MyoConnector myoConnector;
-    
         string myoCurrentPose;
         string myoLastPose;
+    
+        float angleX;
+        float angleY;
+        float zoom;
 
 
 		void splashScreen();
@@ -71,7 +79,7 @@ class Manager {
 		void checkErrors();
 		void playVideo(sfe::Movie* movie);
         void initMyo();
-    
+        void drawGL();
 	public:
 		Manager();
 };

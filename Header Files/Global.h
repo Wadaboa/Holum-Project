@@ -6,6 +6,7 @@
 //
 //
 
+#pragma once
 
 #include <Libraries.h>
 
@@ -25,6 +26,9 @@ extern double pit;
 extern double diagonalAngle;
 extern RectangleShape mainDiagonal;
 extern RectangleShape secondaryDiagonal;
+
+extern float horizontalAspectRatio;
+extern float verticalAspectRatio;
 
 typedef enum {
 	MENU_STATUS,

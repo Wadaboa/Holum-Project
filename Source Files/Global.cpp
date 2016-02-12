@@ -6,7 +6,6 @@
 //
 //
 
-
 #include <Global.h>
 
 bool quit;
@@ -21,6 +20,8 @@ double diagonalAngle;
 RectangleShape mainDiagonal;
 RectangleShape secondaryDiagonal;
 
+float horizontalAspectRatio;
+float verticalAspectRatio;
 
 extern void initGlobal() {
 	quit = false;
@@ -37,6 +38,9 @@ extern void initGlobal() {
         width = 1280;
         height = 1024;
     #endif
+    
+    horizontalAspectRatio = width / height;
+    verticalAspectRatio = height / width;
 
     #ifdef DIAGONAL
         pit = sqrt(pow(width, 2) + pow(height, 2));

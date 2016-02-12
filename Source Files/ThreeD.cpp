@@ -6,25 +6,53 @@
 //
 //
 
-
 #include <Global.h>
 #include <ThreeD.h>
 
-
 ThreeD::ThreeD() {
-	init();
+    init();
 }
 
 void ThreeD::init() {
-
+    glewExperimental = GL_TRUE;
+    glewInit();
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_TEXTURE_2D);
+    glDepthFunc(GL_LEQUAL);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
+    string strModel = workingPath + "3D/Models/Nanosuit/nanosuit.obj";
+    modelPath = new GLchar[strModel.length() + 1];
+    strcpy(modelPath, strModel.c_str());
+    
+    shader = sh::Shader(vertexShaderPath, fragmentShaderPath);
 }
 
 MANAGER_STATUS ThreeD::threeDEvents() {
-	return MENU_STATUS;
+    return MENU_STATUS;
 }
 
-vector<Drawable*> ThreeD::getObjectsVector() {
-	vector <Drawable*> a;
-	return a;
+sh::Shader ThreeD::getShader() {
+    return shader;
 }
 
+Model* ThreeD::getModel() {
+    return &model;
+}
+
+void ThreeD::loadModel() {
+    model = Model(modelPath);
+}
+
+float ThreeD::getHorizontalK() {
+    return horizontalK;
+}
+
+float ThreeD::getVerticalK() {
+    return verticalK;
+}
+
+float ThreeD::getModelOffset() {
+    return (-(getModel()->MAX - getModel()->MIN)) / 2.0f;
+}

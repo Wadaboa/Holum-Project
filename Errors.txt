@@ -10,3 +10,8 @@ Errore 009: Suono non trovato.
 Errore 010: Impossibile trovare Myo Armband.
 Errore 011: Errore inizializzazione Myo Armband.
 Errore 012: Stato interno a menu non gestito.
+Errore 013: Caricamento file OBJ non riuscito.
+Errore 014: Caricamento shader non riuscito.
+Errore 015: Compilazione del vertex shader non riuscita.
+Errore 016: Compilazione del fragment shader non riuscita.
+Errore 017: Collegamento del program shader non riuscito.

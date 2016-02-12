@@ -6,10 +6,8 @@
 //
 //
 
-
 #include <Global.h>
 #include <Menu.h>
-
 
 Menu::Menu() {
 	init();
@@ -29,7 +27,7 @@ void Menu::init() {
 
 	strip = RectangleShape(Vector2f(width, height / 4));
 	strip.setOrigin(Vector2f(width / 2, height / 8));
-	strip.setPosition(width / 2, 1.5f * height);// height / 2 - height / 8);
+	strip.setPosition(width / 2, 1.5f * height);
 	strip.setFillColor(Color(127, 140, 141));
 
 	if (!menuFont.loadFromFile(workingPath + "Montserrat-Regular.otf")) {

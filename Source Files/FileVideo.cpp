@@ -14,7 +14,7 @@ FileVideo::FileVideo() {}
 FileVideo::FileVideo(string videoPath, string videoTitle) {
 	this->videoPath = videoPath;
 	this->videoTitle = videoTitle;
-	this->thumbnailPath = workingPath + videoTitle + ".png";
+	this->thumbnailPath = (workingPath + "Video/") + videoTitle + ".png";
 	init();
 }
 
@@ -24,9 +24,9 @@ void FileVideo::init() {
 
 	if (!thumbnailTexture.loadFromFile(thumbnailPath)) {
         #ifdef DEBUG
-            cout << "Errore 005: Caricamento texture copertina non riuscito." << endl;
+            cout << "Errore 005: Caricamento texture copertina '" << videoTitle << "' non riuscito." << endl;
         #endif
-		thumbnailPath = workingPath + "defaultThumbnail.png";
+		thumbnailPath = workingPath + "Video/" + "defaultThumbnail.png";
         if (!thumbnailTexture.loadFromFile(thumbnailPath)) {
             #ifdef DEBUG
                 cout << "Errore 008: Caricamento texture copertina di default non riuscito." << endl;

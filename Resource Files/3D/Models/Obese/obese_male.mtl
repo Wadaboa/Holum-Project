@@ -1,0 +1,75 @@
+# Blender MTL File: 'Ch5_Fight1_CS.upk.blend'
+# Material Count: 6
+
+newmtl m_obeseMale_eye
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_eye_d.tga
+map_Disp t_eye_n.tga
+
+newmtl m_obeseMale_skin
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_obeseMale_dm.tga
+map_Disp t_obeseMale_n.tga
+map_Ke t_obeseMale_dm.tga
+map_Ks t_obeseMale_s.tga
+
+newmtl m_obeseMale_teeth
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_obeseMale_teeth_d.tga
+map_Disp t_obeseMale_teeth_n.tga
+
+newmtl material_7.001
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_dante_hair_black_dm.tga
+map_Disp t_dante_hair_n.tga
+map_Ks t_dante_hair_s.tga
+
+newmtl mi_obeseMaleHair
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_obeseMale_dm.tga
+map_Disp t_obeseMale_n.tga
+map_Ke t_obeseMale_dm.tga
+map_Ks t_obeseMale_s.tga
+
+newmtl mi_obeseMale_cloth
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd t_obeseMale_dm.tga
+map_Disp t_obeseMale_n.tga
+map_Ke t_obeseMale_dm.tga
+map_Ks t_obeseMale_s.tga
