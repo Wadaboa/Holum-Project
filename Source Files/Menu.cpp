@@ -6,10 +6,8 @@
 //
 //
 
-
 #include <Global.h>
 #include <Menu.h>
-
 
 Menu::Menu() {
 	init();
@@ -29,7 +27,7 @@ void Menu::init() {
 
 	strip = RectangleShape(Vector2f(width, height / 4));
 	strip.setOrigin(Vector2f(width / 2, height / 8));
-	strip.setPosition(width / 2, 1.5f * height);// height / 2 - height / 8);
+	strip.setPosition(width / 2, 1.5f * height);
 	strip.setFillColor(Color(127, 140, 141));
 
 	if (!menuFont.loadFromFile(workingPath + "Montserrat-Regular.otf")) {
@@ -51,7 +49,6 @@ void Menu::init() {
 	menuTexts.push_back(appText);
 	appText = Text("SETTINGS", menuFont, textSize);
 	menuTexts.push_back(appText);
-
 
 	nText = menuTexts.size();
 	firstTextPosition = 0;
@@ -78,7 +75,6 @@ void Menu::init() {
 }
 
 MANAGER_STATUS Menu::menuEvents() {
-	
 	if(upAnimation == true) {
         animateUp();
     }
@@ -93,8 +89,6 @@ MANAGER_STATUS Menu::menuEvents() {
 		animateDown();
 	}
     
-	
-	
 	toDraw = vector <Drawable*>();
 	toDraw.push_back(&strip);
 	for (int i = 0; i < nText; i++)

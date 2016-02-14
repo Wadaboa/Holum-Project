@@ -1,0 +1,11 @@
+newmtl phong2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Can_D.jpg
+bump Can_N.jpg -bm 0.05
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks Can_S.jpg
+Ns 5.41

@@ -6,14 +6,20 @@
 //
 //
 
+#pragma once
 
 #include <iostream>
 #include <cstdlib>
-#include <cstring>
+#include <string>
 #include <cmath>
 #include <fstream>
+#include <sstream>
 #include <vector>
+#include <map>
 #include <algorithm>
+#include <iomanip>
+#include <stdexcept>
+#include <myo/myo.hpp>
 
 #ifdef _WIN32
     #include <glew.h>
@@ -21,8 +27,11 @@
     #include <GL/glew.h>
 #endif
 
+#include <SOIL.h>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -35,3 +44,6 @@
 
 using namespace std;
 using namespace sf;
+using namespace myo;
+using namespace glm;
+using namespace Assimp;

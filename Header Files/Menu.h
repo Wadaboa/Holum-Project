@@ -6,6 +6,7 @@
 //
 //
 
+#pragma once
 
 class Menu {
 	private:
@@ -32,13 +33,7 @@ class Menu {
 		Time stepTime;
         Time udStepTime;
 		float scaleFactor;
-		
 		float animationSpeed;
-        float initCentralPosAnimation;
-        float initLeftPosAnimation;
-        float initRightPosAnimation;
-        float initStripPosAnimation;
-
 		
 		void init();
 		void animateLeft();
@@ -56,6 +51,5 @@ class Menu {
         void setUpAnimation(bool upAnimation);
 		bool getLeftAnimation();
 		bool getRightAnimation();
-		
 		void checkPositions();
 };

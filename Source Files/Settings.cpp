@@ -6,10 +6,8 @@
 //
 //
 
-
 #include <Global.h>
 #include <Settings.h>
-
 
 Settings::Settings() {
 	init();

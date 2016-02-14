@@ -6,11 +6,14 @@
 //
 //
 
+#pragma once
+
 #include <Menu.h>
 #include <Video.h>
 #include <Game.h>
 #include <ThreeD.h>
 #include <Settings.h>
+#include <MyoConnector.h>
 
 class Manager {
 	private:
@@ -33,6 +36,9 @@ class Manager {
 		View viewLeft;
 		View viewRight;
 		View viewBottom;
+    
+        float viewWidth;
+        float viewHeight;
 
 		// Stato corrente della finestra
 		MANAGER_STATUS currentStatus;
@@ -40,14 +46,23 @@ class Manager {
 		// Oggetti delle classi del menu
 		Video video;
 		Menu menu;
-		
 		ThreeD threeD;
 		Game game;
 		Settings settings;
 
 		RenderWindow* window;
         bool fullscreen;
-
+    
+        Hub* hub;
+        Myo* myoArmband;
+        MyoConnector myoConnector;
+        string myoCurrentPose;
+        string myoLastPose;
+    
+        float angleX;
+        float angleY;
+        float zoom;
+		bool drawWithGL;
 
 		void splashScreen();
 		void init();
@@ -62,7 +77,8 @@ class Manager {
 		void drawObjects(vector<Drawable*> toDraw);
 		void checkErrors();
 		void playVideo(sfe::Movie* movie);
-    
+        void initMyo();
+        void drawGL();
 	public:
 		Manager();
 };

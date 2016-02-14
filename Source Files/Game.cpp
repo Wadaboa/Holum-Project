@@ -6,10 +6,8 @@
 //
 //
 
-
 #include <Global.h>
 #include <Game.h>
-
 
 Game::Game() {
 	init();
