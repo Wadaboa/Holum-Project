@@ -83,7 +83,7 @@ void Video::loadVideos() {
         #ifdef DEBUG
             cout << "Errore 004: Il percorso della directory video non esiste." << endl;
         #endif
-		return (void)(-1);
+        quit = true;
 	}
 
 	while ((entry = readdir(dp))) {

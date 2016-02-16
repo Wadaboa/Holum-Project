@@ -52,7 +52,7 @@ class ThreeD {
         
     public:
         ThreeD();
-        bool threeDEvents();
+        MANAGER_STATUS threeDEvents();
 		vector<Drawable*> getObjectsVector();
         void loadModel();
 		void checkPositions();
