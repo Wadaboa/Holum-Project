@@ -59,6 +59,7 @@ class Manager {
         Hub* hub;
         Myo* myoArmband;
         MyoConnector myoConnector;
+
         string myoLastPose;
         string myoCurrentPose;
     
@@ -68,6 +69,8 @@ class Manager {
         float angleX;
         float angleY;
         float zoom;
+
+		bool drawWithGL;
 
 		void splashScreen();
 		void init();
@@ -86,7 +89,7 @@ class Manager {
         void initLeap();
         void drawGL();
         mat4 leapTransform(mat4 modelMatrix);
-    
+        
 	public:
 		Manager();
 };

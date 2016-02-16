@@ -23,7 +23,7 @@ Manager::Manager() {
 
 void Manager::splashScreen() {
     sfe::Movie movie;
-    if (!movie.openFromFile(workingPath + "Video/" + "HolumSplashScreen.mp4")) {
+    if (!movie.openFromFile(workingPath + "Video/HolumSplashScreen.mp4")) {
         #ifdef DEBUG
             cout << "Errore 003: Caricamento splash screen non riuscito." << endl;
         #endif
@@ -44,10 +44,10 @@ void Manager::initMyo() {
             #endif
         }
         
+        hub->addListener(&myoConnector);
+        
         myoLastPose = "unknown";
         myoCurrentPose = "unknown";
-        
-        hub->addListener(&myoConnector);
         
     } catch (const exception& e) {
         #ifdef DEBUG
@@ -122,7 +122,8 @@ void Manager::init() {
     angleX = 0;
     angleY = 0;
     zoom = 45.0f;
-    
+	drawWithGL = false;
+
     threeD.loadModel();
     
     currentStatus = MENU_STATUS;
@@ -175,7 +176,10 @@ void Manager::manageVideos() {
 
 void Manager::manageThreeD() {
     threeD.threeDEvents();
-    drawGL();
+	if (!drawWithGL)
+		drawOn(threeD.getObjectsVector());
+	else
+		drawGL();
 }
 
 void Manager::manageGames() {
@@ -204,7 +208,13 @@ void Manager::windowEvents() {
         if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape ) || myoCurrentPose == "fist") {
             if (currentStatus == MENU_STATUS)
                 menu.setDownAnimation(true);
-            else {
+			else if (currentStatus == THREED_STATUS && drawWithGL == true) {
+				drawWithGL = false;
+				angleX = 0;
+				angleY = 0;
+				zoom = 45.0f;
+			}
+			else {
                 currentStatus = MENU_STATUS;
             }
         }
@@ -226,10 +236,16 @@ void Manager::windowEvents() {
 				}
 			}
             else if (currentStatus == THREED_STATUS) {
-                if(myoCurrentPose == "waveIn") {
+				if (!threeD.getRightAnimation()) {
+					if (!threeD.getLeftAnimation()) {  // Controllo essenziale
+						threeD.setLeftAnimation(true);
+						threeD.checkPositions();
+					}
+				}
+				if (myoCurrentPose == "waveIn" && drawWithGL) {
                     angleY += 0.5f;
                 }
-                else
+				else if (drawWithGL)
                     angleY += 0.1f;
             }
         }
@@ -251,10 +267,16 @@ void Manager::windowEvents() {
                 }
             }
             else if (currentStatus == THREED_STATUS) {
-                if(myoCurrentPose == "waveOut") {
+				if (!threeD.getLeftAnimation()) {
+					if (!threeD.getRightAnimation()) {  // Controllo essenziale
+						threeD.setRightAnimation(true);
+						threeD.checkPositions();
+					}
+				}
+                if(myoCurrentPose == "waveOut" && drawWithGL) {
                     angleY -= 0.5f;
                 }
-                else
+				else if (drawWithGL)
                     angleY -= 0.1f;
             }
         }
@@ -275,6 +297,10 @@ void Manager::windowEvents() {
             else if (currentStatus == VIDEO_STATUS) {
                 playVideo(video.getVideoToPlay());
             }
+			else if (currentStatus == THREED_STATUS) {
+				threeD.loadModel();
+				drawWithGL = true;
+			}
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::F11) {
             fullscreen = !fullscreen;
@@ -284,7 +310,7 @@ void Manager::windowEvents() {
             glViewport(0, 0, event.size.width, event.size.height);
         }
         if (event.type == Event::MouseWheelMoved) {
-            if (currentStatus == THREED_STATUS) {
+			if (currentStatus == THREED_STATUS && drawWithGL) {
                 if (event.mouseWheel.delta > 0) {
                     zoom += 0.01f;
                 }
@@ -324,7 +350,7 @@ void Manager::drawOn(vector<Drawable*> toDraw) {
         drawObjects(toDraw);
     #endif
     
-    glPopAttrib();
+	glPopAttrib();
     window->display();
 }
 
@@ -362,6 +388,7 @@ void Manager::drawGL() {
     horizontalModel = rotate(horizontalModel, angleX, vec3(1.0f, 0.0f, 0.0f));
     horizontalModel = translate(horizontalModel, vec3(0.0f, threeD.getModelOffset(), 0.0f));
     horizontalModel = rotate(horizontalModel, angleY, vec3(0.0f, 1.0f, 0.0f));
+
     #ifdef LEAP
         horizontalModel = leapTransform(horizontalModel);
     #endif
@@ -370,13 +397,16 @@ void Manager::drawGL() {
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(horizontalView));
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "model"), 1, GL_FALSE, value_ptr(horizontalModel));
     
-    /* Top View */
-    glViewport((width / 2) - (viewWidth / 2), height - viewHeight, viewWidth, viewHeight);
-    threeD.getModel()->draw(threeD.getShader());
-    
     /* Bottom View */
     glViewport((width / 2) - (viewWidth / 2), 0, viewWidth, viewHeight);
     threeD.getModel()->draw(threeD.getShader());
+
+	/* Top View */
+	horizontalView = rotate(horizontalView, (float)radians(180.0f), vec3(1.0f, 0.0f, 0.0f));
+	horizontalView = rotate(horizontalView, (float)radians(180.0f), vec3(0.0f, 1.0f, 0.0f));
+	glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(horizontalView));
+	glViewport((width / 2) - (viewWidth / 2), height - viewHeight, viewWidth, viewHeight);
+	threeD.getModel()->draw(threeD.getShader());
     
     /** Left - Right View **/
     mat4 verticalProjection = perspective(zoom, verticalAspectRatio, 0.1f, 100.0f);
@@ -389,6 +419,7 @@ void Manager::drawGL() {
     verticalModel = rotate(verticalModel, angleX, vec3(1.0f, 0.0f, 0.0f));
     verticalModel = translate(verticalModel, vec3(0.0f, threeD.getModelOffset(), 0.0f));
     verticalModel = rotate(verticalModel, angleY, vec3(0.0f, 1.0f, 0.0f));
+
     #ifdef LEAP
         verticalModel = leapTransform(verticalModel);
     #endif
@@ -408,13 +439,14 @@ void Manager::drawGL() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     window->resetGLStates();
+
     #ifdef DIAGONAL
         window->setView(window->getDefaultView());
         window->draw(mainDiagonal);
         window->draw(secondaryDiagonal);
     #endif
-    glPopAttrib();
     
+    glPopAttrib();
     window->display();
 }
 

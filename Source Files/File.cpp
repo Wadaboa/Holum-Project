@@ -1,8 +1,8 @@
 //
 //
 //  Project : Holum
-//  File Name : File.cpp
-//  Date : 13/02/2016
+//  File Name : Game.h
+//  Date : 17/12/2015
 //
 //
 
@@ -14,7 +14,12 @@ File::File() {}
 File::File(string path, string title) {
 	this->path = path;
 	this->title = title;
-	this->thumbnailPath = (workingPath + "Video/") + title + ".png";
+	if (path.substr(15, 5) == "Video") {
+		this->thumbnailPath = (workingPath + "Video/") + title + ".png";
+	}
+	else {
+		this->thumbnailPath = (workingPath + "3D/Models/") + title + ".png";
+	}
 	init();
 }
 
@@ -26,10 +31,11 @@ void File::init() {
         #ifdef DEBUG
             cout << "Errore 005: Caricamento texture copertina '" << title << "' non riuscito." << endl;
         #endif
-		thumbnailPath = workingPath + "/" + "defaultThumbnail.png";
+		thumbnailPath = workingPath + "defaultThumbnail.png";
         if (!thumbnailTexture.loadFromFile(thumbnailPath)) {
             #ifdef DEBUG
                 cout << "Errore 008: Caricamento texture copertina di default non riuscito." << endl;
+				cout << thumbnailPath << endl;
             #endif
         }
 	}

@@ -141,8 +141,7 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 	return Mesh(vertices, indices, textures);
 }
 
-vector<Mesh::texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName)
-{
+vector<Mesh::texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName) {
     vector<Mesh::texture> textures;
     for(GLuint i = 0; i < mat->GetTextureCount(type); i++)
     {

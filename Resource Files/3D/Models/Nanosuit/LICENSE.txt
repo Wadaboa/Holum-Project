@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 Original Nanosuit model by ForrestPL:
 http://tf3dm.com/3d-model/crysis-2-nanosuit-2-97837.html
 
 Slightly modified for use in the LearnOpenGL.com tutorials (by Joey de Vries)
 
+=======
+Original Nanosuit model by ForrestPL:
+http://tf3dm.com/3d-model/crysis-2-nanosuit-2-97837.html
+
+Slightly modified for use in the LearnOpenGL.com tutorials (by Joey de Vries)
+
+>>>>>>> 4d30272b7c5ffad50937f399769317f1d152645e
 For personal use only

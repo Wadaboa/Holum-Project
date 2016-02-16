@@ -9,6 +9,7 @@
 #pragma once
 
 #include <Model.h>
+#include <File.h>
 
 class ThreeD {
     private:
@@ -19,19 +20,46 @@ class ThreeD {
             string vertexShaderPath = workingPath + "3D/Shaders/MacOS/vertexShader.vert";
             string fragmentShaderPath = workingPath + "3D/Shaders/MacOS/fragmentShader.frag";
         #endif
-    
+
+        vector<Drawable*> toDraw;
         GLchar* modelPath;
         sh::Shader shader;
         Model model;
+
+		vector<File> modelFiles;
+		int nModel;
     
         float horizontalK = 4.8f / 3.7f;
-        float verticalK = 7.488f / 3.7f;
-    
+        float verticalK = 4.8f / (3.7f * verticalAspectRatio);
+		
+		int firstModelPosition;
+		float scaleFactor;
+		float animationSpeed;
+		int rightPosition;
+		int leftPosition;
+		int outPosition;
+
+		bool leftAnimation;
+		bool rightAnimation;
+		Clock clock;
+		Time stepTime;
+
         void init();
+		void loadFiles();
+		bool checkExtension(string modelName, int modelNameLen);
+		void animateLeft();
+		void animateRight();
+        
     public:
         ThreeD();
-        MANAGER_STATUS threeDEvents();
+        bool threeDEvents();
+		vector<Drawable*> getObjectsVector();
         void loadModel();
+		void checkPositions();
+		void setLeftAnimation(bool leftAnimation);
+		void setRightAnimation(bool rightAnimation);
+		bool getLeftAnimation();
+		bool getRightAnimation();
         sh::Shader getShader();
         Model* getModel();
         float getHorizontalK();

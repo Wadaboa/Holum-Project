@@ -16,3 +16,5 @@ Errore 015: Compilazione del vertex shader non riuscita.
 Errore 016: Compilazione del fragment shader non riuscita.
 Errore 017: Collegamento del program shader non riuscito.
 Errore 018: Impossibile inizializzare Leap Motion.
+Errore 019: Numero dei modelli insufficiente.
+Errore 020: Il percorso della directory dei modelli 3D non esiste.
