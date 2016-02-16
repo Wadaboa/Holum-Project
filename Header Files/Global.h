@@ -15,6 +15,8 @@
 #define PI 3.14159265
 #define DEBUG
 #define MYO
+#define LEAP
+#define VERBOSE
 
 extern bool quit;
 

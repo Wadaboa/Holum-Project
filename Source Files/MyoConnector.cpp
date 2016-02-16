@@ -21,10 +21,12 @@ void MyoConnector::onUnpair(Myo* myo, uint64_t timestamp) {
 }
 
 void MyoConnector::onOrientationData(Myo* myo, uint64_t timestamp, const Quaternion<float>& quat) {
+    using std::min;
+    using std::max;
     
     float roll = atan2(2.0f * (quat.w() * quat.x() + quat.y() * quat.z()),
                        1.0f - 2.0f * (quat.x() * quat.x() + quat.y() * quat.y()));
-    float pitch = 0;//asin(max(-1.0f, min(1.0f, 2.0f * (quat.w() * quat.y() - quat.z() * quat.x()))));
+    float pitch = asin(max(-1.0f, min(1.0f, 2.0f * (quat.w() * quat.y() - quat.z() * quat.x()))));
     float yaw = atan2(2.0f * (quat.w() * quat.z() + quat.x() * quat.y()),
                       1.0f - 2.0f * (quat.y() * quat.y() + quat.z() * quat.z()));
     

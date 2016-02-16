@@ -19,7 +19,9 @@
 #include <algorithm>
 #include <iomanip>
 #include <stdexcept>
+
 #include <myo/myo.hpp>
+#include <Leap.h>
 
 #ifdef _WIN32
     #include <glew.h>

@@ -14,7 +14,10 @@ Manager::Manager() {
     #ifdef MYO
         initMyo();
     #endif
-    //splashScreen();
+    #ifdef LEAP
+        initLeap();
+    #endif
+    splashScreen();
 	run();
 }
 
@@ -48,7 +51,17 @@ void Manager::initMyo() {
         
     } catch (const exception& e) {
         #ifdef DEBUG
-            cout << "Errore 011: Errore inizializzazione Myo Armband." << endl;
+            cout << "Errore 011: Impossibile inizializzare Myo Armband." << endl;
+        #endif
+    }
+}
+
+void Manager::initLeap() {
+    try {
+        leapController.addListener(leapListener);
+    } catch (const exception& e) {
+        #ifdef DEBUG
+            cout << "Errore 018: Impossibile inizializzare Leap Motion." << endl;
         #endif
     }
 }
@@ -321,6 +334,18 @@ void Manager::drawObjects(vector<Drawable*> toDraw) {
     }
 }
 
+mat4 Manager::leapTransform(mat4 modelMatrix) {
+    if(leapListener.getHandsList().count() == 1) {
+        modelMatrix = rotate(modelMatrix, degrees(leapListener.getHandDirection().pitch()) / LEAP_SCALE, vec3(1.0f, 0.0f, 0.0f));
+        modelMatrix = rotate(modelMatrix, degrees(leapListener.getPalmNormal().roll()) / LEAP_SCALE, vec3(0.0f, 1.0f, 0.0f));
+        modelMatrix = rotate(modelMatrix, degrees(leapListener.getHandDirection().yaw()) / LEAP_SCALE, vec3(0.0f, 0.0f, 1.0f));
+    }
+    else if(leapListener.getHandsList().count() == 2) {
+        modelMatrix = translate(modelMatrix, vec3(leapListener.getLeapTranslation().x, leapListener.getLeapTranslation().y, -(leapListener.getLeapTranslation().z)));
+    }
+    return modelMatrix;
+}
+
 void Manager::drawGL() {
     glClearColor(0.00f, 0.00f, 0.00f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -337,6 +362,9 @@ void Manager::drawGL() {
     horizontalModel = rotate(horizontalModel, angleX, vec3(1.0f, 0.0f, 0.0f));
     horizontalModel = translate(horizontalModel, vec3(0.0f, threeD.getModelOffset(), 0.0f));
     horizontalModel = rotate(horizontalModel, angleY, vec3(0.0f, 1.0f, 0.0f));
+    #ifdef LEAP
+        horizontalModel = leapTransform(horizontalModel);
+    #endif
     
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "projection"), 1, GL_FALSE, value_ptr(horizontalProjection));
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(horizontalView));
@@ -361,6 +389,9 @@ void Manager::drawGL() {
     verticalModel = rotate(verticalModel, angleX, vec3(1.0f, 0.0f, 0.0f));
     verticalModel = translate(verticalModel, vec3(0.0f, threeD.getModelOffset(), 0.0f));
     verticalModel = rotate(verticalModel, angleY, vec3(0.0f, 1.0f, 0.0f));
+    #ifdef LEAP
+        verticalModel = leapTransform(verticalModel);
+    #endif
     
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "projection"), 1, GL_FALSE, value_ptr(verticalProjection));
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(verticalView));

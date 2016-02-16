@@ -14,6 +14,9 @@
 #include <ThreeD.h>
 #include <Settings.h>
 #include <MyoConnector.h>
+#include <LeapListener.h>
+
+#define LEAP_SCALE 15
 
 class Manager {
 	private:
@@ -59,6 +62,9 @@ class Manager {
         string myoLastPose;
         string myoCurrentPose;
     
+        LeapListener leapListener;
+        Leap::Controller leapController;
+    
         float angleX;
         float angleY;
         float zoom;
@@ -77,7 +83,10 @@ class Manager {
 		void checkErrors();
 		void playVideo(sfe::Movie* movie);
         void initMyo();
+        void initLeap();
         void drawGL();
+        mat4 leapTransform(mat4 modelMatrix);
+    
 	public:
 		Manager();
 };

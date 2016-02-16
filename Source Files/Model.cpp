@@ -55,7 +55,9 @@ void Model::loadModel(string path) {
 	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
 	
     if(!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
-		cout << "Errore 013: Caricamento file OBJ non riuscito." << endl << importer.GetErrorString();
+        #ifdef DEBUG
+            cout << "Errore 013: Caricamento file OBJ non riuscito." << endl << importer.GetErrorString();
+        #endif
 		return;
 	}
 	

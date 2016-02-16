@@ -30,7 +30,7 @@ void Menu::init() {
 	strip.setPosition(width / 2, 1.5f * height);
 	strip.setFillColor(Color(127, 140, 141));
 
-	if (!menuFont.loadFromFile(workingPath + "Montserrat-Regular.otf")) {
+	if (!menuFont.loadFromFile(workingPath + "Font/" + "Montserrat-Regular.otf")) {
 		#ifdef DEBUG
 			cout << "Errore 002: Caricamento font non riuscito." << endl;
 		#endif
@@ -295,7 +295,7 @@ MANAGER_STATUS Menu::getCurrentStatus() {
 		return EXIT_STATUS;
 	else {
 		#ifdef DEBUG
-		cout << "Errore 010: Stato interno a menu non gestito." << endl;
+            cout << "Errore 010: Stato interno a menu non gestito." << endl;
 		#endif
 		return MENU_STATUS;
 	}

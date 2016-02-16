@@ -4,14 +4,15 @@ Errore 003: Caricamento splash screen non riuscito.
 Errore 004: Il percorso della directory video non esiste.
 Errore 005: Caricamento texture copertina non riuscito.
 Errore 006: Numero dei video insufficiente.
-Errore 007: Errore caricamento video.
+Errore 007: Caricamento video non riuscito.
 Errore 008: Caricamento texture copertina di default non riuscito.
 Errore 009: Suono non trovato.
 Errore 010: Impossibile trovare Myo Armband.
-Errore 011: Errore inizializzazione Myo Armband.
+Errore 011: Impossibile inizializzare Myo Armband.
 Errore 012: Stato interno a menu non gestito.
 Errore 013: Caricamento file OBJ non riuscito.
 Errore 014: Caricamento shader non riuscito.
 Errore 015: Compilazione del vertex shader non riuscita.
 Errore 016: Compilazione del fragment shader non riuscita.
 Errore 017: Collegamento del program shader non riuscito.
+Errore 018: Impossibile inizializzare Leap Motion.
