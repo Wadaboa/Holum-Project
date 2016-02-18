@@ -90,7 +90,7 @@ MANAGER_STATUS Menu::menuEvents() {
 	}
     
 	toDraw = vector <Drawable*>();
-	toDraw.push_back(&strip);
+	//toDraw.push_back(&strip);
 	for (int i = 0; i < nText; i++)
 		toDraw.push_back(&menuTexts.at(i));
 	

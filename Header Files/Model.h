@@ -12,8 +12,12 @@
 
 class Model {
     public:
-        float MAX;
-        float MIN;
+		float XMAX;
+		float XMIN;
+        float YMAX;
+        float YMIN;
+		float ZMAX;
+		float ZMIN;
     
         Model();
         Model(GLchar* path);

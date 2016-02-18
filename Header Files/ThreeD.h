@@ -29,7 +29,9 @@ class ThreeD {
 		vector<File> modelFiles;
 		int nModel;
     
-        float horizontalK = 4.8f / 3.7f;
+        float xAxisK = 4.8f / 3.7f;
+		float yAxisK = 4.8f / 2.f;
+		float zAxisK = 4.8f / 0.78f;
         float verticalK = 4.8f / (3.7f * verticalAspectRatio);
 		
 		int firstModelPosition;
@@ -63,5 +65,8 @@ class ThreeD {
         Model* getModel();
         float getHorizontalK();
         float getVerticalK();
-        float getModelOffset();
+        float getModelVerticalOffset();
+		float getModelHorizontalOffset();
+		float getModelDepthOffset();
+		float getCameraDistance();
 };

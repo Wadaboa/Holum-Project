@@ -123,6 +123,8 @@ sh::Shader ThreeD::getShader() {
     return shader;
 }
 
+
+
 Model* ThreeD::getModel() {
     return &model;
 }
@@ -132,18 +134,27 @@ void ThreeD::loadModel() {
 	GLchar* modelPath = new char[temp.length() + 1];
 	strcpy(modelPath, temp.c_str());
 	model = Model(modelPath);
+	cout << model.XMIN << " " << model.XMAX << endl;
+	cout << model.YMIN << " " << model.YMAX << endl;
+	cout << model.ZMIN << " " << model.ZMAX << endl << endl;
 }
 
-float ThreeD::getHorizontalK() {
-    return horizontalK;
-}
 
 float ThreeD::getVerticalK() {
     return verticalK;
 }
 
-float ThreeD::getModelOffset() {
-    return (-(getModel()->MAX - getModel()->MIN)) / 2.0f;
+float ThreeD::getModelVerticalOffset() {
+	return ((-getModel()->YMIN - getModel()->YMAX) / 2.0f);
+}
+
+float ThreeD::getModelHorizontalOffset() {
+	return 0;
+	return ((- getModel()->XMIN - getModel()->XMAX) / 2.0f);
+}
+
+float ThreeD::getModelDepthOffset() {
+	return ((-getModel()->ZMIN - getModel()->ZMAX) / 2.0f);
 }
 bool ThreeD::checkExtension(string modelName, int modelNameLen) {
 	if (modelNameLen >= 5) {
@@ -253,4 +264,18 @@ bool ThreeD::getLeftAnimation() {
 
 bool ThreeD::getRightAnimation() {
 	return rightAnimation;
+}
+
+float ThreeD::getCameraDistance() {
+	float distances[3];
+	distances[0] = (model.XMAX - model.XMIN) * xAxisK;
+	distances[1] = (model.YMAX - model.YMIN) * yAxisK;
+	distances[2] = (model.ZMAX - model.ZMIN) * zAxisK;
+	float MAX = 0;
+	for (int i = 0; i < 3; i++) {
+		if (distances[i] > MAX) {
+			MAX = distances[i];
+		}
+	}
+	return MAX;
 }

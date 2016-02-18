@@ -16,7 +16,7 @@ Manager::Manager() {
 #ifdef MYO
 	initMyo();
 #endif
-    splashScreen();
+    //splashScreen();
 	run();
 }
 
@@ -113,9 +113,7 @@ void Manager::init() {
     zoom = 45.0f;
 	drawWithGL = false;
 
-    threeD.loadModel();
-    
-    currentStatus = MENU_STATUS;
+	currentStatus =  THREED_STATUS;
 }
 
 void Manager::run() {
@@ -225,7 +223,7 @@ void Manager::windowEvents() {
 				}
 			}
             else if (currentStatus == THREED_STATUS) {
-				if (!threeD.getRightAnimation()) {
+				if (!threeD.getRightAnimation() && !drawWithGL) {
 					if (!threeD.getLeftAnimation()) {  // Controllo essenziale
 						threeD.setLeftAnimation(true);
 						threeD.checkPositions();
@@ -256,7 +254,7 @@ void Manager::windowEvents() {
                 }
             }
             else if (currentStatus == THREED_STATUS) {
-				if (!threeD.getLeftAnimation()) {
+				if (!threeD.getLeftAnimation() && !drawWithGL) {
 					if (!threeD.getRightAnimation()) {  // Controllo essenziale
 						threeD.setRightAnimation(true);
 						threeD.checkPositions();
@@ -350,20 +348,27 @@ void Manager::drawObjects(vector<Drawable*> toDraw) {
 }
 
 void Manager::drawGL() {
-    glClearColor(0.00f, 0.00f, 0.00f, 1.0f);
+	glm::vec3 lightPos(1.2f, 10.0f, 2.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     threeD.getShader().use();
     
+	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.position"), lightPos.x, lightPos.y, lightPos.z);
+	glUniform3f(glGetUniformLocation(threeD.getShader().program, "viewPos"), 0, 0, threeD.getCameraDistance());
+	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.ambient"), 0.5f, 0.5f, 0.5f);
+	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.diffuse"), 0.5f, 0.5f, 0.5f);
+	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.specular"), 1.0f, 1.0f, 1.0f);
+
     /** Top - Bottom View **/
-    mat4 horizontalProjection = perspective(zoom, horizontalAspectRatio, 0.1f, 100.0f);
+    mat4 horizontalProjection = perspective(zoom, horizontalAspectRatio, 0.1f, 200.0f);
 
     mat4 horizontalView;
-    horizontalView = lookAt(vec3(0.0f, 0.0f, threeD.getModel()->MAX * threeD.getHorizontalK()), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
-    
+	horizontalView = lookAt(vec3(0.0f, 0.0f, threeD.getCameraDistance()), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+	
     mat4 horizontalModel;
-    horizontalModel = rotate(horizontalModel, angleX, vec3(1.0f, 0.0f, 0.0f));
-    horizontalModel = translate(horizontalModel, vec3(0.0f, threeD.getModelOffset(), 0.0f));
+	horizontalModel = rotate(horizontalModel, angleX, vec3(1.0f, 0.0f, 0.0f));
+	horizontalModel = translate(horizontalModel, vec3(threeD.getModelHorizontalOffset(), threeD.getModelVerticalOffset(), threeD.getModelDepthOffset()));
     horizontalModel = rotate(horizontalModel, angleY, vec3(0.0f, 1.0f, 0.0f));
     
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "projection"), 1, GL_FALSE, value_ptr(horizontalProjection));
@@ -373,8 +378,6 @@ void Manager::drawGL() {
     /* Bottom View */
     glViewport((width / 2) - (viewWidth / 2), 0, viewWidth, viewHeight);
     threeD.getModel()->draw(threeD.getShader());
-
-	/* Top View */
 	horizontalView = rotate(horizontalView, (float)radians(180.0f), vec3(1.0f, 0.0f, 0.0f));
 	horizontalView = rotate(horizontalView, (float)radians(180.0f), vec3(0.0f, 1.0f, 0.0f));
 	glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(horizontalView));
@@ -385,12 +388,12 @@ void Manager::drawGL() {
     mat4 verticalProjection = perspective(zoom, verticalAspectRatio, 0.1f, 100.0f);
     
     mat4 verticalView;
-    verticalView = lookAt(vec3(0.0f, 0.0f, threeD.getModel()->MAX * threeD.getVerticalK()), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+	verticalView = lookAt(vec3(0.0f, 0.0f, (threeD.getModel()->YMAX - threeD.getModel()->YMIN)  * threeD.getVerticalK()), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
     verticalView = rotate(verticalView, (float)radians(270.0f), vec3(0.0f, 0.0f, 1.0f));
     
     mat4 verticalModel;
     verticalModel = rotate(verticalModel, angleX, vec3(1.0f, 0.0f, 0.0f));
-    verticalModel = translate(verticalModel, vec3(0.0f, threeD.getModelOffset(), 0.0f));
+	verticalModel = translate(verticalModel, vec3(threeD.getModelHorizontalOffset(), threeD.getModelVerticalOffset(), 0.0f));
     verticalModel = rotate(verticalModel, angleY, vec3(0.0f, 1.0f, 0.0f));
     
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "projection"), 1, GL_FALSE, value_ptr(verticalProjection));
