@@ -85,6 +85,10 @@ void File::setThumbnailPosition(float x, float y) {
 	thumbnail.setPosition(Vector2f(x, y));
 }
 
+Vector2f File::getThumbnailPosition() {
+	return thumbnail.getPosition();
+}
+
 Vector2f File::getThumbnailSize() {
 	return Vector2f(thumbnail.getGlobalBounds().width, thumbnail.getGlobalBounds().height);
 }

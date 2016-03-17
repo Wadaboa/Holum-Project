@@ -12,11 +12,17 @@
 
 class Video {
     private:
+
+		bool first;
         bool leftAnimation;
         bool rightAnimation;
+		bool upAnimation;
+		bool downAnimation;
         Clock clock;
         Time stepTime;
+		Time udStepTime;
         int firstVideoPosition;
+		float animationTime;
         float animationSpeed;
 
         int rightPosition;
@@ -31,8 +37,13 @@ class Video {
         void loadVideos();
         bool checkExtension(string videoName, int videoNameLen);
 
+		void setPositions();
         void animateLeft();
         void animateRight();
+		void animateUp();
+		void animateDown();
+
+		int stepCounter;
 
         sfe::Movie movie;
     public:
@@ -41,8 +52,12 @@ class Video {
         vector<Drawable*> getObjectsVector();
         void setLeftAnimation(bool leftAnimation);
         void setRightAnimation(bool rightAnimation);
+		void setDownAnimation(bool downAnimation);
+		void setUpAnimation(bool upAnimation);
         bool getLeftAnimation();
         bool getRightAnimation();
+		bool getUpAnimation();
+		bool getDownAnimation();
         void checkPositions();
         sfe::Movie* getVideoToPlay();
 };

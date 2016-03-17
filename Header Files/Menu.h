@@ -24,6 +24,8 @@ class Menu {
 
 		Font menuFont;
 
+		bool first;
+
 		bool leftAnimation;
 		bool rightAnimation;
         bool upAnimation;
@@ -33,13 +35,18 @@ class Menu {
 		Time stepTime;
         Time udStepTime;
 		float scaleFactor;
+		float animationTime;
 		float animationSpeed;
+		int stepCounter;
 		
 		void init();
+		void setPositions();
 		void animateLeft();
 		void animateRight();
 		void animateUp();
 		void animateDown();
+
+		
 	public:
 		Menu();
 		MANAGER_STATUS menuEvents();
@@ -51,5 +58,8 @@ class Menu {
         void setUpAnimation(bool upAnimation);
 		bool getLeftAnimation();
 		bool getRightAnimation();
+		bool getUpAnimation();
+		bool getDownAnimation();
 		void checkPositions();
+		
 };

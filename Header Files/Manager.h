@@ -63,6 +63,8 @@ class Manager {
         float angleY;
         float zoom;
 		bool drawWithGL;
+		bool enterPressed;
+		bool escapePressed;
 
 		void splashScreen();
 		void init();
@@ -73,6 +75,7 @@ class Manager {
 		void manageGames();
 		void manageSettings();
 		void windowEvents();
+		void changeStatus();
 		void drawOn(vector<Drawable*> toDraw);
 		void drawObjects(vector<Drawable*> toDraw);
 		void checkErrors();

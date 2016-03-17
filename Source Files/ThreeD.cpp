@@ -267,6 +267,7 @@ bool ThreeD::getRightAnimation() {
 }
 
 float ThreeD::getCameraDistance() {
+	
 	float distances[3];
 	distances[0] = (model.XMAX - model.XMIN) * xAxisK;
 	distances[1] = (model.YMAX - model.YMIN) * yAxisK;
@@ -277,5 +278,7 @@ float ThreeD::getCameraDistance() {
 			MAX = distances[i];
 		}
 	}
+
 	return MAX;
+
 }

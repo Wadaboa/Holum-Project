@@ -14,14 +14,18 @@ Menu::Menu() {
 }
 
 void Menu::init() {
+	first = false;
+
+	animationTime = frameRateLimit / 2.5f;
+
 	leftAnimation = false;
 	rightAnimation = false;
 
     upAnimation = true;
     downAnimation = false;
 
-	stepTime = microseconds(8000);
-    udStepTime = microseconds(2000);
+	stepTime = microseconds(0);
+    udStepTime = microseconds(0);
 
 	scaleFactor = 1;
 
@@ -68,13 +72,14 @@ void Menu::init() {
 		menuTexts.at(i).setPosition(Vector2f(0 - (width / 2) + (menuTexts.at(i).getGlobalBounds().width), height * 1.5f));
 	}
 
-	animationSpeed = height / 50;
-
+	animationSpeed = height / animationTime;
+	stepCounter = 0;
 	checkPositions();
 
 }
 
 MANAGER_STATUS Menu::menuEvents() {
+	MANAGER_STATUS currentStatus = MENU_STATUS;
 	if(upAnimation == true) {
         animateUp();
     }
@@ -85,7 +90,6 @@ MANAGER_STATUS Menu::menuEvents() {
 		animateRight();
 	}
 	if (downAnimation == true) {
-		checkPositions();
 		animateDown();
 	}
     
@@ -94,7 +98,7 @@ MANAGER_STATUS Menu::menuEvents() {
 	for (int i = 0; i < nText; i++)
 		toDraw.push_back(&menuTexts.at(i));
 	
-	return MENU_STATUS;
+	return currentStatus;
 }
 
 vector<Drawable*> Menu::getObjectsVector() {
@@ -102,18 +106,22 @@ vector<Drawable*> Menu::getObjectsVector() {
 }
 
 void Menu::setLeftAnimation(bool leftAnimation) {
+	first = true;
 	this->leftAnimation = leftAnimation;
 }
 
 void Menu::setRightAnimation(bool rightAnimation) {
+	first = true;
 	this->rightAnimation = rightAnimation;
 }
 
 void Menu::setDownAnimation(bool downAnimation) {
+	first = true;
     this->downAnimation = downAnimation;
 }
 
 void Menu::setUpAnimation(bool upAnimation) {
+	first = true;
     this->upAnimation = upAnimation;
 }
 
@@ -125,82 +133,107 @@ bool Menu::getRightAnimation() {
 	return rightAnimation;
 }
 
-void Menu::animateLeft() {
-	if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
-	{
-		if (scaleFactor <= 0.51) {
-			leftAnimation = false;
-			scaleFactor = 1;
-			firstTextPosition = rightPosition;
-		}
-		else {
-			clock.restart();
+bool Menu::getUpAnimation() {
+	return upAnimation;
+}
 
-			scaleFactor = scaleFactor - 0.01f;
-			menuTexts.at(firstTextPosition).setScale(scaleFactor, scaleFactor);
-			menuTexts.at(rightPosition).setScale((float)1.5 - scaleFactor, (float)1.5 - scaleFactor);
-			menuTexts.at(firstTextPosition).move((0 - (width / 2) + (menuTexts.at(firstTextPosition).getLocalBounds().width / 4)) / 50, 0);
-			menuTexts.at(rightPosition).move((0 - (width / 2) + (menuTexts.at(rightPosition).getLocalBounds().width / 4)) / 50, 0);
-			menuTexts.at(leftPosition).move((0 - (width / 2) + (menuTexts.at(leftPosition).getLocalBounds().width / 4)) / 50, 0);
-			menuTexts.at(outPosition).move((0 - (width / 2) + (menuTexts.at(outPosition).getLocalBounds().width / 4)) / 50, 0);
-		}
+bool Menu::getDownAnimation() {
+	return downAnimation;
+}
+
+void Menu::setPositions() {
+	menuTexts.at(firstTextPosition).setPosition(Vector2f(width / 2, height * 1.5f));
+	menuTexts.at(rightPosition).setPosition(Vector2f(width - (menuTexts.at(rightPosition).getGlobalBounds().width / 2), height * 1.5f));
+	menuTexts.at(leftPosition).setPosition(Vector2f(menuTexts.at(leftPosition).getGlobalBounds().width / 2, height * 1.5f));
+	menuTexts.at(outPosition).setPosition(Vector2f(0 - (width / 2) + (menuTexts.at(outPosition).getGlobalBounds().width), height * 1.5f));
+
+}
+
+void Menu::animateLeft() {
+	if (first) {
+		first = false;
+		checkPositions();
+	}
+
+	if ((int)menuTexts.at(rightPosition).getPosition().x <= width / 2 || stepCounter == animationTime) {
+		stepCounter = 0;
+		leftAnimation = false;
+		scaleFactor = 1;
+		firstTextPosition = rightPosition;
+	}
+	else {
+		stepCounter++;
+		scaleFactor = scaleFactor - (0.50f / animationTime);
+		menuTexts.at(firstTextPosition).setScale(scaleFactor, scaleFactor);
+		menuTexts.at(rightPosition).setScale((float)1.5 - scaleFactor, (float)1.5 - scaleFactor);
+		menuTexts.at(firstTextPosition).move((0 - (width / 2) + (menuTexts.at(firstTextPosition).getLocalBounds().width / 4)) / animationTime, 0);
+		menuTexts.at(rightPosition).move((float)(0 - (width / 2) + (menuTexts.at(rightPosition).getLocalBounds().width / 4)) / animationTime, 0);
+		menuTexts.at(leftPosition).move((0 - (width / 2) + (menuTexts.at(leftPosition).getLocalBounds().width / 4)) / animationTime, 0);
+		menuTexts.at(outPosition).move((0 - (width / 2) + (menuTexts.at(outPosition).getLocalBounds().width / 4)) / animationTime, 0);
 	}
 }
 
 void Menu::animateRight() {
-	if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds())
-	{
-		if (scaleFactor <= 0.51) {
-			rightAnimation = false;
-			scaleFactor = 1;
-			firstTextPosition = leftPosition;
-		}
-		else {
-			clock.restart();
+	if (first) {
+		first = false;
+		checkPositions();
+	}
 
-			scaleFactor = scaleFactor - 0.01f;
-			menuTexts.at(firstTextPosition).setScale(scaleFactor, scaleFactor);
-			menuTexts.at(leftPosition).setScale((float)1.5 - scaleFactor, (float)1.5 - scaleFactor);
-			menuTexts.at(firstTextPosition).move(( (width / 2) - (menuTexts.at(firstTextPosition).getLocalBounds().width / 4)) / 50, 0);
-			menuTexts.at(rightPosition).move(( (width / 2) - (menuTexts.at(rightPosition).getLocalBounds().width / 4)) / 50, 0);
-			menuTexts.at(leftPosition).move(( (width / 2) - (menuTexts.at(leftPosition).getLocalBounds().width / 4)) / 50, 0);
-			menuTexts.at(outPosition).move(( (width / 2) - (menuTexts.at(outPosition).getLocalBounds().width / 4)) / 50, 0);
-		}
+	if ((int)menuTexts.at(leftPosition).getPosition().x >= width / 2 || stepCounter == animationTime) {
+		stepCounter = 0;
+		rightAnimation = false;
+		scaleFactor = 1;
+		firstTextPosition = leftPosition;
+	}
+	else {
+		stepCounter++;
+		scaleFactor = scaleFactor - (0.50f / animationTime);
+		menuTexts.at(firstTextPosition).setScale(scaleFactor, scaleFactor);
+		menuTexts.at(leftPosition).setScale((float)1.5 - scaleFactor, (float)1.5 - scaleFactor);
+		menuTexts.at(firstTextPosition).move(((width / 2) - (menuTexts.at(firstTextPosition).getLocalBounds().width / 4)) / animationTime, 0);
+		menuTexts.at(rightPosition).move(((width / 2) - (menuTexts.at(rightPosition).getLocalBounds().width / 4)) / animationTime, 0);
+		menuTexts.at(leftPosition).move(((width / 2) - (menuTexts.at(leftPosition).getLocalBounds().width / 4)) / animationTime, 0);
+		menuTexts.at(outPosition).move(((width / 2) - (menuTexts.at(outPosition).getLocalBounds().width / 4)) / animationTime, 0);
 	}
 }
 
 void Menu::animateUp() {
-    if (clock.getElapsedTime().asMicroseconds() >= udStepTime.asMicroseconds()) {
-        if (scaleFactor <= 0.51) {
-            upAnimation = false;
-            scaleFactor = 1;
-        }
-        else {
-            clock.restart();
-            scaleFactor = scaleFactor - 0.01f;
-			menuTexts.at(firstTextPosition).move(0, 0 - animationSpeed);
-			menuTexts.at(leftPosition).move(0, 0 - animationSpeed);
-			menuTexts.at(rightPosition).move(0, 0 - animationSpeed);
-			menuTexts.at(outPosition).move(0, 0 - animationSpeed);
-			strip.move(0, 0 - animationSpeed);
-        }
+	if (first) {
+		first = false;
+		checkPositions();
+	}
+
+	if (menuTexts.at(firstTextPosition).getPosition().y <= height / 2 || stepCounter == animationTime) {
+        upAnimation = false;
+		stepCounter = 0;
+    }
+    else {
+		stepCounter++;
+		menuTexts.at(firstTextPosition).move(0, 0 - animationSpeed);
+		menuTexts.at(leftPosition).move(0, 0 - animationSpeed);
+		menuTexts.at(rightPosition).move(0, 0 - animationSpeed);
+		menuTexts.at(outPosition).move(0, 0 - animationSpeed);
+		strip.move(0, 0 - animationSpeed);
     }
 }
 
 void Menu::animateDown() {
-    if (clock.getElapsedTime().asMicroseconds() >= udStepTime.asMicroseconds()) {
-        if (scaleFactor <= 0.51) {
-            quit = true;
-        }
-        else {
-            clock.restart();
-            scaleFactor = scaleFactor - 0.01f;
-			menuTexts.at(firstTextPosition).move(0, animationSpeed);
-			menuTexts.at(leftPosition).move(0, animationSpeed);
-			menuTexts.at(rightPosition).move(0, animationSpeed);
-			menuTexts.at(outPosition).move(0, animationSpeed);
-			strip.move(0, animationSpeed);
-        }
+	if (first) {
+		first = false;
+		checkPositions();
+	}
+
+	if (menuTexts.at(firstTextPosition).getPosition().y >= height * 1.5f || stepCounter == animationTime) {
+		downAnimation = false;
+		stepCounter = 0;
+    }
+    else {
+		stepCounter++;
+		menuTexts.at(firstTextPosition).move(0, animationSpeed);
+		menuTexts.at(leftPosition).move(0, animationSpeed);
+		menuTexts.at(rightPosition).move(0, animationSpeed);
+		menuTexts.at(outPosition).move(0, animationSpeed);
+		strip.move(0, animationSpeed);
     }
 }
 
@@ -241,6 +274,7 @@ void Menu::checkPositions() {
 			leftPosition = 0;
 			outPosition = nText - 1;
 		}
+		cout << firstTextPosition << " " << leftPosition << " " << rightPosition << " " << outPosition << endl;
 	}
 	else if (rightAnimation) {
 		rightPosition = firstTextPosition + 1;

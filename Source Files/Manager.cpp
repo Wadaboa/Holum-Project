@@ -65,6 +65,7 @@ void Manager::init() {
     window = new RenderWindow(VideoMode((unsigned int)width, (unsigned int)height), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close), ContextSettings(24, 8, 4, 2, 1));
     window->requestFocus();
     window->setMouseCursorVisible(false);
+	window->setFramerateLimit(frameRateLimit);
     
     VIEW_DIMENSION = 0.32f;
     
@@ -112,8 +113,10 @@ void Manager::init() {
     angleY = 0;
     zoom = 45.0f;
 	drawWithGL = false;
+	enterPressed = false;
+	escapePressed = false;
 
-	currentStatus =  THREED_STATUS;
+	currentStatus =  MENU_STATUS;
 }
 
 void Manager::run() {
@@ -152,17 +155,45 @@ void Manager::run() {
 }
 
 void Manager::manageMenu() {
-    menu.menuEvents();
+	
+    currentStatus = menu.menuEvents();
+	if (enterPressed) {
+		if (!menu.getDownAnimation()) {
+			currentStatus = menu.getCurrentStatus();
+			if (currentStatus == VIDEO_STATUS)
+				video.setUpAnimation(true);
+			enterPressed = false;
+		}
+	}
+	else if (escapePressed) {
+		if (!menu.getDownAnimation()) {
+			currentStatus = EXIT_STATUS;
+			escapePressed = false;
+		}
+	}
+
     drawOn(menu.getObjectsVector());
 }
 
 void Manager::manageVideos() {
-    video.videoEvents();
+    currentStatus = video.videoEvents();
+	if (escapePressed) {
+		if (!video.getDownAnimation()) {
+			currentStatus = MENU_STATUS;
+			menu.setUpAnimation(true);
+			escapePressed = false;
+		}
+	}
     drawOn(video.getObjectsVector());
 }
 
 void Manager::manageThreeD() {
     threeD.threeDEvents();
+	if (escapePressed) {
+		currentStatus = MENU_STATUS;
+		menu.setUpAnimation(true);
+		escapePressed = false;
+	}
 	if (!drawWithGL)
 		drawOn(threeD.getObjectsVector());
 	else
@@ -193,9 +224,16 @@ void Manager::windowEvents() {
             window->close();
         }
         if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape ) || myoCurrentPose == "fist") {
-            if (currentStatus == MENU_STATUS)
-                menu.setDownAnimation(true);
-			else if (currentStatus == THREED_STATUS && drawWithGL == true) {
+			if (currentStatus == MENU_STATUS) {
+				menu.setDownAnimation(true);
+				escapePressed = true;
+			}
+			else if (currentStatus == VIDEO_STATUS) {
+				video.setDownAnimation(true);
+				escapePressed = true;
+			}
+			else if (currentStatus == THREED_STATUS) {
+				escapePressed = true;
 				drawWithGL = false;
 				angleX = 0;
 				angleY = 0;
@@ -210,7 +248,6 @@ void Manager::windowEvents() {
 				if (!menu.getRightAnimation()) {
 					if (!menu.getLeftAnimation()) {  // Controllo essenziale
 						menu.setLeftAnimation(true);
-						menu.checkPositions();
 					}
 				}
 			}
@@ -218,7 +255,6 @@ void Manager::windowEvents() {
 				if (!video.getRightAnimation()) {
 					if (!video.getLeftAnimation()) {  // Controllo essenziale
 						video.setLeftAnimation(true);
-						video.checkPositions();
 					}
 				}
 			}
@@ -241,7 +277,6 @@ void Manager::windowEvents() {
 				if (!menu.getLeftAnimation()) {
 					if (!menu.getRightAnimation()) {  // Controllo essenziale
 						menu.setRightAnimation(true);
-						menu.checkPositions();
 					}
 				}
             }
@@ -249,7 +284,6 @@ void Manager::windowEvents() {
                 if (!video.getLeftAnimation()) {
                     if (!video.getRightAnimation()) {  // Controllo essenziale
                         video.setRightAnimation(true);
-                        video.checkPositions();
                     }
                 }
             }
@@ -279,7 +313,9 @@ void Manager::windowEvents() {
         }
         if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Return) || myoCurrentPose == "fingersSpread") {
             if (currentStatus == MENU_STATUS) {
-				currentStatus = menu.getCurrentStatus();
+				menu.setDownAnimation(true);
+				
+				enterPressed = true;
             }
             else if (currentStatus == VIDEO_STATUS) {
                 playVideo(video.getVideoToPlay());
@@ -309,6 +345,15 @@ void Manager::windowEvents() {
         myoLastPose = myoCurrentPose;
         myoCurrentPose = "unknown";
     }
+}
+
+void Manager::changeStatus() {
+
+	currentStatus = menu.getCurrentStatus();
+	if (currentStatus == VIDEO_STATUS) {
+		video.setUpAnimation(true);
+	}
+	enterPressed = false;
 }
 
 void Manager::drawOn(vector<Drawable*> toDraw) {

@@ -30,6 +30,8 @@ extern RectangleShape secondaryDiagonal;
 extern float horizontalAspectRatio;
 extern float verticalAspectRatio;
 
+extern int frameRateLimit;
+
 typedef enum {
 	MENU_STATUS,
 	VIDEO_STATUS,
