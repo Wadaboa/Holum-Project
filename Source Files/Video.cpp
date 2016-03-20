@@ -25,8 +25,6 @@ void Video::init() {
 	upAnimation = true;
 	downAnimation = false;
 
-	stepTime = microseconds(8000);
-	udStepTime = microseconds(3500);
 	scaleFactor = 1;
 
 	firstVideoPosition = 0;
@@ -59,7 +57,6 @@ MANAGER_STATUS Video::videoEvents() {
 	MANAGER_STATUS currentStatus = VIDEO_STATUS;
 	toDraw = vector <Drawable*>();
 	if (upAnimation == true) {
-		//upAnimation = false;
 		animateUp();
 	}
 	else if (leftAnimation == true) {
@@ -335,18 +332,22 @@ sfe::Movie* Video::getVideoToPlay() {
 }
 
 void Video::setLeftAnimation(bool leftAnimation) {
+	first = true;
 	this->leftAnimation = leftAnimation;
 }
 
 void Video::setRightAnimation(bool rightAnimation) {
+	first = true;
 	this->rightAnimation = rightAnimation;
 }
 
 void Video::setDownAnimation(bool downAnimation) {
+	first = true;
 	this->downAnimation = downAnimation;
 }
 
 void Video::setUpAnimation(bool upAnimation) {
+	first = true;
 	this->upAnimation = upAnimation;
 }
 

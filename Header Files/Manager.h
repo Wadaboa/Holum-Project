@@ -14,6 +14,7 @@
 #include <ThreeD.h>
 #include <Settings.h>
 #include <MyoConnector.h>
+#include <Bluetooth.h>
 
 class Manager {
 	private:
@@ -52,7 +53,10 @@ class Manager {
 
 		RenderWindow* window;
         bool fullscreen;
-    
+
+		thread bluetoothManager;
+
+		Bluetooth bluetooth;
         Hub* hub;
         Myo* myoArmband;
         MyoConnector myoConnector;
@@ -74,6 +78,8 @@ class Manager {
 		void manageThreeD();
 		void manageGames();
 		void manageSettings();
+		void manageBluetooth();
+		void bluetoothEvents();
 		void windowEvents();
 		void changeStatus();
 		void drawOn(vector<Drawable*> toDraw);

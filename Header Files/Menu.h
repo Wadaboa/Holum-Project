@@ -31,9 +31,6 @@ class Menu {
         bool upAnimation;
         bool downAnimation;
 
-		Clock clock;
-		Time stepTime;
-        Time udStepTime;
 		float scaleFactor;
 		float animationTime;
 		float animationSpeed;

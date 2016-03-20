@@ -15,6 +15,11 @@
 #define PI 3.14159265
 #define DEBUG
 
+#define LEFT 1
+#define UP 2
+#define RIGHT 3
+#define DOWN 4
+
 extern bool quit;
 
 extern string workingPath;

@@ -8,7 +8,18 @@
 
 #pragma once
 
+#ifdef _WIN32
+	#include <WinSock2.h>
+	#include <ws2bth.h>
+#endif
+#include <bthsdpdef.h>
+#include <bluetoothapis.h>
+
+#pragma comment(lib, "ws2_32.lib")
+#pragma comment(lib, "irprops.lib")
+
 #include <iostream>
+#include <thread>
 #include <cstdlib>
 #include <string>
 #include <cmath>
@@ -41,6 +52,8 @@
 #include <SFML/OpenGL.hpp>
 #include <SFML/Audio.hpp>
 #include <sfeMovie/Movie.hpp>
+
+
 
 using namespace std;
 using namespace sf;

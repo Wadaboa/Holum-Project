@@ -18,9 +18,6 @@ class Video {
         bool rightAnimation;
 		bool upAnimation;
 		bool downAnimation;
-        Clock clock;
-        Time stepTime;
-		Time udStepTime;
         int firstVideoPosition;
 		float animationTime;
         float animationSpeed;

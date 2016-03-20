@@ -24,9 +24,6 @@ void Menu::init() {
     upAnimation = true;
     downAnimation = false;
 
-	stepTime = microseconds(0);
-    udStepTime = microseconds(0);
-
 	scaleFactor = 1;
 
 	strip = RectangleShape(Vector2f(width, height / 4));
