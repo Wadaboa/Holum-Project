@@ -10,13 +10,14 @@
 #include <Bluetooth.h>
 
 Bluetooth::Bluetooth() {
-	time = seconds(3);
+	
 }
 
 void Bluetooth::manageBluetooth() {
-	
+	time = seconds(0);
 	while (true) {
-		if (clock.getElapsedTime() > time) {
+		if (clock.getElapsedTime() >= time) {
+			time = seconds(3);
 			available = false;
 			direction = 0;
 			if (!init());

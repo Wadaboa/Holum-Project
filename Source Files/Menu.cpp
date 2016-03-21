@@ -31,7 +31,7 @@ void Menu::init() {
 	strip.setPosition(width / 2, 1.5f * height);
 	strip.setFillColor(Color(127, 140, 141));
 
-	if (!menuFont.loadFromFile(workingPath + "Montserrat-Regular.otf")) {
+	if (!menuFont.loadFromFile(workingPath + "Font/" + "Montserrat-Regular.otf")) {
 		#ifdef DEBUG
 			cout << "Errore 002: Caricamento font non riuscito." << endl;
 		#endif
@@ -271,7 +271,6 @@ void Menu::checkPositions() {
 			leftPosition = 0;
 			outPosition = nText - 1;
 		}
-		cout << firstTextPosition << " " << leftPosition << " " << rightPosition << " " << outPosition << endl;
 	}
 	else if (rightAnimation) {
 		rightPosition = firstTextPosition + 1;

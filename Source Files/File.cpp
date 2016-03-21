@@ -28,16 +28,21 @@ void File::init() {
 	rectHeight = 720;
 
 	if (!thumbnailTexture.loadFromFile(thumbnailPath)) {
-        #ifdef DEBUG
-            cout << "Errore 005: Caricamento texture copertina '" << title << "' non riuscito." << endl;
-        #endif
-		thumbnailPath = workingPath + "defaultThumbnail.png";
-        if (!thumbnailTexture.loadFromFile(thumbnailPath)) {
-            #ifdef DEBUG
-                cout << "Errore 008: Caricamento texture copertina di default non riuscito." << endl;
+		#ifdef DEBUG
+			cout << "Errore 005: Caricamento texture copertina '" << title << "' non riuscito." << endl;
+		#endif
+		if (thumbnailPath.find("Video", workingPath.length()) != -1) {
+			thumbnailPath = workingPath + "Video/defaultThumbnail.png";
+		}
+		else if (thumbnailPath.find("3D", workingPath.length()) != -1) {
+			thumbnailPath = workingPath + "3D/defaultThumbnail.png";
+		}
+		if (!thumbnailTexture.loadFromFile(thumbnailPath)) {
+			#ifdef DEBUG
+				cout << "Errore 008: Caricamento texture copertina di default non riuscito." << endl;
 				cout << thumbnailPath << endl;
-            #endif
-        }
+			#endif
+		}
 	}
 	thumbnail = RectangleShape(Vector2f(rectWidth, rectHeight));
 	FloatRect thumbnailBounds = thumbnail.getGlobalBounds();

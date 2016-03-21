@@ -346,7 +346,24 @@ void Manager::windowEvents() {
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::F11) {
             fullscreen = !fullscreen;
-            window->create(VideoMode((unsigned int)width, (unsigned int)height, VideoMode((unsigned int)width, (unsigned int)height).getDesktopMode().bitsPerPixel), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
+			window ->create(VideoMode((unsigned int)width, (unsigned int)height), "Holum", (fullscreen ? Style::Fullscreen : Style::Resize | Style::Close), ContextSettings(24, 8, 4, 2, 1));
+			window->requestFocus();
+			window->setMouseCursorVisible(false);
+			window->setFramerateLimit(frameRateLimit);
+			
+			glewExperimental = GL_TRUE;
+			glewInit();
+			glEnable(GL_DEPTH_TEST);
+			glEnable(GL_TEXTURE_2D);
+			glDepthFunc(GL_LEQUAL);
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+			if (drawWithGL) {
+				vector<Drawable*> temp;
+				drawOn(temp);
+				threeD.loadModel();
+			}
         }
         if (event.type == Event::Resized) {
             glViewport(0, 0, event.size.width, event.size.height);

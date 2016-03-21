@@ -64,34 +64,35 @@ void ThreeD::init() {
 void ThreeD::loadFiles() {
 	string modelPath = workingPath + "3D/Models";
 	const char *path = modelPath.c_str();
-	struct dirent *entry, *entry2;
-	DIR *dp;
+	struct dirent *entry, *subEntry;
+	DIR* dp;
 	dp = opendir(path);
 	if (dp == NULL) {
 #ifdef DEBUG
-		cout << "Errore 004: Il percorso della directory video non esiste." << endl;
+		cout << "Errore 020: Il percorso della directory dei modelli 3D non esiste." << endl;
 #endif
-		return (void)(-1);
+		quit = true;
 	}
 
 	while ((entry = readdir(dp))) {
-
 		DIR* dir;
-		string temp = modelPath + "/";
-		char* path2 = new char[temp.length() + 1];
-		strcpy(path2, temp.c_str());
-		strcat(path2, entry->d_name);
-		dir = opendir(path2);
-		while ((entry2 = readdir(dir))) {
-			string modelName = string(entry2->d_name);
-			int modelNameLen = strlen(modelName.c_str());
-			if (checkExtension(modelName, modelNameLen)) {
-				string subPath = string(entry->d_name);
-				modelPath += "/" + subPath + "/" + modelName;
-				cout << modelPath << endl;
-				File fm(modelPath, modelName.substr(0, modelName.find(".")));
-				modelPath = workingPath + "3D/Models";
-				modelFiles.push_back(fm);
+		string slashModelPath = modelPath + "/";
+		char* folderPath = new char[slashModelPath.length() + 1];
+		strcpy(folderPath, slashModelPath.c_str());
+		strcat(folderPath, entry->d_name);
+		dir = opendir(folderPath);
+
+		if (entry->d_type == DT_DIR) {
+			while ((subEntry = readdir(dir))) {
+				string modelName = string(subEntry->d_name);
+				int modelNameLen = strlen(modelName.c_str());
+				if (checkExtension(modelName, modelNameLen)) {
+					string subPath = string(entry->d_name);
+					modelPath += "/" + subPath + "/" + modelName;
+					File fm(modelPath, modelName.substr(0, modelName.find(".")));
+					modelPath = workingPath + "3D/Models";
+					modelFiles.push_back(fm);
+				}
 			}
 		}
 	}
