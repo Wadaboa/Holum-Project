@@ -37,7 +37,9 @@ class Manager {
 		View viewLeft;
 		View viewRight;
 		View viewBottom;
-    
+		
+		float width3D;
+		float height3D;
         float viewWidth;
         float viewHeight;
 

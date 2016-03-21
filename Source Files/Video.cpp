@@ -225,7 +225,8 @@ void Video::checkPositions() {
 }
 
 void Video::setPositions() {
-	animationSpeed = ((width / 2) - (videoFiles.at(1).getThumbnailSize().x / 2)) / 50;
+	animationSpeed = height / animationTime;
+	cout << width << endl;
 	videoFiles.at(0).setThumbnailPosition(width / 2, height * 1.5f);
 	videoFiles.at(nVideo - 1).setThumbnailPosition(videoFiles.at(nVideo - 1).getThumbnailSize().x / 2, height * 1.5f);
 	videoFiles.at(1).setThumbnailPosition(width - (videoFiles.at(1).getThumbnailSize().x / 2), height * 1.5f);

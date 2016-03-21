@@ -34,7 +34,6 @@ class Video {
         void loadVideos();
         bool checkExtension(string videoName, int videoNameLen);
 
-		void setPositions();
         void animateLeft();
         void animateRight();
 		void animateUp();
@@ -47,6 +46,7 @@ class Video {
         Video();
         MANAGER_STATUS videoEvents();
         vector<Drawable*> getObjectsVector();
+		void setPositions();
         void setLeftAnimation(bool leftAnimation);
         void setRightAnimation(bool rightAnimation);
 		void setDownAnimation(bool downAnimation);

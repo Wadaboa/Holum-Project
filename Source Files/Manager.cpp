@@ -98,8 +98,11 @@ void Manager::init() {
     viewBottom.setRotation(0);
     viewBottom.setViewport(FloatRect(VIEW_POSITION_BOTTOM_X, VIEW_POSITION_BOTTOM_Y, VIEW_DIMENSION, VIEW_DIMENSION));
     
-    viewWidth = width * VIEW_DIMENSION;
-    viewHeight = height * VIEW_DIMENSION;
+	width3D = width;
+	height3D = height;
+
+    viewWidth = width3D * VIEW_DIMENSION;
+    viewHeight = height3D * VIEW_DIMENSION;
     
     glewExperimental = GL_TRUE;
     glewInit();
@@ -242,12 +245,16 @@ void Manager::windowEvents() {
         }
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) || myoCurrentPose == "fist" || bluetooth.getDirection() == DOWN) {
 			if (currentStatus == MENU_STATUS) {
-				menu.setDownAnimation(true);
-				escapePressed = true;
+				if (!menu.getRightAnimation() && !menu.getLeftAnimation()) {
+					menu.setDownAnimation(true);
+					escapePressed = true;
+				}
 			}
 			else if (currentStatus == VIDEO_STATUS) {
-				video.setDownAnimation(true);
-				escapePressed = true;
+				if (!video.getRightAnimation() && !video.getLeftAnimation()) {
+					video.setDownAnimation(true);
+					escapePressed = true;
+				}
 			}
 			else if (currentStatus == THREED_STATUS && drawWithGL) {
 				drawWithGL = false;
@@ -256,8 +263,10 @@ void Manager::windowEvents() {
 				zoom = 45.0f;
 			}
 			else if (currentStatus == THREED_STATUS && !drawWithGL) {
-				threeD.setDownAnimation(true);
-				escapePressed = true;
+				if (!threeD.getRightAnimation() && !threeD.getLeftAnimation()) {
+					threeD.setDownAnimation(true);
+					escapePressed = true;
+				}
 			}
 			else {
                 currentStatus = MENU_STATUS;
@@ -266,24 +275,27 @@ void Manager::windowEvents() {
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Left) || myoCurrentPose == "waveIn" || bluetooth.getDirection() == LEFT) {
             if (currentStatus == MENU_STATUS) {
 				if (!menu.getRightAnimation()) {
-					if (!menu.getLeftAnimation()) {  // Controllo essenziale
-						menu.setLeftAnimation(true);
-					}
+					if (!menu.getDownAnimation() && !menu.getUpAnimation())
+						if (!menu.getLeftAnimation()) {  // Controllo essenziale
+							menu.setLeftAnimation(true);
+						}
 				}
 			}
 			else if (currentStatus == VIDEO_STATUS) {
 				if (!video.getRightAnimation()) {
-					if (!video.getLeftAnimation()) {  // Controllo essenziale
-						video.setLeftAnimation(true);
-					}
+					if (!video.getDownAnimation() && !video.getUpAnimation())
+						if (!video.getLeftAnimation()) {  // Controllo essenziale
+							video.setLeftAnimation(true);
+						}
 				}
 			}
             else if (currentStatus == THREED_STATUS) {
 				if (!threeD.getRightAnimation() && !drawWithGL) {
-					if (!threeD.getLeftAnimation()) {  // Controllo essenziale
-						threeD.setLeftAnimation(true);
-						threeD.checkPositions();
-					}
+					if (!threeD.getDownAnimation() && !threeD.getUpAnimation())
+						if (!threeD.getLeftAnimation()) {  // Controllo essenziale
+							threeD.setLeftAnimation(true);
+							threeD.checkPositions();
+						}
 				}
 				if (myoCurrentPose == "waveIn" && drawWithGL) {
                     angleY += 0.5f;
@@ -295,24 +307,27 @@ void Manager::windowEvents() {
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Right) || myoCurrentPose == "waveOut" || bluetooth.getDirection() == RIGHT) {
             if (currentStatus == MENU_STATUS) {
 				if (!menu.getLeftAnimation()) {
-					if (!menu.getRightAnimation()) {  // Controllo essenziale
-						menu.setRightAnimation(true);
-					}
+					if (!menu.getDownAnimation() && !menu.getUpAnimation())
+						if (!menu.getRightAnimation()) {  // Controllo essenziale
+							menu.setRightAnimation(true);
+						}
 				}
             }
             else if (currentStatus == VIDEO_STATUS) {
                 if (!video.getLeftAnimation()) {
-                    if (!video.getRightAnimation()) {  // Controllo essenziale
-                        video.setRightAnimation(true);
-                    }
+					if (!video.getDownAnimation() && !video.getUpAnimation())
+						if (!video.getRightAnimation()) {  // Controllo essenziale
+							video.setRightAnimation(true);
+						}
                 }
             }
             else if (currentStatus == THREED_STATUS) {
 				if (!threeD.getLeftAnimation() && !drawWithGL) {
-					if (!threeD.getRightAnimation()) {  // Controllo essenziale
-						threeD.setRightAnimation(true);
-						threeD.checkPositions();
-					}
+					if (!threeD.getDownAnimation() && !threeD.getUpAnimation())
+						if (!threeD.getRightAnimation()) {  // Controllo essenziale
+							threeD.setRightAnimation(true);
+							threeD.checkPositions();
+						}
 				}
                 if(myoCurrentPose == "waveOut" && drawWithGL) {
                     angleY -= 0.5f;
@@ -333,15 +348,21 @@ void Manager::windowEvents() {
         }
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Return) || myoCurrentPose == "fingersSpread" || bluetooth.getDirection() == UP) {
             if (currentStatus == MENU_STATUS) {
-				menu.setDownAnimation(true);
-				enterPressed = true;
+				if (!menu.getRightAnimation() && !menu.getLeftAnimation()) {
+					menu.setDownAnimation(true);
+					enterPressed = true;
+				}
             }
             else if (currentStatus == VIDEO_STATUS) {
-                playVideo(video.getVideoToPlay());
+				if (!video.getRightAnimation() && !video.getLeftAnimation() && !video.getDownAnimation()) {
+					playVideo(video.getVideoToPlay());
+				}
             }
 			else if (currentStatus == THREED_STATUS) {
-				threeD.loadModel();
-				drawWithGL = true;
+				if (!threeD.getRightAnimation() && !threeD.getLeftAnimation() && !threeD.getDownAnimation()) {
+					threeD.loadModel();
+					drawWithGL = true;
+				}
 			}
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::F11) {
@@ -366,7 +387,11 @@ void Manager::windowEvents() {
 			}
         }
         if (event.type == Event::Resized) {
-            glViewport(0, 0, event.size.width, event.size.height);
+			width3D = event.size.width;
+			height3D = event.size.height;
+
+			viewWidth = width3D * VIEW_DIMENSION;
+			viewHeight = height3D * VIEW_DIMENSION;
         }
         if (event.type == Event::MouseWheelMoved) {
 			if (currentStatus == THREED_STATUS && drawWithGL) {
@@ -494,14 +519,14 @@ void Manager::drawGL() {
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "model"), 1, GL_FALSE, value_ptr(horizontalModel));
     
     /* Bottom View */
-    glViewport((width / 2) - (viewWidth / 2), 0, viewWidth, viewHeight);
+    glViewport((width3D / 2) - (viewWidth / 2), 0, viewWidth, viewHeight);
     threeD.getModel()->draw(threeD.getShader());
-
+	//ds
 	/* Top View*/
 	horizontalView = rotate(horizontalView, (float)radians(180.0f), vec3(1.0f, 0.0f, 0.0f));
 	horizontalView = rotate(horizontalView, (float)radians(180.0f), vec3(0.0f, 1.0f, 0.0f));
 	glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(horizontalView));
-	glViewport((width / 2) - (viewWidth / 2), height - viewHeight, viewWidth, viewHeight);
+	glViewport((width3D / 2) - (viewWidth / 2), height3D - viewHeight, viewWidth, viewHeight);
 	threeD.getModel()->draw(threeD.getShader());
     
     /** Left - Right View **/
@@ -521,14 +546,14 @@ void Manager::drawGL() {
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "model"), 1, GL_FALSE, value_ptr(verticalModel));
     
     /* Left View */
-    glViewport(0, (height / 2) - (viewWidth / 2), viewHeight, viewWidth);
+    glViewport(0, (height3D / 2) - (viewWidth / 2), viewHeight, viewWidth);
     threeD.getModel()->draw(threeD.getShader());
     
     /* Right View */
 	verticalView = rotate(verticalView, (float)radians(180.0f), vec3(1.0f, 0.0f, 0.0f));
 	verticalView = rotate(verticalView, (float)radians(180.0f), vec3(0.0f, 1.0f, .0f));
 	glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(verticalView));
-    glViewport(width - viewHeight, (height / 2) - (viewWidth / 2), viewHeight, viewWidth);
+    glViewport(width3D - viewHeight, (height3D / 2) - (viewWidth / 2), viewHeight, viewWidth);
     threeD.getModel()->draw(threeD.getShader());
     
     glBindBuffer(GL_ARRAY_BUFFER, 0);
