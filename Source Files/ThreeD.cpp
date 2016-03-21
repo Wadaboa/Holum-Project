@@ -375,9 +375,9 @@ float ThreeD::getCameraDistance() {
 	float distances[3];
 	distances[0] = (model.XMAX - model.XMIN) * xAxisK;
 	distances[1] = (model.YMAX - model.YMIN) * yAxisK;
-	distances[2] = (model.ZMAX - model.ZMIN) * zAxisK;
+	//distances[2] = (model.ZMAX - model.ZMIN) * zAxisK;
 	float MAX = 0;
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 2; i++) {
 		if (distances[i] > MAX) {
 			MAX = distances[i];
 		}

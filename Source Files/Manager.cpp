@@ -229,6 +229,7 @@ void Manager::windowEvents() {
         myoCurrentPose = myoConnector.getCurrentPose();
     }
 #endif
+	//cout << bluetooth.isAvailable() << endl;
     while (window->pollEvent(event) || myoCurrentPose != "unknown" || bluetooth.isAvailable()) {
         if (event.type == Event::Closed) {
 		#ifdef MYO
@@ -461,7 +462,7 @@ void Manager::drawGL() {
 	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.specular"), 1.0f, 1.0f, 1.0f);
 
     /** Top - Bottom View **/
-    mat4 horizontalProjection = perspective(zoom, horizontalAspectRatio, 0.1f, 200.0f);
+    mat4 horizontalProjection = perspective(zoom, horizontalAspectRatio, 0.1f, 100.0f);
 
     mat4 horizontalView;
 	horizontalView = lookAt(vec3(0.0f, 0.0f, threeD.getCameraDistance()), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
@@ -478,6 +479,8 @@ void Manager::drawGL() {
     /* Bottom View */
     glViewport((width / 2) - (viewWidth / 2), 0, viewWidth, viewHeight);
     threeD.getModel()->draw(threeD.getShader());
+
+	/* Top View*/
 	horizontalView = rotate(horizontalView, (float)radians(180.0f), vec3(1.0f, 0.0f, 0.0f));
 	horizontalView = rotate(horizontalView, (float)radians(180.0f), vec3(0.0f, 1.0f, 0.0f));
 	glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(horizontalView));
@@ -485,10 +488,10 @@ void Manager::drawGL() {
 	threeD.getModel()->draw(threeD.getShader());
     
     /** Left - Right View **/
-    mat4 verticalProjection = perspective(zoom, verticalAspectRatio, 0.1f, 100.0f);
+    mat4 verticalProjection = perspective(zoom, verticalAspectRatio, 0.1f, 200.0f);
     
     mat4 verticalView;
-	verticalView = lookAt(vec3(0.0f, 0.0f, (threeD.getModel()->YMAX - threeD.getModel()->YMIN)  * threeD.getVerticalK()), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+	verticalView = lookAt(vec3(0.0f, 0.0f, threeD.getCameraDistance() / verticalAspectRatio), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
     verticalView = rotate(verticalView, (float)radians(270.0f), vec3(0.0f, 0.0f, 1.0f));
     
     mat4 verticalModel;
@@ -505,6 +508,9 @@ void Manager::drawGL() {
     threeD.getModel()->draw(threeD.getShader());
     
     /* Right View */
+	verticalView = rotate(verticalView, (float)radians(180.0f), vec3(1.0f, 0.0f, 0.0f));
+	verticalView = rotate(verticalView, (float)radians(180.0f), vec3(0.0f, 1.0f, .0f));
+	glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(verticalView));
     glViewport(width - viewHeight, (height / 2) - (viewWidth / 2), viewHeight, viewWidth);
     threeD.getModel()->draw(threeD.getShader());
     
@@ -539,12 +545,12 @@ void Manager::playVideo(sfe::Movie* movie) {
 			myoCurrentPose = myoConnector.getCurrentPose();
 		#endif
         Event event;
-        if (window->pollEvent(event) || myoCurrentPose != "unknown" || myoCurrentPose != "rest") {
-            if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) || myoCurrentPose == "fist") {
+        if (window->pollEvent(event) || myoCurrentPose != "unknown" || myoCurrentPose != "rest" || bluetooth.isAvailable()) {
+            if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) || myoCurrentPose == "fist" || bluetooth.getDirection() == DOWN) {
                 movie->stop();
                 toDraw = vector<Drawable*>();
             }
-            if (event.type == Event::KeyPressed && event.key.code == Keyboard::Space) {
+			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Space || bluetooth.getDirection() == UP) {
                 if(movie->getStatus() == sfe::Paused) {
                     movie->play();
                 }
@@ -552,6 +558,7 @@ void Manager::playVideo(sfe::Movie* movie) {
                     movie->pause();
                 }
             }
+			bluetooth.isAvailable(false);
         }
         if (!(movie->getStatus() == sfe::Stopped || movie->getStatus() == sfe::Paused)) {
             movie->update();

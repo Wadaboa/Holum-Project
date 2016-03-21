@@ -44,7 +44,7 @@ extern void initGlobal() {
     horizontalAspectRatio = width / height;
     verticalAspectRatio = height / width;
 
-	frameRateLimit = 60;
+	frameRateLimit = 120;
 
     #ifdef DIAGONAL
         pit = sqrt(pow(width, 2) + pow(height, 2));

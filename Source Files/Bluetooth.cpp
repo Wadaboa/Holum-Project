@@ -10,23 +10,29 @@
 #include <Bluetooth.h>
 
 Bluetooth::Bluetooth() {
-
+	time = seconds(3);
 }
 
 void Bluetooth::manageBluetooth() {
-	available = false;
-	direction = 0;
-	if (!init())
-		return;
-	if (!bindSocket())
-		return;
-	if (!listenSocket())
-		return;
-	if (!registerService())
-		return;
-	if (!acceptSocket())
-		return;
-	startCommunication();
+	
+	while (true) {
+		if (clock.getElapsedTime() > time) {
+			available = false;
+			direction = 0;
+			if (!init());
+			else if (!bindSocket());
+			else if (!listenSocket());
+			else if (!registerService());
+			else if (!acceptSocket()) {
+				break;
+			}
+			else {
+				startCommunication();
+				break;
+			}
+			clock.restart();
+		}
+	}
 }
 
 bool Bluetooth::init() {
@@ -115,7 +121,6 @@ bool Bluetooth::acceptSocket() {
 	int cLenght = sizeof(bAddressClient);
 
 	bSockClient = accept(bSock, (sockaddr*)&bAddressClient, &cLenght);
-
 	if (bSockClient == INVALID_SOCKET)
 	{
 		cout << "Errore 0??: Socket del client non valido." << endl;
@@ -124,15 +129,11 @@ bool Bluetooth::acceptSocket() {
 }
 
 void Bluetooth::startCommunication() {
-	
-	char buffer[sizeof(int)] = { 0 };
-
-	memset(buffer, 0, sizeof(buffer));
-
 	int r = -1;
 
 	while (r != 0) {
-		cout << r <<endl;
+		char buffer[sizeof(int)] = { 0 };
+		memset(buffer, 0, sizeof(buffer));
 		r = recv(bSockClient, (char*)buffer, sizeof(buffer), 0);
 		if (r == SOCKET_ERROR) {
 			cout << "Errore 0??: Errore sconosciuto durante la comunicazione Bluetooth." << endl;
@@ -142,6 +143,7 @@ void Bluetooth::startCommunication() {
 			int n;
 			memcpy(&n, buffer, sizeof(int));
 			if (!available) {
+				cout << n << endl;
 				direction = n;
 				available = true;
 			}

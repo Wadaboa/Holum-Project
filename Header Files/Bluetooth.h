@@ -8,6 +8,8 @@
 
 class Bluetooth {
 	private:
+		Clock clock;
+		Time time;
 		SOCKET bSock;
 		SOCKET bSockClient;
 		bool available;
