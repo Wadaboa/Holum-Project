@@ -20,6 +20,7 @@
 
 #include <iostream>
 #include <thread>
+#include <atomic>
 #include <cstdlib>
 #include <string>
 #include <cmath>

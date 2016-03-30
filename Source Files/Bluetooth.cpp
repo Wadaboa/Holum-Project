@@ -15,7 +15,8 @@ Bluetooth::Bluetooth() {
 
 void Bluetooth::manageBluetooth() {
 	time = seconds(0);
-	while (true) {
+	exit = false;
+	while (!exit) {
 		if (clock.getElapsedTime() >= time) {
 			time = seconds(3);
 			available = false;
@@ -131,24 +132,23 @@ bool Bluetooth::acceptSocket() {
 
 void Bluetooth::startCommunication() {
 	int r = -1;
-
+	char buffer[sizeof(int)] = { 0 };
 	while (r != 0) {
-		char buffer[sizeof(int)] = { 0 };
 		memset(buffer, 0, sizeof(buffer));
 		r = recv(bSockClient, (char*)buffer, sizeof(buffer), 0);
 		if (r == SOCKET_ERROR) {
+
 			cout << "Errore 0??: Errore sconosciuto durante la comunicazione Bluetooth." << endl;
 			break;
 		}
 		else {
 			int n;
 			memcpy(&n, buffer, sizeof(int));
-			if (!available) {
-				cout << n << endl;
-				direction = n;
-				available = true;
-			}
+			direction = n;
+			available = true;
 		}
+		
+
 	}
 }
 
@@ -157,15 +157,42 @@ bool Bluetooth::isAvailable() {
 }
 
 void Bluetooth::isAvailable(bool available) {
-	this->available = available;
 	direction = 0;
+	this->available = available;
 }
 
 void Bluetooth::closeSocket() {
+	exit = true;
 	closesocket(bSock);
 	closesocket(bSockClient);
 }
 
 int Bluetooth::getDirection() {
 	return direction;
+}
+
+bool Bluetooth::checkMessage() {
+	fd_set set;
+	struct timeval timeout;
+	FD_ZERO(&set); /* clear the set */
+	FD_SET(bSockClient, &set); /* add our file descriptor to the set */
+	timeout.tv_sec = 0;
+	timeout.tv_usec = 100;
+
+	int r = select(bSockClient, &set, NULL, NULL, &timeout);
+	if (r == 0 || r == -1) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
+int Bluetooth::readMessage() {
+	char buffer[sizeof(int)] = { 0 };
+	memset(buffer, 0, sizeof(buffer));
+	int r = recv(bSockClient, (char*)buffer, sizeof(buffer), 0);
+	int n;
+	memcpy(&n, buffer, sizeof(int));
+	return n;
 }

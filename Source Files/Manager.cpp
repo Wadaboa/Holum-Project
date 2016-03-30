@@ -126,11 +126,10 @@ void Manager::init() {
 
 void Manager::run() {
     while (window->isOpen()) {
-#ifdef MYO
-        hub->runOnce(1);
-#endif
+		#ifdef MYO
+			hub->runOnce(1);
+		#endif
         windowEvents();
-		bluetoothEvents();
         checkErrors();
         switch (currentStatus) {
             case MENU_STATUS:
@@ -163,8 +162,7 @@ void Manager::run() {
 }
 
 void Manager::manageMenu() {
-	
-    currentStatus = menu.menuEvents();
+    menu.menuEvents();
 	if (enterPressed) {
 		if (!menu.getDownAnimation()) {
 			currentStatus = menu.getCurrentStatus();
@@ -218,7 +216,8 @@ void Manager::manageGames() {
 }
 
 void Manager::manageSettings() {
-    
+	settings.settingsEvents();
+	drawOn(settings.getObjectsVector());
 }
 
 void Manager::manageBluetooth() {
@@ -226,14 +225,15 @@ void Manager::manageBluetooth() {
 }
 
 void Manager::windowEvents() {
+	int as;
     Event event;
 #ifdef MYO
     if(myoLastPose != myoConnector.getCurrentPose()) {
         myoCurrentPose = myoConnector.getCurrentPose();
     }
 #endif
-	//cout << bluetooth.isAvailable() << endl;
     while (window->pollEvent(event) || myoCurrentPose != "unknown" || bluetooth.isAvailable()) {
+		
         if (event.type == Event::Closed) {
 		#ifdef MYO
             hub->removeListener(&myoConnector);
@@ -300,9 +300,17 @@ void Manager::windowEvents() {
 				if (myoCurrentPose == "waveIn" && drawWithGL) {
                     angleY += 0.5f;
                 }
-				else if (drawWithGL)
-                    angleY += 0.1f;
+				else if (drawWithGL) {
+					angleY += 0.1f;
+				}
             }
+			else if (currentStatus == SETTINGS_STATUS) {
+				if (!settings.getFadeLeftAnimation() && !settings.getFadeRightAnimation()) {
+					if (!settings.getScrollDownAnimation() && !settings.getScrollUpAnimation()) {
+						settings.setFadeLeftAnimation(true);
+					}
+				}
+			}
         }
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Right) || myoCurrentPose == "waveOut" || bluetooth.getDirection() == RIGHT) {
             if (currentStatus == MENU_STATUS) {
@@ -332,19 +340,39 @@ void Manager::windowEvents() {
                 if(myoCurrentPose == "waveOut" && drawWithGL) {
                     angleY -= 0.5f;
                 }
-				else if (drawWithGL)
-                    angleY -= 0.1f;
+				else if (drawWithGL) {
+					angleY -= 0.1f;
+				}
             }
+			else if (currentStatus == SETTINGS_STATUS) {
+				if (!settings.getFadeLeftAnimation() && !settings.getFadeRightAnimation()) {
+					if (!settings.getScrollDownAnimation() && !settings.getScrollUpAnimation()) {
+						settings.setFadeRightAnimation(true);
+					}
+				}
+			}	
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::Up ) {
             if (currentStatus == THREED_STATUS) {
                 angleX += 0.1f;
             }
+			else if (currentStatus == SETTINGS_STATUS) {
+				if (!settings.getScrollDownAnimation() && !settings.getScrollUpAnimation())
+					if (!settings.getFadeLeftAnimation() && !settings.getFadeRightAnimation()) {
+						settings.setScrollUpAnimation(true);
+					}
+			}
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::Down) {
             if (currentStatus == THREED_STATUS) {
                 angleX -= 0.1f;
             }
+			else if (currentStatus == SETTINGS_STATUS) {
+				if (!settings.getScrollDownAnimation() && !settings.getScrollUpAnimation())
+					if (!settings.getFadeLeftAnimation() && !settings.getFadeRightAnimation()) {
+						settings.setScrollDownAnimation(true);
+					}
+			}
         }
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Return) || myoCurrentPose == "fingersSpread" || bluetooth.getDirection() == UP) {
             if (currentStatus == MENU_STATUS) {
@@ -354,7 +382,7 @@ void Manager::windowEvents() {
 				}
             }
             else if (currentStatus == VIDEO_STATUS) {
-				if (!video.getRightAnimation() && !video.getLeftAnimation() && !video.getDownAnimation()) {
+				if (!video.getRightAnimation() && !video.getLeftAnimation() && !video.getDownAnimation() && !video.getUpAnimation()) {
 					playVideo(video.getVideoToPlay());
 				}
             }
@@ -372,6 +400,12 @@ void Manager::windowEvents() {
 			window->setMouseCursorVisible(false);
 			window->setFramerateLimit(frameRateLimit);
 			
+			width3D = width;
+			height3D = height;
+
+			viewWidth = width3D * VIEW_DIMENSION;
+			viewHeight = height3D * VIEW_DIMENSION;
+
 			glewExperimental = GL_TRUE;
 			glewInit();
 			glEnable(GL_DEPTH_TEST);
@@ -409,41 +443,6 @@ void Manager::windowEvents() {
     }
 }
 
-void Manager::bluetoothEvents() {
-	/*
-	if (bluetooth.isAvailable()) {
-		if (bluetooth.getDirection() == 1) {
-			if (currentStatus == MENU_STATUS) {
-				if (!menu.getLeftAnimation()) {
-					if (!menu.getRightAnimation()) {  // Controllo essenziale
-						menu.setRightAnimation(true);
-					}
-				}
-			}
-			else if (currentStatus == VIDEO_STATUS) {
-				if (!video.getLeftAnimation()) {
-					if (!video.getRightAnimation()) {  // Controllo essenziale
-						video.setRightAnimation(true);
-					}
-				}
-			}
-			else if (currentStatus == THREED_STATUS) {
-				if (!threeD.getLeftAnimation() && !drawWithGL) {
-					if (!threeD.getRightAnimation()) {  // Controllo essenziale
-						threeD.setRightAnimation(true);
-						threeD.checkPositions();
-					}
-				}
-				if (drawWithGL) {
-					angleY -= 0.5f;
-				}
-				else if (drawWithGL)
-					angleY -= 0.1f;
-			}
-		}
-		bluetooth.isAvailable(false);
-	}*/
-}
 
 void Manager::changeStatus() {
 

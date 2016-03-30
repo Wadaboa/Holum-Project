@@ -8,12 +8,15 @@
 
 class Bluetooth {
 	private:
+		bool exit;
+		Clock clock2;
 		Clock clock;
 		Time time;
 		SOCKET bSock;
 		SOCKET bSockClient;
-		bool available;
-		int direction;
+		atomic_bool available;
+		atomic_int direction;
+		int count = 0;
 	public:
 		Bluetooth();
 		void manageBluetooth();
@@ -27,4 +30,7 @@ class Bluetooth {
 		void isAvailable(bool available);
 		void closeSocket();
 		int getDirection();
+
+		bool checkMessage();
+		int readMessage();
 };

@@ -75,27 +75,23 @@ void Menu::init() {
 
 }
 
-MANAGER_STATUS Menu::menuEvents() {
-	MANAGER_STATUS currentStatus = MENU_STATUS;
-	if(upAnimation == true) {
+void Menu::menuEvents() {
+	if(upAnimation) {
         animateUp();
     }
-	else if (leftAnimation == true) {
+	else if (leftAnimation) {
 		animateLeft();
 	}
-	else if (rightAnimation == true) {
+	else if (rightAnimation) {
 		animateRight();
 	}
-	if (downAnimation == true) {
+	if (downAnimation) {
 		animateDown();
 	}
     
 	toDraw = vector <Drawable*>();
-	//toDraw.push_back(&strip);
 	for (int i = 0; i < nText; i++)
 		toDraw.push_back(&menuTexts.at(i));
-	
-	return currentStatus;
 }
 
 vector<Drawable*> Menu::getObjectsVector() {

@@ -46,7 +46,7 @@ class Menu {
 		
 	public:
 		Menu();
-		MANAGER_STATUS menuEvents();
+		void menuEvents();
 		MANAGER_STATUS getCurrentStatus();
 		vector<Drawable*> getObjectsVector();
 		void setLeftAnimation(bool leftAnimation);

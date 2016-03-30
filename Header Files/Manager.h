@@ -81,7 +81,6 @@ class Manager {
 		void manageGames();
 		void manageSettings();
 		void manageBluetooth();
-		void bluetoothEvents();
 		void windowEvents();
 		void changeStatus();
 		void drawOn(vector<Drawable*> toDraw);
