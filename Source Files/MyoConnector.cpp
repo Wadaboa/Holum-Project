@@ -64,8 +64,7 @@ void MyoConnector::onLock(Myo* myo, uint64_t timestamp) {
     isUnlocked = false;
 }
 
-void MyoConnector::print()
-{
+void MyoConnector::print() {
     cout << '\r';
     
     cout << '[' << string(roll_w, '*') << string(18 - roll_w, ' ') << ']'

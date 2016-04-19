@@ -23,6 +23,8 @@ RectangleShape secondaryDiagonal;
 float horizontalAspectRatio;
 float verticalAspectRatio;
 
+int frameRateLimit;
+
 extern void initGlobal() {
 	quit = false;
     #ifdef _WIN32
@@ -41,6 +43,8 @@ extern void initGlobal() {
     
     horizontalAspectRatio = width / height;
     verticalAspectRatio = height / width;
+
+	frameRateLimit = 120;
 
     #ifdef DIAGONAL
         pit = sqrt(pow(width, 2) + pow(height, 2));

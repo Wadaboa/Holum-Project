@@ -11,6 +11,7 @@
 class Game {
     private:
         void init();
+    
     public:
         Game();
         MANAGER_STATUS gameEvents();

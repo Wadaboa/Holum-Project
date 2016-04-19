@@ -8,7 +8,21 @@
 
 #pragma once
 
+#ifdef _WIN32
+	#include <WinSock2.h>
+	#include <ws2bth.h>
+    #include <bthsdpdef.h>
+    #include <bluetoothapis.h>
+#endif
+
+#ifdef _WIN32
+    #pragma comment(lib, "ws2_32.lib")
+    #pragma comment(lib, "irprops.lib")
+#endif
+
 #include <iostream>
+#include <thread>
+#include <atomic>
 #include <cstdlib>
 #include <string>
 #include <cmath>

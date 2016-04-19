@@ -45,20 +45,29 @@ void Mesh::draw(sh::Shader shader) {
     
     for(GLuint i = 0; i < textures.size(); i++) {
         glActiveTexture(GL_TEXTURE0 + i);
-        
+		glUniform1i(glGetUniformLocation(shader.program, "tex"), 1);
         stringstream ss;
         string number;
         string name = textures[i].type;
+		string materialType = "material.";
         
-        if(name == "texture_diffuse")
-            ss << diffuseNr++;
-        else if(name == "texture_specular")
-            ss << specularNr++;
+		if (name == "texture_diffuse") {
+			ss << diffuseNr++;
+			materialType += "diffuse";
+		}
+		else if (name == "texture_specular") {
+			ss << specularNr++;
+			materialType += "specular";
+		}
         number = ss.str();
-        
-        glUniform1i(glGetUniformLocation(shader.program, (name + number).c_str()), i);
+		//cout << number <<endl;
+        glUniform1i(glGetUniformLocation(shader.program, materialType.c_str()), i);
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
+	if (textures.size() <= 0) {
+		glUniform1i(glGetUniformLocation(shader.program, "tex"), 0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
     
     glUniform1f(glGetUniformLocation(shader.program, "material.shininess"), 16.0f);
     

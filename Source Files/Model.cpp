@@ -10,13 +10,11 @@
 #include <Model.h>
 
 Model::Model() {
-    MAX = 0;
-    MIN = 99999;
 }
 
 Model::Model(GLchar* path) {
-    MAX = 0;
-    MIN = 99999;
+    XMAX = YMAX  = ZMAX = 0;
+    XMIN = YMIN = ZMIN = 99999;
 	loadModel(path);
 }
 
@@ -91,12 +89,23 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 		tempVector.z = mesh->mVertices[i].z;
 		vertex.position = tempVector;
         
-        if (tempVector.y >= MAX) {
-            MAX = tempVector.y;
-        }
-        if (tempVector.y <= MIN) {
-            MIN = tempVector.y;
-        }
+        if (tempVector.y >= YMAX)
+            YMAX = tempVector.y;
+        
+        if (tempVector.y <= YMIN)
+            YMIN = tempVector.y;
+
+		if (tempVector.x >= XMAX)
+			XMAX = tempVector.x;
+
+		if (tempVector.x <= XMIN)
+			XMIN = tempVector.x;
+
+		if (tempVector.z >= ZMAX)
+			ZMAX = tempVector.z;
+
+		if (tempVector.z <= ZMIN) 
+			ZMIN = tempVector.z;
         
         if(mesh->mNormals) {
             tempVector.x = mesh->mNormals[i].x;
@@ -127,8 +136,7 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 			indices.push_back(face.mIndices[j]);
 	}
 	
-	if(mesh->mMaterialIndex > 0)
-	{
+	if(mesh->mMaterialIndex > 0) {
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
         
 		vector<Mesh::texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
@@ -137,14 +145,13 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
 		vector<Mesh::texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 	}
-	
+
 	return Mesh(vertices, indices, textures);
 }
 
 vector<Mesh::texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName) {
     vector<Mesh::texture> textures;
-    for(GLuint i = 0; i < mat->GetTextureCount(type); i++)
-    {
+    for(GLuint i = 0; i < mat->GetTextureCount(type); i++) {
         aiString str;
         mat->GetTexture(type, i, &str);
         GLboolean skip = false;

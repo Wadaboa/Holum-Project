@@ -40,9 +40,8 @@ void File::init() {
         if (!thumbnailTexture.loadFromFile(thumbnailPath)) {
             #ifdef DEBUG
                 cout << "Errore 008: Caricamento texture copertina di default non riuscito." << endl;
-				cout << thumbnailPath << endl;
-            #endif
-        }
+			#endif
+		}
 	}
 	thumbnail = RectangleShape(Vector2f(rectWidth, rectHeight));
 	FloatRect thumbnailBounds = thumbnail.getGlobalBounds();
@@ -88,6 +87,10 @@ void File::setThumbnailSize(float x, float y) {
 
 void File::setThumbnailPosition(float x, float y) {
 	thumbnail.setPosition(Vector2f(x, y));
+}
+
+Vector2f File::getThumbnailPosition() {
+	return thumbnail.getPosition();
 }
 
 Vector2f File::getThumbnailSize() {

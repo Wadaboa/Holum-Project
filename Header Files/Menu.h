@@ -19,30 +19,33 @@ class Menu {
 		int rightPosition;
 		int leftPosition;
 		int outPosition;
-		RectangleShape strip;
+		
+        RectangleShape strip;
+    
 		unsigned int textSize;
-
 		Font menuFont;
 
+		bool first;
 		bool leftAnimation;
 		bool rightAnimation;
         bool upAnimation;
         bool downAnimation;
 
-		Clock clock;
-		Time stepTime;
-        Time udStepTime;
 		float scaleFactor;
+		float animationTime;
 		float animationSpeed;
+		int stepCounter;
 		
 		void init();
+		void setPositions();
 		void animateLeft();
 		void animateRight();
 		void animateUp();
 		void animateDown();
+
 	public:
 		Menu();
-		MANAGER_STATUS menuEvents();
+		void menuEvents();
 		MANAGER_STATUS getCurrentStatus();
 		vector<Drawable*> getObjectsVector();
 		void setLeftAnimation(bool leftAnimation);
@@ -51,5 +54,8 @@ class Menu {
         void setUpAnimation(bool upAnimation);
 		bool getLeftAnimation();
 		bool getRightAnimation();
+		bool getUpAnimation();
+		bool getDownAnimation();
 		void checkPositions();
+		
 };

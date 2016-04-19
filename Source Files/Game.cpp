@@ -13,16 +13,14 @@ Game::Game() {
 	init();
 }
 
-void Game::init() {
-
-}
+void Game::init() {}
 
 MANAGER_STATUS Game::gameEvents() {
 	return MENU_STATUS;
 }
 
 vector<Drawable*> Game::getObjectsVector() {
-	vector <Drawable*> a;
-	return a;
+	vector <Drawable*> toDraw;
+	return toDraw;
 }
 

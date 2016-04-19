@@ -24,13 +24,12 @@ void ThreeD::init() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     loadFiles();
-
     leftAnimation = false;
+	first = false;
 	rightAnimation = false;
 
-	stepTime = microseconds(8000);
 	scaleFactor = 1;
-
+	stepCounter = 0;
 	firstModelPosition = 0;
 
 	for (int i = 1; i < nModel; i++) {
@@ -38,13 +37,14 @@ void ThreeD::init() {
 	}
 
 	if (nModel >= 4) {
-		animationSpeed = ((width / 2) - (modelFiles.at(1).getThumbnailSize().x / 2)) / 50;
-		modelFiles.at(0).setThumbnailPosition(width / 2, height / 2);
-		modelFiles.at(nModel - 1).setThumbnailPosition(modelFiles.at(nModel - 1).getThumbnailSize().x / 2, height / 2);
-		modelFiles.at(nModel - 2).setThumbnailPosition(0 - (width / 2) + (modelFiles.at(nModel - 2).getThumbnailSize().x), height / 2);
-		modelFiles.at(1).setThumbnailPosition(width - (modelFiles.at(1).getThumbnailSize().x / 2), height / 2);
+		animationTime = frameRateLimit / 2.5f;
+		animationSpeed = height / animationTime;
+		modelFiles.at(0).setThumbnailPosition(width / 2, height * 1.5f);
+		modelFiles.at(nModel - 1).setThumbnailPosition(modelFiles.at(nModel - 1).getThumbnailSize().x / 2, height * 1.5f);
+		modelFiles.at(nModel - 2).setThumbnailPosition(0 - (width / 2) + (modelFiles.at(nModel - 2).getThumbnailSize().x), height * 1.5f);
+		modelFiles.at(1).setThumbnailPosition(width - (modelFiles.at(1).getThumbnailSize().x / 2), height * 1.5f);
 		for (int i = 2; i < nModel - 2; i++){
-			modelFiles.at(i).setThumbnailPosition(0 - (width / 2) + (modelFiles.at(i).getThumbnailSize().x), height / 2);
+			modelFiles.at(i).setThumbnailPosition(0 - (width / 2) + (modelFiles.at(i).getThumbnailSize().x), height * 1.5f);
 		}
 	}
 	else {
@@ -79,7 +79,6 @@ void ThreeD::loadFiles() {
 		strcpy(folderPath, slashModelPath.c_str());
 		strcat(folderPath, entry->d_name);
 		dir = opendir(folderPath);
-
         if (entry->d_type == DT_DIR) {
             while ((subEntry = readdir(dir))) {
                 string modelName = string(subEntry->d_name);
@@ -101,12 +100,19 @@ void ThreeD::loadFiles() {
 MANAGER_STATUS ThreeD::threeDEvents() {
 	toDraw = vector <Drawable*>();
 	
-	if (leftAnimation == true) {
+	if (leftAnimation) {
 		animateLeft();
 	}
-	else if (rightAnimation == true) {
+	else if (rightAnimation) {
 		animateRight();
 	}
+	else if (upAnimation) {
+		animateUp();
+	}
+	else if (downAnimation) {
+		animateDown();
+	}
+
 	File* fv;
 	for (int i = 0; i < nModel; i++) {
 		fv = &modelFiles.at(i);
@@ -135,16 +141,21 @@ void ThreeD::loadModel() {
 	model = Model(modelPath);
 }
 
-float ThreeD::getHorizontalK() {
-    return horizontalK;
-}
-
 float ThreeD::getVerticalK() {
     return verticalK;
 }
 
-float ThreeD::getModelOffset() {
-    return (-(getModel()->MAX - getModel()->MIN)) / 2.0f;
+float ThreeD::getModelVerticalOffset() {
+	return ((-getModel()->YMIN - getModel()->YMAX) / 2.0f);
+}
+
+float ThreeD::getModelHorizontalOffset() {
+	return 0;
+	return ((- getModel()->XMIN - getModel()->XMAX) / 2.0f);
+}
+
+float ThreeD::getModelDepthOffset() {
+	return ((-getModel()->ZMIN - getModel()->ZMAX) / 2.0f);
 }
 
 bool ThreeD::checkExtension(string modelName, int modelNameLen) {
@@ -157,7 +168,43 @@ bool ThreeD::checkExtension(string modelName, int modelNameLen) {
 }
 
 void ThreeD::checkPositions() {
-	if (rightAnimation) {
+	if (upAnimation){
+		rightPosition = firstModelPosition + 1;
+		leftPosition = firstModelPosition - 1;
+		outPosition = firstModelPosition - 2;
+
+		if (firstModelPosition + 1 >= nModel) {
+			rightPosition = 0;
+		}
+		if (firstModelPosition - 1 < 0) {
+			leftPosition = nModel - 1;
+			outPosition = nModel - 2;
+
+		}
+		else if (firstModelPosition - 2 < 0) {
+			leftPosition = 0;
+			outPosition = nModel - 1;
+		}
+	}
+	else if (downAnimation) {
+		rightPosition = firstModelPosition + 1;
+		leftPosition = firstModelPosition - 1;
+		outPosition = firstModelPosition - 2;
+
+		if (firstModelPosition + 1 >= nModel) {
+			rightPosition = 0;
+		}
+		if (firstModelPosition - 1 < 0) {
+			leftPosition = nModel - 1;
+			outPosition = nModel - 2;
+
+		}
+		else if (firstModelPosition - 2 < 0) {
+			leftPosition = 0;
+			outPosition = nModel - 1;
+		}
+	}
+	else if (rightAnimation) {
 		rightPosition = firstModelPosition + 1;
 		leftPosition = firstModelPosition - 1;
 		outPosition = firstModelPosition - 2;
@@ -201,53 +248,109 @@ void ThreeD::checkPositions() {
 }
 
 void ThreeD::animateLeft(){
-	if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
-		if (scaleFactor <= 0.51) {
-			leftAnimation = false;
-			scaleFactor = 1;
-			firstModelPosition = rightPosition;
-		}
-		else {
-			clock.restart();
+	if (first) {
+		first = false;
+		checkPositions();
+	}
 
-			scaleFactor = scaleFactor - 0.01f;
-			modelFiles.at(firstModelPosition).setThumbnailScale(scaleFactor, scaleFactor);
-			modelFiles.at(rightPosition).setThumbnailScale((float)1.5 - scaleFactor, (float)1.5 - scaleFactor);
-			modelFiles.at(firstModelPosition).moveThumbnail(0 - animationSpeed, 0);
-			modelFiles.at(rightPosition).moveThumbnail(0 - animationSpeed, 0);
-			modelFiles.at(leftPosition).moveThumbnail(0 - animationSpeed, 0);
-			modelFiles.at(outPosition).moveThumbnail(0 - animationSpeed, 0);
-		}
+	if (modelFiles.at(rightPosition).getThumbnailPosition().x <= width / 2 || stepCounter == animationTime) {
+		stepCounter = 0;
+		leftAnimation = false;
+		scaleFactor = 1;
+		firstModelPosition = rightPosition;
+	}
+	else {
+		stepCounter++;
+		scaleFactor = scaleFactor - (0.50f / animationTime);
+		modelFiles.at(firstModelPosition).setThumbnailScale(scaleFactor, scaleFactor);
+		modelFiles.at(rightPosition).setThumbnailScale((float)1.5 - scaleFactor, (float)1.5 - scaleFactor);
+		modelFiles.at(firstModelPosition).moveThumbnail(0 - ((width / 2) - (modelFiles.at(firstModelPosition).getThumbnail()->getLocalBounds().width / 4)) / animationTime, 0);
+		modelFiles.at(rightPosition).moveThumbnail(0 - ((width / 2) - (modelFiles.at(rightPosition).getThumbnail()->getLocalBounds().width / 4)) / animationTime, 0);
+		modelFiles.at(leftPosition).moveThumbnail(0 - ((width / 2) - (modelFiles.at(leftPosition).getThumbnail()->getLocalBounds().width / 4)) / animationTime, 0);
+		modelFiles.at(outPosition).moveThumbnail(0 - ((width / 2) - (modelFiles.at(outPosition).getThumbnail()->getLocalBounds().width / 4)) / animationTime, 0);
 	}
 }
 
 void ThreeD::animateRight() {
-	if (clock.getElapsedTime().asMicroseconds() >= stepTime.asMicroseconds()) {
-		if (scaleFactor <= 0.51) {
-			rightAnimation = false;
-			scaleFactor = 1;
-			firstModelPosition = leftPosition;
-		}
-		else {
-			clock.restart();
+	if (first) {
+		first = false;
+		checkPositions();
+	}
 
-			scaleFactor = scaleFactor - 0.01f;
-			modelFiles.at(firstModelPosition).setThumbnailScale(scaleFactor, scaleFactor);
-			modelFiles.at(leftPosition).setThumbnailScale((float)1.5 - scaleFactor, (float)1.5 - scaleFactor);
-			modelFiles.at(firstModelPosition).moveThumbnail(animationSpeed, 0);
-			modelFiles.at(rightPosition).moveThumbnail(animationSpeed, 0);
-			modelFiles.at(leftPosition).moveThumbnail(animationSpeed, 0);
-			modelFiles.at(outPosition).moveThumbnail(animationSpeed, 0);
-		}
+	if (modelFiles.at(leftPosition).getThumbnailPosition().x >= width / 2 || stepCounter == animationTime) {
+		stepCounter = 0;
+		rightAnimation = false;
+		scaleFactor = 1;
+		firstModelPosition = leftPosition;
+	}
+	else {
+		stepCounter++;
+		scaleFactor = scaleFactor - (0.50f / animationTime);
+		modelFiles.at(firstModelPosition).setThumbnailScale(scaleFactor, scaleFactor);
+		modelFiles.at(leftPosition).setThumbnailScale((float)1.5 - scaleFactor, (float)1.5 - scaleFactor);
+		modelFiles.at(firstModelPosition).moveThumbnail(((width / 2) - (modelFiles.at(firstModelPosition).getThumbnail()->getLocalBounds().width / 4)) / animationTime, 0);
+		modelFiles.at(rightPosition).moveThumbnail(((width / 2) - (modelFiles.at(rightPosition).getThumbnail()->getLocalBounds().width / 4)) / animationTime, 0);
+		modelFiles.at(leftPosition).moveThumbnail(((width / 2) - (modelFiles.at(leftPosition).getThumbnail()->getLocalBounds().width / 4)) / animationTime, 0);
+		modelFiles.at(outPosition).moveThumbnail(((width / 2) - (modelFiles.at(outPosition).getThumbnail()->getLocalBounds().width / 4)) / animationTime, 0);
+	}
+}
+
+void ThreeD::animateUp() {
+	if (first) {
+		first = false;
+		checkPositions();
+	}
+
+	if (modelFiles.at(firstModelPosition).getThumbnailPosition().y <= height / 2 || stepCounter == animationTime) {
+		stepCounter = 0;
+		upAnimation = false;
+	}
+	else {
+		stepCounter++;
+		modelFiles.at(firstModelPosition).moveThumbnail(0, 0 - animationSpeed);
+		modelFiles.at(leftPosition).moveThumbnail(0, 0 - animationSpeed);
+		modelFiles.at(rightPosition).moveThumbnail(0, 0 - animationSpeed);
+		modelFiles.at(outPosition).moveThumbnail(0, 0 - animationSpeed);
+	}
+}
+
+void ThreeD::animateDown() {
+	if (first) {
+		first = false;
+		checkPositions();
+	}
+
+	if (modelFiles.at(firstModelPosition).getThumbnailPosition().y >= height *1.5f || stepCounter == animationTime) {
+		stepCounter = 0;
+		downAnimation = false;
+	}
+	else {
+		stepCounter++;
+		modelFiles.at(firstModelPosition).moveThumbnail(0, animationSpeed);
+		modelFiles.at(leftPosition).moveThumbnail(0, animationSpeed);
+		modelFiles.at(rightPosition).moveThumbnail(0, animationSpeed);
+		modelFiles.at(outPosition).moveThumbnail(0, animationSpeed);
 	}
 }
 
 void ThreeD::setLeftAnimation(bool leftAnimation) {
+	first = true;
 	this->leftAnimation = leftAnimation;
 }
 
 void ThreeD::setRightAnimation(bool rightAnimation) {
+	first = true;
 	this->rightAnimation = rightAnimation;
+}
+
+void ThreeD::setUpAnimation(bool upAnimation) {
+	first = true;
+	this->upAnimation = upAnimation;
+}
+
+void ThreeD::setDownAnimation(bool downAnimation) {
+	first = true;
+	this->downAnimation = downAnimation;
 }
 
 bool ThreeD::getLeftAnimation() {
@@ -256,4 +359,28 @@ bool ThreeD::getLeftAnimation() {
 
 bool ThreeD::getRightAnimation() {
 	return rightAnimation;
+}
+
+bool ThreeD::getUpAnimation() {
+	return upAnimation;
+}
+
+bool ThreeD::getDownAnimation() {
+	return downAnimation;
+}
+
+float ThreeD::getCameraDistance() {
+	float distances[3];
+	distances[0] = (model.XMAX - model.XMIN) * xAxisK;
+	distances[1] = (model.YMAX - model.YMIN) * yAxisK;
+	//distances[2] = (model.ZMAX - model.ZMIN) * zAxisK;
+	
+	float MAX = 0;
+	for (int i = 0; i < 2; i++) {
+		if (distances[i] > MAX) {
+			MAX = distances[i];
+		}
+	}
+
+	return MAX;
 }

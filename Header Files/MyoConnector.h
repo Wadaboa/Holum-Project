@@ -15,6 +15,7 @@ class MyoConnector: public DeviceListener {
         bool isUnlocked;
         int roll_w, pitch_w, yaw_w;
         Pose currentPose;
+    
     public:
         MyoConnector();
         void onUnpair(Myo* myo, uint64_t timestamp);

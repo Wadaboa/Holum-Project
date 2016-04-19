@@ -15,8 +15,7 @@
 #include <Settings.h>
 #include <MyoConnector.h>
 #include <LeapListener.h>
-
-#define LEAP_SCALE 15
+#include <Bluetooth.h>
 
 class Manager {
 	private:
@@ -39,7 +38,9 @@ class Manager {
 		View viewLeft;
 		View viewRight;
 		View viewBottom;
-    
+		
+		float width3D;
+		float height3D;
         float viewWidth;
         float viewHeight;
 
@@ -55,7 +56,10 @@ class Manager {
 
 		RenderWindow* window;
         bool fullscreen;
-    
+
+		thread bluetoothManager;
+
+		Bluetooth bluetooth;
         Hub* hub;
         Myo* myoArmband;
         MyoConnector myoConnector;
@@ -71,6 +75,8 @@ class Manager {
         float zoom;
 
 		bool drawWithGL;
+		bool enterPressed;
+		bool escapePressed;
 
 		void splashScreen();
 		void init();
@@ -80,7 +86,9 @@ class Manager {
 		void manageThreeD();
 		void manageGames();
 		void manageSettings();
+		void manageBluetooth();
 		void windowEvents();
+		void changeStatus();
 		void drawOn(vector<Drawable*> toDraw);
 		void drawObjects(vector<Drawable*> toDraw);
 		void checkErrors();

@@ -19,6 +19,7 @@ class File {
         Texture thumbnailTexture;
 
         void init();
+    
     public:
         File();
         File(string path, string title);
@@ -32,6 +33,7 @@ class File {
         Texture* getThumbnailTexture();
         void setThumbnailSize(float x, float y);
         void setThumbnailPosition(float x, float y);
+		Vector2f getThumbnailPosition();
         Vector2f getThumbnailSize();
         void setThumbnailScale(float x, float y);
         void moveThumbnail(float x, float y);

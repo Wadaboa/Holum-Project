@@ -15,6 +15,7 @@ class Mesh {
 		GLuint VAO, VBO, EBO;
 		
 		void init();
+    
 	public:
 		typedef struct {
 			vec3 position;

@@ -14,9 +14,16 @@
 #define DIAGONAL
 #define PI 3.14159265
 #define DEBUG
+#define VERBOSE
+
 #define MYO
 #define LEAP
-#define VERBOSE
+#define LEAP_SCALE 15
+
+#define LEFT 1
+#define UP 2
+#define RIGHT 3
+#define DOWN 4
 
 extern bool quit;
 
@@ -32,6 +39,8 @@ extern RectangleShape secondaryDiagonal;
 
 extern float horizontalAspectRatio;
 extern float verticalAspectRatio;
+
+extern int frameRateLimit;
 
 typedef enum {
 	MENU_STATUS,

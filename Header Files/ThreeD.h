@@ -29,27 +29,34 @@ class ThreeD {
 		vector<File> modelFiles;
 		int nModel;
     
-        float horizontalK = 4.8f / 3.7f;
+        float xAxisK = 4.8f / 3.7f;
+		float yAxisK = 4.8f / 2.f;
+		float zAxisK = 4.8f / 0.78f;
         float verticalK = 4.8f / (3.7f * verticalAspectRatio);
 		
+		int stepCounter;
 		int firstModelPosition;
 		float scaleFactor;
+		float animationTime;
 		float animationSpeed;
 		int rightPosition;
 		int leftPosition;
 		int outPosition;
 
+		bool first;
 		bool leftAnimation;
 		bool rightAnimation;
-		Clock clock;
-		Time stepTime;
+		bool upAnimation;
+		bool downAnimation;
 
         void init();
 		void loadFiles();
 		bool checkExtension(string modelName, int modelNameLen);
 		void animateLeft();
 		void animateRight();
-        
+		void animateUp();
+		void animateDown();
+
     public:
         ThreeD();
         MANAGER_STATUS threeDEvents();
@@ -58,11 +65,18 @@ class ThreeD {
 		void checkPositions();
 		void setLeftAnimation(bool leftAnimation);
 		void setRightAnimation(bool rightAnimation);
+		void setUpAnimation(bool upAnimation);
+		void setDownAnimation(bool downAnimation);
 		bool getLeftAnimation();
 		bool getRightAnimation();
+		bool getUpAnimation();
+		bool getDownAnimation();
         sh::Shader getShader();
         Model* getModel();
         float getHorizontalK();
         float getVerticalK();
-        float getModelOffset();
+        float getModelVerticalOffset();
+		float getModelHorizontalOffset();
+		float getModelDepthOffset();
+		float getCameraDistance();
 };
