@@ -323,13 +323,13 @@ void Video::animateDown() {
 }
 
 sfe::Movie* Video::getVideoToPlay() {
-	movie = sfe::Movie();
+    movie = sfe::Movie();
 	if (!movie.openFromFile(videoFiles.at(firstVideoPosition).getPath())) {
         #ifdef DEBUG
             cout << "Errore 007: Caricamento video non riuscito." << endl;
         #endif
 	}
-	return &movie;
+    return &movie;
 }
 
 void Video::setLeftAnimation(bool leftAnimation) {

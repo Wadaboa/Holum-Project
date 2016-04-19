@@ -18,3 +18,10 @@ Errore 017: Collegamento del program shader non riuscito.
 Errore 018: Impossibile inizializzare Leap Motion.
 Errore 019: Numero dei modelli insufficiente.
 Errore 020: Il percorso della directory dei modelli 3D non esiste.
+Errore 021: Inizializzazione API Winsock fallita.
+Errore 022: Inizializzazione socket bluetooth fallita.
+Errore 023: Bind del socket bluetooth fallito.
+Errore 024: Inizializzazione dello stato di ascolto del socket bluetooth fallita.
+Errore 025: Registrazione del servizio Bluetooth SDP fallita.
+Errore 026: Socket del client bluetooth non valido.
+Errore 027: Errore sconosciuto durante la comunicazione bluetooth.

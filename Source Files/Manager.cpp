@@ -131,8 +131,11 @@ void Manager::init() {
 	escapePressed = false;
 
 	currentStatus =  MENU_STATUS;
-	bluetooth = Bluetooth();
-	bluetoothManager = thread(&Manager::manageBluetooth, this);
+    
+    #ifdef _WIN32
+        bluetooth = Bluetooth();
+        bluetoothManager = thread(&Manager::manageBluetooth, this);
+    #endif
 }
 
 void Manager::run() {
@@ -159,8 +162,10 @@ void Manager::run() {
                 manageSettings();
                 break;
 			case EXIT_STATUS:
-				bluetooth.closeSocket();
-				bluetoothManager.join();
+                #ifdef _WIN32
+                    bluetooth.closeSocket();
+                    bluetoothManager.join();
+                #endif
 				window->close();
 				break;
             default:
@@ -222,9 +227,7 @@ void Manager::manageThreeD() {
 		drawGL();
 }
 
-void Manager::manageGames() {
-    
-}
+void Manager::manageGames() {}
 
 void Manager::manageSettings() {
 	settings.settingsEvents();
@@ -232,7 +235,9 @@ void Manager::manageSettings() {
 }
 
 void Manager::manageBluetooth() {
-	bluetooth.manageBluetooth();
+    #ifdef _WIN32
+        bluetooth.manageBluetooth();
+    #endif
 }
 
 void Manager::windowEvents() {
@@ -249,8 +254,10 @@ void Manager::windowEvents() {
                 hub->removeListener(&myoConnector);
                 delete hub;
     		#endif
-			bluetooth.closeSocket();
-			bluetoothManager.join();
+            #ifdef _WIN32
+                bluetooth.closeSocket();
+                bluetoothManager.join();
+            #endif
             window->close();
         }
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) || myoCurrentPose == "fist" || bluetooth.getDirection() == DOWN) {
@@ -362,7 +369,7 @@ void Manager::windowEvents() {
 				}
 			}	
         }
-        if (event.type == Event::KeyPressed && event.key.code == Keyboard::Up ) {
+        if (event.type == Event::KeyPressed && event.key.code == Keyboard::Up) {
             if (currentStatus == THREED_STATUS) {
                 angleX += 0.1f;
             }
@@ -449,7 +456,9 @@ void Manager::windowEvents() {
         }
         myoLastPose = myoCurrentPose;
         myoCurrentPose = "unknown";
-		bluetooth.isAvailable(false);
+        #ifdef _WIN32
+            bluetooth.isAvailable(false);
+        #endif
     }
 }
 
@@ -621,7 +630,7 @@ void Manager::playVideo(sfe::Movie* movie) {
                 movie->stop();
                 toDraw = vector<Drawable*>();
             }
-			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Space || bluetooth.getDirection() == UP) {
+			if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Space) || bluetooth.getDirection() == UP) {
                 if(movie->getStatus() == sfe::Paused) {
                     movie->play();
                 }
@@ -629,7 +638,9 @@ void Manager::playVideo(sfe::Movie* movie) {
                     movie->pause();
                 }
             }
-			bluetooth.isAvailable(false);
+            #ifdef _WIN32
+                bluetooth.isAvailable(false);
+            #endif
         }
         if (!(movie->getStatus() == sfe::Stopped || movie->getStatus() == sfe::Paused)) {
             movie->update();

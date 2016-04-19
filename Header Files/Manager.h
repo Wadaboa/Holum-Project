@@ -57,9 +57,10 @@ class Manager {
 		RenderWindow* window;
         bool fullscreen;
 
-		thread bluetoothManager;
-
-		Bluetooth bluetooth;
+        #ifdef _WIN32
+            thread bluetoothManager;
+        #endif
+        Bluetooth bluetooth;
         Hub* hub;
         Myo* myoArmband;
         MyoConnector myoConnector;
