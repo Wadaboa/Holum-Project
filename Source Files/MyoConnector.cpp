@@ -10,6 +10,7 @@
 #include <Global.h>
 #include <MyoConnector.h>
 
+
 MyoConnector::MyoConnector(): onArm(false), isUnlocked(false), roll_w(0), pitch_w(0), yaw_w(0), currentPose() {}
 
 void MyoConnector::onUnpair(Myo* myo, uint64_t timestamp) {
@@ -80,11 +81,15 @@ void MyoConnector::print() {
     } else {
         cout << '[' << string(8, ' ') << ']' << "[?]" << '[' << string(14, ' ') << ']';
     }
-    
+	cout << roll_w << " " << pitch_w << " " << yaw_w;
     cout << flush;
 }
 
 string MyoConnector::getCurrentPose() {
     return currentPose.toString();
+}
+
+vec3 MyoConnector::getDirections() {
+	return vec3(roll_w, pitch_w, yaw_w);
 }
 

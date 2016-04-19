@@ -58,4 +58,6 @@ class Settings {
 		void setFadeRightAnimation(bool fadeRightAnimation);
 		bool getFadeLeftAnimation();
 		bool getFadeRightAnimation();
+
+		void test();
 };

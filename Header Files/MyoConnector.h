@@ -27,4 +27,5 @@ class MyoConnector: public DeviceListener {
         void onLock(Myo* myo, uint64_t timestamp);
         void print();
         string getCurrentPose();
+		vec3 getDirections();
 };

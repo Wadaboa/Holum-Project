@@ -20,6 +20,7 @@
 class Manager {
 	private:
 		// Posizioni e dimensioni delle view
+		Clock cDeb;
 		float VIEW_DIMENSION;
 
 		float VIEW_DIMENSION_X;
@@ -61,15 +62,16 @@ class Manager {
             thread bluetoothManager;
         #endif
         Bluetooth bluetooth;
+        
         Hub* hub;
         Myo* myoArmband;
         MyoConnector myoConnector;
-
         string myoLastPose;
         string myoCurrentPose;
-    
-        LeapListener leapListener;
-        Leap::Controller leapController;
+		vec3 myoDirections;
+
+		LeapListener leapListener;
+		Leap::Controller leapController;
     
         float angleX;
         float angleY;
@@ -78,6 +80,7 @@ class Manager {
 		bool drawWithGL;
 		bool enterPressed;
 		bool escapePressed;
+		bool firstMyoPose;
 
 		void splashScreen();
 		void init();
@@ -98,7 +101,7 @@ class Manager {
         void initLeap();
         void drawGL();
         mat4 leapTransform(mat4 modelMatrix);
-        
+
 	public:
 		Manager();
 };

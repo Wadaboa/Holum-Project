@@ -91,7 +91,6 @@ void Settings::init() {
 			optionsTexts.at(i).at(j).setOrigin(oAppBounds.left + (oAppBounds.width / 2.0f), oAppBounds.top + (oAppBounds.height / 2.0f));
 		}
 	}
-
 	selector.setPosition(Vector2f(width / 2, textMargin + settingsTexts.at(0).getGlobalBounds().height / 2));
 
 	float appMargin = textMargin;
@@ -186,7 +185,7 @@ void Settings::scrollUp() {
 }
 
 void Settings::scrollDown() {
-	if ((int)selector.getPosition().y >= (int)settingsTexts.at(selectorPosition + 1).getPosition().y || stepCounter == animationTime) {
+	if ((int)selector.getPosition().y >= settingsTexts.at(selectorPosition + 1).getPosition().y/* || stepCounter == animationTime*/) {
 		stepCounter = 0;
 		scrollDownAnimation = false;
 		selectorPosition++;
@@ -198,7 +197,7 @@ void Settings::scrollDown() {
 }
 
 void Settings::pageUp() {
-	if ((int)settingsTexts.at(selectorPosition - 1).getPosition().y >= (int)selector.getPosition().y || stepCounter == animationTime) {
+	if ((int)settingsTexts.at(selectorPosition - 1).getPosition().y >= selector.getPosition().y || stepCounter == animationTime) {
 		stepCounter = 0;
 		pageUpAnimation = false;
 		scrollUpAnimation = false;
@@ -216,7 +215,7 @@ void Settings::pageUp() {
 }
 
 void Settings::pageDown() {
-	if ((int)settingsTexts.at(selectorPosition + 1).getPosition().y <= (int)selector.getPosition().y || stepCounter == animationTime) {
+	if ((int)settingsTexts.at(selectorPosition + 1).getPosition().y <= selector.getPosition().y /*|| stepCounter == animationTime*/) {
 		stepCounter = 0;
 		pageDownAnimation = false;
 		scrollDownAnimation = false;
@@ -236,9 +235,7 @@ void Settings::pageDown() {
 void Settings::fadeLeft() {
 	if ((int)alpha <= 0 || stepCounter >= fadeTime) {
 		if (stepCounter == fadeTime) {
-			cout << optionsPositions.at(selectorPosition) << endl;
 			optionsPositions.at(selectorPosition)--;
-			cout << optionsPositions.at(selectorPosition) << endl;
 			alpha = 0;
 			optionsTexts.at(selectorPosition).at(optionsPositions.at(selectorPosition)).setColor(Color(255, 255, 255, alpha));
 			secondFade = true;
@@ -252,7 +249,6 @@ void Settings::fadeLeft() {
 		else {
 			stepCounter++;
 			alpha += fadeSpeed;
-			cout << alpha << endl;
 			optionsTexts.at(selectorPosition).at(optionsPositions.at(selectorPosition)).setColor(Color(255, 255, 255, alpha));
 		}
 	}
@@ -267,9 +263,7 @@ void Settings::fadeRight() {
 
 	if ((int)alpha <= 0 || stepCounter >= fadeTime) {
 		if (stepCounter == fadeTime) {
-			cout << optionsPositions.at(selectorPosition) << endl;
 			optionsPositions.at(selectorPosition)++;
-			cout << optionsPositions.at(selectorPosition) << endl;
 			alpha = 0;
 			optionsTexts.at(selectorPosition).at(optionsPositions.at(selectorPosition)).setColor(Color(255, 255, 255, alpha));
 			secondFade = true;
@@ -283,7 +277,6 @@ void Settings::fadeRight() {
 		else {
 			stepCounter++;
 			alpha += fadeSpeed;
-			cout << alpha << endl;
 			optionsTexts.at(selectorPosition).at(optionsPositions.at(selectorPosition)).setColor(Color(255, 255, 255, alpha));
 		}
 	}
@@ -325,4 +318,9 @@ bool Settings::getFadeLeftAnimation() {
 
 bool Settings::getFadeRightAnimation() {
 	return fadeRightAnimation;
+}
+
+void Settings::test() {
+	settingsTexts.at(0).move(0, -0.5);
+	optionsTexts.at(0).at(0).move(0, -0.5);
 }

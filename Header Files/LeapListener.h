@@ -27,20 +27,22 @@ class LeapListener : public Leap::Listener {
         Leap::Vector getLeapTranslation();
     
     private:
-        const string fingerNames[NFINGERS] = {
-            "Thumb",
-            "Index",
-            "Middle",
-            "Ring",
-            "Pinky"
-        };
-        
-        const string stateNames[NSTATES] = {
-            "STATE_INVALID",
-            "STATE_START",
-            "STATE_UPDATE",
-            "STATE_END"
-        };
+        #ifndef _WIN32
+            const string fingerNames[NFINGERS] = {
+                "Thumb",
+                "Index",
+                "Middle",
+                "Ring",
+                "Pinky"
+            };
+            
+            const string stateNames[NSTATES] = {
+                "STATE_INVALID",
+                "STATE_START",
+                "STATE_UPDATE",
+                "STATE_END"
+            };
+        #endif
     
         Leap::Frame currentFrame;
         Leap::Frame previousFrame;

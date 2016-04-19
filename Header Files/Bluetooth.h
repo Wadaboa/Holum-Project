@@ -34,7 +34,6 @@ class Bluetooth {
         void isAvailable(bool available);
         void closeSocket();
         int getDirection();
-
         bool checkMessage();
         int readMessage();
 };

@@ -80,8 +80,8 @@ void Manager::init() {
     
     VIEW_DIMENSION = 0.32f;
     
-    VIEW_DIMENSION_X = (height * VIEW_DIMENSION) / width;
-    VIEW_DIMENSION_Y = (width * VIEW_DIMENSION) / height;
+	VIEW_DIMENSION_X = (height / width) * VIEW_DIMENSION;
+    VIEW_DIMENSION_Y = (width / height) * VIEW_DIMENSION;
     
     VIEW_POSITION_TOP_X = 0.5f - (VIEW_DIMENSION / 2);
     VIEW_POSITION_TOP_Y = 0.0;
@@ -91,7 +91,7 @@ void Manager::init() {
     VIEW_POSITION_LEFT_Y = 0.5f - (VIEW_DIMENSION_Y / 2);
     VIEW_POSITION_RIGHT_X = 1 - VIEW_DIMENSION_X;
     VIEW_POSITION_RIGHT_Y = 0.5f - (VIEW_DIMENSION_Y / 2);
-    
+
     viewTop = View(Vector2f((width / 2), (height / 2)), Vector2f(0 - width, height));
     viewLeft = View(Vector2f((width / 2), (height / 2)), Vector2f(height, 0 - width));
     viewRight= View(Vector2f((width / 2), (height / 2)), Vector2f(height, 0 - width));
@@ -129,6 +129,7 @@ void Manager::init() {
 	drawWithGL = false;
 	enterPressed = false;
 	escapePressed = false;
+	firstMyoPose = true;
 
 	currentStatus =  MENU_STATUS;
     
@@ -174,6 +175,7 @@ void Manager::run() {
                 #endif
                 break;
         }
+		
     }
 }
 
@@ -241,14 +243,27 @@ void Manager::manageBluetooth() {
 }
 
 void Manager::windowEvents() {
-	int as;
-    Event event;
     #ifdef MYO
-        if(myoLastPose != myoConnector.getCurrentPose()) {
-            myoCurrentPose = myoConnector.getCurrentPose();
-        }
-    #endif
-    while (window->pollEvent(event) || myoCurrentPose != "unknown" || bluetooth.isAvailable()) {
+		myoCurrentPose = myoConnector.getCurrentPose();
+		if (myoLastPose != myoCurrentPose) {
+			myoLastPose = myoCurrentPose;
+			cDeb.restart();
+			firstMyoPose = true;
+		}
+		if (myoLastPose == myoCurrentPose && cDeb.getElapsedTime().asMilliseconds() >= milliseconds(1000).asMilliseconds()) {
+			myoConnector.print();
+		}
+		else if (firstMyoPose) {
+			myoDirections = myoConnector.getDirections();
+			firstMyoPose = false;
+		}
+		else if(!firstMyoPose) {
+			myoCurrentPose = "unknown";
+		}
+	#endif
+
+	Event event;
+    while (window->pollEvent(event) || (myoCurrentPose != "unknown" && myoCurrentPose != "rest") || bluetooth.isAvailable()) {
         if (event.type == Event::Closed) {
     		#ifdef MYO
                 hub->removeListener(&myoConnector);
@@ -314,11 +329,8 @@ void Manager::windowEvents() {
 							threeD.checkPositions();
 						}
 				}
-				if (myoCurrentPose == "waveIn" && drawWithGL) {
-                    angleY += 0.5f;
-                }
 				else if (drawWithGL) {
-					angleY += 0.1f;
+					angleY += 0.05f;
 				}
             }
 			else if (currentStatus == SETTINGS_STATUS) {
@@ -354,11 +366,8 @@ void Manager::windowEvents() {
 							threeD.checkPositions();
 						}
 				}
-                if(myoCurrentPose == "waveOut" && drawWithGL) {
-                    angleY -= 0.5f;
-                }
 				else if (drawWithGL) {
-					angleY -= 0.1f;
+					angleY -= 0.05f;
 				}
             }
 			else if (currentStatus == SETTINGS_STATUS) {
@@ -389,6 +398,8 @@ void Manager::windowEvents() {
 					if (!settings.getFadeLeftAnimation() && !settings.getFadeRightAnimation()) {
 						settings.setScrollDownAnimation(true);
 					}
+				
+				//settings.test();
 			}
         }
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Return) || myoCurrentPose == "fingersSpread" || bluetooth.getDirection() == UP) {
@@ -403,10 +414,26 @@ void Manager::windowEvents() {
 					playVideo(video.getVideoToPlay());
 				}
             }
-			else if (currentStatus == THREED_STATUS) {
+			else if (currentStatus == THREED_STATUS && !drawWithGL) {
 				if (!threeD.getRightAnimation() && !threeD.getLeftAnimation() && !threeD.getDownAnimation()) {
 					threeD.loadModel();
 					drawWithGL = true;
+				}
+			}
+			else if (currentStatus == THREED_STATUS && drawWithGL) {
+				vec3 currentMyoDirections = myoConnector.getDirections();
+
+				if (((int)currentMyoDirections[0] + 9) % 18 > ((int)myoDirections[0] + 9) % 18 + 1) {
+					angleY += 0.01f;
+				}
+				else if (((int)currentMyoDirections[0] + 9) % 18 < ((int)myoDirections[0] + 9) % 18 - 1) {
+					angleY -= 0.01f;
+				}
+				if (((int)currentMyoDirections[1] > 9 + 1)) {
+					angleX += 0.01f;
+				}
+				else if (((int)currentMyoDirections[1] < 9 - 1)) {
+					angleX -= 0.01f;
 				}
 			}
         }
@@ -438,6 +465,7 @@ void Manager::windowEvents() {
 			}
         }
         if (event.type == Event::Resized) {
+			
 			width3D = event.size.width;
 			height3D = event.size.height;
 
@@ -454,7 +482,8 @@ void Manager::windowEvents() {
                 }
             }
         }
-        myoLastPose = myoCurrentPose;
+        
+		myoLastPose = myoCurrentPose;
         myoCurrentPose = "unknown";
         #ifdef _WIN32
             bluetooth.isAvailable(false);
@@ -547,6 +576,10 @@ void Manager::drawGL() {
         horizontalModel = leapTransform(horizontalModel);
     #endif
     
+	#ifdef LEAP
+		horizontalModel = leapTransform(horizontalModel);
+	#endif
+
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "projection"), 1, GL_FALSE, value_ptr(horizontalProjection));
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(horizontalView));
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "model"), 1, GL_FALSE, value_ptr(horizontalModel));
@@ -578,6 +611,10 @@ void Manager::drawGL() {
         verticalModel = leapTransform(verticalModel);
     #endif
     
+	#ifdef LEAP
+		verticalModel = leapTransform(verticalModel);
+	#endif
+
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "projection"), 1, GL_FALSE, value_ptr(verticalProjection));
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(verticalView));
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "model"), 1, GL_FALSE, value_ptr(verticalModel));
