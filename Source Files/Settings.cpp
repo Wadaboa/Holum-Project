@@ -91,7 +91,7 @@ void Settings::init() {
 			optionsTexts.at(i).at(j).setOrigin(oAppBounds.left + (oAppBounds.width / 2.0f), oAppBounds.top + (oAppBounds.height / 2.0f));
 		}
 	}
-
+	cout << width / 2 << endl;
 	selector.setPosition(Vector2f(width / 2, textMargin + settingsTexts.at(0).getGlobalBounds().height / 2));
 
 	float appMargin = textMargin;
@@ -186,7 +186,7 @@ void Settings::scrollUp() {
 }
 
 void Settings::scrollDown() {
-	if ((int)selector.getPosition().y >= (int)settingsTexts.at(selectorPosition + 1).getPosition().y || stepCounter == animationTime) {
+	if ((int)selector.getPosition().y >= settingsTexts.at(selectorPosition + 1).getPosition().y/* || stepCounter == animationTime*/) {
 		stepCounter = 0;
 		scrollDownAnimation = false;
 		selectorPosition++;
@@ -198,7 +198,7 @@ void Settings::scrollDown() {
 }
 
 void Settings::pageUp() {
-	if ((int)settingsTexts.at(selectorPosition - 1).getPosition().y >= (int)selector.getPosition().y || stepCounter == animationTime) {
+	if ((int)settingsTexts.at(selectorPosition - 1).getPosition().y >= selector.getPosition().y || stepCounter == animationTime) {
 		stepCounter = 0;
 		pageUpAnimation = false;
 		scrollUpAnimation = false;
@@ -216,7 +216,9 @@ void Settings::pageUp() {
 }
 
 void Settings::pageDown() {
-	if ((int)settingsTexts.at(selectorPosition + 1).getPosition().y <= (int)selector.getPosition().y || stepCounter == animationTime) {
+	if ((int)settingsTexts.at(selectorPosition + 1).getPosition().y <= selector.getPosition().y /*|| stepCounter == animationTime*/) {
+		cout << animationSpeed * animationTime << endl;
+		cout << stepCounter << endl;
 		stepCounter = 0;
 		pageDownAnimation = false;
 		scrollDownAnimation = false;
@@ -325,4 +327,9 @@ bool Settings::getFadeLeftAnimation() {
 
 bool Settings::getFadeRightAnimation() {
 	return fadeRightAnimation;
+}
+
+void Settings::test() {
+	settingsTexts.at(0).move(0, -0.5);
+	optionsTexts.at(0).at(0).move(0, -0.5);
 }

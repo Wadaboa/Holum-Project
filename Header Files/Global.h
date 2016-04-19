@@ -14,6 +14,9 @@
 #define DIAGONAL
 #define PI 3.14159265
 #define DEBUG
+#define MYO
+//#define LEAP
+#define LEAP_SCALE 15
 
 #define LEFT 1
 #define UP 2

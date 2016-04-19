@@ -10,6 +10,7 @@
 #include <Global.h>
 #include <MyoConnector.h>
 
+
 MyoConnector::MyoConnector(): onArm(false), isUnlocked(false), roll_w(0), pitch_w(0), yaw_w(0), currentPose() {}
 
 void MyoConnector::onUnpair(Myo* myo, uint64_t timestamp) {
@@ -21,10 +22,12 @@ void MyoConnector::onUnpair(Myo* myo, uint64_t timestamp) {
 }
 
 void MyoConnector::onOrientationData(Myo* myo, uint64_t timestamp, const Quaternion<float>& quat) {
-    
+	using std::max;
+	using std::min;
+
     float roll = atan2(2.0f * (quat.w() * quat.x() + quat.y() * quat.z()),
                        1.0f - 2.0f * (quat.x() * quat.x() + quat.y() * quat.y()));
-    float pitch = 0;//asin(max(-1.0f, min(1.0f, 2.0f * (quat.w() * quat.y() - quat.z() * quat.x()))));
+	float pitch = asin(max(-1.0f, min(1.0f, 2.0f * (quat.w() * quat.y() - quat.z() * quat.x()))));
     float yaw = atan2(2.0f * (quat.w() * quat.z() + quat.x() * quat.y()),
                       1.0f - 2.0f * (quat.y() * quat.y() + quat.z() * quat.z()));
     
@@ -79,11 +82,15 @@ void MyoConnector::print()
     } else {
         cout << '[' << string(8, ' ') << ']' << "[?]" << '[' << string(14, ' ') << ']';
     }
-    
+	cout << roll_w << " " << pitch_w << " " << yaw_w;
     cout << flush;
 }
 
 string MyoConnector::getCurrentPose() {
     return currentPose.toString();
+}
+
+vec3 MyoConnector::getDirections() {
+	return vec3(roll_w, pitch_w, yaw_w);
 }
 

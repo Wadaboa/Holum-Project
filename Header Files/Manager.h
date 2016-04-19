@@ -14,11 +14,13 @@
 #include <ThreeD.h>
 #include <Settings.h>
 #include <MyoConnector.h>
+#include <LeapListener.h>
 #include <Bluetooth.h>
 
 class Manager {
 	private:
 		// Posizioni e dimensioni delle view
+		Clock cDeb;
 		float VIEW_DIMENSION;
 
 		float VIEW_DIMENSION_X;
@@ -61,9 +63,12 @@ class Manager {
 		Bluetooth bluetooth;
         Hub* hub;
         Myo* myoArmband;
+		LeapListener leapListener;
+		Leap::Controller leapController;
         MyoConnector myoConnector;
         string myoCurrentPose;
         string myoLastPose;
+		vec3 myoDirections;
     
         float angleX;
         float angleY;
@@ -71,6 +76,7 @@ class Manager {
 		bool drawWithGL;
 		bool enterPressed;
 		bool escapePressed;
+		bool firstMyoPose;
 
 		void splashScreen();
 		void init();
@@ -88,7 +94,9 @@ class Manager {
 		void checkErrors();
 		void playVideo(sfe::Movie* movie);
         void initMyo();
+		void initLeap();
         void drawGL();
+		mat4 leapTransform(mat4 modelMatrix);
 	public:
 		Manager();
 };

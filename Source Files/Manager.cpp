@@ -16,6 +16,9 @@ Manager::Manager() {
 #ifdef MYO
 	initMyo();
 #endif
+#ifdef LEAP
+	initLeap();
+#endif
     //splashScreen();
 	run();
 }
@@ -55,6 +58,16 @@ void Manager::initMyo() {
     }
 }
 
+void Manager::initLeap() {
+	try {
+		leapController.addListener(leapListener);
+	} catch (const exception& e) {
+#ifdef DEBUG
+		cout << "Errore 018: Impossibile inizializzare Leap Motion." << endl;
+#endif
+	}
+}
+
 void Manager::init() {
     #ifdef DEBUG
         fullscreen = false;
@@ -69,8 +82,8 @@ void Manager::init() {
     
     VIEW_DIMENSION = 0.32f;
     
-    VIEW_DIMENSION_X = (height * VIEW_DIMENSION) / width;
-    VIEW_DIMENSION_Y = (width * VIEW_DIMENSION) / height;
+	VIEW_DIMENSION_X = (height / width) * VIEW_DIMENSION;
+    VIEW_DIMENSION_Y = (width / height) * VIEW_DIMENSION;
     
     VIEW_POSITION_TOP_X = 0.5f - (VIEW_DIMENSION / 2);
     VIEW_POSITION_TOP_Y = 0.0;
@@ -80,7 +93,7 @@ void Manager::init() {
     VIEW_POSITION_LEFT_Y = 0.5f - (VIEW_DIMENSION_Y / 2);
     VIEW_POSITION_RIGHT_X = 1 - VIEW_DIMENSION_X;
     VIEW_POSITION_RIGHT_Y = 0.5f - (VIEW_DIMENSION_Y / 2);
-    
+
     viewTop = View(Vector2f((width / 2), (height / 2)), Vector2f(0 - width, height));
     viewLeft = View(Vector2f((width / 2), (height / 2)), Vector2f(height, 0 - width));
     viewRight= View(Vector2f((width / 2), (height / 2)), Vector2f(height, 0 - width));
@@ -90,12 +103,14 @@ void Manager::init() {
     viewTop.setViewport(FloatRect(VIEW_POSITION_TOP_X, VIEW_POSITION_TOP_Y, VIEW_DIMENSION, VIEW_DIMENSION));
     
     viewLeft.setRotation(270);
+	cout << VIEW_POSITION_LEFT_X << " " << VIEW_POSITION_LEFT_Y << " " << VIEW_DIMENSION_X << " " << VIEW_DIMENSION_Y << endl;
     viewLeft.setViewport(FloatRect(VIEW_POSITION_LEFT_X, VIEW_POSITION_LEFT_Y, VIEW_DIMENSION_X, VIEW_DIMENSION_Y));
     
     viewRight.setRotation(90);
     viewRight.setViewport(FloatRect(VIEW_POSITION_RIGHT_X, VIEW_POSITION_RIGHT_Y, VIEW_DIMENSION_X, VIEW_DIMENSION_Y));
     
     viewBottom.setRotation(0);
+	cout << VIEW_POSITION_BOTTOM_X << " " << VIEW_POSITION_BOTTOM_Y << " " << VIEW_DIMENSION << " "  << VIEW_DIMENSION << endl;
     viewBottom.setViewport(FloatRect(VIEW_POSITION_BOTTOM_X, VIEW_POSITION_BOTTOM_Y, VIEW_DIMENSION, VIEW_DIMENSION));
     
 	width3D = width;
@@ -118,6 +133,7 @@ void Manager::init() {
 	drawWithGL = false;
 	enterPressed = false;
 	escapePressed = false;
+	firstMyoPose = true;
 
 	currentStatus =  MENU_STATUS;
 	bluetooth = Bluetooth();
@@ -125,6 +141,7 @@ void Manager::init() {
 }
 
 void Manager::run() {
+	
     while (window->isOpen()) {
 		#ifdef MYO
 			hub->runOnce(1);
@@ -158,6 +175,7 @@ void Manager::run() {
                 #endif
                 break;
         }
+		
     }
 }
 
@@ -227,12 +245,31 @@ void Manager::manageBluetooth() {
 void Manager::windowEvents() {
 	int as;
     Event event;
-#ifdef MYO
+#ifndef MYO
     if(myoLastPose != myoConnector.getCurrentPose()) {
         myoCurrentPose = myoConnector.getCurrentPose();
     }
 #endif
-    while (window->pollEvent(event) || myoCurrentPose != "unknown" || bluetooth.isAvailable()) {
+	//if(cDeb.getElapsedTime().asMicroseconds()
+	myoCurrentPose = myoConnector.getCurrentPose();
+	if (myoLastPose != myoCurrentPose) {
+		myoLastPose = myoCurrentPose;
+		cDeb.restart();
+		firstMyoPose = true;
+	}
+	if (myoLastPose == myoCurrentPose && cDeb.getElapsedTime().asMilliseconds() >= milliseconds(1000).asMilliseconds()) {
+		myoConnector.print();
+	}
+	else if (firstMyoPose) {
+		myoDirections = myoConnector.getDirections();
+		firstMyoPose = false;
+	}
+	else if(!firstMyoPose) {
+		myoCurrentPose = "unknown";
+	}
+	
+	//cout << myoCurrentPose << endl;
+    while (window->pollEvent(event) || (myoCurrentPose != "unknown" && myoCurrentPose != "rest") || bluetooth.isAvailable()) {
 		
         if (event.type == Event::Closed) {
 		#ifdef MYO
@@ -297,11 +334,8 @@ void Manager::windowEvents() {
 							threeD.checkPositions();
 						}
 				}
-				if (myoCurrentPose == "waveIn" && drawWithGL) {
-                    angleY += 0.5f;
-                }
 				else if (drawWithGL) {
-					angleY += 0.1f;
+					angleY += 0.05f;
 				}
             }
 			else if (currentStatus == SETTINGS_STATUS) {
@@ -337,11 +371,8 @@ void Manager::windowEvents() {
 							threeD.checkPositions();
 						}
 				}
-                if(myoCurrentPose == "waveOut" && drawWithGL) {
-                    angleY -= 0.5f;
-                }
 				else if (drawWithGL) {
-					angleY -= 0.1f;
+					angleY -= 0.05f;
 				}
             }
 			else if (currentStatus == SETTINGS_STATUS) {
@@ -372,6 +403,8 @@ void Manager::windowEvents() {
 					if (!settings.getFadeLeftAnimation() && !settings.getFadeRightAnimation()) {
 						settings.setScrollDownAnimation(true);
 					}
+				
+				//settings.test();
 			}
         }
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Return) || myoCurrentPose == "fingersSpread" || bluetooth.getDirection() == UP) {
@@ -386,10 +419,26 @@ void Manager::windowEvents() {
 					playVideo(video.getVideoToPlay());
 				}
             }
-			else if (currentStatus == THREED_STATUS) {
+			else if (currentStatus == THREED_STATUS && !drawWithGL) {
 				if (!threeD.getRightAnimation() && !threeD.getLeftAnimation() && !threeD.getDownAnimation()) {
 					threeD.loadModel();
 					drawWithGL = true;
+				}
+			}
+			else if (currentStatus == THREED_STATUS && drawWithGL) {
+				vec3 currentMyoDirections = myoConnector.getDirections();
+
+				if (((int)currentMyoDirections[0] + 9) % 18 > ((int)myoDirections[0] + 9) % 18 + 1) {
+					angleY += 0.01f;
+				}
+				else if (((int)currentMyoDirections[0] + 9) % 18 < ((int)myoDirections[0] + 9) % 18 - 1) {
+					angleY -= 0.01f;
+				}
+				if (((int)currentMyoDirections[1] > 9 + 1 )) {
+					angleX += 0.01f;
+				}
+				else if (((int)currentMyoDirections[1] < 9 - 15)) {
+					angleX -= 0.01f;
 				}
 			}
         }
@@ -421,6 +470,7 @@ void Manager::windowEvents() {
 			}
         }
         if (event.type == Event::Resized) {
+			
 			width3D = event.size.width;
 			height3D = event.size.height;
 
@@ -437,7 +487,8 @@ void Manager::windowEvents() {
                 }
             }
         }
-        myoLastPose = myoCurrentPose;
+        
+		myoLastPose = myoCurrentPose;
         myoCurrentPose = "unknown";
 		bluetooth.isAvailable(false);
     }
@@ -513,6 +564,10 @@ void Manager::drawGL() {
 	horizontalModel = translate(horizontalModel, vec3(threeD.getModelHorizontalOffset(), threeD.getModelVerticalOffset(), threeD.getModelDepthOffset()));
     horizontalModel = rotate(horizontalModel, angleY, vec3(0.0f, 1.0f, 0.0f));
     
+	#ifdef LEAP
+		horizontalModel = leapTransform(horizontalModel);
+	#endif
+
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "projection"), 1, GL_FALSE, value_ptr(horizontalProjection));
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(horizontalView));
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "model"), 1, GL_FALSE, value_ptr(horizontalModel));
@@ -520,7 +575,7 @@ void Manager::drawGL() {
     /* Bottom View */
     glViewport((width3D / 2) - (viewWidth / 2), 0, viewWidth, viewHeight);
     threeD.getModel()->draw(threeD.getShader());
-	//ds
+	
 	/* Top View*/
 	horizontalView = rotate(horizontalView, (float)radians(180.0f), vec3(1.0f, 0.0f, 0.0f));
 	horizontalView = rotate(horizontalView, (float)radians(180.0f), vec3(0.0f, 1.0f, 0.0f));
@@ -540,6 +595,10 @@ void Manager::drawGL() {
 	verticalModel = translate(verticalModel, vec3(threeD.getModelHorizontalOffset(), threeD.getModelVerticalOffset(), 0.0f));
     verticalModel = rotate(verticalModel, angleY, vec3(0.0f, 1.0f, 0.0f));
     
+	#ifdef LEAP
+		verticalModel = leapTransform(verticalModel);
+	#endif
+
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "projection"), 1, GL_FALSE, value_ptr(verticalProjection));
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(verticalView));
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "model"), 1, GL_FALSE, value_ptr(verticalModel));
@@ -608,6 +667,18 @@ void Manager::playVideo(sfe::Movie* movie) {
             toDraw = vector<Drawable*>();
         }
     }
+}
+
+mat4 Manager::leapTransform(mat4 modelMatrix) {
+	if (leapListener.getHandsList().count() == 1) {
+		modelMatrix = rotate(modelMatrix, degrees(leapListener.getHandDirection().pitch()) / LEAP_SCALE, vec3(1.0f, 0.0f, 0.0f));
+		modelMatrix = rotate(modelMatrix, degrees(leapListener.getPalmNormal().roll()) / LEAP_SCALE, vec3(0.0f, 1.0f, 0.0f));
+		modelMatrix = rotate(modelMatrix, degrees(leapListener.getHandDirection().yaw()) / LEAP_SCALE, vec3(0.0f, 0.0f, 1.0f));
+	}
+	else if (leapListener.getHandsList().count() == 2) {
+		modelMatrix = translate(modelMatrix, vec3(leapListener.getLeapTranslation().x, leapListener.getLeapTranslation().y, -(leapListener.getLeapTranslation().z)));
+	}
+	return modelMatrix;
 }
 
 int main() {

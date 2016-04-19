@@ -145,6 +145,7 @@ void Bluetooth::startCommunication() {
 			int n;
 			memcpy(&n, buffer, sizeof(int));
 			direction = n;
+			cout << direction << endl;
 			available = true;
 		}
 		
