@@ -21,6 +21,7 @@ class Settings {
 		float textMargin;
 		int nSettings;
 		int selectorPosition;
+		int pageHeaderPosition;
 		float alpha;
 		vector<int> optionsPositions;
 
@@ -30,11 +31,14 @@ class Settings {
 		bool pageDownAnimation;
 		bool fadeLeftAnimation;
 		bool fadeRightAnimation;
+		bool upAnimation;
+		bool downAnimation;
 		bool secondFade;
 
 		int stepCounter;
 		float animationTime;
 		float animationSpeed;
+		float udAnimationSpeed;
 		float fadeSpeed;
 		float fadeTime;
 
@@ -45,6 +49,8 @@ class Settings {
 		void pageDown();
 		void fadeLeft();
 		void fadeRight();
+		void animateUp();
+		void animateDown();
 
 	public:
 		Settings();
@@ -56,8 +62,12 @@ class Settings {
 		bool getScrollDownAnimation();
 		void setFadeLeftAnimation(bool fadeLeftAnimation);
 		void setFadeRightAnimation(bool fadeRightAnimation);
+		void setUpAnimation(bool upAnimation);
+		void setDownAnimation(bool downAnimation);
 		bool getFadeLeftAnimation();
 		bool getFadeRightAnimation();
+		bool getUpAnimation();
+		bool getDownAnimation();
 
 		void test();
 };

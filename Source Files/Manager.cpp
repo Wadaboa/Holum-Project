@@ -158,9 +158,6 @@ void Manager::run() {
             case THREED_STATUS:
                 manageThreeD();
                 break;
-            case GAMES_STATUS:
-                manageGames();
-                break;
             case SETTINGS_STATUS:
                 manageSettings();
                 break;
@@ -190,6 +187,9 @@ void Manager::manageMenu() {
 				video.setUpAnimation(true);
 			else if (currentStatus == THREED_STATUS) {
 				threeD.setUpAnimation(true);
+			}
+			else if (currentStatus == SETTINGS_STATUS) {
+				settings.setUpAnimation(true);
 			}
 			enterPressed = false;
 		}
@@ -250,10 +250,15 @@ void Manager::manageThreeD() {
     }
 }
 
-void Manager::manageGames() {}
-
 void Manager::manageSettings() {
 	settings.settingsEvents();
+	if (escapePressed) {
+		if (!settings.getDownAnimation()) {
+			currentStatus = MENU_STATUS;
+			menu.setUpAnimation(true);
+			escapePressed = false;
+		}
+	}
 	drawOn(settings.getObjectsVector());
 }
 
@@ -319,6 +324,12 @@ void Manager::windowEvents() {
 			else if (currentStatus == THREED_STATUS && !drawWithGL) {
 				if (!threeD.getRightAnimation() && !threeD.getLeftAnimation()) {
 					threeD.setDownAnimation(true);
+					escapePressed = true;
+				}
+			}
+			else if (currentStatus == SETTINGS_STATUS) {
+				if (!settings.getScrollDownAnimation() && !settings.getScrollUpAnimation()) {
+					settings.setDownAnimation(true);
 					escapePressed = true;
 				}
 			}
@@ -420,8 +431,6 @@ void Manager::windowEvents() {
 					if (!settings.getFadeLeftAnimation() && !settings.getFadeRightAnimation()) {
 						settings.setScrollDownAnimation(true);
 					}
-				
-				//settings.test();
 			}
         }
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Return) || myoCurrentPose == "fingersSpread" || bluetooth.getDirection() == UP) {

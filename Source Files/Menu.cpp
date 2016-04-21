@@ -44,8 +44,6 @@ void Menu::init() {
 	menuTexts.push_back(appText);
 	appText = Text("3D", menuFont, textSize);
 	menuTexts.push_back(appText);
-	appText = Text("GAMES", menuFont, textSize);
-	menuTexts.push_back(appText);
 	appText = Text("EXIT", menuFont, textSize);
 	menuTexts.push_back(appText);
 	appText = Text("SETTINGS", menuFont, textSize);
@@ -312,8 +310,6 @@ MANAGER_STATUS Menu::getCurrentStatus() {
 		return THREED_STATUS;
 	else if (menuTexts.at(firstTextPosition).getString() == "SETTINGS")
 		return SETTINGS_STATUS;
-	else if (menuTexts.at(firstTextPosition).getString() == "GAMES")
-		return GAMES_STATUS;
 	else if (menuTexts.at(firstTextPosition).getString() == "EXIT")
 		return EXIT_STATUS;
 	else {
