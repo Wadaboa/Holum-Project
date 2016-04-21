@@ -81,6 +81,9 @@ class Manager {
 		bool enterPressed;
 		bool escapePressed;
 		bool firstMyoPose;
+    
+        bool loadCheck;
+        Clock loadClock;
 
 		void splashScreen();
 		void init();

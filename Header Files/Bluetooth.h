@@ -6,6 +6,10 @@
 //
 //
 
+/*!
+ * \class Bluetooth
+ * \brief The Bluetooth class provides wireless communication between this software and the Android application.
+ */
 class Bluetooth {
     private:
         bool exit;
@@ -18,7 +22,6 @@ class Bluetooth {
         #endif
         atomic_bool available;
         atomic_int direction;
-        int count = 0;
     
     public:
         Bluetooth();

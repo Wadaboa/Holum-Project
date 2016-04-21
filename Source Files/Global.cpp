@@ -27,11 +27,7 @@ int frameRateLimit;
 
 extern void initGlobal() {
 	quit = false;
-    #ifdef _WIN32
-        workingPath = "Resource Files/";
-    #else
-        workingPath = "/Users/Jobs/Documents/Xcode/HolumV0.1/HolumV0.1/Resource Files/";
-    #endif
+    workingPath = "Resource Files/";
     
     #ifdef SCREEN
         width = (float)VideoMode::getDesktopMode().width;

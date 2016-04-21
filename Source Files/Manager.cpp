@@ -130,6 +130,8 @@ void Manager::init() {
 	enterPressed = false;
 	escapePressed = false;
 	firstMyoPose = true;
+    
+    loadCheck = true;
 
 	currentStatus =  MENU_STATUS;
     
@@ -223,10 +225,29 @@ void Manager::manageThreeD() {
 			escapePressed = false;
 		}
 	}
-	if (!drawWithGL)
+    if (!drawWithGL) {
 		drawOn(threeD.getObjectsVector());
-	else
+    }
+    else {
+        if(loadCheck && loadClock.getElapsedTime().asMilliseconds() >= milliseconds(1000).asMilliseconds()) {
+            Font loadFont;
+            if(!loadFont.loadFromFile(workingPath + "Font/Montserrat-Regular.otf")) {
+                #ifdef DEBUG
+                    cout << "Errore 002: Caricamento font non riuscito." << endl;
+                #endif
+            }
+            Text loadText("LOADING...", loadFont);
+            loadText.setCharacterSize(100);
+            FloatRect textBounds = loadText.getLocalBounds();
+            loadText.setPosition(width / 2 - textBounds.width / 2, height / 2 - textBounds.height / 2);
+            vector<Drawable*> toDraw;
+            toDraw.push_back(&loadText);
+            drawOn(toDraw);
+            loadCheck = false;
+            loadClock.restart();
+        }
 		drawGL();
+    }
 }
 
 void Manager::manageGames() {}
@@ -251,7 +272,7 @@ void Manager::windowEvents() {
 			firstMyoPose = true;
 		}
 		if (myoLastPose == myoCurrentPose && cDeb.getElapsedTime().asMilliseconds() >= milliseconds(1000).asMilliseconds()) {
-			myoConnector.print();
+			//myoConnector.print();
 		}
 		else if (firstMyoPose) {
 			myoDirections = myoConnector.getDirections();
@@ -276,6 +297,7 @@ void Manager::windowEvents() {
             window->close();
         }
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) || myoCurrentPose == "fist" || bluetooth.getDirection() == DOWN) {
+            loadCheck = true;
 			if (currentStatus == MENU_STATUS) {
 				if (!menu.getRightAnimation() && !menu.getLeftAnimation()) {
 					menu.setDownAnimation(true);
@@ -416,13 +438,14 @@ void Manager::windowEvents() {
             }
 			else if (currentStatus == THREED_STATUS && !drawWithGL) {
 				if (!threeD.getRightAnimation() && !threeD.getLeftAnimation() && !threeD.getDownAnimation()) {
+                    loadClock.restart();
 					threeD.loadModel();
 					drawWithGL = true;
 				}
 			}
 			else if (currentStatus == THREED_STATUS && drawWithGL) {
 				vec3 currentMyoDirections = myoConnector.getDirections();
-
+                
 				if (((int)currentMyoDirections[0] + 9) % 18 > ((int)myoDirections[0] + 9) % 18 + 1) {
 					angleY += 0.01f;
 				}
@@ -465,7 +488,6 @@ void Manager::windowEvents() {
 			}
         }
         if (event.type == Event::Resized) {
-			
 			width3D = event.size.width;
 			height3D = event.size.height;
 
@@ -490,7 +512,6 @@ void Manager::windowEvents() {
         #endif
     }
 }
-
 
 void Manager::changeStatus() {
 	currentStatus = menu.getCurrentStatus();
@@ -575,10 +596,6 @@ void Manager::drawGL() {
     #ifdef LEAP
         horizontalModel = leapTransform(horizontalModel);
     #endif
-    
-	#ifdef LEAP
-		horizontalModel = leapTransform(horizontalModel);
-	#endif
 
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "projection"), 1, GL_FALSE, value_ptr(horizontalProjection));
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(horizontalView));
@@ -595,6 +612,8 @@ void Manager::drawGL() {
 	glViewport((width3D / 2) - (viewWidth / 2), height3D - viewHeight, viewWidth, viewHeight);
 	threeD.getModel()->draw(threeD.getShader());
     
+    loadCheck = false;
+    
     /** Left - Right View **/
     mat4 verticalProjection = perspective(zoom, verticalAspectRatio, 0.1f, 200.0f);
     
@@ -610,10 +629,6 @@ void Manager::drawGL() {
     #ifdef LEAP
         verticalModel = leapTransform(verticalModel);
     #endif
-    
-	#ifdef LEAP
-		verticalModel = leapTransform(verticalModel);
-	#endif
 
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "projection"), 1, GL_FALSE, value_ptr(verticalProjection));
     glUniformMatrix4fv(glGetUniformLocation(threeD.getShader().program, "view"), 1, GL_FALSE, value_ptr(verticalView));
