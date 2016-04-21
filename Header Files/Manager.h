@@ -10,7 +10,6 @@
 
 #include <Menu.h>
 #include <Video.h>
-#include <Game.h>
 #include <ThreeD.h>
 #include <Settings.h>
 #include <MyoConnector.h>
@@ -52,7 +51,6 @@ class Manager {
 		Video video;
 		Menu menu;
 		ThreeD threeD;
-		Game game;
 		Settings settings;
 
 		RenderWindow* window;

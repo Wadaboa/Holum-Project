@@ -16,7 +16,6 @@ class Bluetooth {
 		SOCKET bSockClient;
 		atomic_bool available;
 		atomic_int direction;
-		int count = 0;
 	public:
 		Bluetooth();
 		void manageBluetooth();

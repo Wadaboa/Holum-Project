@@ -103,14 +103,12 @@ void Manager::init() {
     viewTop.setViewport(FloatRect(VIEW_POSITION_TOP_X, VIEW_POSITION_TOP_Y, VIEW_DIMENSION, VIEW_DIMENSION));
     
     viewLeft.setRotation(270);
-	cout << VIEW_POSITION_LEFT_X << " " << VIEW_POSITION_LEFT_Y << " " << VIEW_DIMENSION_X << " " << VIEW_DIMENSION_Y << endl;
     viewLeft.setViewport(FloatRect(VIEW_POSITION_LEFT_X, VIEW_POSITION_LEFT_Y, VIEW_DIMENSION_X, VIEW_DIMENSION_Y));
     
     viewRight.setRotation(90);
     viewRight.setViewport(FloatRect(VIEW_POSITION_RIGHT_X, VIEW_POSITION_RIGHT_Y, VIEW_DIMENSION_X, VIEW_DIMENSION_Y));
     
     viewBottom.setRotation(0);
-	cout << VIEW_POSITION_BOTTOM_X << " " << VIEW_POSITION_BOTTOM_Y << " " << VIEW_DIMENSION << " "  << VIEW_DIMENSION << endl;
     viewBottom.setViewport(FloatRect(VIEW_POSITION_BOTTOM_X, VIEW_POSITION_BOTTOM_Y, VIEW_DIMENSION, VIEW_DIMENSION));
     
 	width3D = width;
@@ -158,9 +156,6 @@ void Manager::run() {
             case THREED_STATUS:
                 manageThreeD();
                 break;
-            case GAMES_STATUS:
-                manageGames();
-                break;
             case SETTINGS_STATUS:
                 manageSettings();
                 break;
@@ -188,6 +183,9 @@ void Manager::manageMenu() {
 				video.setUpAnimation(true);
 			else if (currentStatus == THREED_STATUS) {
 				threeD.setUpAnimation(true);
+			}
+			else if (currentStatus == SETTINGS_STATUS) {
+				settings.setUpAnimation(true);
 			}
 			enterPressed = false;
 		}
@@ -229,12 +227,16 @@ void Manager::manageThreeD() {
 		drawGL();
 }
 
-void Manager::manageGames() {
-    
-}
 
 void Manager::manageSettings() {
 	settings.settingsEvents();
+	if (escapePressed) {
+		if (!settings.getDownAnimation()) {
+			currentStatus = MENU_STATUS;
+			menu.setUpAnimation(true);
+			escapePressed = false;
+		}
+	}
 	drawOn(settings.getObjectsVector());
 }
 
@@ -243,7 +245,6 @@ void Manager::manageBluetooth() {
 }
 
 void Manager::windowEvents() {
-	int as;
     Event event;
 #ifndef MYO
     if(myoLastPose != myoConnector.getCurrentPose()) {
@@ -258,7 +259,7 @@ void Manager::windowEvents() {
 		firstMyoPose = true;
 	}
 	if (myoLastPose == myoCurrentPose && cDeb.getElapsedTime().asMilliseconds() >= milliseconds(1000).asMilliseconds()) {
-		myoConnector.print();
+		//myoConnector.print();
 	}
 	else if (firstMyoPose) {
 		myoDirections = myoConnector.getDirections();
@@ -302,6 +303,12 @@ void Manager::windowEvents() {
 			else if (currentStatus == THREED_STATUS && !drawWithGL) {
 				if (!threeD.getRightAnimation() && !threeD.getLeftAnimation()) {
 					threeD.setDownAnimation(true);
+					escapePressed = true;
+				}
+			}
+			else if (currentStatus == SETTINGS_STATUS) {
+				if (!settings.getScrollDownAnimation() && !settings.getScrollUpAnimation()) {
+					settings.setDownAnimation(true);
 					escapePressed = true;
 				}
 			}
