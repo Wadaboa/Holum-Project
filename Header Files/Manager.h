@@ -19,6 +19,7 @@
 class Manager {
 	private:
 		// Posizioni e dimensioni delle view
+		Clock tDeb;
 		Clock cDeb;
 		float VIEW_DIMENSION;
 
@@ -75,6 +76,8 @@ class Manager {
 		bool enterPressed;
 		bool escapePressed;
 		bool firstMyoPose;
+
+		bool loadCheck;
 
 		void splashScreen();
 		void init();

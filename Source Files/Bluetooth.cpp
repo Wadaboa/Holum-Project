@@ -64,7 +64,7 @@ bool Bluetooth::bindSocket() {
 	bLenght = sizeof(bAddress);
 
 	if (::bind(bSock, (sockaddr*)&bAddress, bLenght)) {
-		cout << "Errore 0??: Bind del socket fallito." << endl;
+		//cout << "Errore 0??: Bind del socket fallito." << endl;
 		return false;
 	}
 

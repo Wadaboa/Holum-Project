@@ -11,10 +11,9 @@
 #include <Libraries.h>
 
 #define SCREEN
-#define DIAGONAL
+//#define DIAGONAL
 #define PI 3.14159265
 #define DEBUG
-#define MYO
 //#define LEAP
 #define LEAP_SCALE 15
 

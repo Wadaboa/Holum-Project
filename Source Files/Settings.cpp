@@ -184,7 +184,7 @@ vector<Drawable*> Settings::getObjectsVector() {
 }
 
 void Settings::scrollUp() {
-	if ((int)selector.getPosition().y <= (int)settingsTexts.at(selectorPosition - 1).getPosition().y || stepCounter == animationTime) {
+	if (stepCounter == animationTime) {
 		stepCounter = 0;
 		scrollUpAnimation = false;
 		selectorPosition--;
@@ -196,7 +196,7 @@ void Settings::scrollUp() {
 }
 
 void Settings::scrollDown() {
-	if ((int)selector.getPosition().y >= settingsTexts.at(selectorPosition + 1).getPosition().y/* || stepCounter == animationTime*/) {
+	if (stepCounter == animationTime) {
 		stepCounter = 0;
 		scrollDownAnimation = false;
 		selectorPosition++;
@@ -208,7 +208,7 @@ void Settings::scrollDown() {
 }
 
 void Settings::pageUp() {
-	if ((int)settingsTexts.at(selectorPosition - 1).getPosition().y >= selector.getPosition().y || stepCounter == animationTime) {
+	if (stepCounter == animationTime) {
 		stepCounter = 0;
 		pageUpAnimation = false;
 		scrollUpAnimation = false;
@@ -227,7 +227,7 @@ void Settings::pageUp() {
 }
 
 void Settings::pageDown() {
-	if ((int)settingsTexts.at(selectorPosition + 1).getPosition().y <= selector.getPosition().y /*|| stepCounter == animationTime*/) {
+	if (stepCounter == animationTime) {
 		stepCounter = 0;
 		pageDownAnimation = false;
 		scrollDownAnimation = false;
