@@ -39,7 +39,6 @@ extern void initGlobal() {
     
     horizontalAspectRatio = width / height;
     verticalAspectRatio = height / width;
-
 	frameRateLimit = 120;
 
     #ifdef DIAGONAL

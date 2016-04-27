@@ -45,10 +45,11 @@ void Manager::initMyo() {
         }
         
         hub->addListener(&myoConnector);
-        
+
         myoLastPose = "unknown";
         myoCurrentPose = "unknown";
-        
+
+		int MYO; 
     } catch (const exception& e) {
         #ifdef DEBUG
             cout << "Errore 011: Impossibile inizializzare Myo Armband." << endl;
@@ -78,7 +79,7 @@ void Manager::init() {
     window->setMouseCursorVisible(false);
 	window->setFramerateLimit(frameRateLimit);
     
-    VIEW_DIMENSION = 0.32f;
+    VIEW_DIMENSION = 0.35f;
     
 	VIEW_DIMENSION_X = (height / width) * VIEW_DIMENSION;
     VIEW_DIMENSION_Y = (width / height) * VIEW_DIMENSION;
@@ -125,7 +126,7 @@ void Manager::init() {
     
     angleX = 0;
     angleY = 0;
-    zoom = 45.0f;
+    zoom = 44.6f;
 	drawWithGL = false;
 	enterPressed = false;
 	escapePressed = false;
@@ -174,7 +175,6 @@ void Manager::run() {
                 #endif
                 break;
         }
-		
     }
 }
 
@@ -227,27 +227,26 @@ void Manager::manageThreeD() {
 	}
     if (!drawWithGL) {
 		drawOn(threeD.getObjectsVector());
-    }
-    else {
-        if(loadCheck && loadClock.getElapsedTime().asMilliseconds() >= milliseconds(1000).asMilliseconds()) {
-            Font loadFont;
-            if(!loadFont.loadFromFile(workingPath + "Font/Montserrat-Regular.otf")) {
-                #ifdef DEBUG
-                    cout << "Errore 002: Caricamento font non riuscito." << endl;
-                #endif
-            }
-            Text loadText("LOADING...", loadFont);
-            loadText.setCharacterSize(100);
-            FloatRect textBounds = loadText.getLocalBounds();
-            loadText.setPosition(width / 2 - textBounds.width / 2, height / 2 - textBounds.height / 2);
-            vector<Drawable*> toDraw;
-            toDraw.push_back(&loadText);
-            drawOn(toDraw);
-            loadCheck = false;
-            loadClock.restart();
-        }
+	else {
+		if (loadCheck) {
+			Font loadFont;
+			if (!loadFont.loadFromFile(workingPath + "Font/Montserrat-Regular.otf")) {
+				#ifdef DEBUG
+					cout << "Errore 002: Caricamento font non riuscito." << endl;
+				#endif
+			}
+			Text loadText("LOADING...", loadFont);
+			loadText.setCharacterSize(100);
+			FloatRect textBounds = loadText.getLocalBounds();
+			loadText.setPosition(width / 2 - textBounds.width / 2, height / 2 - textBounds.height / 2);
+			vector<Drawable*> toDraw;
+			toDraw.push_back(&loadText);
+			drawOn(toDraw);
+			threeD.loadModel();
+			loadCheck = false;
+		}
 		drawGL();
-    }
+	}
 }
 
 void Manager::manageSettings() {
@@ -340,10 +339,11 @@ void Manager::windowEvents() {
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Left) || myoCurrentPose == "waveIn" || bluetooth.getDirection() == LEFT) {
             if (currentStatus == MENU_STATUS) {
 				if (!menu.getRightAnimation()) {
-					if (!menu.getDownAnimation() && !menu.getUpAnimation())
+					if (!menu.getDownAnimation() && !menu.getUpAnimation()) {
 						if (!menu.getLeftAnimation()) {  // Controllo essenziale
 							menu.setLeftAnimation(true);
 						}
+					}
 				}
 			}
 			else if (currentStatus == VIDEO_STATUS) {
@@ -447,8 +447,6 @@ void Manager::windowEvents() {
             }
 			else if (currentStatus == THREED_STATUS && !drawWithGL) {
 				if (!threeD.getRightAnimation() && !threeD.getLeftAnimation() && !threeD.getDownAnimation()) {
-                    loadClock.restart();
-					threeD.loadModel();
 					drawWithGL = true;
 				}
 			}
@@ -587,9 +585,9 @@ void Manager::drawGL() {
     
 	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.position"), lightPos.x, lightPos.y, lightPos.z);
 	glUniform3f(glGetUniformLocation(threeD.getShader().program, "viewPos"), 0, 0, threeD.getCameraDistance());
-	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.ambient"), 0.5f, 0.5f, 0.5f);
-	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.diffuse"), 0.5f, 0.5f, 0.5f);
-	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.specular"), 1.0f, 1.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.ambient"), 1, 1 ,1);
+	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.diffuse"), 1, 1, 1);
+	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.specular"), 1.5, 1.5, 1.5);
 
     /** Top - Bottom View **/
     mat4 horizontalProjection = perspective(zoom, horizontalAspectRatio, 0.1f, 100.0f);
@@ -654,6 +652,8 @@ void Manager::drawGL() {
     glViewport(width3D - viewHeight, (height3D / 2) - (viewWidth / 2), viewHeight, viewWidth);
     threeD.getModel()->draw(threeD.getShader());
     
+	loadCheck = false;
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     window->resetGLStates();
