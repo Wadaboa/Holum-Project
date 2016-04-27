@@ -225,8 +225,9 @@ void Manager::manageThreeD() {
 			escapePressed = false;
 		}
 	}
-    if (!drawWithGL) {
+	if (!drawWithGL) {
 		drawOn(threeD.getObjectsVector());
+	} 
 	else {
 		if (loadCheck) {
 			Font loadFont;

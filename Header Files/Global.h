@@ -16,8 +16,8 @@
 #define DEBUG
 #define VERBOSE
 
-#define MYO
-#define LEAP
+//#define MYO
+//#define LEAP
 #define LEAP_SCALE 15
 
 #define LEFT 1
