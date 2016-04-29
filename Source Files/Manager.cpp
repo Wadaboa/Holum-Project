@@ -46,13 +46,8 @@ void Manager::initMyo() {
 
         myoLastPose = "unknown";
         myoCurrentPose = "unknown";
-<<<<<<< HEAD
 		myoManager = thread(&Manager::manageMyo, this);
 		MYO = true;
-=======
-
-		int MYO; 
->>>>>>> origin/prah
     } catch (const exception& e) {
         #ifdef DEBUG
             cout << "Errore 011: Errore inizializzazione Myo Armband." << endl;
@@ -72,7 +67,7 @@ void Manager::initLeap() {
 
 void Manager::init() {
     #ifdef DEBUG
-        fullscreen = true;
+        fullscreen = false;
     #else
         fullscreen = true;
     #endif
@@ -82,7 +77,7 @@ void Manager::init() {
     window->setMouseCursorVisible(false);
 	window->setFramerateLimit(frameRateLimit);
     
-    VIEW_DIMENSION = 0.35f;
+    VIEW_DIMENSION = 0.32f;
     
 	VIEW_DIMENSION_X = (height / width) * VIEW_DIMENSION;
     VIEW_DIMENSION_Y = (width / height) * VIEW_DIMENSION;
@@ -129,10 +124,7 @@ void Manager::init() {
     
     angleX = 0;
     angleY = 0;
-<<<<<<< HEAD
 	angleZ = 0;
-=======
->>>>>>> origin/prah
     zoom = 44.6f;
 	drawWithGL = false;
 	enterPressed = false;
@@ -147,14 +139,9 @@ void Manager::init() {
 }
 
 void Manager::run() {
+	
     while (window->isOpen()) {
 		tDeb.restart();
-<<<<<<< HEAD
-=======
-		#ifdef MYO
-			hub->runOnce(1);
-		#endif
->>>>>>> origin/prah
         windowEvents();
         checkErrors();
         switch (currentStatus) {
@@ -187,11 +174,7 @@ void Manager::run() {
                 break;
         }
 		if (tDeb.getElapsedTime().asMicroseconds() < microseconds(100000).asMicroseconds()) {
-<<<<<<< HEAD
 			//cout << tDeb.getElapsedTime().asMicroseconds() << endl;
-=======
-			cout << tDeb.getElapsedTime().asMicroseconds() << endl;
->>>>>>> origin/prah
 		}
 		
     }
@@ -312,6 +295,7 @@ void Manager::windowEvents() {
 	}
 	
     while (window->pollEvent(event) || (myoCurrentPose != "unknown" && myoCurrentPose != "rest") || bluetooth.isAvailable()) {
+		
         if (event.type == Event::Closed) {
 			quit = true;
 			if (MYO) {
