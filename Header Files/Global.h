@@ -11,11 +11,11 @@
 #include <Libraries.h>
 
 #define SCREEN
-#define DIAGONAL
+//#define DIAGONAL
 #define PI 3.14159265
 #define DEBUG
-#define MYO
 //#define LEAP
+//#define MYO
 #define LEAP_SCALE 15
 
 #define LEFT 1
@@ -24,6 +24,7 @@
 #define DOWN 4
 
 extern bool quit;
+extern bool MYO;
 
 extern string workingPath;
 

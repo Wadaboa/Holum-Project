@@ -19,6 +19,7 @@
 class Manager {
 	private:
 		// Posizioni e dimensioni delle view
+		Clock tDeb;
 		Clock cDeb;
 		float VIEW_DIMENSION;
 
@@ -57,6 +58,7 @@ class Manager {
         bool fullscreen;
 
 		thread bluetoothManager;
+		thread myoManager;
 
 		Bluetooth bluetooth;
         Hub* hub;
@@ -70,11 +72,14 @@ class Manager {
     
         float angleX;
         float angleY;
+		float angleZ;
         float zoom;
 		bool drawWithGL;
 		bool enterPressed;
 		bool escapePressed;
 		bool firstMyoPose;
+
+		bool loadCheck;
 
 		void splashScreen();
 		void init();
@@ -85,6 +90,7 @@ class Manager {
 		void manageGames();
 		void manageSettings();
 		void manageBluetooth();
+		void manageMyo();
 		void windowEvents();
 		void changeStatus();
 		void drawOn(vector<Drawable*> toDraw);

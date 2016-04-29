@@ -9,13 +9,9 @@
 #include <Global.h>
 #include <Manager.h>
 
-//#define MYO
-
 Manager::Manager() {
     init();
-#ifdef MYO
 	initMyo();
-#endif
 #ifdef LEAP
 	initLeap();
 #endif
@@ -37,7 +33,7 @@ void Manager::splashScreen() {
 void Manager::initMyo() {
     try {
         hub = new Hub("com.holum.holum-project");
-        
+		hub->setLockingPolicy(Hub::lockingPolicyNone);
         myoArmband = hub->waitForMyo(1000);
         
         if (!myoArmband) {
@@ -47,10 +43,11 @@ void Manager::initMyo() {
         }
         
         hub->addListener(&myoConnector);
-        
+
         myoLastPose = "unknown";
         myoCurrentPose = "unknown";
-        
+		myoManager = thread(&Manager::manageMyo, this);
+		MYO = true;
     } catch (const exception& e) {
         #ifdef DEBUG
             cout << "Errore 011: Errore inizializzazione Myo Armband." << endl;
@@ -127,11 +124,14 @@ void Manager::init() {
     
     angleX = 0;
     angleY = 0;
-    zoom = 45.0f;
+	angleZ = 0;
+    zoom = 44.6f;
 	drawWithGL = false;
 	enterPressed = false;
 	escapePressed = false;
 	firstMyoPose = true;
+
+	loadCheck = true;
 
 	currentStatus =  MENU_STATUS;
 	bluetooth = Bluetooth();
@@ -141,9 +141,7 @@ void Manager::init() {
 void Manager::run() {
 	
     while (window->isOpen()) {
-		#ifdef MYO
-			hub->runOnce(1);
-		#endif
+		tDeb.restart();
         windowEvents();
         checkErrors();
         switch (currentStatus) {
@@ -160,6 +158,11 @@ void Manager::run() {
                 manageSettings();
                 break;
 			case EXIT_STATUS:
+				quit = true;
+				if (MYO) {
+					hub->removeListener(&myoConnector);
+					myoManager.join();
+				}
 				bluetooth.closeSocket();
 				bluetoothManager.join();
 				window->close();
@@ -170,6 +173,9 @@ void Manager::run() {
                 #endif
                 break;
         }
+		if (tDeb.getElapsedTime().asMicroseconds() < microseconds(100000).asMicroseconds()) {
+			//cout << tDeb.getElapsedTime().asMicroseconds() << endl;
+		}
 		
     }
 }
@@ -223,8 +229,26 @@ void Manager::manageThreeD() {
 	}
 	if (!drawWithGL)
 		drawOn(threeD.getObjectsVector());
-	else
+	else {
+		if (loadCheck) {
+			Font loadFont;
+			if (!loadFont.loadFromFile(workingPath + "Font/Montserrat-Regular.otf")) {
+				#ifdef DEBUG
+					cout << "Errore 002: Caricamento font non riuscito." << endl;
+				#endif
+			}
+			Text loadText("LOADING...", loadFont);
+			loadText.setCharacterSize(100);
+			FloatRect textBounds = loadText.getLocalBounds();
+			loadText.setPosition(width / 2 - textBounds.width / 2, height / 2 - textBounds.height / 2);
+			vector<Drawable*> toDraw;
+			toDraw.push_back(&loadText);
+			drawOn(toDraw);
+			threeD.loadModel();
+			loadCheck = false;
+		}
 		drawGL();
+	}
 }
 
 
@@ -244,13 +268,14 @@ void Manager::manageBluetooth() {
 	bluetooth.manageBluetooth();
 }
 
+void Manager::manageMyo() {
+	while (!quit) {
+		hub->runOnce(100);
+	}
+}
+
 void Manager::windowEvents() {
     Event event;
-#ifndef MYO
-    if(myoLastPose != myoConnector.getCurrentPose()) {
-        myoCurrentPose = myoConnector.getCurrentPose();
-    }
-#endif
 	//if(cDeb.getElapsedTime().asMicroseconds()
 	myoCurrentPose = myoConnector.getCurrentPose();
 	if (myoLastPose != myoCurrentPose) {
@@ -269,19 +294,21 @@ void Manager::windowEvents() {
 		myoCurrentPose = "unknown";
 	}
 	
-	//cout << myoCurrentPose << endl;
     while (window->pollEvent(event) || (myoCurrentPose != "unknown" && myoCurrentPose != "rest") || bluetooth.isAvailable()) {
 		
         if (event.type == Event::Closed) {
-		#ifdef MYO
-            hub->removeListener(&myoConnector);
-            delete hub;
-		#endif
+			quit = true;
+			if (MYO) {
+				hub->removeListener(&myoConnector);
+				myoManager.join();
+			}
 			bluetooth.closeSocket();
 			bluetoothManager.join();
+			
             window->close();
         }
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) || myoCurrentPose == "fist" || bluetooth.getDirection() == DOWN) {
+			loadCheck = true;
 			if (currentStatus == MENU_STATUS) {
 				if (!menu.getRightAnimation() && !menu.getLeftAnimation()) {
 					menu.setDownAnimation(true);
@@ -298,7 +325,8 @@ void Manager::windowEvents() {
 				drawWithGL = false;
 				angleX = 0;
 				angleY = 0;
-				zoom = 45.0f;
+				angleZ = 0;
+				zoom = 44.6f;
 			}
 			else if (currentStatus == THREED_STATUS && !drawWithGL) {
 				if (!threeD.getRightAnimation() && !threeD.getLeftAnimation()) {
@@ -319,10 +347,11 @@ void Manager::windowEvents() {
 		if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Left) || myoCurrentPose == "waveIn" || bluetooth.getDirection() == LEFT) {
             if (currentStatus == MENU_STATUS) {
 				if (!menu.getRightAnimation()) {
-					if (!menu.getDownAnimation() && !menu.getUpAnimation())
+					if (!menu.getDownAnimation() && !menu.getUpAnimation()) {
 						if (!menu.getLeftAnimation()) {  // Controllo essenziale
 							menu.setLeftAnimation(true);
 						}
+					}
 				}
 			}
 			else if (currentStatus == VIDEO_STATUS) {
@@ -342,7 +371,7 @@ void Manager::windowEvents() {
 						}
 				}
 				else if (drawWithGL) {
-					angleY += 0.05f;
+					angleY += 0.01f;
 				}
             }
 			else if (currentStatus == SETTINGS_STATUS) {
@@ -379,7 +408,7 @@ void Manager::windowEvents() {
 						}
 				}
 				else if (drawWithGL) {
-					angleY -= 0.05f;
+					angleY -= 0.01f;
 				}
             }
 			else if (currentStatus == SETTINGS_STATUS) {
@@ -392,7 +421,7 @@ void Manager::windowEvents() {
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::Up ) {
             if (currentStatus == THREED_STATUS) {
-                angleX += 0.1f;
+                angleX += 0.01f;
             }
 			else if (currentStatus == SETTINGS_STATUS) {
 				if (!settings.getScrollDownAnimation() && !settings.getScrollUpAnimation())
@@ -403,7 +432,7 @@ void Manager::windowEvents() {
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::Down) {
             if (currentStatus == THREED_STATUS) {
-                angleX -= 0.1f;
+                angleX -= 0.01f;
             }
 			else if (currentStatus == SETTINGS_STATUS) {
 				if (!settings.getScrollDownAnimation() && !settings.getScrollUpAnimation())
@@ -428,7 +457,6 @@ void Manager::windowEvents() {
             }
 			else if (currentStatus == THREED_STATUS && !drawWithGL) {
 				if (!threeD.getRightAnimation() && !threeD.getLeftAnimation() && !threeD.getDownAnimation()) {
-					threeD.loadModel();
 					drawWithGL = true;
 				}
 			}
@@ -436,15 +464,15 @@ void Manager::windowEvents() {
 				vec3 currentMyoDirections = myoConnector.getDirections();
 
 				if (((int)currentMyoDirections[0] + 9) % 18 > ((int)myoDirections[0] + 9) % 18 + 1) {
-					angleY += 0.01f;
+					angleZ += 0.01f;
 				}
 				else if (((int)currentMyoDirections[0] + 9) % 18 < ((int)myoDirections[0] + 9) % 18 - 1) {
-					angleY -= 0.01f;
+					angleZ -= 0.01f;
 				}
-				if (((int)currentMyoDirections[1] > 9 + 1 )) {
+				else if (((int)currentMyoDirections[1] > 9)) {
 					angleX += 0.01f;
 				}
-				else if (((int)currentMyoDirections[1] < 9 - 15)) {
+				else if (((int)currentMyoDirections[1] < 9)) {
 					angleX -= 0.01f;
 				}
 			}
@@ -556,9 +584,9 @@ void Manager::drawGL() {
     
 	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.position"), lightPos.x, lightPos.y, lightPos.z);
 	glUniform3f(glGetUniformLocation(threeD.getShader().program, "viewPos"), 0, 0, threeD.getCameraDistance());
-	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.ambient"), 0.5f, 0.5f, 0.5f);
-	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.diffuse"), 0.5f, 0.5f, 0.5f);
-	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.specular"), 1.0f, 1.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.ambient"), 1, 1 ,1);
+	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.diffuse"), 1, 1, 1);
+	glUniform3f(glGetUniformLocation(threeD.getShader().program, "light.specular"), 1.5, 1.5, 1.5);
 
     /** Top - Bottom View **/
     mat4 horizontalProjection = perspective(zoom, horizontalAspectRatio, 0.1f, 100.0f);
@@ -568,8 +596,10 @@ void Manager::drawGL() {
 	
     mat4 horizontalModel;
 	horizontalModel = rotate(horizontalModel, angleX, vec3(1.0f, 0.0f, 0.0f));
+	horizontalModel = rotate(horizontalModel, angleZ, vec3(0.0f, 0.0f, 1.0f));
 	horizontalModel = translate(horizontalModel, vec3(threeD.getModelHorizontalOffset(), threeD.getModelVerticalOffset(), threeD.getModelDepthOffset()));
     horizontalModel = rotate(horizontalModel, angleY, vec3(0.0f, 1.0f, 0.0f));
+
     
 	#ifdef LEAP
 		horizontalModel = leapTransform(horizontalModel);
@@ -599,6 +629,7 @@ void Manager::drawGL() {
     
     mat4 verticalModel;
     verticalModel = rotate(verticalModel, angleX, vec3(1.0f, 0.0f, 0.0f));
+	verticalModel = rotate(verticalModel, angleZ, vec3(0.0f, 0.0f, 1.0f));
 	verticalModel = translate(verticalModel, vec3(threeD.getModelHorizontalOffset(), threeD.getModelVerticalOffset(), 0.0f));
     verticalModel = rotate(verticalModel, angleY, vec3(0.0f, 1.0f, 0.0f));
     
@@ -621,6 +652,8 @@ void Manager::drawGL() {
     glViewport(width3D - viewHeight, (height3D / 2) - (viewWidth / 2), viewHeight, viewWidth);
     threeD.getModel()->draw(threeD.getShader());
     
+	loadCheck = false;
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glPushAttrib(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	window->resetGLStates();
@@ -647,10 +680,9 @@ void Manager::playVideo(sfe::Movie* movie) {
     Clock clock;
     
     while (movie->getDuration() >= clock.getElapsedTime() && !(movie->getStatus() == sfe::Stopped)) {
-		#ifdef MYO
-			hub->runOnce(1);
+		if (MYO) {
 			myoCurrentPose = myoConnector.getCurrentPose();
-		#endif
+		}
         Event event;
         if (window->pollEvent(event) || myoCurrentPose != "unknown" || myoCurrentPose != "rest" || bluetooth.isAvailable()) {
             if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) || myoCurrentPose == "fist" || bluetooth.getDirection() == DOWN) {

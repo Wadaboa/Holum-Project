@@ -9,6 +9,7 @@
 #include <Global.h>
 
 bool quit;
+bool MYO;
 
 string workingPath;
 
@@ -27,6 +28,7 @@ int frameRateLimit;
 
 extern void initGlobal() {
 	quit = false;
+	MYO = false;
     #ifdef _WIN32
         workingPath = "Resource Files/";
     #else
@@ -43,7 +45,6 @@ extern void initGlobal() {
     
     horizontalAspectRatio = width / height;
     verticalAspectRatio = height / width;
-
 	frameRateLimit = 120;
 
     #ifdef DIAGONAL

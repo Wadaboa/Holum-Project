@@ -60,7 +60,6 @@ void Mesh::draw(sh::Shader shader) {
 			materialType += "specular";
 		}
         number = ss.str();
-		//cout << number <<endl;
         glUniform1i(glGetUniformLocation(shader.program, materialType.c_str()), i);
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }

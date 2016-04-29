@@ -64,7 +64,7 @@ bool Bluetooth::bindSocket() {
 	bLenght = sizeof(bAddress);
 
 	if (::bind(bSock, (sockaddr*)&bAddress, bLenght)) {
-		cout << "Errore 0??: Bind del socket fallito." << endl;
+		//cout << "Errore 0??: Bind del socket fallito." << endl;
 		return false;
 	}
 
@@ -76,7 +76,6 @@ bool Bluetooth::bindSocket() {
 bool Bluetooth::listenSocket() {
 	if (listen(bSock, 1) != 0) {
 		cout << "Errore 0??: Inizializzazione dello stato di ascolto del socket fallita." << endl;
-		system("pause");
 		return false;
 	}
 	return true;
@@ -112,7 +111,6 @@ bool Bluetooth::registerService() {
 
 	if (WSASetService(&bService, RNRSERVICE_REGISTER, 0) != 0) {
 		cout << "Errore 0??: Registrazione del servizio Bluetooth SDP fallita." << endl;
-		system("pause");
 		return false;
 	}
 	return true;
@@ -145,7 +143,6 @@ void Bluetooth::startCommunication() {
 			int n;
 			memcpy(&n, buffer, sizeof(int));
 			direction = n;
-			cout << direction << endl;
 			available = true;
 		}
 		
