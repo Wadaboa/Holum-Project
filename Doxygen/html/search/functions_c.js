@@ -2,7 +2,7 @@ var searchData=
 [
   ['scrolldown',['scrollDown',['../classSettings.html#a455628093679d8ff5661f0cf17c45ea9',1,'Settings']]],
   ['scrollup',['scrollUp',['../classSettings.html#aae74a0b5718c3a2c47725e12e96f634a',1,'Settings']]],
-  ['setdownanimation',['setDownAnimation',['../classMenu.html#aeebbcdcb7508e3cafc12ad1a32efc8e4',1,'Menu::setDownAnimation()'],['../classThreeD.html#a0ce89ac20ecb8f1082cdf600e5f6e5ae',1,'ThreeD::setDownAnimation()'],['../classVideo.html#a3c882e87f594e4c89284f5e5a7093069',1,'Video::setDownAnimation()']]],
+  ['setdownanimation',['setDownAnimation',['../classMenu.html#aeebbcdcb7508e3cafc12ad1a32efc8e4',1,'Menu::setDownAnimation()'],['../classSettings.html#a38d541933e0786f211e6296b03d9f002',1,'Settings::setDownAnimation()'],['../classThreeD.html#a0ce89ac20ecb8f1082cdf600e5f6e5ae',1,'ThreeD::setDownAnimation()'],['../classVideo.html#a3c882e87f594e4c89284f5e5a7093069',1,'Video::setDownAnimation()']]],
   ['setfadeleftanimation',['setFadeLeftAnimation',['../classSettings.html#abd4b4ba65f26dc0f542c74dd977404a6',1,'Settings']]],
   ['setfaderightanimation',['setFadeRightAnimation',['../classSettings.html#aef8cac960c79056f81bcc62d58332555',1,'Settings']]],
   ['setleftanimation',['setLeftAnimation',['../classMenu.html#a5b19e29c8681f88929c71d22a3327a0c',1,'Menu::setLeftAnimation()'],['../classThreeD.html#a136f44c031431eb378b46d0807f141c7',1,'ThreeD::setLeftAnimation()'],['../classVideo.html#aed05b84331399a1e2d42dffdc25ca4d6',1,'Video::setLeftAnimation()']]],
@@ -18,7 +18,7 @@ var searchData=
   ['settings',['Settings',['../classSettings.html#ab7169a6eefce79566dd07db3b1e5e967',1,'Settings']]],
   ['settingsevents',['settingsEvents',['../classSettings.html#a3976a636038110c89e23506cfd980707',1,'Settings']]],
   ['settitle',['setTitle',['../classFile.html#a185b799b99d7ecc46e6de8e8d858cc45',1,'File']]],
-  ['setupanimation',['setUpAnimation',['../classMenu.html#ab94e0456a636056b422e4eb4b81aaf21',1,'Menu::setUpAnimation()'],['../classThreeD.html#a715a9ef2706849b06ab647db18ddd263',1,'ThreeD::setUpAnimation()'],['../classVideo.html#a9aea5a522a7ba84ccae1e946f6a6a41b',1,'Video::setUpAnimation()']]],
+  ['setupanimation',['setUpAnimation',['../classMenu.html#ab94e0456a636056b422e4eb4b81aaf21',1,'Menu::setUpAnimation()'],['../classSettings.html#a176dc32eec32d3e22a2cb49a59f4f279',1,'Settings::setUpAnimation()'],['../classThreeD.html#a715a9ef2706849b06ab647db18ddd263',1,'ThreeD::setUpAnimation()'],['../classVideo.html#a9aea5a522a7ba84ccae1e946f6a6a41b',1,'Video::setUpAnimation()']]],
   ['shader',['Shader',['../classsh_1_1Shader.html#a838e67f15e8d0dd6e58844ef3dca25ab',1,'sh::Shader::Shader()'],['../classsh_1_1Shader.html#a83bb368ad9001eb054d036a1991102dc',1,'sh::Shader::Shader(const GLchar *vertexPath, const GLchar *fragmentPath)']]],
   ['splashscreen',['splashScreen',['../classManager.html#ab9652f47f396c929f9b05b3619bd3254',1,'Manager']]],
   ['startcommunication',['startCommunication',['../classBluetooth.html#acee37e1c96d3b1f39ace4d58c43190bf',1,'Bluetooth']]]

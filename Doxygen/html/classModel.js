@@ -3,7 +3,7 @@ var classModel =
     [ "Model", "classModel.html#ae3b375de5f6df4faf74a95d64748e048", null ],
     [ "Model", "classModel.html#ac1aaf3ae95e438c200eb3dfcb4a22073", null ],
     [ "draw", "classModel.html#aeb5a81fc1282f805ebbc591c2b03aa0a", null ],
-    [ "loadMaterialTextures", "classModel.html#a01cbab5abbe85583758793ce0e02e582", null ],
+    [ "loadMaterialTextures", "classModel.html#ad25cf1e26af4969d5ed8435ed6807bb8", null ],
     [ "loadModel", "classModel.html#a293cf3e4b03935164fbee0fab62c78cd", null ],
     [ "processMesh", "classModel.html#a95ae1a9980ded3d98b1c8785cb889d96", null ],
     [ "processNode", "classModel.html#a23b167ce0d33f7e6ab5693cd5e81a9a5", null ],

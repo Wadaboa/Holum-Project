@@ -3,7 +3,6 @@ var annotated_dup =
     [ "sh", "namespacesh.html", "namespacesh" ],
     [ "Bluetooth", "classBluetooth.html", "classBluetooth" ],
     [ "File", "classFile.html", "classFile" ],
-    [ "Game", "classGame.html", "classGame" ],
     [ "LeapListener", "classLeapListener.html", "classLeapListener" ],
     [ "Manager", "classManager.html", "classManager" ],
     [ "Menu", "classMenu.html", "classMenu" ],

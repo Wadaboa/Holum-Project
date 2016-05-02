@@ -1,0 +1,304 @@
+\hypertarget{classVideo}{}\section{Video Class Reference}
+\label{classVideo}\index{Video@{Video}}
+
+
+{\ttfamily \#include $<$Video.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classVideo_ab67336c2c5b6227a9635bc7dcd6af543}{Video} ()
+\item 
+void \hyperlink{classVideo_a9e80e9a88fd5d80aeeda8df0804fa2e8}{check\+Positions} ()
+\item 
+bool \hyperlink{classVideo_ab93216910bfa303c707d85dcba691a32}{get\+Down\+Animation} ()
+\item 
+bool \hyperlink{classVideo_af805356652d8f08c41da1df0f3f5854d}{get\+Left\+Animation} ()
+\item 
+vector$<$ Drawable $\ast$ $>$ \hyperlink{classVideo_aeffa6c8901a81ba7ce15f63ff97dbfa8}{get\+Objects\+Vector} ()
+\item 
+bool \hyperlink{classVideo_ac31c5b728166d7cf7fe7f58d71dc50b1}{get\+Right\+Animation} ()
+\item 
+bool \hyperlink{classVideo_a1810b74d077a593c429211a2d374a51f}{get\+Up\+Animation} ()
+\item 
+sfe\+::\+Movie $\ast$ \hyperlink{classVideo_ab8e3fcb522e1e4be723a3ef05b315cb3}{get\+Video\+To\+Play} ()
+\item 
+void \hyperlink{classVideo_a3c882e87f594e4c89284f5e5a7093069}{set\+Down\+Animation} (bool \hyperlink{classVideo_aec0e8ade42cb0336539857309f1329ee}{down\+Animation})
+\item 
+void \hyperlink{classVideo_aed05b84331399a1e2d42dffdc25ca4d6}{set\+Left\+Animation} (bool \hyperlink{classVideo_a9cc3dcc22a6e20b9f1dbc6340386c5d0}{left\+Animation})
+\item 
+void \hyperlink{classVideo_ad9ec3de5d15bfb5dbaaad3f81157c2ab}{set\+Positions} ()
+\item 
+void \hyperlink{classVideo_a2c06363b8efa7c22811693cfec9630e6}{set\+Right\+Animation} (bool \hyperlink{classVideo_ab61a504587371180bb6533ed99e1a688}{right\+Animation})
+\item 
+void \hyperlink{classVideo_a9aea5a522a7ba84ccae1e946f6a6a41b}{set\+Up\+Animation} (bool \hyperlink{classVideo_a997f7ceb635d7897d2eed00cf6faaf19}{up\+Animation})
+\item 
+\hyperlink{Global_8h_a94049c48a0d77b80bca0fcb5b1281516}{M\+A\+N\+A\+G\+E\+R\+\_\+\+S\+T\+A\+T\+US} \hyperlink{classVideo_a732cb55c0a7f677ddf20ea0c39690ace}{video\+Events} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classVideo_a347c3f25a1b33369c668d9a560b4ea1e}{animate\+Down} ()
+\item 
+void \hyperlink{classVideo_a366d6b271d71a6132025554fa9d4b940}{animate\+Left} ()
+\item 
+void \hyperlink{classVideo_a46c85d9b2ef35927670898f4fbeadd1f}{animate\+Right} ()
+\item 
+void \hyperlink{classVideo_a9f4ffc4833d196e114858d217f42efdd}{animate\+Up} ()
+\item 
+bool \hyperlink{classVideo_a9544892192e1b8baa83418c789bb9410}{check\+Extension} (string video\+Name, int video\+Name\+Len)
+\item 
+void \hyperlink{classVideo_abe9ac37aaef5921270d0d68d27fabe87}{init} ()
+\item 
+void \hyperlink{classVideo_ad73b6ab89339073bc731c01c562734e8}{load\+Videos} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{classVideo_aa7fb4b457e5594265a89474824db2437}{animation\+Speed}
+\item 
+float \hyperlink{classVideo_a76be94d2c8b95d4d3151fe1fdd00155b}{animation\+Time}
+\item 
+bool \hyperlink{classVideo_aec0e8ade42cb0336539857309f1329ee}{down\+Animation}
+\item 
+bool \hyperlink{classVideo_a8d16cd62917d62c5cda8df87f968c9be}{first}
+\item 
+int \hyperlink{classVideo_a1061f9cbb975530d37e5ef0be54b386a}{first\+Video\+Position}
+\item 
+bool \hyperlink{classVideo_a9cc3dcc22a6e20b9f1dbc6340386c5d0}{left\+Animation}
+\item 
+int \hyperlink{classVideo_aae5cccd35042dd9947906c0d25d1d6ca}{left\+Position}
+\item 
+sfe\+::\+Movie \hyperlink{classVideo_a7caa629bcd7defde560543a16fda097d}{movie}
+\item 
+int \hyperlink{classVideo_abeb02719d0e789cc53428317c1d8cb51}{n\+Video}
+\item 
+int \hyperlink{classVideo_afa1d75f88328a80b477f2016dec95a10}{out\+Position}
+\item 
+bool \hyperlink{classVideo_ab61a504587371180bb6533ed99e1a688}{right\+Animation}
+\item 
+int \hyperlink{classVideo_a5edc214489dc7ffb30cbfe0849771537}{right\+Position}
+\item 
+float \hyperlink{classVideo_a9437d769e28b21103b07da7092569e2e}{scale\+Factor}
+\item 
+int \hyperlink{classVideo_a862be3ec8e981fe12e515c21e79f32c0}{step\+Counter}
+\item 
+vector$<$ Drawable $\ast$ $>$ \hyperlink{classVideo_a6b8b02006dbbe4a6cc2b469024c383a8}{to\+Draw}
+\item 
+bool \hyperlink{classVideo_a997f7ceb635d7897d2eed00cf6faaf19}{up\+Animation}
+\item 
+vector$<$ \hyperlink{classFile}{File} $>$ \hyperlink{classVideo_ae6b3a3fcfb9d7379aa39523a70dff6c7}{video\+Files}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Video@{Video}!Video@{Video}}
+\index{Video@{Video}!Video@{Video}}
+\subsubsection[{\texorpdfstring{Video()}{Video()}}]{\setlength{\rightskip}{0pt plus 5cm}Video\+::\+Video (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_ab67336c2c5b6227a9635bc7dcd6af543}{}\label{classVideo_ab67336c2c5b6227a9635bc7dcd6af543}
+
+
+\subsection{Member Function Documentation}
+\index{Video@{Video}!animate\+Down@{animate\+Down}}
+\index{animate\+Down@{animate\+Down}!Video@{Video}}
+\subsubsection[{\texorpdfstring{animate\+Down()}{animateDown()}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::animate\+Down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a347c3f25a1b33369c668d9a560b4ea1e}{}\label{classVideo_a347c3f25a1b33369c668d9a560b4ea1e}
+\index{Video@{Video}!animate\+Left@{animate\+Left}}
+\index{animate\+Left@{animate\+Left}!Video@{Video}}
+\subsubsection[{\texorpdfstring{animate\+Left()}{animateLeft()}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::animate\+Left (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a366d6b271d71a6132025554fa9d4b940}{}\label{classVideo_a366d6b271d71a6132025554fa9d4b940}
+\index{Video@{Video}!animate\+Right@{animate\+Right}}
+\index{animate\+Right@{animate\+Right}!Video@{Video}}
+\subsubsection[{\texorpdfstring{animate\+Right()}{animateRight()}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::animate\+Right (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a46c85d9b2ef35927670898f4fbeadd1f}{}\label{classVideo_a46c85d9b2ef35927670898f4fbeadd1f}
+\index{Video@{Video}!animate\+Up@{animate\+Up}}
+\index{animate\+Up@{animate\+Up}!Video@{Video}}
+\subsubsection[{\texorpdfstring{animate\+Up()}{animateUp()}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::animate\+Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a9f4ffc4833d196e114858d217f42efdd}{}\label{classVideo_a9f4ffc4833d196e114858d217f42efdd}
+\index{Video@{Video}!check\+Extension@{check\+Extension}}
+\index{check\+Extension@{check\+Extension}!Video@{Video}}
+\subsubsection[{\texorpdfstring{check\+Extension(string video\+Name, int video\+Name\+Len)}{checkExtension(string videoName, int videoNameLen)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::check\+Extension (
+\begin{DoxyParamCaption}
+\item[{string}]{video\+Name, }
+\item[{int}]{video\+Name\+Len}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a9544892192e1b8baa83418c789bb9410}{}\label{classVideo_a9544892192e1b8baa83418c789bb9410}
+\index{Video@{Video}!check\+Positions@{check\+Positions}}
+\index{check\+Positions@{check\+Positions}!Video@{Video}}
+\subsubsection[{\texorpdfstring{check\+Positions()}{checkPositions()}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::check\+Positions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_a9e80e9a88fd5d80aeeda8df0804fa2e8}{}\label{classVideo_a9e80e9a88fd5d80aeeda8df0804fa2e8}
+\index{Video@{Video}!get\+Down\+Animation@{get\+Down\+Animation}}
+\index{get\+Down\+Animation@{get\+Down\+Animation}!Video@{Video}}
+\subsubsection[{\texorpdfstring{get\+Down\+Animation()}{getDownAnimation()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::get\+Down\+Animation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_ab93216910bfa303c707d85dcba691a32}{}\label{classVideo_ab93216910bfa303c707d85dcba691a32}
+\index{Video@{Video}!get\+Left\+Animation@{get\+Left\+Animation}}
+\index{get\+Left\+Animation@{get\+Left\+Animation}!Video@{Video}}
+\subsubsection[{\texorpdfstring{get\+Left\+Animation()}{getLeftAnimation()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::get\+Left\+Animation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_af805356652d8f08c41da1df0f3f5854d}{}\label{classVideo_af805356652d8f08c41da1df0f3f5854d}
+\index{Video@{Video}!get\+Objects\+Vector@{get\+Objects\+Vector}}
+\index{get\+Objects\+Vector@{get\+Objects\+Vector}!Video@{Video}}
+\subsubsection[{\texorpdfstring{get\+Objects\+Vector()}{getObjectsVector()}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Drawable$\ast$$>$ Video\+::get\+Objects\+Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_aeffa6c8901a81ba7ce15f63ff97dbfa8}{}\label{classVideo_aeffa6c8901a81ba7ce15f63ff97dbfa8}
+\index{Video@{Video}!get\+Right\+Animation@{get\+Right\+Animation}}
+\index{get\+Right\+Animation@{get\+Right\+Animation}!Video@{Video}}
+\subsubsection[{\texorpdfstring{get\+Right\+Animation()}{getRightAnimation()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::get\+Right\+Animation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_ac31c5b728166d7cf7fe7f58d71dc50b1}{}\label{classVideo_ac31c5b728166d7cf7fe7f58d71dc50b1}
+\index{Video@{Video}!get\+Up\+Animation@{get\+Up\+Animation}}
+\index{get\+Up\+Animation@{get\+Up\+Animation}!Video@{Video}}
+\subsubsection[{\texorpdfstring{get\+Up\+Animation()}{getUpAnimation()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::get\+Up\+Animation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_a1810b74d077a593c429211a2d374a51f}{}\label{classVideo_a1810b74d077a593c429211a2d374a51f}
+\index{Video@{Video}!get\+Video\+To\+Play@{get\+Video\+To\+Play}}
+\index{get\+Video\+To\+Play@{get\+Video\+To\+Play}!Video@{Video}}
+\subsubsection[{\texorpdfstring{get\+Video\+To\+Play()}{getVideoToPlay()}}]{\setlength{\rightskip}{0pt plus 5cm}sfe\+::\+Movie$\ast$ Video\+::get\+Video\+To\+Play (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_ab8e3fcb522e1e4be723a3ef05b315cb3}{}\label{classVideo_ab8e3fcb522e1e4be723a3ef05b315cb3}
+\index{Video@{Video}!init@{init}}
+\index{init@{init}!Video@{Video}}
+\subsubsection[{\texorpdfstring{init()}{init()}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_abe9ac37aaef5921270d0d68d27fabe87}{}\label{classVideo_abe9ac37aaef5921270d0d68d27fabe87}
+\index{Video@{Video}!load\+Videos@{load\+Videos}}
+\index{load\+Videos@{load\+Videos}!Video@{Video}}
+\subsubsection[{\texorpdfstring{load\+Videos()}{loadVideos()}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::load\+Videos (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_ad73b6ab89339073bc731c01c562734e8}{}\label{classVideo_ad73b6ab89339073bc731c01c562734e8}
+\index{Video@{Video}!set\+Down\+Animation@{set\+Down\+Animation}}
+\index{set\+Down\+Animation@{set\+Down\+Animation}!Video@{Video}}
+\subsubsection[{\texorpdfstring{set\+Down\+Animation(bool down\+Animation)}{setDownAnimation(bool downAnimation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::set\+Down\+Animation (
+\begin{DoxyParamCaption}
+\item[{bool}]{down\+Animation}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_a3c882e87f594e4c89284f5e5a7093069}{}\label{classVideo_a3c882e87f594e4c89284f5e5a7093069}
+\index{Video@{Video}!set\+Left\+Animation@{set\+Left\+Animation}}
+\index{set\+Left\+Animation@{set\+Left\+Animation}!Video@{Video}}
+\subsubsection[{\texorpdfstring{set\+Left\+Animation(bool left\+Animation)}{setLeftAnimation(bool leftAnimation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::set\+Left\+Animation (
+\begin{DoxyParamCaption}
+\item[{bool}]{left\+Animation}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_aed05b84331399a1e2d42dffdc25ca4d6}{}\label{classVideo_aed05b84331399a1e2d42dffdc25ca4d6}
+\index{Video@{Video}!set\+Positions@{set\+Positions}}
+\index{set\+Positions@{set\+Positions}!Video@{Video}}
+\subsubsection[{\texorpdfstring{set\+Positions()}{setPositions()}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::set\+Positions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_ad9ec3de5d15bfb5dbaaad3f81157c2ab}{}\label{classVideo_ad9ec3de5d15bfb5dbaaad3f81157c2ab}
+\index{Video@{Video}!set\+Right\+Animation@{set\+Right\+Animation}}
+\index{set\+Right\+Animation@{set\+Right\+Animation}!Video@{Video}}
+\subsubsection[{\texorpdfstring{set\+Right\+Animation(bool right\+Animation)}{setRightAnimation(bool rightAnimation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::set\+Right\+Animation (
+\begin{DoxyParamCaption}
+\item[{bool}]{right\+Animation}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_a2c06363b8efa7c22811693cfec9630e6}{}\label{classVideo_a2c06363b8efa7c22811693cfec9630e6}
+\index{Video@{Video}!set\+Up\+Animation@{set\+Up\+Animation}}
+\index{set\+Up\+Animation@{set\+Up\+Animation}!Video@{Video}}
+\subsubsection[{\texorpdfstring{set\+Up\+Animation(bool up\+Animation)}{setUpAnimation(bool upAnimation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::set\+Up\+Animation (
+\begin{DoxyParamCaption}
+\item[{bool}]{up\+Animation}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_a9aea5a522a7ba84ccae1e946f6a6a41b}{}\label{classVideo_a9aea5a522a7ba84ccae1e946f6a6a41b}
+\index{Video@{Video}!video\+Events@{video\+Events}}
+\index{video\+Events@{video\+Events}!Video@{Video}}
+\subsubsection[{\texorpdfstring{video\+Events()}{videoEvents()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf M\+A\+N\+A\+G\+E\+R\+\_\+\+S\+T\+A\+T\+US} Video\+::video\+Events (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classVideo_a732cb55c0a7f677ddf20ea0c39690ace}{}\label{classVideo_a732cb55c0a7f677ddf20ea0c39690ace}
+
+
+\subsection{Field Documentation}
+\index{Video@{Video}!animation\+Speed@{animation\+Speed}}
+\index{animation\+Speed@{animation\+Speed}!Video@{Video}}
+\subsubsection[{\texorpdfstring{animation\+Speed}{animationSpeed}}]{\setlength{\rightskip}{0pt plus 5cm}float Video\+::animation\+Speed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_aa7fb4b457e5594265a89474824db2437}{}\label{classVideo_aa7fb4b457e5594265a89474824db2437}
+\index{Video@{Video}!animation\+Time@{animation\+Time}}
+\index{animation\+Time@{animation\+Time}!Video@{Video}}
+\subsubsection[{\texorpdfstring{animation\+Time}{animationTime}}]{\setlength{\rightskip}{0pt plus 5cm}float Video\+::animation\+Time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a76be94d2c8b95d4d3151fe1fdd00155b}{}\label{classVideo_a76be94d2c8b95d4d3151fe1fdd00155b}
+\index{Video@{Video}!down\+Animation@{down\+Animation}}
+\index{down\+Animation@{down\+Animation}!Video@{Video}}
+\subsubsection[{\texorpdfstring{down\+Animation}{downAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::down\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_aec0e8ade42cb0336539857309f1329ee}{}\label{classVideo_aec0e8ade42cb0336539857309f1329ee}
+\index{Video@{Video}!first@{first}}
+\index{first@{first}!Video@{Video}}
+\subsubsection[{\texorpdfstring{first}{first}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::first\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a8d16cd62917d62c5cda8df87f968c9be}{}\label{classVideo_a8d16cd62917d62c5cda8df87f968c9be}
+\index{Video@{Video}!first\+Video\+Position@{first\+Video\+Position}}
+\index{first\+Video\+Position@{first\+Video\+Position}!Video@{Video}}
+\subsubsection[{\texorpdfstring{first\+Video\+Position}{firstVideoPosition}}]{\setlength{\rightskip}{0pt plus 5cm}int Video\+::first\+Video\+Position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a1061f9cbb975530d37e5ef0be54b386a}{}\label{classVideo_a1061f9cbb975530d37e5ef0be54b386a}
+\index{Video@{Video}!left\+Animation@{left\+Animation}}
+\index{left\+Animation@{left\+Animation}!Video@{Video}}
+\subsubsection[{\texorpdfstring{left\+Animation}{leftAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::left\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a9cc3dcc22a6e20b9f1dbc6340386c5d0}{}\label{classVideo_a9cc3dcc22a6e20b9f1dbc6340386c5d0}
+\index{Video@{Video}!left\+Position@{left\+Position}}
+\index{left\+Position@{left\+Position}!Video@{Video}}
+\subsubsection[{\texorpdfstring{left\+Position}{leftPosition}}]{\setlength{\rightskip}{0pt plus 5cm}int Video\+::left\+Position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_aae5cccd35042dd9947906c0d25d1d6ca}{}\label{classVideo_aae5cccd35042dd9947906c0d25d1d6ca}
+\index{Video@{Video}!movie@{movie}}
+\index{movie@{movie}!Video@{Video}}
+\subsubsection[{\texorpdfstring{movie}{movie}}]{\setlength{\rightskip}{0pt plus 5cm}sfe\+::\+Movie Video\+::movie\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a7caa629bcd7defde560543a16fda097d}{}\label{classVideo_a7caa629bcd7defde560543a16fda097d}
+\index{Video@{Video}!n\+Video@{n\+Video}}
+\index{n\+Video@{n\+Video}!Video@{Video}}
+\subsubsection[{\texorpdfstring{n\+Video}{nVideo}}]{\setlength{\rightskip}{0pt plus 5cm}int Video\+::n\+Video\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_abeb02719d0e789cc53428317c1d8cb51}{}\label{classVideo_abeb02719d0e789cc53428317c1d8cb51}
+\index{Video@{Video}!out\+Position@{out\+Position}}
+\index{out\+Position@{out\+Position}!Video@{Video}}
+\subsubsection[{\texorpdfstring{out\+Position}{outPosition}}]{\setlength{\rightskip}{0pt plus 5cm}int Video\+::out\+Position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_afa1d75f88328a80b477f2016dec95a10}{}\label{classVideo_afa1d75f88328a80b477f2016dec95a10}
+\index{Video@{Video}!right\+Animation@{right\+Animation}}
+\index{right\+Animation@{right\+Animation}!Video@{Video}}
+\subsubsection[{\texorpdfstring{right\+Animation}{rightAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::right\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_ab61a504587371180bb6533ed99e1a688}{}\label{classVideo_ab61a504587371180bb6533ed99e1a688}
+\index{Video@{Video}!right\+Position@{right\+Position}}
+\index{right\+Position@{right\+Position}!Video@{Video}}
+\subsubsection[{\texorpdfstring{right\+Position}{rightPosition}}]{\setlength{\rightskip}{0pt plus 5cm}int Video\+::right\+Position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a5edc214489dc7ffb30cbfe0849771537}{}\label{classVideo_a5edc214489dc7ffb30cbfe0849771537}
+\index{Video@{Video}!scale\+Factor@{scale\+Factor}}
+\index{scale\+Factor@{scale\+Factor}!Video@{Video}}
+\subsubsection[{\texorpdfstring{scale\+Factor}{scaleFactor}}]{\setlength{\rightskip}{0pt plus 5cm}float Video\+::scale\+Factor\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a9437d769e28b21103b07da7092569e2e}{}\label{classVideo_a9437d769e28b21103b07da7092569e2e}
+\index{Video@{Video}!step\+Counter@{step\+Counter}}
+\index{step\+Counter@{step\+Counter}!Video@{Video}}
+\subsubsection[{\texorpdfstring{step\+Counter}{stepCounter}}]{\setlength{\rightskip}{0pt plus 5cm}int Video\+::step\+Counter\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a862be3ec8e981fe12e515c21e79f32c0}{}\label{classVideo_a862be3ec8e981fe12e515c21e79f32c0}
+\index{Video@{Video}!to\+Draw@{to\+Draw}}
+\index{to\+Draw@{to\+Draw}!Video@{Video}}
+\subsubsection[{\texorpdfstring{to\+Draw}{toDraw}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Drawable$\ast$$>$ Video\+::to\+Draw\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a6b8b02006dbbe4a6cc2b469024c383a8}{}\label{classVideo_a6b8b02006dbbe4a6cc2b469024c383a8}
+\index{Video@{Video}!up\+Animation@{up\+Animation}}
+\index{up\+Animation@{up\+Animation}!Video@{Video}}
+\subsubsection[{\texorpdfstring{up\+Animation}{upAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::up\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a997f7ceb635d7897d2eed00cf6faaf19}{}\label{classVideo_a997f7ceb635d7897d2eed00cf6faaf19}
+\index{Video@{Video}!video\+Files@{video\+Files}}
+\index{video\+Files@{video\+Files}!Video@{Video}}
+\subsubsection[{\texorpdfstring{video\+Files}{videoFiles}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf File}$>$ Video\+::video\+Files\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_ae6b3a3fcfb9d7379aa39523a70dff6c7}{}\label{classVideo_ae6b3a3fcfb9d7379aa39523a70dff6c7}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Video_8h}{Video.\+h}\end{DoxyCompactItemize}

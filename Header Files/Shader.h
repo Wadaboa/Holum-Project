@@ -8,6 +8,10 @@
 
 #pragma once
 
+/*!
+ * \namespace sh
+ * \brief It is used to distinguish Holum shaders from SFML ones.
+ */
 namespace sh {
     /*!
      * \class Shader

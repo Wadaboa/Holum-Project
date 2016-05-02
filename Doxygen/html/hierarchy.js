@@ -5,7 +5,6 @@ var hierarchy =
       [ "MyoConnector", "classMyoConnector.html", null ]
     ] ],
     [ "File", "classFile.html", null ],
-    [ "Game", "classGame.html", null ],
     [ "Listener", null, [
       [ "LeapListener", "classLeapListener.html", null ]
     ] ],

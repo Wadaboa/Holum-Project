@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['yaw_5fw',['yaw_w',['../classMyoConnector.html#a1ed4453c60238a7eca696500cb1d2c4e',1,'MyoConnector']]],
-  ['yaxisk',['yAxisK',['../classThreeD.html#a5c1e6590e023b722f328c40c7c332907',1,'ThreeD']]],
-  ['ymax',['YMAX',['../classModel.html#a53e3a94533cc9161cdfd9c4a689d167f',1,'Model']]],
-  ['ymin',['YMIN',['../classModel.html#a8cebe48c5f510c12e78d6f343ad78834',1,'Model']]]
+  ['xaxisk',['xAxisK',['../classThreeD.html#a79ec8e0ca613b8900a61b5ee91802641',1,'ThreeD']]],
+  ['xmax',['XMAX',['../classModel.html#a887214a8f563973cb0372e2208434604',1,'Model']]],
+  ['xmin',['XMIN',['../classModel.html#aa82ab530b0a822fbaadb1261e6aee6da',1,'Model']]]
 ];

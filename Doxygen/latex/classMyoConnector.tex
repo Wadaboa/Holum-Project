@@ -1,0 +1,187 @@
+\hypertarget{classMyoConnector}{}\section{Myo\+Connector Class Reference}
+\label{classMyoConnector}\index{Myo\+Connector@{Myo\+Connector}}
+
+
+A \hyperlink{classMyoConnector}{Myo\+Connector} object receives and processes events about a Myo.  
+
+
+
+
+{\ttfamily \#include $<$Myo\+Connector.\+h$>$}
+
+Inheritance diagram for Myo\+Connector\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMyoConnector}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMyoConnector_a42308102b85259c441d806f94bd4caf1}{Myo\+Connector} ()
+\item 
+string \hyperlink{classMyoConnector_a3e5f18609811079ff25846d9b48c30b3}{get\+Current\+Pose} ()
+\item 
+vec3 \hyperlink{classMyoConnector_aa43b05a1bf5e27001464f2d70fcbf37e}{get\+Directions} ()
+\item 
+void \hyperlink{classMyoConnector_a9969e82f11eed7319a830f1cc9c7150c}{on\+Arm\+Sync} (Myo $\ast$myo, uint64\+\_\+t timestamp, Arm arm, X\+Direction x\+Direction, float rotation, Warmup\+State warmup\+State)
+\item 
+void \hyperlink{classMyoConnector_a3619d2595bc4e7585932aca0756d03dd}{on\+Arm\+Unsync} (Myo $\ast$myo, uint64\+\_\+t timestamp)
+\item 
+void \hyperlink{classMyoConnector_a64e4ea6befbf348461fe34998729da01}{on\+Lock} (Myo $\ast$myo, uint64\+\_\+t timestamp)
+\item 
+void \hyperlink{classMyoConnector_ae38c04a23931c6b8f789c28cdede6a08}{on\+Orientation\+Data} (Myo $\ast$myo, uint64\+\_\+t timestamp, const Quaternion$<$ float $>$ \&quat)
+\item 
+void \hyperlink{classMyoConnector_ab72e7aff6230ae3926c226172d1d5b7c}{on\+Pose} (Myo $\ast$myo, uint64\+\_\+t timestamp, Pose pose)
+\item 
+void \hyperlink{classMyoConnector_a35c2bda2592781885efdae984acfd92e}{on\+Unlock} (Myo $\ast$myo, uint64\+\_\+t timestamp)
+\item 
+void \hyperlink{classMyoConnector_a63c5e27ece98d6d24b2d8ff7ad230c1c}{on\+Unpair} (Myo $\ast$myo, uint64\+\_\+t timestamp)
+\item 
+void \hyperlink{classMyoConnector_a5c9a4a90f78daed7b7cac82cf4ea59f0}{print} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Pose \hyperlink{classMyoConnector_a2146661def24d826ce3b42cef102be9b}{current\+Pose}
+\item 
+bool \hyperlink{classMyoConnector_a5df170788264f552feffe6a4eee54be8}{is\+Unlocked}
+\item 
+bool \hyperlink{classMyoConnector_a16bb4ab235d7e2c4b2d00554f8cda899}{on\+Arm}
+\item 
+int \hyperlink{classMyoConnector_a9005025e75f04acef5f587b2315b0f5c}{pitch\+\_\+w}
+\item 
+int \hyperlink{classMyoConnector_a373d10d0e950eeed40e9f31299c92dac}{roll\+\_\+w}
+\item 
+Arm \hyperlink{classMyoConnector_aa4054bb7438f07bf8109d54fc8be3f58}{which\+Arm}
+\item 
+int \hyperlink{classMyoConnector_a1ed4453c60238a7eca696500cb1d2c4e}{yaw\+\_\+w}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classes that inherit from myo\+::\+Device\+Listener can be used to receive events from Myo devices. Device\+Listener provides several virtual functions for handling different kinds of events. If you do not override an event, the default behavior is to do nothing. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Myo\+Connector@{Myo\+Connector}!Myo\+Connector@{Myo\+Connector}}
+\index{Myo\+Connector@{Myo\+Connector}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{Myo\+Connector()}{MyoConnector()}}]{\setlength{\rightskip}{0pt plus 5cm}Myo\+Connector\+::\+Myo\+Connector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMyoConnector_a42308102b85259c441d806f94bd4caf1}{}\label{classMyoConnector_a42308102b85259c441d806f94bd4caf1}
+It is used to generate an instance of the \hyperlink{classMyoConnector}{Myo\+Connector} class and link it to the already created Hub object. 
+
+\subsection{Member Function Documentation}
+\index{Myo\+Connector@{Myo\+Connector}!get\+Current\+Pose@{get\+Current\+Pose}}
+\index{get\+Current\+Pose@{get\+Current\+Pose}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{get\+Current\+Pose()}{getCurrentPose()}}]{\setlength{\rightskip}{0pt plus 5cm}string Myo\+Connector\+::get\+Current\+Pose (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMyoConnector_a3e5f18609811079ff25846d9b48c30b3}{}\label{classMyoConnector_a3e5f18609811079ff25846d9b48c30b3}
+It returns the current pose, read by the on\+Pose function whenever the Myo detects that the person wearing it has changed their pose. \index{Myo\+Connector@{Myo\+Connector}!get\+Directions@{get\+Directions}}
+\index{get\+Directions@{get\+Directions}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{get\+Directions()}{getDirections()}}]{\setlength{\rightskip}{0pt plus 5cm}vec3 Myo\+Connector\+::get\+Directions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMyoConnector_aa43b05a1bf5e27001464f2d70fcbf37e}{}\label{classMyoConnector_aa43b05a1bf5e27001464f2d70fcbf37e}
+It returns the current pitch, roll and yaw values. \index{Myo\+Connector@{Myo\+Connector}!on\+Arm\+Sync@{on\+Arm\+Sync}}
+\index{on\+Arm\+Sync@{on\+Arm\+Sync}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{on\+Arm\+Sync(\+Myo $\ast$myo, uint64\+\_\+t timestamp, Arm arm, X\+Direction x\+Direction, float rotation, Warmup\+State warmup\+State)}{onArmSync(Myo *myo, uint64_t timestamp, Arm arm, XDirection xDirection, float rotation, WarmupState warmupState)}}]{\setlength{\rightskip}{0pt plus 5cm}void Myo\+Connector\+::on\+Arm\+Sync (
+\begin{DoxyParamCaption}
+\item[{Myo $\ast$}]{myo, }
+\item[{uint64\+\_\+t}]{timestamp, }
+\item[{Arm}]{arm, }
+\item[{X\+Direction}]{x\+Direction, }
+\item[{float}]{rotation, }
+\item[{Warmup\+State}]{warmup\+State}
+\end{DoxyParamCaption}
+)}\hypertarget{classMyoConnector_a9969e82f11eed7319a830f1cc9c7150c}{}\label{classMyoConnector_a9969e82f11eed7319a830f1cc9c7150c}
+Called when a paired Myo recognizes that it is on an arm. \index{Myo\+Connector@{Myo\+Connector}!on\+Arm\+Unsync@{on\+Arm\+Unsync}}
+\index{on\+Arm\+Unsync@{on\+Arm\+Unsync}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{on\+Arm\+Unsync(\+Myo $\ast$myo, uint64\+\_\+t timestamp)}{onArmUnsync(Myo *myo, uint64_t timestamp)}}]{\setlength{\rightskip}{0pt plus 5cm}void Myo\+Connector\+::on\+Arm\+Unsync (
+\begin{DoxyParamCaption}
+\item[{Myo $\ast$}]{myo, }
+\item[{uint64\+\_\+t}]{timestamp}
+\end{DoxyParamCaption}
+)}\hypertarget{classMyoConnector_a3619d2595bc4e7585932aca0756d03dd}{}\label{classMyoConnector_a3619d2595bc4e7585932aca0756d03dd}
+Called when a paired Myo is moved or removed from the arm. \index{Myo\+Connector@{Myo\+Connector}!on\+Lock@{on\+Lock}}
+\index{on\+Lock@{on\+Lock}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{on\+Lock(\+Myo $\ast$myo, uint64\+\_\+t timestamp)}{onLock(Myo *myo, uint64_t timestamp)}}]{\setlength{\rightskip}{0pt plus 5cm}void Myo\+Connector\+::on\+Lock (
+\begin{DoxyParamCaption}
+\item[{Myo $\ast$}]{myo, }
+\item[{uint64\+\_\+t}]{timestamp}
+\end{DoxyParamCaption}
+)}\hypertarget{classMyoConnector_a64e4ea6befbf348461fe34998729da01}{}\label{classMyoConnector_a64e4ea6befbf348461fe34998729da01}
+Called when a paired Myo becomes locked. \index{Myo\+Connector@{Myo\+Connector}!on\+Orientation\+Data@{on\+Orientation\+Data}}
+\index{on\+Orientation\+Data@{on\+Orientation\+Data}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{on\+Orientation\+Data(\+Myo $\ast$myo, uint64\+\_\+t timestamp, const Quaternion$<$ float $>$ \&quat)}{onOrientationData(Myo *myo, uint64_t timestamp, const Quaternion< float > &quat)}}]{\setlength{\rightskip}{0pt plus 5cm}void Myo\+Connector\+::on\+Orientation\+Data (
+\begin{DoxyParamCaption}
+\item[{Myo $\ast$}]{myo, }
+\item[{uint64\+\_\+t}]{timestamp, }
+\item[{const Quaternion$<$ float $>$ \&}]{quat}
+\end{DoxyParamCaption}
+)}\hypertarget{classMyoConnector_ae38c04a23931c6b8f789c28cdede6a08}{}\label{classMyoConnector_ae38c04a23931c6b8f789c28cdede6a08}
+Called when a paired Myo has provided new orientation data. \index{Myo\+Connector@{Myo\+Connector}!on\+Pose@{on\+Pose}}
+\index{on\+Pose@{on\+Pose}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{on\+Pose(\+Myo $\ast$myo, uint64\+\_\+t timestamp, Pose pose)}{onPose(Myo *myo, uint64_t timestamp, Pose pose)}}]{\setlength{\rightskip}{0pt plus 5cm}void Myo\+Connector\+::on\+Pose (
+\begin{DoxyParamCaption}
+\item[{Myo $\ast$}]{myo, }
+\item[{uint64\+\_\+t}]{timestamp, }
+\item[{Pose}]{pose}
+\end{DoxyParamCaption}
+)}\hypertarget{classMyoConnector_ab72e7aff6230ae3926c226172d1d5b7c}{}\label{classMyoConnector_ab72e7aff6230ae3926c226172d1d5b7c}
+Called when a paired Myo has provided a new pose. \index{Myo\+Connector@{Myo\+Connector}!on\+Unlock@{on\+Unlock}}
+\index{on\+Unlock@{on\+Unlock}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{on\+Unlock(\+Myo $\ast$myo, uint64\+\_\+t timestamp)}{onUnlock(Myo *myo, uint64_t timestamp)}}]{\setlength{\rightskip}{0pt plus 5cm}void Myo\+Connector\+::on\+Unlock (
+\begin{DoxyParamCaption}
+\item[{Myo $\ast$}]{myo, }
+\item[{uint64\+\_\+t}]{timestamp}
+\end{DoxyParamCaption}
+)}\hypertarget{classMyoConnector_a35c2bda2592781885efdae984acfd92e}{}\label{classMyoConnector_a35c2bda2592781885efdae984acfd92e}
+Called when a paired Myo becomes unlocked. \index{Myo\+Connector@{Myo\+Connector}!on\+Unpair@{on\+Unpair}}
+\index{on\+Unpair@{on\+Unpair}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{on\+Unpair(\+Myo $\ast$myo, uint64\+\_\+t timestamp)}{onUnpair(Myo *myo, uint64_t timestamp)}}]{\setlength{\rightskip}{0pt plus 5cm}void Myo\+Connector\+::on\+Unpair (
+\begin{DoxyParamCaption}
+\item[{Myo $\ast$}]{myo, }
+\item[{uint64\+\_\+t}]{timestamp}
+\end{DoxyParamCaption}
+)}\hypertarget{classMyoConnector_a63c5e27ece98d6d24b2d8ff7ad230c1c}{}\label{classMyoConnector_a63c5e27ece98d6d24b2d8ff7ad230c1c}
+Called when a Myo has been unpaired. \index{Myo\+Connector@{Myo\+Connector}!print@{print}}
+\index{print@{print}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{print()}{print()}}]{\setlength{\rightskip}{0pt plus 5cm}void Myo\+Connector\+::print (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classMyoConnector_a5c9a4a90f78daed7b7cac82cf4ea59f0}{}\label{classMyoConnector_a5c9a4a90f78daed7b7cac82cf4ea59f0}
+It prints the current values that were updated by the overriden virtual functions. 
+
+\subsection{Field Documentation}
+\index{Myo\+Connector@{Myo\+Connector}!current\+Pose@{current\+Pose}}
+\index{current\+Pose@{current\+Pose}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{current\+Pose}{currentPose}}]{\setlength{\rightskip}{0pt plus 5cm}Pose Myo\+Connector\+::current\+Pose\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMyoConnector_a2146661def24d826ce3b42cef102be9b}{}\label{classMyoConnector_a2146661def24d826ce3b42cef102be9b}
+It stores the value returned by the on\+Pose funtion, which represents the pose detected in the current frame. \index{Myo\+Connector@{Myo\+Connector}!is\+Unlocked@{is\+Unlocked}}
+\index{is\+Unlocked@{is\+Unlocked}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{is\+Unlocked}{isUnlocked}}]{\setlength{\rightskip}{0pt plus 5cm}bool Myo\+Connector\+::is\+Unlocked\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMyoConnector_a5df170788264f552feffe6a4eee54be8}{}\label{classMyoConnector_a5df170788264f552feffe6a4eee54be8}
+It stores the value returned by the on\+Lock and on\+Unlock funtions, which represents wheter or not the user has unlocked the paired Myo armband. \index{Myo\+Connector@{Myo\+Connector}!on\+Arm@{on\+Arm}}
+\index{on\+Arm@{on\+Arm}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{on\+Arm}{onArm}}]{\setlength{\rightskip}{0pt plus 5cm}bool Myo\+Connector\+::on\+Arm\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMyoConnector_a16bb4ab235d7e2c4b2d00554f8cda899}{}\label{classMyoConnector_a16bb4ab235d7e2c4b2d00554f8cda899}
+It stores the value returned by the on\+Arm\+Sync and on\+Arm\+Unsync funtions, which represents wheter or not the user is wearing the paired Myo armband. \index{Myo\+Connector@{Myo\+Connector}!pitch\+\_\+w@{pitch\+\_\+w}}
+\index{pitch\+\_\+w@{pitch\+\_\+w}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{pitch\+\_\+w}{pitch_w}}]{\setlength{\rightskip}{0pt plus 5cm}int Myo\+Connector\+::pitch\+\_\+w\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMyoConnector_a9005025e75f04acef5f587b2315b0f5c}{}\label{classMyoConnector_a9005025e75f04acef5f587b2315b0f5c}
+It stores the value returned by the on\+Orientation\+Data funtion, which represents the pitch Euler angle, obtained from the unit quaternion. \index{Myo\+Connector@{Myo\+Connector}!roll\+\_\+w@{roll\+\_\+w}}
+\index{roll\+\_\+w@{roll\+\_\+w}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{roll\+\_\+w}{roll_w}}]{\setlength{\rightskip}{0pt plus 5cm}int Myo\+Connector\+::roll\+\_\+w\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMyoConnector_a373d10d0e950eeed40e9f31299c92dac}{}\label{classMyoConnector_a373d10d0e950eeed40e9f31299c92dac}
+It stores the value returned by the on\+Orientation\+Data funtion, which represents the roll Euler angle, obtained from the unit quaternion. \index{Myo\+Connector@{Myo\+Connector}!which\+Arm@{which\+Arm}}
+\index{which\+Arm@{which\+Arm}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{which\+Arm}{whichArm}}]{\setlength{\rightskip}{0pt plus 5cm}Arm Myo\+Connector\+::which\+Arm\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMyoConnector_aa4054bb7438f07bf8109d54fc8be3f58}{}\label{classMyoConnector_aa4054bb7438f07bf8109d54fc8be3f58}
+It stores the value returned by the on\+Arm\+Sync and on\+Arm\+Unsync funtions, which represents on which arm the user is wearing the paired Myo armband. \index{Myo\+Connector@{Myo\+Connector}!yaw\+\_\+w@{yaw\+\_\+w}}
+\index{yaw\+\_\+w@{yaw\+\_\+w}!Myo\+Connector@{Myo\+Connector}}
+\subsubsection[{\texorpdfstring{yaw\+\_\+w}{yaw_w}}]{\setlength{\rightskip}{0pt plus 5cm}int Myo\+Connector\+::yaw\+\_\+w\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMyoConnector_a1ed4453c60238a7eca696500cb1d2c4e}{}\label{classMyoConnector_a1ed4453c60238a7eca696500cb1d2c4e}
+It stores the value returned by the on\+Orientation\+Data funtion, which represents the yaw Euler angle, obtained from the unit quaternion. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{MyoConnector_8h}{Myo\+Connector.\+h}\end{DoxyCompactItemize}

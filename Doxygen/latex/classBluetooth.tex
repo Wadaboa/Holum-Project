@@ -1,0 +1,196 @@
+\hypertarget{classBluetooth}{}\section{Bluetooth Class Reference}
+\label{classBluetooth}\index{Bluetooth@{Bluetooth}}
+
+
+The \hyperlink{classBluetooth}{Bluetooth} class provides wireless communication between this software and the Android application.  
+
+
+
+
+{\ttfamily \#include $<$Bluetooth.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classBluetooth_adff22f9e5f2bd81b1fc5b8eeba71f68b}{Bluetooth} ()
+\item 
+\hyperlink{classBluetooth_a89e37d06353e375c0c05d02caca60e7a}{Bluetooth} (const \hyperlink{classBluetooth}{Bluetooth} \&b)
+\item 
+bool \hyperlink{classBluetooth_a1d1d79331f7ac176240617f864c90986}{accept\+Socket} ()
+\item 
+bool \hyperlink{classBluetooth_a9b72d26b9ca3954c61b07aa31a29b87a}{bind\+Socket} ()
+\item 
+bool \hyperlink{classBluetooth_a7a14c1d4892ab911f24fe241c0f9d8bd}{check\+Message} ()
+\item 
+void \hyperlink{classBluetooth_ad827d394aff7e1b67b552e77c939fe97}{close\+Socket} ()
+\item 
+int \hyperlink{classBluetooth_a06b93309bc14bf3c8c1522a859b46a93}{get\+Direction} ()
+\item 
+bool \hyperlink{classBluetooth_afb4dda9fe9df7c2ebf02efdafe17bc5f}{init} ()
+\item 
+bool \hyperlink{classBluetooth_a5355c79812948221e6f0c9c47b191b8a}{is\+Available} ()
+\item 
+void \hyperlink{classBluetooth_aa6cd9fe9e9d0472579d53c79d0a3e644}{is\+Available} (bool \hyperlink{classBluetooth_a6a16541ed58b634caff713ca4209e975}{available})
+\item 
+bool \hyperlink{classBluetooth_aae394d2379c39a67d9efbca886da9e25}{listen\+Socket} ()
+\item 
+void \hyperlink{classBluetooth_ae13d797ede1bb492eded4285142a7f3c}{manage\+Bluetooth} ()
+\item 
+int \hyperlink{classBluetooth_a9bcc560b34605070e72b2b285b1d4f16}{read\+Message} ()
+\item 
+bool \hyperlink{classBluetooth_a1b1b147c12429192e8ef7e543e6e4d67}{register\+Service} ()
+\item 
+void \hyperlink{classBluetooth_acee37e1c96d3b1f39ace4d58c43190bf}{start\+Communication} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+atomic\+\_\+bool \hyperlink{classBluetooth_a6a16541ed58b634caff713ca4209e975}{available}
+\item 
+Clock \hyperlink{classBluetooth_ae66d43274ae46b6895b0132258e5cf1e}{clock}
+\item 
+Clock \hyperlink{classBluetooth_a2494be6c40b4071bf13c6a018d635a7d}{clock2}
+\item 
+atomic\+\_\+int \hyperlink{classBluetooth_ad0f51dfcfb452953467ee9eec3801725}{direction}
+\item 
+bool \hyperlink{classBluetooth_acca56b0089cf38cd2f2a4d0d7d330360}{exit}
+\item 
+Time \hyperlink{classBluetooth_a9bb41383c492dc0919dfa6d026bc718d}{time}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Bluetooth@{Bluetooth}!Bluetooth@{Bluetooth}}
+\index{Bluetooth@{Bluetooth}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{Bluetooth()}{Bluetooth()}}]{\setlength{\rightskip}{0pt plus 5cm}Bluetooth\+::\+Bluetooth (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_adff22f9e5f2bd81b1fc5b8eeba71f68b}{}\label{classBluetooth_adff22f9e5f2bd81b1fc5b8eeba71f68b}
+\index{Bluetooth@{Bluetooth}!Bluetooth@{Bluetooth}}
+\index{Bluetooth@{Bluetooth}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{Bluetooth(const Bluetooth \&b)}{Bluetooth(const Bluetooth &b)}}]{\setlength{\rightskip}{0pt plus 5cm}Bluetooth\+::\+Bluetooth (
+\begin{DoxyParamCaption}
+\item[{const {\bf Bluetooth} \&}]{b}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_a89e37d06353e375c0c05d02caca60e7a}{}\label{classBluetooth_a89e37d06353e375c0c05d02caca60e7a}
+
+
+\subsection{Member Function Documentation}
+\index{Bluetooth@{Bluetooth}!accept\+Socket@{accept\+Socket}}
+\index{accept\+Socket@{accept\+Socket}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{accept\+Socket()}{acceptSocket()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Bluetooth\+::accept\+Socket (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_a1d1d79331f7ac176240617f864c90986}{}\label{classBluetooth_a1d1d79331f7ac176240617f864c90986}
+\index{Bluetooth@{Bluetooth}!bind\+Socket@{bind\+Socket}}
+\index{bind\+Socket@{bind\+Socket}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{bind\+Socket()}{bindSocket()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Bluetooth\+::bind\+Socket (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_a9b72d26b9ca3954c61b07aa31a29b87a}{}\label{classBluetooth_a9b72d26b9ca3954c61b07aa31a29b87a}
+\index{Bluetooth@{Bluetooth}!check\+Message@{check\+Message}}
+\index{check\+Message@{check\+Message}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{check\+Message()}{checkMessage()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Bluetooth\+::check\+Message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_a7a14c1d4892ab911f24fe241c0f9d8bd}{}\label{classBluetooth_a7a14c1d4892ab911f24fe241c0f9d8bd}
+\index{Bluetooth@{Bluetooth}!close\+Socket@{close\+Socket}}
+\index{close\+Socket@{close\+Socket}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{close\+Socket()}{closeSocket()}}]{\setlength{\rightskip}{0pt plus 5cm}void Bluetooth\+::close\+Socket (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_ad827d394aff7e1b67b552e77c939fe97}{}\label{classBluetooth_ad827d394aff7e1b67b552e77c939fe97}
+\index{Bluetooth@{Bluetooth}!get\+Direction@{get\+Direction}}
+\index{get\+Direction@{get\+Direction}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{get\+Direction()}{getDirection()}}]{\setlength{\rightskip}{0pt plus 5cm}int Bluetooth\+::get\+Direction (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_a06b93309bc14bf3c8c1522a859b46a93}{}\label{classBluetooth_a06b93309bc14bf3c8c1522a859b46a93}
+\index{Bluetooth@{Bluetooth}!init@{init}}
+\index{init@{init}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{init()}{init()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Bluetooth\+::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_afb4dda9fe9df7c2ebf02efdafe17bc5f}{}\label{classBluetooth_afb4dda9fe9df7c2ebf02efdafe17bc5f}
+\index{Bluetooth@{Bluetooth}!is\+Available@{is\+Available}}
+\index{is\+Available@{is\+Available}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{is\+Available()}{isAvailable()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Bluetooth\+::is\+Available (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_a5355c79812948221e6f0c9c47b191b8a}{}\label{classBluetooth_a5355c79812948221e6f0c9c47b191b8a}
+\index{Bluetooth@{Bluetooth}!is\+Available@{is\+Available}}
+\index{is\+Available@{is\+Available}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{is\+Available(bool available)}{isAvailable(bool available)}}]{\setlength{\rightskip}{0pt plus 5cm}void Bluetooth\+::is\+Available (
+\begin{DoxyParamCaption}
+\item[{bool}]{available}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_aa6cd9fe9e9d0472579d53c79d0a3e644}{}\label{classBluetooth_aa6cd9fe9e9d0472579d53c79d0a3e644}
+\index{Bluetooth@{Bluetooth}!listen\+Socket@{listen\+Socket}}
+\index{listen\+Socket@{listen\+Socket}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{listen\+Socket()}{listenSocket()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Bluetooth\+::listen\+Socket (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_aae394d2379c39a67d9efbca886da9e25}{}\label{classBluetooth_aae394d2379c39a67d9efbca886da9e25}
+\index{Bluetooth@{Bluetooth}!manage\+Bluetooth@{manage\+Bluetooth}}
+\index{manage\+Bluetooth@{manage\+Bluetooth}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{manage\+Bluetooth()}{manageBluetooth()}}]{\setlength{\rightskip}{0pt plus 5cm}void Bluetooth\+::manage\+Bluetooth (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_ae13d797ede1bb492eded4285142a7f3c}{}\label{classBluetooth_ae13d797ede1bb492eded4285142a7f3c}
+\index{Bluetooth@{Bluetooth}!read\+Message@{read\+Message}}
+\index{read\+Message@{read\+Message}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{read\+Message()}{readMessage()}}]{\setlength{\rightskip}{0pt plus 5cm}int Bluetooth\+::read\+Message (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_a9bcc560b34605070e72b2b285b1d4f16}{}\label{classBluetooth_a9bcc560b34605070e72b2b285b1d4f16}
+\index{Bluetooth@{Bluetooth}!register\+Service@{register\+Service}}
+\index{register\+Service@{register\+Service}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{register\+Service()}{registerService()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Bluetooth\+::register\+Service (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_a1b1b147c12429192e8ef7e543e6e4d67}{}\label{classBluetooth_a1b1b147c12429192e8ef7e543e6e4d67}
+\index{Bluetooth@{Bluetooth}!start\+Communication@{start\+Communication}}
+\index{start\+Communication@{start\+Communication}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{start\+Communication()}{startCommunication()}}]{\setlength{\rightskip}{0pt plus 5cm}void Bluetooth\+::start\+Communication (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBluetooth_acee37e1c96d3b1f39ace4d58c43190bf}{}\label{classBluetooth_acee37e1c96d3b1f39ace4d58c43190bf}
+
+
+\subsection{Field Documentation}
+\index{Bluetooth@{Bluetooth}!available@{available}}
+\index{available@{available}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{available}{available}}]{\setlength{\rightskip}{0pt plus 5cm}atomic\+\_\+bool Bluetooth\+::available\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classBluetooth_a6a16541ed58b634caff713ca4209e975}{}\label{classBluetooth_a6a16541ed58b634caff713ca4209e975}
+\index{Bluetooth@{Bluetooth}!clock@{clock}}
+\index{clock@{clock}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{clock}{clock}}]{\setlength{\rightskip}{0pt plus 5cm}Clock Bluetooth\+::clock\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classBluetooth_ae66d43274ae46b6895b0132258e5cf1e}{}\label{classBluetooth_ae66d43274ae46b6895b0132258e5cf1e}
+\index{Bluetooth@{Bluetooth}!clock2@{clock2}}
+\index{clock2@{clock2}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{clock2}{clock2}}]{\setlength{\rightskip}{0pt plus 5cm}Clock Bluetooth\+::clock2\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classBluetooth_a2494be6c40b4071bf13c6a018d635a7d}{}\label{classBluetooth_a2494be6c40b4071bf13c6a018d635a7d}
+\index{Bluetooth@{Bluetooth}!direction@{direction}}
+\index{direction@{direction}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{direction}{direction}}]{\setlength{\rightskip}{0pt plus 5cm}atomic\+\_\+int Bluetooth\+::direction\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classBluetooth_ad0f51dfcfb452953467ee9eec3801725}{}\label{classBluetooth_ad0f51dfcfb452953467ee9eec3801725}
+\index{Bluetooth@{Bluetooth}!exit@{exit}}
+\index{exit@{exit}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{exit}{exit}}]{\setlength{\rightskip}{0pt plus 5cm}bool Bluetooth\+::exit\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classBluetooth_acca56b0089cf38cd2f2a4d0d7d330360}{}\label{classBluetooth_acca56b0089cf38cd2f2a4d0d7d330360}
+\index{Bluetooth@{Bluetooth}!time@{time}}
+\index{time@{time}!Bluetooth@{Bluetooth}}
+\subsubsection[{\texorpdfstring{time}{time}}]{\setlength{\rightskip}{0pt plus 5cm}Time Bluetooth\+::time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classBluetooth_a9bb41383c492dc0919dfa6d026bc718d}{}\label{classBluetooth_a9bb41383c492dc0919dfa6d026bc718d}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Bluetooth_8h}{Bluetooth.\+h}\end{DoxyCompactItemize}

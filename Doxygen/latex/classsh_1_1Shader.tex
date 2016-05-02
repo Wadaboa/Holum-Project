@@ -1,0 +1,86 @@
+\hypertarget{classsh_1_1Shader}{}\section{sh\+:\+:Shader Class Reference}
+\label{classsh_1_1Shader}\index{sh\+::\+Shader@{sh\+::\+Shader}}
+
+
+The \hyperlink{classsh_1_1Shader}{Shader} class describes the little programs, which rest on the G\+PU, used in the rendering operation next to an Open\+GL drawing command execution.  
+
+
+
+
+{\ttfamily \#include $<$Shader.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classsh_1_1Shader_a838e67f15e8d0dd6e58844ef3dca25ab}{Shader} ()
+\item 
+\hyperlink{classsh_1_1Shader_a83bb368ad9001eb054d036a1991102dc}{Shader} (const G\+Lchar $\ast$\hyperlink{classsh_1_1Shader_ab895a8404ad72cdf2af7a596f47a1cd8}{vertex\+Path}, const G\+Lchar $\ast$\hyperlink{classsh_1_1Shader_a51f875ab763628c644a27bb4fce30bc9}{fragment\+Path})
+\item 
+void \hyperlink{classsh_1_1Shader_a4551228c3ee9186390295024c9a376d4}{init} ()
+\item 
+void \hyperlink{classsh_1_1Shader_a31480c10d6492f4b9ac3bf6cad347acf}{use} ()
+\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+const G\+Lchar $\ast$ \hyperlink{classsh_1_1Shader_a51f875ab763628c644a27bb4fce30bc9}{fragment\+Path}
+\item 
+G\+Luint \hyperlink{classsh_1_1Shader_a190d971a6a71eeeb9b186226d87000af}{program}
+\item 
+const G\+Lchar $\ast$ \hyperlink{classsh_1_1Shader_ab895a8404ad72cdf2af7a596f47a1cd8}{vertex\+Path}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A \hyperlink{classsh_1_1Shader}{Shader} is a user-\/defined program designed to run on some stage of a graphics processor. Its purpose is to execute one of the programmable stages of the rendering pipeline and it represents compiled G\+L\+SL code. In a basic sense, shaders are nothing more than programs transforming inputs to outputs. Shaders are also very isolated programs in that they are not allowed to communicate with each other\+: the only communication they have is via their inputs and outputs. The \hyperlink{classsh_1_1Shader}{Shader} class handles both the vertex and the fragment shaders. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{sh\+::\+Shader@{sh\+::\+Shader}!Shader@{Shader}}
+\index{Shader@{Shader}!sh\+::\+Shader@{sh\+::\+Shader}}
+\subsubsection[{\texorpdfstring{Shader()}{Shader()}}]{\setlength{\rightskip}{0pt plus 5cm}sh\+::\+Shader\+::\+Shader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classsh_1_1Shader_a838e67f15e8d0dd6e58844ef3dca25ab}{}\label{classsh_1_1Shader_a838e67f15e8d0dd6e58844ef3dca25ab}
+Constructs a \hyperlink{classsh_1_1Shader}{Shader} object, without setting any parameter. \index{sh\+::\+Shader@{sh\+::\+Shader}!Shader@{Shader}}
+\index{Shader@{Shader}!sh\+::\+Shader@{sh\+::\+Shader}}
+\subsubsection[{\texorpdfstring{Shader(const G\+Lchar $\ast$vertex\+Path, const G\+Lchar $\ast$fragment\+Path)}{Shader(const GLchar *vertexPath, const GLchar *fragmentPath)}}]{\setlength{\rightskip}{0pt plus 5cm}sh\+::\+Shader\+::\+Shader (
+\begin{DoxyParamCaption}
+\item[{const G\+Lchar $\ast$}]{vertex\+Path, }
+\item[{const G\+Lchar $\ast$}]{fragment\+Path}
+\end{DoxyParamCaption}
+)}\hypertarget{classsh_1_1Shader_a83bb368ad9001eb054d036a1991102dc}{}\label{classsh_1_1Shader_a83bb368ad9001eb054d036a1991102dc}
+Constructs a \hyperlink{classsh_1_1Shader}{Shader} object, by setting the vertex\+Path and fragment\+Path variables to the given values. 
+
+\subsection{Member Function Documentation}
+\index{sh\+::\+Shader@{sh\+::\+Shader}!init@{init}}
+\index{init@{init}!sh\+::\+Shader@{sh\+::\+Shader}}
+\subsubsection[{\texorpdfstring{init()}{init()}}]{\setlength{\rightskip}{0pt plus 5cm}void sh\+::\+Shader\+::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classsh_1_1Shader_a4551228c3ee9186390295024c9a376d4}{}\label{classsh_1_1Shader_a4551228c3ee9186390295024c9a376d4}
+Called by the constructor, it opens the data stream to the G\+L\+SL source files, creates the shader objects, compiles the obtained G\+L\+SL source code and links it to the newly generated shader objects. It also attachs both the G\+L\+\_\+\+V\+E\+R\+T\+E\+X\+\_\+\+S\+H\+A\+D\+ER and the G\+L\+\_\+\+F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+S\+H\+A\+D\+ER to the program object. \index{sh\+::\+Shader@{sh\+::\+Shader}!use@{use}}
+\index{use@{use}!sh\+::\+Shader@{sh\+::\+Shader}}
+\subsubsection[{\texorpdfstring{use()}{use()}}]{\setlength{\rightskip}{0pt plus 5cm}void sh\+::\+Shader\+::use (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classsh_1_1Shader_a31480c10d6492f4b9ac3bf6cad347acf}{}\label{classsh_1_1Shader_a31480c10d6492f4b9ac3bf6cad347acf}
+Called to use the defined shaders program object, which is needed by the Open\+GL drawing functions. 
+
+\subsection{Field Documentation}
+\index{sh\+::\+Shader@{sh\+::\+Shader}!fragment\+Path@{fragment\+Path}}
+\index{fragment\+Path@{fragment\+Path}!sh\+::\+Shader@{sh\+::\+Shader}}
+\subsubsection[{\texorpdfstring{fragment\+Path}{fragmentPath}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lchar$\ast$ sh\+::\+Shader\+::fragment\+Path}\hypertarget{classsh_1_1Shader_a51f875ab763628c644a27bb4fce30bc9}{}\label{classsh_1_1Shader_a51f875ab763628c644a27bb4fce30bc9}
+It contains the path to a G\+L\+SL source file, filled with a set of strings, which represents the core of the G\+L\+\_\+\+F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+S\+H\+A\+D\+ER stage. \index{sh\+::\+Shader@{sh\+::\+Shader}!program@{program}}
+\index{program@{program}!sh\+::\+Shader@{sh\+::\+Shader}}
+\subsubsection[{\texorpdfstring{program}{program}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint sh\+::\+Shader\+::program}\hypertarget{classsh_1_1Shader_a190d971a6a71eeeb9b186226d87000af}{}\label{classsh_1_1Shader_a190d971a6a71eeeb9b186226d87000af}
+A program object represents fully processed executable code, in the Open\+GL Shading Language (G\+L\+SL), for one or more \hyperlink{classsh_1_1Shader}{Shader} stages. Empty program objects must be filled in by compiling and linking shaders into the program itself. \index{sh\+::\+Shader@{sh\+::\+Shader}!vertex\+Path@{vertex\+Path}}
+\index{vertex\+Path@{vertex\+Path}!sh\+::\+Shader@{sh\+::\+Shader}}
+\subsubsection[{\texorpdfstring{vertex\+Path}{vertexPath}}]{\setlength{\rightskip}{0pt plus 5cm}const G\+Lchar$\ast$ sh\+::\+Shader\+::vertex\+Path}\hypertarget{classsh_1_1Shader_ab895a8404ad72cdf2af7a596f47a1cd8}{}\label{classsh_1_1Shader_ab895a8404ad72cdf2af7a596f47a1cd8}
+It contains the path to a G\+L\+SL source file, filled with a set of strings, which represents the core of the G\+L\+\_\+\+V\+E\+R\+T\+E\+X\+\_\+\+S\+H\+A\+D\+ER stage. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Shader_8h}{Shader.\+h}\end{DoxyCompactItemize}

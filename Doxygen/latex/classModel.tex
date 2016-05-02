@@ -1,0 +1,153 @@
+\hypertarget{classModel}{}\section{Model Class Reference}
+\label{classModel}\index{Model@{Model}}
+
+
+{\ttfamily \#include $<$Model.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classModel_ae3b375de5f6df4faf74a95d64748e048}{Model} ()
+\item 
+\hyperlink{classModel_ac1aaf3ae95e438c200eb3dfcb4a22073}{Model} (G\+Lchar $\ast$path)
+\item 
+void \hyperlink{classModel_aeb5a81fc1282f805ebbc591c2b03aa0a}{draw} (\hyperlink{classsh_1_1Shader}{sh\+::\+Shader} shader)
+\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{classModel_a887214a8f563973cb0372e2208434604}{X\+M\+AX}
+\item 
+float \hyperlink{classModel_aa82ab530b0a822fbaadb1261e6aee6da}{X\+M\+IN}
+\item 
+float \hyperlink{classModel_a53e3a94533cc9161cdfd9c4a689d167f}{Y\+M\+AX}
+\item 
+float \hyperlink{classModel_a8cebe48c5f510c12e78d6f343ad78834}{Y\+M\+IN}
+\item 
+float \hyperlink{classModel_a85b8f4656dc00fabded57052410979c1}{Z\+M\+AX}
+\item 
+float \hyperlink{classModel_abaee6b7a00cb309bf646b5aaaa39f7d5}{Z\+M\+IN}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \hyperlink{structMesh_1_1texture}{Mesh\+::texture} $>$ \hyperlink{classModel_ad25cf1e26af4969d5ed8435ed6807bb8}{load\+Material\+Textures} (ai\+Material $\ast$mat, ai\+Texture\+Type type, string type\+Name)
+\item 
+void \hyperlink{classModel_a293cf3e4b03935164fbee0fab62c78cd}{load\+Model} (string path)
+\item 
+\hyperlink{classMesh}{Mesh} \hyperlink{classModel_a95ae1a9980ded3d98b1c8785cb889d96}{process\+Mesh} (ai\+Mesh $\ast$mesh, const ai\+Scene $\ast$scene)
+\item 
+void \hyperlink{classModel_a23b167ce0d33f7e6ab5693cd5e81a9a5}{process\+Node} (ai\+Node $\ast$node, const ai\+Scene $\ast$scene)
+\item 
+G\+Lint \hyperlink{classModel_a8923f8b12798b321e385d4796325f1cb}{texture\+From\+File} (const char $\ast$path)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{classModel_a5d77b67392e10756ca9c5075b2abedea}{directory}
+\item 
+vector$<$ \hyperlink{structMesh_1_1texture}{Mesh\+::texture} $>$ \hyperlink{classModel_ab1af6f7b29babed36a2922ab47a31929}{loaded\+Textures}
+\item 
+vector$<$ \hyperlink{classMesh}{Mesh} $>$ \hyperlink{classModel_a8ff9e88cc08d20ac95168a6a61458d98}{meshes}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Model@{Model}!Model@{Model}}
+\index{Model@{Model}!Model@{Model}}
+\subsubsection[{\texorpdfstring{Model()}{Model()}}]{\setlength{\rightskip}{0pt plus 5cm}Model\+::\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classModel_ae3b375de5f6df4faf74a95d64748e048}{}\label{classModel_ae3b375de5f6df4faf74a95d64748e048}
+\index{Model@{Model}!Model@{Model}}
+\index{Model@{Model}!Model@{Model}}
+\subsubsection[{\texorpdfstring{Model(\+G\+Lchar $\ast$path)}{Model(GLchar *path)}}]{\setlength{\rightskip}{0pt plus 5cm}Model\+::\+Model (
+\begin{DoxyParamCaption}
+\item[{G\+Lchar $\ast$}]{path}
+\end{DoxyParamCaption}
+)}\hypertarget{classModel_ac1aaf3ae95e438c200eb3dfcb4a22073}{}\label{classModel_ac1aaf3ae95e438c200eb3dfcb4a22073}
+
+
+\subsection{Member Function Documentation}
+\index{Model@{Model}!draw@{draw}}
+\index{draw@{draw}!Model@{Model}}
+\subsubsection[{\texorpdfstring{draw(sh\+::\+Shader shader)}{draw(sh::Shader shader)}}]{\setlength{\rightskip}{0pt plus 5cm}void Model\+::draw (
+\begin{DoxyParamCaption}
+\item[{{\bf sh\+::\+Shader}}]{shader}
+\end{DoxyParamCaption}
+)}\hypertarget{classModel_aeb5a81fc1282f805ebbc591c2b03aa0a}{}\label{classModel_aeb5a81fc1282f805ebbc591c2b03aa0a}
+\index{Model@{Model}!load\+Material\+Textures@{load\+Material\+Textures}}
+\index{load\+Material\+Textures@{load\+Material\+Textures}!Model@{Model}}
+\subsubsection[{\texorpdfstring{load\+Material\+Textures(ai\+Material $\ast$mat, ai\+Texture\+Type type, string type\+Name)}{loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName)}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Mesh\+::texture}$>$ Model\+::load\+Material\+Textures (
+\begin{DoxyParamCaption}
+\item[{ai\+Material $\ast$}]{mat, }
+\item[{ai\+Texture\+Type}]{type, }
+\item[{string}]{type\+Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classModel_ad25cf1e26af4969d5ed8435ed6807bb8}{}\label{classModel_ad25cf1e26af4969d5ed8435ed6807bb8}
+\index{Model@{Model}!load\+Model@{load\+Model}}
+\index{load\+Model@{load\+Model}!Model@{Model}}
+\subsubsection[{\texorpdfstring{load\+Model(string path)}{loadModel(string path)}}]{\setlength{\rightskip}{0pt plus 5cm}void Model\+::load\+Model (
+\begin{DoxyParamCaption}
+\item[{string}]{path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classModel_a293cf3e4b03935164fbee0fab62c78cd}{}\label{classModel_a293cf3e4b03935164fbee0fab62c78cd}
+\index{Model@{Model}!process\+Mesh@{process\+Mesh}}
+\index{process\+Mesh@{process\+Mesh}!Model@{Model}}
+\subsubsection[{\texorpdfstring{process\+Mesh(ai\+Mesh $\ast$mesh, const ai\+Scene $\ast$scene)}{processMesh(aiMesh *mesh, const aiScene *scene)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Mesh} Model\+::process\+Mesh (
+\begin{DoxyParamCaption}
+\item[{ai\+Mesh $\ast$}]{mesh, }
+\item[{const ai\+Scene $\ast$}]{scene}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classModel_a95ae1a9980ded3d98b1c8785cb889d96}{}\label{classModel_a95ae1a9980ded3d98b1c8785cb889d96}
+\index{Model@{Model}!process\+Node@{process\+Node}}
+\index{process\+Node@{process\+Node}!Model@{Model}}
+\subsubsection[{\texorpdfstring{process\+Node(ai\+Node $\ast$node, const ai\+Scene $\ast$scene)}{processNode(aiNode *node, const aiScene *scene)}}]{\setlength{\rightskip}{0pt plus 5cm}void Model\+::process\+Node (
+\begin{DoxyParamCaption}
+\item[{ai\+Node $\ast$}]{node, }
+\item[{const ai\+Scene $\ast$}]{scene}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classModel_a23b167ce0d33f7e6ab5693cd5e81a9a5}{}\label{classModel_a23b167ce0d33f7e6ab5693cd5e81a9a5}
+\index{Model@{Model}!texture\+From\+File@{texture\+From\+File}}
+\index{texture\+From\+File@{texture\+From\+File}!Model@{Model}}
+\subsubsection[{\texorpdfstring{texture\+From\+File(const char $\ast$path)}{textureFromFile(const char *path)}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lint Model\+::texture\+From\+File (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classModel_a8923f8b12798b321e385d4796325f1cb}{}\label{classModel_a8923f8b12798b321e385d4796325f1cb}
+
+
+\subsection{Field Documentation}
+\index{Model@{Model}!directory@{directory}}
+\index{directory@{directory}!Model@{Model}}
+\subsubsection[{\texorpdfstring{directory}{directory}}]{\setlength{\rightskip}{0pt plus 5cm}string Model\+::directory\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classModel_a5d77b67392e10756ca9c5075b2abedea}{}\label{classModel_a5d77b67392e10756ca9c5075b2abedea}
+\index{Model@{Model}!loaded\+Textures@{loaded\+Textures}}
+\index{loaded\+Textures@{loaded\+Textures}!Model@{Model}}
+\subsubsection[{\texorpdfstring{loaded\+Textures}{loadedTextures}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Mesh\+::texture}$>$ Model\+::loaded\+Textures\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classModel_ab1af6f7b29babed36a2922ab47a31929}{}\label{classModel_ab1af6f7b29babed36a2922ab47a31929}
+\index{Model@{Model}!meshes@{meshes}}
+\index{meshes@{meshes}!Model@{Model}}
+\subsubsection[{\texorpdfstring{meshes}{meshes}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf Mesh}$>$ Model\+::meshes\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classModel_a8ff9e88cc08d20ac95168a6a61458d98}{}\label{classModel_a8ff9e88cc08d20ac95168a6a61458d98}
+\index{Model@{Model}!X\+M\+AX@{X\+M\+AX}}
+\index{X\+M\+AX@{X\+M\+AX}!Model@{Model}}
+\subsubsection[{\texorpdfstring{X\+M\+AX}{XMAX}}]{\setlength{\rightskip}{0pt plus 5cm}float Model\+::\+X\+M\+AX}\hypertarget{classModel_a887214a8f563973cb0372e2208434604}{}\label{classModel_a887214a8f563973cb0372e2208434604}
+\index{Model@{Model}!X\+M\+IN@{X\+M\+IN}}
+\index{X\+M\+IN@{X\+M\+IN}!Model@{Model}}
+\subsubsection[{\texorpdfstring{X\+M\+IN}{XMIN}}]{\setlength{\rightskip}{0pt plus 5cm}float Model\+::\+X\+M\+IN}\hypertarget{classModel_aa82ab530b0a822fbaadb1261e6aee6da}{}\label{classModel_aa82ab530b0a822fbaadb1261e6aee6da}
+\index{Model@{Model}!Y\+M\+AX@{Y\+M\+AX}}
+\index{Y\+M\+AX@{Y\+M\+AX}!Model@{Model}}
+\subsubsection[{\texorpdfstring{Y\+M\+AX}{YMAX}}]{\setlength{\rightskip}{0pt plus 5cm}float Model\+::\+Y\+M\+AX}\hypertarget{classModel_a53e3a94533cc9161cdfd9c4a689d167f}{}\label{classModel_a53e3a94533cc9161cdfd9c4a689d167f}
+\index{Model@{Model}!Y\+M\+IN@{Y\+M\+IN}}
+\index{Y\+M\+IN@{Y\+M\+IN}!Model@{Model}}
+\subsubsection[{\texorpdfstring{Y\+M\+IN}{YMIN}}]{\setlength{\rightskip}{0pt plus 5cm}float Model\+::\+Y\+M\+IN}\hypertarget{classModel_a8cebe48c5f510c12e78d6f343ad78834}{}\label{classModel_a8cebe48c5f510c12e78d6f343ad78834}
+\index{Model@{Model}!Z\+M\+AX@{Z\+M\+AX}}
+\index{Z\+M\+AX@{Z\+M\+AX}!Model@{Model}}
+\subsubsection[{\texorpdfstring{Z\+M\+AX}{ZMAX}}]{\setlength{\rightskip}{0pt plus 5cm}float Model\+::\+Z\+M\+AX}\hypertarget{classModel_a85b8f4656dc00fabded57052410979c1}{}\label{classModel_a85b8f4656dc00fabded57052410979c1}
+\index{Model@{Model}!Z\+M\+IN@{Z\+M\+IN}}
+\index{Z\+M\+IN@{Z\+M\+IN}!Model@{Model}}
+\subsubsection[{\texorpdfstring{Z\+M\+IN}{ZMIN}}]{\setlength{\rightskip}{0pt plus 5cm}float Model\+::\+Z\+M\+IN}\hypertarget{classModel_abaee6b7a00cb309bf646b5aaaa39f7d5}{}\label{classModel_abaee6b7a00cb309bf646b5aaaa39f7d5}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Model_8h}{Model.\+h}\end{DoxyCompactItemize}

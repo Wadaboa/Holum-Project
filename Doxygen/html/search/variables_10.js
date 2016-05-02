@@ -1,16 +1,17 @@
 var searchData=
 [
-  ['texcoords',['texCoords',['../structMesh_1_1vertex.html#a62bc25534c13023dc785c8a45d8432c6',1,'Mesh::vertex']]],
-  ['textmargin',['textMargin',['../classSettings.html#ae5a8d76a1a6cdd6d75944bbbdde48d43',1,'Settings']]],
-  ['textsize',['textSize',['../classMenu.html#af50094c0a9831c625dc16a713652777c',1,'Menu::textSize()'],['../classSettings.html#abea7382c4fbb098421588012e1d1461b',1,'Settings::textSize()']]],
-  ['textures',['textures',['../classMesh.html#aa154a7fb2e174902c1d2ebf0755261a0',1,'Mesh']]],
-  ['thickness',['thickness',['../classSettings.html#a16af6d82edc8cea82f4c5642fd9d2245',1,'Settings']]],
-  ['threed',['threeD',['../classManager.html#aec79717dcdb413187e068925497eda32',1,'Manager']]],
-  ['thumbnail',['thumbnail',['../classFile.html#ac2c44ef77d792ce526677f3d891aaf80',1,'File']]],
-  ['thumbnailpath',['thumbnailPath',['../classFile.html#a66dfca1082630f791541c8feefbc729d',1,'File']]],
-  ['thumbnailtexture',['thumbnailTexture',['../classFile.html#a569136d0908ee11b7afcf59769db5e0c',1,'File']]],
-  ['time',['time',['../classBluetooth.html#a9bb41383c492dc0919dfa6d026bc718d',1,'Bluetooth']]],
-  ['title',['title',['../classFile.html#a302a98ac2a5820e288e9be26d5947bc4',1,'File']]],
-  ['todraw',['toDraw',['../classMenu.html#ad64e0b08c47706709d3b23a61caf036f',1,'Menu::toDraw()'],['../classSettings.html#a53bcf11bcc5148c0bfd512deb7d45fb3',1,'Settings::toDraw()'],['../classThreeD.html#afb93e5ef811c19cb5c37af054ffea094',1,'ThreeD::toDraw()'],['../classVideo.html#a6b8b02006dbbe4a6cc2b469024c383a8',1,'Video::toDraw()']]],
-  ['type',['type',['../structMesh_1_1texture.html#a69224b22e2c2d7f180c333adbe163655',1,'Mesh::texture']]]
+  ['scalefactor',['scaleFactor',['../classMenu.html#a3edde1cae9d582ce1521009d1744068d',1,'Menu::scaleFactor()'],['../classThreeD.html#a32999a5a3b2863ec63f835955ac3f826',1,'ThreeD::scaleFactor()'],['../classVideo.html#a9437d769e28b21103b07da7092569e2e',1,'Video::scaleFactor()']]],
+  ['scrolldownanimation',['scrollDownAnimation',['../classSettings.html#ae02e88347857994296383bea194f3fdf',1,'Settings']]],
+  ['scrollupanimation',['scrollUpAnimation',['../classSettings.html#acef41c3ecdc8d54ae52e9dacf6a47bec',1,'Settings']]],
+  ['secondarydiagonal',['secondaryDiagonal',['../Global_8h.html#a2cfee83e655f00829d4a622450adaa9b',1,'Global.h']]],
+  ['secondfade',['secondFade',['../classSettings.html#af2fdd4e36866cd1e773749e4d3c8e36b',1,'Settings']]],
+  ['selector',['selector',['../classSettings.html#ad13324ea78b1a08300d96d84a7a37428',1,'Settings']]],
+  ['selectorposition',['selectorPosition',['../classSettings.html#a7c479137ff0b1327f7ba30f5d0d07536',1,'Settings']]],
+  ['settings',['settings',['../classManager.html#a1799e8219d94565f72625e6821eda993',1,'Manager']]],
+  ['settingsfont',['settingsFont',['../classSettings.html#a92b2a2888b774616737fa42418049bd1',1,'Settings']]],
+  ['settingstexts',['settingsTexts',['../classSettings.html#a7bbaff0d17c72a260f549c66d216d6dd',1,'Settings']]],
+  ['shader',['shader',['../classThreeD.html#ad62aea7e5f504913746c5eecf1071ae2',1,'ThreeD']]],
+  ['speeds',['speeds',['../classMenu.html#aca5731572596b8e5dbd962b41644ae27',1,'Menu']]],
+  ['stepcounter',['stepCounter',['../classMenu.html#a7fc5cd2396e512ef71bb7c3d367710d7',1,'Menu::stepCounter()'],['../classSettings.html#a28d934a64de46650bfb0d238dbd6ee60',1,'Settings::stepCounter()'],['../classThreeD.html#a19f237923a6e43527f9daaa211a0e799',1,'ThreeD::stepCounter()'],['../classVideo.html#a862be3ec8e981fe12e515c21e79f32c0',1,'Video::stepCounter()']]],
+  ['strip',['strip',['../classMenu.html#a56e4febfec0254757193602cabcb88e1',1,'Menu']]]
 ];

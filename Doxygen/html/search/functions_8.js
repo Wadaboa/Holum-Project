@@ -3,6 +3,7 @@ var searchData=
   ['managebluetooth',['manageBluetooth',['../classBluetooth.html#ae13d797ede1bb492eded4285142a7f3c',1,'Bluetooth::manageBluetooth()'],['../classManager.html#a8abce1582047cb434a87dbe2dbe9c00d',1,'Manager::manageBluetooth()']]],
   ['managegames',['manageGames',['../classManager.html#a366f9a671838a633672bc51f9d258646',1,'Manager']]],
   ['managemenu',['manageMenu',['../classManager.html#a98ffad2b354a12650d074e604edeffa6',1,'Manager']]],
+  ['managemyo',['manageMyo',['../classManager.html#af8645d966523587f7d7853e8a1497ed4',1,'Manager']]],
   ['manager',['Manager',['../classManager.html#a1658ff9f18e38ccd9cb8b0b371b9c20b',1,'Manager']]],
   ['managesettings',['manageSettings',['../classManager.html#abaa47fce892b3e7cb91cce4f22f6dc2c',1,'Manager']]],
   ['managethreed',['manageThreeD',['../classManager.html#ad2a81bcf9fe948180aba898f2a177a39',1,'Manager']]],

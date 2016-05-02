@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['zaxisk',['zAxisK',['../classThreeD.html#a243c98ad206c311825280b150ae14ba3',1,'ThreeD']]],
-  ['zmax',['ZMAX',['../classModel.html#a85b8f4656dc00fabded57052410979c1',1,'Model']]],
-  ['zmin',['ZMIN',['../classModel.html#abaee6b7a00cb309bf646b5aaaa39f7d5',1,'Model']]],
-  ['zoom',['zoom',['../classManager.html#a39946012d45458a913d1c1a4604be337',1,'Manager']]]
+  ['yaw_5fw',['yaw_w',['../classMyoConnector.html#a1ed4453c60238a7eca696500cb1d2c4e',1,'MyoConnector']]],
+  ['yaxisk',['yAxisK',['../classThreeD.html#a5c1e6590e023b722f328c40c7c332907',1,'ThreeD']]],
+  ['ymax',['YMAX',['../classModel.html#a53e3a94533cc9161cdfd9c4a689d167f',1,'Model']]],
+  ['ymin',['YMIN',['../classModel.html#a8cebe48c5f510c12e78d6f343ad78834',1,'Model']]]
 ];

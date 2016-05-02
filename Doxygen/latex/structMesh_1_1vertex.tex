@@ -1,0 +1,39 @@
+\hypertarget{structMesh_1_1vertex}{}\section{Mesh\+:\+:vertex Struct Reference}
+\label{structMesh_1_1vertex}\index{Mesh\+::vertex@{Mesh\+::vertex}}
+
+
+It is a set of vectors which contains a position vector, a normal vector and a texture coordinate vector.  
+
+
+
+
+{\ttfamily \#include $<$Mesh.\+h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+vec3 \hyperlink{structMesh_1_1vertex_a680fbbb01fb5382bc43b6553040f5559}{normal}
+\item 
+vec3 \hyperlink{structMesh_1_1vertex_a2c2b574a9ecd906c361da07eaf124c5d}{position}
+\item 
+vec2 \hyperlink{structMesh_1_1vertex_a62bc25534c13023dc785c8a45d8432c6}{tex\+Coords}
+\end{DoxyCompactItemize}
+
+
+\subsection{Field Documentation}
+\index{Mesh\+::vertex@{Mesh\+::vertex}!normal@{normal}}
+\index{normal@{normal}!Mesh\+::vertex@{Mesh\+::vertex}}
+\subsubsection[{\texorpdfstring{normal}{normal}}]{\setlength{\rightskip}{0pt plus 5cm}vec3 Mesh\+::vertex\+::normal}\hypertarget{structMesh_1_1vertex_a680fbbb01fb5382bc43b6553040f5559}{}\label{structMesh_1_1vertex_a680fbbb01fb5382bc43b6553040f5559}
+When lighting is enabled in Open\+GL, the normal vectors are used to determine how much light is received at the specified vertex or surface.
+
+This lighting processing is performed at eye coordinate space, therefore, normal vectors in object coordinates are also transformed to eye coordinates with G\+L\+\_\+\+M\+O\+D\+E\+L\+V\+I\+EW matrix, but in a different way as vertices do. \index{Mesh\+::vertex@{Mesh\+::vertex}!position@{position}}
+\index{position@{position}!Mesh\+::vertex@{Mesh\+::vertex}}
+\subsubsection[{\texorpdfstring{position}{position}}]{\setlength{\rightskip}{0pt plus 5cm}vec3 Mesh\+::vertex\+::position}\hypertarget{structMesh_1_1vertex_a2c2b574a9ecd906c361da07eaf124c5d}{}\label{structMesh_1_1vertex_a2c2b574a9ecd906c361da07eaf124c5d}
+The actual point represented in the tridimensional space (x, y, z). \index{Mesh\+::vertex@{Mesh\+::vertex}!tex\+Coords@{tex\+Coords}}
+\index{tex\+Coords@{tex\+Coords}!Mesh\+::vertex@{Mesh\+::vertex}}
+\subsubsection[{\texorpdfstring{tex\+Coords}{texCoords}}]{\setlength{\rightskip}{0pt plus 5cm}vec2 Mesh\+::vertex\+::tex\+Coords}\hypertarget{structMesh_1_1vertex_a62bc25534c13023dc785c8a45d8432c6}{}\label{structMesh_1_1vertex_a62bc25534c13023dc785c8a45d8432c6}
+Texture coordinates specify the point in the texture image that will correspond to the vertex you are specifying them for. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Mesh_8h}{Mesh.\+h}\end{DoxyCompactItemize}

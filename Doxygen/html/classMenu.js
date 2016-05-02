@@ -9,7 +9,7 @@ var classMenu =
     [ "getCurrentStatus", "classMenu.html#a2c11dd9aa1d02b232a2cd7d1b02d4790", null ],
     [ "getDownAnimation", "classMenu.html#aca94096321296262fe99d17d01556bad", null ],
     [ "getLeftAnimation", "classMenu.html#a2076597bda6ac7fcb654d19abc812a61", null ],
-    [ "getObjectsVector", "classMenu.html#a18e88729cce08d3898696e277e639acb", null ],
+    [ "getObjectsVector", "classMenu.html#a207642b71b3e74c8619f311e73eafffc", null ],
     [ "getRightAnimation", "classMenu.html#a114842e3e2fe84ca8ec08095dd08a92e", null ],
     [ "getUpAnimation", "classMenu.html#a07c7b5c74648c47803ef1534b35c6584", null ],
     [ "init", "classMenu.html#a342d2a526a850dbf2d1aecd830b91287", null ],

@@ -1,0 +1,407 @@
+\hypertarget{classThreeD}{}\section{ThreeD Class Reference}
+\label{classThreeD}\index{ThreeD@{ThreeD}}
+
+
+{\ttfamily \#include $<$Three\+D.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classThreeD_ad79fb958b989b2c1358e33a0a823cf8a}{ThreeD} ()
+\item 
+void \hyperlink{classThreeD_a5e5f226858ce49041844422d83ad19b3}{check\+Positions} ()
+\item 
+float \hyperlink{classThreeD_aff67affc775619000703802fe516b8e7}{get\+Camera\+Distance} ()
+\item 
+bool \hyperlink{classThreeD_a44b5aaeed06e609bd522618b84fef9d5}{get\+Down\+Animation} ()
+\item 
+float \hyperlink{classThreeD_a1db0bd4d8c8e545661bd82600ebcbdcd}{get\+HorizontalK} ()
+\item 
+bool \hyperlink{classThreeD_ad148b4894dccdb057883fe3b2d42387f}{get\+Left\+Animation} ()
+\item 
+\hyperlink{classModel}{Model} $\ast$ \hyperlink{classThreeD_acf94ccdd1282a0f7fcb129013ef8eb22}{get\+Model} ()
+\item 
+float \hyperlink{classThreeD_af6012e8fd642ebbc5aec91373b7fd97c}{get\+Model\+Depth\+Offset} ()
+\item 
+float \hyperlink{classThreeD_aeda2b7fe09f9270ee1a35edf452ec8ad}{get\+Model\+Horizontal\+Offset} ()
+\item 
+float \hyperlink{classThreeD_a95759f6b213d70fc0fe102daa4c6488b}{get\+Model\+Vertical\+Offset} ()
+\item 
+vector$<$ Drawable $\ast$ $>$ \hyperlink{classThreeD_a0712cb34196c20ea0a9f0896901c44f0}{get\+Objects\+Vector} ()
+\item 
+bool \hyperlink{classThreeD_a2ba006aadb8e3e328c697529f73bab17}{get\+Right\+Animation} ()
+\item 
+\hyperlink{classsh_1_1Shader}{sh\+::\+Shader} \hyperlink{classThreeD_a91c01d4795244bf16a5c2a978faeb2d2}{get\+Shader} ()
+\item 
+bool \hyperlink{classThreeD_a1c5e018b1430fe75b979d62a88bc3a7c}{get\+Up\+Animation} ()
+\item 
+float \hyperlink{classThreeD_a74821e7c91af85568683304e80ccc9c0}{get\+VerticalK} ()
+\item 
+void \hyperlink{classThreeD_aa316c4fce37636fd97bef3667ef17ea4}{load\+Model} ()
+\item 
+void \hyperlink{classThreeD_a0ce89ac20ecb8f1082cdf600e5f6e5ae}{set\+Down\+Animation} (bool \hyperlink{classThreeD_ad0852e7fce074e4bd6fbe6ea59d1fdd0}{down\+Animation})
+\item 
+void \hyperlink{classThreeD_a136f44c031431eb378b46d0807f141c7}{set\+Left\+Animation} (bool \hyperlink{classThreeD_a93f3dd02240c35bd5f55fc3660ceb53b}{left\+Animation})
+\item 
+void \hyperlink{classThreeD_a681915094facd4f2be2825ffe3a18c24}{set\+Right\+Animation} (bool \hyperlink{classThreeD_a9fd46e1b3cd60888cfe0506f937ef55b}{right\+Animation})
+\item 
+void \hyperlink{classThreeD_a715a9ef2706849b06ab647db18ddd263}{set\+Up\+Animation} (bool \hyperlink{classThreeD_a94906891c06e47023741a95039a74454}{up\+Animation})
+\item 
+\hyperlink{Global_8h_a94049c48a0d77b80bca0fcb5b1281516}{M\+A\+N\+A\+G\+E\+R\+\_\+\+S\+T\+A\+T\+US} \hyperlink{classThreeD_a58be5f1ca95e67bf3d12288ec03e8965}{three\+D\+Events} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classThreeD_adcffb8f499342872638329da9cbb4254}{animate\+Down} ()
+\item 
+void \hyperlink{classThreeD_a61250e4f3656d4a641f4cdc6e5d56e2a}{animate\+Left} ()
+\item 
+void \hyperlink{classThreeD_a7e019fc338c273b0393e51b76f149e71}{animate\+Right} ()
+\item 
+void \hyperlink{classThreeD_af1ac9f112fd22e091e4f8edee2b402e9}{animate\+Up} ()
+\item 
+bool \hyperlink{classThreeD_a5e1ac5bc4d6dfdce40bd8e0a70c436d5}{check\+Extension} (string model\+Name, int model\+Name\+Len)
+\item 
+void \hyperlink{classThreeD_a7b7f6a67430d8adea226c469ae550ede}{init} ()
+\item 
+void \hyperlink{classThreeD_a77f141ee72cfd90b713081bc77be3ac5}{load\+Files} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{classThreeD_a163b3d056baf55e06ac10cf06afd8a19}{animation\+Speed}
+\item 
+float \hyperlink{classThreeD_a22ff8a649bc0c6bfeb901bf4e5ad58f0}{animation\+Time}
+\item 
+bool \hyperlink{classThreeD_ad0852e7fce074e4bd6fbe6ea59d1fdd0}{down\+Animation}
+\item 
+bool \hyperlink{classThreeD_a0c77a57282a44dda09d831baa75d8d2f}{first}
+\item 
+int \hyperlink{classThreeD_a430fa8b4d8d04de359a6422d7bb533c1}{first\+Model\+Position}
+\item 
+string \hyperlink{classThreeD_a53baa9e879782cda613dfc831ee48281}{fragment\+Shader\+Path} = \hyperlink{Global_8h_a28e2efd443bc60075ab13410d1702148}{working\+Path} + \char`\"{}3\+D/\+Shaders/\+Mac\+O\+S/fragment\+Shader.\+frag\char`\"{}
+\item 
+bool \hyperlink{classThreeD_a93f3dd02240c35bd5f55fc3660ceb53b}{left\+Animation}
+\item 
+int \hyperlink{classThreeD_a0926126096803cba6bac20ef37e05c88}{left\+Position}
+\item 
+\hyperlink{classModel}{Model} \hyperlink{classThreeD_a037d4aa7448d209ecce1782c83175d67}{model}
+\item 
+vector$<$ \hyperlink{classFile}{File} $>$ \hyperlink{classThreeD_ae5c9c865a765d578eb69a6505197aa9e}{model\+Files}
+\item 
+G\+Lchar $\ast$ \hyperlink{classThreeD_a13ca3a88683c98b655e033062eadb159}{model\+Path}
+\item 
+int \hyperlink{classThreeD_a39dd42df2f25fa5b03d32407569ac800}{n\+Model}
+\item 
+int \hyperlink{classThreeD_a1fed81253f5a23655c93a6774f246b48}{out\+Position}
+\item 
+bool \hyperlink{classThreeD_a9fd46e1b3cd60888cfe0506f937ef55b}{right\+Animation}
+\item 
+int \hyperlink{classThreeD_ab805f9f7e12a4f2fefa4a702627db957}{right\+Position}
+\item 
+float \hyperlink{classThreeD_a32999a5a3b2863ec63f835955ac3f826}{scale\+Factor}
+\item 
+\hyperlink{classsh_1_1Shader}{sh\+::\+Shader} \hyperlink{classThreeD_ad62aea7e5f504913746c5eecf1071ae2}{shader}
+\item 
+int \hyperlink{classThreeD_a19f237923a6e43527f9daaa211a0e799}{step\+Counter}
+\item 
+vector$<$ Drawable $\ast$ $>$ \hyperlink{classThreeD_afb93e5ef811c19cb5c37af054ffea094}{to\+Draw}
+\item 
+bool \hyperlink{classThreeD_a94906891c06e47023741a95039a74454}{up\+Animation}
+\item 
+string \hyperlink{classThreeD_ad9906a3d16b91484c8920147f6cbe46e}{vertex\+Shader\+Path} = \hyperlink{Global_8h_a28e2efd443bc60075ab13410d1702148}{working\+Path} + \char`\"{}3\+D/\+Shaders/\+Mac\+O\+S/vertex\+Shader.\+vert\char`\"{}
+\item 
+float \hyperlink{classThreeD_ad1d42243a8752a3cabe7fdd2fa72d18e}{verticalK} = 4.\+8f / (3.\+7f $\ast$ vertical\+Aspect\+Ratio)
+\item 
+float \hyperlink{classThreeD_a79ec8e0ca613b8900a61b5ee91802641}{x\+AxisK} = 4.\+8f / 3.\+7f
+\item 
+float \hyperlink{classThreeD_a5c1e6590e023b722f328c40c7c332907}{y\+AxisK} = 4.\+8f / 2.\+f
+\item 
+float \hyperlink{classThreeD_a243c98ad206c311825280b150ae14ba3}{z\+AxisK} = 4.\+8f / 0.\+78f
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ThreeD@{ThreeD}!ThreeD@{ThreeD}}
+\index{ThreeD@{ThreeD}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{Three\+D()}{ThreeD()}}]{\setlength{\rightskip}{0pt plus 5cm}Three\+D\+::\+ThreeD (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_ad79fb958b989b2c1358e33a0a823cf8a}{}\label{classThreeD_ad79fb958b989b2c1358e33a0a823cf8a}
+
+
+\subsection{Member Function Documentation}
+\index{ThreeD@{ThreeD}!animate\+Down@{animate\+Down}}
+\index{animate\+Down@{animate\+Down}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{animate\+Down()}{animateDown()}}]{\setlength{\rightskip}{0pt plus 5cm}void Three\+D\+::animate\+Down (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_adcffb8f499342872638329da9cbb4254}{}\label{classThreeD_adcffb8f499342872638329da9cbb4254}
+\index{ThreeD@{ThreeD}!animate\+Left@{animate\+Left}}
+\index{animate\+Left@{animate\+Left}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{animate\+Left()}{animateLeft()}}]{\setlength{\rightskip}{0pt plus 5cm}void Three\+D\+::animate\+Left (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a61250e4f3656d4a641f4cdc6e5d56e2a}{}\label{classThreeD_a61250e4f3656d4a641f4cdc6e5d56e2a}
+\index{ThreeD@{ThreeD}!animate\+Right@{animate\+Right}}
+\index{animate\+Right@{animate\+Right}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{animate\+Right()}{animateRight()}}]{\setlength{\rightskip}{0pt plus 5cm}void Three\+D\+::animate\+Right (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a7e019fc338c273b0393e51b76f149e71}{}\label{classThreeD_a7e019fc338c273b0393e51b76f149e71}
+\index{ThreeD@{ThreeD}!animate\+Up@{animate\+Up}}
+\index{animate\+Up@{animate\+Up}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{animate\+Up()}{animateUp()}}]{\setlength{\rightskip}{0pt plus 5cm}void Three\+D\+::animate\+Up (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_af1ac9f112fd22e091e4f8edee2b402e9}{}\label{classThreeD_af1ac9f112fd22e091e4f8edee2b402e9}
+\index{ThreeD@{ThreeD}!check\+Extension@{check\+Extension}}
+\index{check\+Extension@{check\+Extension}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{check\+Extension(string model\+Name, int model\+Name\+Len)}{checkExtension(string modelName, int modelNameLen)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Three\+D\+::check\+Extension (
+\begin{DoxyParamCaption}
+\item[{string}]{model\+Name, }
+\item[{int}]{model\+Name\+Len}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a5e1ac5bc4d6dfdce40bd8e0a70c436d5}{}\label{classThreeD_a5e1ac5bc4d6dfdce40bd8e0a70c436d5}
+\index{ThreeD@{ThreeD}!check\+Positions@{check\+Positions}}
+\index{check\+Positions@{check\+Positions}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{check\+Positions()}{checkPositions()}}]{\setlength{\rightskip}{0pt plus 5cm}void Three\+D\+::check\+Positions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a5e5f226858ce49041844422d83ad19b3}{}\label{classThreeD_a5e5f226858ce49041844422d83ad19b3}
+\index{ThreeD@{ThreeD}!get\+Camera\+Distance@{get\+Camera\+Distance}}
+\index{get\+Camera\+Distance@{get\+Camera\+Distance}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{get\+Camera\+Distance()}{getCameraDistance()}}]{\setlength{\rightskip}{0pt plus 5cm}float Three\+D\+::get\+Camera\+Distance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_aff67affc775619000703802fe516b8e7}{}\label{classThreeD_aff67affc775619000703802fe516b8e7}
+\index{ThreeD@{ThreeD}!get\+Down\+Animation@{get\+Down\+Animation}}
+\index{get\+Down\+Animation@{get\+Down\+Animation}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{get\+Down\+Animation()}{getDownAnimation()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Three\+D\+::get\+Down\+Animation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a44b5aaeed06e609bd522618b84fef9d5}{}\label{classThreeD_a44b5aaeed06e609bd522618b84fef9d5}
+\index{ThreeD@{ThreeD}!get\+HorizontalK@{get\+HorizontalK}}
+\index{get\+HorizontalK@{get\+HorizontalK}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{get\+Horizontal\+K()}{getHorizontalK()}}]{\setlength{\rightskip}{0pt plus 5cm}float Three\+D\+::get\+HorizontalK (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a1db0bd4d8c8e545661bd82600ebcbdcd}{}\label{classThreeD_a1db0bd4d8c8e545661bd82600ebcbdcd}
+\index{ThreeD@{ThreeD}!get\+Left\+Animation@{get\+Left\+Animation}}
+\index{get\+Left\+Animation@{get\+Left\+Animation}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{get\+Left\+Animation()}{getLeftAnimation()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Three\+D\+::get\+Left\+Animation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_ad148b4894dccdb057883fe3b2d42387f}{}\label{classThreeD_ad148b4894dccdb057883fe3b2d42387f}
+\index{ThreeD@{ThreeD}!get\+Model@{get\+Model}}
+\index{get\+Model@{get\+Model}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{get\+Model()}{getModel()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Model}$\ast$ Three\+D\+::get\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_acf94ccdd1282a0f7fcb129013ef8eb22}{}\label{classThreeD_acf94ccdd1282a0f7fcb129013ef8eb22}
+\index{ThreeD@{ThreeD}!get\+Model\+Depth\+Offset@{get\+Model\+Depth\+Offset}}
+\index{get\+Model\+Depth\+Offset@{get\+Model\+Depth\+Offset}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{get\+Model\+Depth\+Offset()}{getModelDepthOffset()}}]{\setlength{\rightskip}{0pt plus 5cm}float Three\+D\+::get\+Model\+Depth\+Offset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_af6012e8fd642ebbc5aec91373b7fd97c}{}\label{classThreeD_af6012e8fd642ebbc5aec91373b7fd97c}
+\index{ThreeD@{ThreeD}!get\+Model\+Horizontal\+Offset@{get\+Model\+Horizontal\+Offset}}
+\index{get\+Model\+Horizontal\+Offset@{get\+Model\+Horizontal\+Offset}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{get\+Model\+Horizontal\+Offset()}{getModelHorizontalOffset()}}]{\setlength{\rightskip}{0pt plus 5cm}float Three\+D\+::get\+Model\+Horizontal\+Offset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_aeda2b7fe09f9270ee1a35edf452ec8ad}{}\label{classThreeD_aeda2b7fe09f9270ee1a35edf452ec8ad}
+\index{ThreeD@{ThreeD}!get\+Model\+Vertical\+Offset@{get\+Model\+Vertical\+Offset}}
+\index{get\+Model\+Vertical\+Offset@{get\+Model\+Vertical\+Offset}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{get\+Model\+Vertical\+Offset()}{getModelVerticalOffset()}}]{\setlength{\rightskip}{0pt plus 5cm}float Three\+D\+::get\+Model\+Vertical\+Offset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a95759f6b213d70fc0fe102daa4c6488b}{}\label{classThreeD_a95759f6b213d70fc0fe102daa4c6488b}
+\index{ThreeD@{ThreeD}!get\+Objects\+Vector@{get\+Objects\+Vector}}
+\index{get\+Objects\+Vector@{get\+Objects\+Vector}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{get\+Objects\+Vector()}{getObjectsVector()}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Drawable$\ast$$>$ Three\+D\+::get\+Objects\+Vector (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a0712cb34196c20ea0a9f0896901c44f0}{}\label{classThreeD_a0712cb34196c20ea0a9f0896901c44f0}
+\index{ThreeD@{ThreeD}!get\+Right\+Animation@{get\+Right\+Animation}}
+\index{get\+Right\+Animation@{get\+Right\+Animation}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{get\+Right\+Animation()}{getRightAnimation()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Three\+D\+::get\+Right\+Animation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a2ba006aadb8e3e328c697529f73bab17}{}\label{classThreeD_a2ba006aadb8e3e328c697529f73bab17}
+\index{ThreeD@{ThreeD}!get\+Shader@{get\+Shader}}
+\index{get\+Shader@{get\+Shader}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{get\+Shader()}{getShader()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sh\+::\+Shader} Three\+D\+::get\+Shader (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a91c01d4795244bf16a5c2a978faeb2d2}{}\label{classThreeD_a91c01d4795244bf16a5c2a978faeb2d2}
+\index{ThreeD@{ThreeD}!get\+Up\+Animation@{get\+Up\+Animation}}
+\index{get\+Up\+Animation@{get\+Up\+Animation}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{get\+Up\+Animation()}{getUpAnimation()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Three\+D\+::get\+Up\+Animation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a1c5e018b1430fe75b979d62a88bc3a7c}{}\label{classThreeD_a1c5e018b1430fe75b979d62a88bc3a7c}
+\index{ThreeD@{ThreeD}!get\+VerticalK@{get\+VerticalK}}
+\index{get\+VerticalK@{get\+VerticalK}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{get\+Vertical\+K()}{getVerticalK()}}]{\setlength{\rightskip}{0pt plus 5cm}float Three\+D\+::get\+VerticalK (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a74821e7c91af85568683304e80ccc9c0}{}\label{classThreeD_a74821e7c91af85568683304e80ccc9c0}
+\index{ThreeD@{ThreeD}!init@{init}}
+\index{init@{init}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{init()}{init()}}]{\setlength{\rightskip}{0pt plus 5cm}void Three\+D\+::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a7b7f6a67430d8adea226c469ae550ede}{}\label{classThreeD_a7b7f6a67430d8adea226c469ae550ede}
+\index{ThreeD@{ThreeD}!load\+Files@{load\+Files}}
+\index{load\+Files@{load\+Files}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{load\+Files()}{loadFiles()}}]{\setlength{\rightskip}{0pt plus 5cm}void Three\+D\+::load\+Files (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a77f141ee72cfd90b713081bc77be3ac5}{}\label{classThreeD_a77f141ee72cfd90b713081bc77be3ac5}
+\index{ThreeD@{ThreeD}!load\+Model@{load\+Model}}
+\index{load\+Model@{load\+Model}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{load\+Model()}{loadModel()}}]{\setlength{\rightskip}{0pt plus 5cm}void Three\+D\+::load\+Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_aa316c4fce37636fd97bef3667ef17ea4}{}\label{classThreeD_aa316c4fce37636fd97bef3667ef17ea4}
+\index{ThreeD@{ThreeD}!set\+Down\+Animation@{set\+Down\+Animation}}
+\index{set\+Down\+Animation@{set\+Down\+Animation}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{set\+Down\+Animation(bool down\+Animation)}{setDownAnimation(bool downAnimation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Three\+D\+::set\+Down\+Animation (
+\begin{DoxyParamCaption}
+\item[{bool}]{down\+Animation}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a0ce89ac20ecb8f1082cdf600e5f6e5ae}{}\label{classThreeD_a0ce89ac20ecb8f1082cdf600e5f6e5ae}
+\index{ThreeD@{ThreeD}!set\+Left\+Animation@{set\+Left\+Animation}}
+\index{set\+Left\+Animation@{set\+Left\+Animation}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{set\+Left\+Animation(bool left\+Animation)}{setLeftAnimation(bool leftAnimation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Three\+D\+::set\+Left\+Animation (
+\begin{DoxyParamCaption}
+\item[{bool}]{left\+Animation}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a136f44c031431eb378b46d0807f141c7}{}\label{classThreeD_a136f44c031431eb378b46d0807f141c7}
+\index{ThreeD@{ThreeD}!set\+Right\+Animation@{set\+Right\+Animation}}
+\index{set\+Right\+Animation@{set\+Right\+Animation}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{set\+Right\+Animation(bool right\+Animation)}{setRightAnimation(bool rightAnimation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Three\+D\+::set\+Right\+Animation (
+\begin{DoxyParamCaption}
+\item[{bool}]{right\+Animation}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a681915094facd4f2be2825ffe3a18c24}{}\label{classThreeD_a681915094facd4f2be2825ffe3a18c24}
+\index{ThreeD@{ThreeD}!set\+Up\+Animation@{set\+Up\+Animation}}
+\index{set\+Up\+Animation@{set\+Up\+Animation}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{set\+Up\+Animation(bool up\+Animation)}{setUpAnimation(bool upAnimation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Three\+D\+::set\+Up\+Animation (
+\begin{DoxyParamCaption}
+\item[{bool}]{up\+Animation}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a715a9ef2706849b06ab647db18ddd263}{}\label{classThreeD_a715a9ef2706849b06ab647db18ddd263}
+\index{ThreeD@{ThreeD}!three\+D\+Events@{three\+D\+Events}}
+\index{three\+D\+Events@{three\+D\+Events}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{three\+D\+Events()}{threeDEvents()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf M\+A\+N\+A\+G\+E\+R\+\_\+\+S\+T\+A\+T\+US} Three\+D\+::three\+D\+Events (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classThreeD_a58be5f1ca95e67bf3d12288ec03e8965}{}\label{classThreeD_a58be5f1ca95e67bf3d12288ec03e8965}
+
+
+\subsection{Field Documentation}
+\index{ThreeD@{ThreeD}!animation\+Speed@{animation\+Speed}}
+\index{animation\+Speed@{animation\+Speed}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{animation\+Speed}{animationSpeed}}]{\setlength{\rightskip}{0pt plus 5cm}float Three\+D\+::animation\+Speed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a163b3d056baf55e06ac10cf06afd8a19}{}\label{classThreeD_a163b3d056baf55e06ac10cf06afd8a19}
+\index{ThreeD@{ThreeD}!animation\+Time@{animation\+Time}}
+\index{animation\+Time@{animation\+Time}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{animation\+Time}{animationTime}}]{\setlength{\rightskip}{0pt plus 5cm}float Three\+D\+::animation\+Time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a22ff8a649bc0c6bfeb901bf4e5ad58f0}{}\label{classThreeD_a22ff8a649bc0c6bfeb901bf4e5ad58f0}
+\index{ThreeD@{ThreeD}!down\+Animation@{down\+Animation}}
+\index{down\+Animation@{down\+Animation}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{down\+Animation}{downAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}bool Three\+D\+::down\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_ad0852e7fce074e4bd6fbe6ea59d1fdd0}{}\label{classThreeD_ad0852e7fce074e4bd6fbe6ea59d1fdd0}
+\index{ThreeD@{ThreeD}!first@{first}}
+\index{first@{first}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{first}{first}}]{\setlength{\rightskip}{0pt plus 5cm}bool Three\+D\+::first\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a0c77a57282a44dda09d831baa75d8d2f}{}\label{classThreeD_a0c77a57282a44dda09d831baa75d8d2f}
+\index{ThreeD@{ThreeD}!first\+Model\+Position@{first\+Model\+Position}}
+\index{first\+Model\+Position@{first\+Model\+Position}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{first\+Model\+Position}{firstModelPosition}}]{\setlength{\rightskip}{0pt plus 5cm}int Three\+D\+::first\+Model\+Position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a430fa8b4d8d04de359a6422d7bb533c1}{}\label{classThreeD_a430fa8b4d8d04de359a6422d7bb533c1}
+\index{ThreeD@{ThreeD}!fragment\+Shader\+Path@{fragment\+Shader\+Path}}
+\index{fragment\+Shader\+Path@{fragment\+Shader\+Path}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{fragment\+Shader\+Path}{fragmentShaderPath}}]{\setlength{\rightskip}{0pt plus 5cm}string Three\+D\+::fragment\+Shader\+Path = {\bf working\+Path} + \char`\"{}3\+D/\+Shaders/\+Mac\+O\+S/fragment\+Shader.\+frag\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a53baa9e879782cda613dfc831ee48281}{}\label{classThreeD_a53baa9e879782cda613dfc831ee48281}
+\index{ThreeD@{ThreeD}!left\+Animation@{left\+Animation}}
+\index{left\+Animation@{left\+Animation}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{left\+Animation}{leftAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}bool Three\+D\+::left\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a93f3dd02240c35bd5f55fc3660ceb53b}{}\label{classThreeD_a93f3dd02240c35bd5f55fc3660ceb53b}
+\index{ThreeD@{ThreeD}!left\+Position@{left\+Position}}
+\index{left\+Position@{left\+Position}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{left\+Position}{leftPosition}}]{\setlength{\rightskip}{0pt plus 5cm}int Three\+D\+::left\+Position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a0926126096803cba6bac20ef37e05c88}{}\label{classThreeD_a0926126096803cba6bac20ef37e05c88}
+\index{ThreeD@{ThreeD}!model@{model}}
+\index{model@{model}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{model}{model}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Model} Three\+D\+::model\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a037d4aa7448d209ecce1782c83175d67}{}\label{classThreeD_a037d4aa7448d209ecce1782c83175d67}
+\index{ThreeD@{ThreeD}!model\+Files@{model\+Files}}
+\index{model\+Files@{model\+Files}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{model\+Files}{modelFiles}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf File}$>$ Three\+D\+::model\+Files\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_ae5c9c865a765d578eb69a6505197aa9e}{}\label{classThreeD_ae5c9c865a765d578eb69a6505197aa9e}
+\index{ThreeD@{ThreeD}!model\+Path@{model\+Path}}
+\index{model\+Path@{model\+Path}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{model\+Path}{modelPath}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Lchar$\ast$ Three\+D\+::model\+Path\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a13ca3a88683c98b655e033062eadb159}{}\label{classThreeD_a13ca3a88683c98b655e033062eadb159}
+\index{ThreeD@{ThreeD}!n\+Model@{n\+Model}}
+\index{n\+Model@{n\+Model}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{n\+Model}{nModel}}]{\setlength{\rightskip}{0pt plus 5cm}int Three\+D\+::n\+Model\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a39dd42df2f25fa5b03d32407569ac800}{}\label{classThreeD_a39dd42df2f25fa5b03d32407569ac800}
+\index{ThreeD@{ThreeD}!out\+Position@{out\+Position}}
+\index{out\+Position@{out\+Position}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{out\+Position}{outPosition}}]{\setlength{\rightskip}{0pt plus 5cm}int Three\+D\+::out\+Position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a1fed81253f5a23655c93a6774f246b48}{}\label{classThreeD_a1fed81253f5a23655c93a6774f246b48}
+\index{ThreeD@{ThreeD}!right\+Animation@{right\+Animation}}
+\index{right\+Animation@{right\+Animation}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{right\+Animation}{rightAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}bool Three\+D\+::right\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a9fd46e1b3cd60888cfe0506f937ef55b}{}\label{classThreeD_a9fd46e1b3cd60888cfe0506f937ef55b}
+\index{ThreeD@{ThreeD}!right\+Position@{right\+Position}}
+\index{right\+Position@{right\+Position}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{right\+Position}{rightPosition}}]{\setlength{\rightskip}{0pt plus 5cm}int Three\+D\+::right\+Position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_ab805f9f7e12a4f2fefa4a702627db957}{}\label{classThreeD_ab805f9f7e12a4f2fefa4a702627db957}
+\index{ThreeD@{ThreeD}!scale\+Factor@{scale\+Factor}}
+\index{scale\+Factor@{scale\+Factor}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{scale\+Factor}{scaleFactor}}]{\setlength{\rightskip}{0pt plus 5cm}float Three\+D\+::scale\+Factor\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a32999a5a3b2863ec63f835955ac3f826}{}\label{classThreeD_a32999a5a3b2863ec63f835955ac3f826}
+\index{ThreeD@{ThreeD}!shader@{shader}}
+\index{shader@{shader}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{shader}{shader}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sh\+::\+Shader} Three\+D\+::shader\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_ad62aea7e5f504913746c5eecf1071ae2}{}\label{classThreeD_ad62aea7e5f504913746c5eecf1071ae2}
+\index{ThreeD@{ThreeD}!step\+Counter@{step\+Counter}}
+\index{step\+Counter@{step\+Counter}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{step\+Counter}{stepCounter}}]{\setlength{\rightskip}{0pt plus 5cm}int Three\+D\+::step\+Counter\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a19f237923a6e43527f9daaa211a0e799}{}\label{classThreeD_a19f237923a6e43527f9daaa211a0e799}
+\index{ThreeD@{ThreeD}!to\+Draw@{to\+Draw}}
+\index{to\+Draw@{to\+Draw}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{to\+Draw}{toDraw}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Drawable$\ast$$>$ Three\+D\+::to\+Draw\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_afb93e5ef811c19cb5c37af054ffea094}{}\label{classThreeD_afb93e5ef811c19cb5c37af054ffea094}
+\index{ThreeD@{ThreeD}!up\+Animation@{up\+Animation}}
+\index{up\+Animation@{up\+Animation}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{up\+Animation}{upAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}bool Three\+D\+::up\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a94906891c06e47023741a95039a74454}{}\label{classThreeD_a94906891c06e47023741a95039a74454}
+\index{ThreeD@{ThreeD}!vertex\+Shader\+Path@{vertex\+Shader\+Path}}
+\index{vertex\+Shader\+Path@{vertex\+Shader\+Path}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{vertex\+Shader\+Path}{vertexShaderPath}}]{\setlength{\rightskip}{0pt plus 5cm}string Three\+D\+::vertex\+Shader\+Path = {\bf working\+Path} + \char`\"{}3\+D/\+Shaders/\+Mac\+O\+S/vertex\+Shader.\+vert\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_ad9906a3d16b91484c8920147f6cbe46e}{}\label{classThreeD_ad9906a3d16b91484c8920147f6cbe46e}
+\index{ThreeD@{ThreeD}!verticalK@{verticalK}}
+\index{verticalK@{verticalK}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{verticalK}{verticalK}}]{\setlength{\rightskip}{0pt plus 5cm}float Three\+D\+::verticalK = 4.\+8f / (3.\+7f $\ast$ vertical\+Aspect\+Ratio)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_ad1d42243a8752a3cabe7fdd2fa72d18e}{}\label{classThreeD_ad1d42243a8752a3cabe7fdd2fa72d18e}
+\index{ThreeD@{ThreeD}!x\+AxisK@{x\+AxisK}}
+\index{x\+AxisK@{x\+AxisK}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{x\+AxisK}{xAxisK}}]{\setlength{\rightskip}{0pt plus 5cm}float Three\+D\+::x\+AxisK = 4.\+8f / 3.\+7f\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a79ec8e0ca613b8900a61b5ee91802641}{}\label{classThreeD_a79ec8e0ca613b8900a61b5ee91802641}
+\index{ThreeD@{ThreeD}!y\+AxisK@{y\+AxisK}}
+\index{y\+AxisK@{y\+AxisK}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{y\+AxisK}{yAxisK}}]{\setlength{\rightskip}{0pt plus 5cm}float Three\+D\+::y\+AxisK = 4.\+8f / 2.\+f\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a5c1e6590e023b722f328c40c7c332907}{}\label{classThreeD_a5c1e6590e023b722f328c40c7c332907}
+\index{ThreeD@{ThreeD}!z\+AxisK@{z\+AxisK}}
+\index{z\+AxisK@{z\+AxisK}!ThreeD@{ThreeD}}
+\subsubsection[{\texorpdfstring{z\+AxisK}{zAxisK}}]{\setlength{\rightskip}{0pt plus 5cm}float Three\+D\+::z\+AxisK = 4.\+8f / 0.\+78f\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classThreeD_a243c98ad206c311825280b150ae14ba3}{}\label{classThreeD_a243c98ad206c311825280b150ae14ba3}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{ThreeD_8h}{Three\+D.\+h}\end{DoxyCompactItemize}

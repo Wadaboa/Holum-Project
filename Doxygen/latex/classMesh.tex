@@ -1,0 +1,120 @@
+\hypertarget{classMesh}{}\section{Mesh Class Reference}
+\label{classMesh}\index{Mesh@{Mesh}}
+
+
+The \hyperlink{classMesh}{Mesh} class defines each single drawable entity, in a format that Open\+GL uses to render the objects.  
+
+
+
+
+{\ttfamily \#include $<$Mesh.\+h$>$}
+
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structMesh_1_1texture}{texture}
+\begin{DoxyCompactList}\small\item\em It is used to organize the material data, in the form of textures. \end{DoxyCompactList}\item 
+struct \hyperlink{structMesh_1_1vertex}{vertex}
+\begin{DoxyCompactList}\small\item\em It is a set of vectors which contains a position vector, a normal vector and a texture coordinate vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classMesh_a9c8095febd970ba37c3739091d452f78}{Mesh} (vector$<$ \hyperlink{structMesh_1_1vertex}{vertex} $>$ \hyperlink{classMesh_a57fc8cde81bbaa1317983a29b5647e26}{vertices}, vector$<$ G\+Luint $>$ \hyperlink{classMesh_a233e40975b5ddafda502c8c31b77db2c}{indices}, vector$<$ \hyperlink{structMesh_1_1texture}{texture} $>$ \hyperlink{classMesh_aa154a7fb2e174902c1d2ebf0755261a0}{textures})
+\item 
+void \hyperlink{classMesh_a2d2ae2eec57107db43d9d01b649acd61}{draw} (\hyperlink{classsh_1_1Shader}{sh\+::\+Shader} shader)
+\end{DoxyCompactItemize}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ G\+Luint $>$ \hyperlink{classMesh_a233e40975b5ddafda502c8c31b77db2c}{indices}
+\item 
+vector$<$ \hyperlink{structMesh_1_1texture}{texture} $>$ \hyperlink{classMesh_aa154a7fb2e174902c1d2ebf0755261a0}{textures}
+\item 
+vector$<$ \hyperlink{structMesh_1_1vertex}{vertex} $>$ \hyperlink{classMesh_a57fc8cde81bbaa1317983a29b5647e26}{vertices}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classMesh_ab5df5ad9aabcb888d69fbdef9de7305b}{init} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+G\+Luint \hyperlink{classMesh_a894c6723c0172f4e38b2509582abfa6c}{E\+BO}
+\item 
+G\+Luint \hyperlink{classMesh_a09b989b9d4df8ae595d7e80e091a4a5b}{V\+AO}
+\item 
+G\+Luint \hyperlink{classMesh_a0d28b2c6fee628a13f43cae3f858569b}{V\+BO}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\subsubsection[{\texorpdfstring{Mesh(vector$<$ vertex $>$ vertices, vector$<$ G\+Luint $>$ indices, vector$<$ texture $>$ textures)}{Mesh(vector< vertex > vertices, vector< GLuint > indices, vector< texture > textures)}}]{\setlength{\rightskip}{0pt plus 5cm}Mesh\+::\+Mesh (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf vertex} $>$}]{vertices, }
+\item[{vector$<$ G\+Luint $>$}]{indices, }
+\item[{vector$<$ {\bf texture} $>$}]{textures}
+\end{DoxyParamCaption}
+)}\hypertarget{classMesh_a9c8095febd970ba37c3739091d452f78}{}\label{classMesh_a9c8095febd970ba37c3739091d452f78}
+The constructor loads Assimp\textquotesingle{}s data structures and transforms that data to a format that Open\+GL understands. 
+
+\subsection{Member Function Documentation}
+\index{Mesh@{Mesh}!draw@{draw}}
+\index{draw@{draw}!Mesh@{Mesh}}
+\subsubsection[{\texorpdfstring{draw(sh\+::\+Shader shader)}{draw(sh::Shader shader)}}]{\setlength{\rightskip}{0pt plus 5cm}void Mesh\+::draw (
+\begin{DoxyParamCaption}
+\item[{{\bf sh\+::\+Shader}}]{shader}
+\end{DoxyParamCaption}
+)}\hypertarget{classMesh_a2d2ae2eec57107db43d9d01b649acd61}{}\label{classMesh_a2d2ae2eec57107db43d9d01b649acd61}
+It renders the mesh, after binding the appropriate textures. \index{Mesh@{Mesh}!init@{init}}
+\index{init@{init}!Mesh@{Mesh}}
+\subsubsection[{\texorpdfstring{init()}{init()}}]{\setlength{\rightskip}{0pt plus 5cm}void Mesh\+::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMesh_ab5df5ad9aabcb888d69fbdef9de7305b}{}\label{classMesh_ab5df5ad9aabcb888d69fbdef9de7305b}
+This initialization function is used to setup the appropriate buffers and specify the vertex shader layout via vertex attribute pointers.
+
+It is called after the constructor, which provides us large lists of mesh data that we can use for rendering. 
+
+\subsection{Field Documentation}
+\index{Mesh@{Mesh}!E\+BO@{E\+BO}}
+\index{E\+BO@{E\+BO}!Mesh@{Mesh}}
+\subsubsection[{\texorpdfstring{E\+BO}{EBO}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Mesh\+::\+E\+BO\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMesh_a894c6723c0172f4e38b2509582abfa6c}{}\label{classMesh_a894c6723c0172f4e38b2509582abfa6c}
+An E\+BO is a buffer, just like a vertex buffer object, that stores indices that Open\+GL uses to decide what vertices to draw. \index{Mesh@{Mesh}!indices@{indices}}
+\index{indices@{indices}!Mesh@{Mesh}}
+\subsubsection[{\texorpdfstring{indices}{indices}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$G\+Luint$>$ Mesh\+::indices}\hypertarget{classMesh_a233e40975b5ddafda502c8c31b77db2c}{}\label{classMesh_a233e40975b5ddafda502c8c31b77db2c}
+The set of indices which defines a particular mesh. \index{Mesh@{Mesh}!textures@{textures}}
+\index{textures@{textures}!Mesh@{Mesh}}
+\subsubsection[{\texorpdfstring{textures}{textures}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf texture}$>$ Mesh\+::textures}\hypertarget{classMesh_aa154a7fb2e174902c1d2ebf0755261a0}{}\label{classMesh_aa154a7fb2e174902c1d2ebf0755261a0}
+The set of textures which defines a particular mesh. \index{Mesh@{Mesh}!V\+AO@{V\+AO}}
+\index{V\+AO@{V\+AO}!Mesh@{Mesh}}
+\subsubsection[{\texorpdfstring{V\+AO}{VAO}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Mesh\+::\+V\+AO\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMesh_a09b989b9d4df8ae595d7e80e091a4a5b}{}\label{classMesh_a09b989b9d4df8ae595d7e80e091a4a5b}
+The so called vertex array object (V\+AO) can be bound just like a vertex buffer object and any subsequent vertex attribute calls from that point on will be stored inside the V\+AO.
+
+This has the advantage that when configuring vertex attribute pointers you only have to make those calls once and whenever we want to draw the object, we can just bind the corresponding V\+AO. This makes switching between different vertex data and attribute configurations as easy as binding a different V\+AO.
+
+{\bfseries Core Open\+GL requires that we use a V\+AO so it knows what to do with our vertex inputs. If we fail to bind a V\+AO, Open\+GL will most likely refuse to draw anything.}
+
+A vertex array object stores the following\+:
+
+
+\begin{DoxyItemize}
+\item Calls to gl\+Enable\+Vertex\+Attrib\+Array or gl\+Disable\+Vertex\+Attrib\+Array.
+\item Vertex attribute configurations via gl\+Vertex\+Attrib\+Pointer.
+\item Vertex buffer objects associated with vertex attributes by calls to gl\+Vertex\+Attrib\+Pointer. 
+\end{DoxyItemize}\index{Mesh@{Mesh}!V\+BO@{V\+BO}}
+\index{V\+BO@{V\+BO}!Mesh@{Mesh}}
+\subsubsection[{\texorpdfstring{V\+BO}{VBO}}]{\setlength{\rightskip}{0pt plus 5cm}G\+Luint Mesh\+::\+V\+BO\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classMesh_a0d28b2c6fee628a13f43cae3f858569b}{}\label{classMesh_a0d28b2c6fee628a13f43cae3f858569b}
+The so called vertex buffer objects (V\+BO) can store a large number of vertices in the G\+PU\textquotesingle{}s memory.
+
+The advantage of using those buffer objects is that we can send large batches of data all at once to the graphics card, without having to send data a vertex a time. Sending data to the graphics card from the C\+PU is relatively slow, so wherever we can we try to send as much data as possible at once. Once the data is in the graphics card\textquotesingle{}s memory the vertex shader has almost instant access to the vertices making it extremely fast. \index{Mesh@{Mesh}!vertices@{vertices}}
+\index{vertices@{vertices}!Mesh@{Mesh}}
+\subsubsection[{\texorpdfstring{vertices}{vertices}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf vertex}$>$ Mesh\+::vertices}\hypertarget{classMesh_a57fc8cde81bbaa1317983a29b5647e26}{}\label{classMesh_a57fc8cde81bbaa1317983a29b5647e26}
+The set of vertices which defines a particular mesh. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Mesh_8h}{Mesh.\+h}\end{DoxyCompactItemize}

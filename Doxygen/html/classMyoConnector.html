@@ -99,6 +99,9 @@ $(document).ready(function(){initNavTree('classMyoConnector.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>A <a class="el" href="classMyoConnector.html" title="A MyoConnector object receives and processes events about a Myo. ">MyoConnector</a> object receives and processes events about a Myo.  
+ <a href="classMyoConnector.html#details">More...</a></p>
+
 <p><code>#include &lt;MyoConnector.h&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for MyoConnector:</div>
@@ -151,7 +154,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a1ed4453c60238a7eca696500cb1d2c4e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMyoConnector.html#a1ed4453c60238a7eca696500cb1d2c4e">yaw_w</a></td></tr>
 <tr class="separator:a1ed4453c60238a7eca696500cb1d2c4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Classes that inherit from myo::DeviceListener can be used to receive events from Myo devices. DeviceListener provides several virtual functions for handling different kinds of events. If you do not override an event, the default behavior is to do nothing. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a42308102b85259c441d806f94bd4caf1"></a>
 <div class="memitem">
 <div class="memproto">
@@ -164,6 +169,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>It is used to generate an instance of the <a class="el" href="classMyoConnector.html" title="A MyoConnector object receives and processes events about a Myo. ">MyoConnector</a> class and link it to the already created Hub object. </p>
 
 </div>
 </div>
@@ -180,6 +186,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>It returns the current pose, read by the onPose function whenever the Myo detects that the person wearing it has changed their pose. </p>
 
 </div>
 </div>
@@ -195,6 +202,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>It returns the current pitch, roll and yaw values. </p>
 
 </div>
 </div>
@@ -245,6 +253,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Called when a paired Myo recognizes that it is on an arm. </p>
 
 </div>
 </div>
@@ -271,6 +280,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Called when a paired Myo is moved or removed from the arm. </p>
 
 </div>
 </div>
@@ -297,6 +307,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Called when a paired Myo becomes locked. </p>
 
 </div>
 </div>
@@ -329,6 +340,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Called when a paired Myo has provided new orientation data. </p>
 
 </div>
 </div>
@@ -361,6 +373,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Called when a paired Myo has provided a new pose. </p>
 
 </div>
 </div>
@@ -387,6 +400,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Called when a paired Myo becomes unlocked. </p>
 
 </div>
 </div>
@@ -413,6 +427,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Called when a Myo has been unpaired. </p>
 
 </div>
 </div>
@@ -428,6 +443,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>It prints the current values that were updated by the overriden virtual functions. </p>
 
 </div>
 </div>
@@ -449,6 +465,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It stores the value returned by the onPose funtion, which represents the pose detected in the current frame. </p>
 
 </div>
 </div>
@@ -469,6 +486,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It stores the value returned by the onLock and onUnlock funtions, which represents wheter or not the user has unlocked the paired Myo armband. </p>
 
 </div>
 </div>
@@ -489,6 +507,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It stores the value returned by the onArmSync and onArmUnsync funtions, which represents wheter or not the user is wearing the paired Myo armband. </p>
 
 </div>
 </div>
@@ -509,6 +528,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It stores the value returned by the onOrientationData funtion, which represents the pitch Euler angle, obtained from the unit quaternion. </p>
 
 </div>
 </div>
@@ -529,6 +549,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It stores the value returned by the onOrientationData funtion, which represents the roll Euler angle, obtained from the unit quaternion. </p>
 
 </div>
 </div>
@@ -549,6 +570,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It stores the value returned by the onArmSync and onArmUnsync funtions, which represents on which arm the user is wearing the paired Myo armband. </p>
 
 </div>
 </div>
@@ -569,12 +591,12 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It stores the value returned by the onOrientationData funtion, which represents the yaw Euler angle, obtained from the unit quaternion. </p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li>MyoConnector.h</li>
-<li>MyoConnector.cpp</li>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="MyoConnector_8h.html">MyoConnector.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -582,7 +604,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classMyoConnector.html">MyoConnector</a></li>
-    <li class="footer">Generated on Thu Apr 21 2016 12:55:45 for Holum by
+    <li class="footer">Generated on Mon May 2 2016 23:02:55 for Holum by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

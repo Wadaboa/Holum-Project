@@ -1,0 +1,453 @@
+\hypertarget{classManager}{}\section{Manager Class Reference}
+\label{classManager}\index{Manager@{Manager}}
+
+
+{\ttfamily \#include $<$Manager.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}{Manager} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classManager_a4c983bfe24e7bbda4126c674ec3b2bb7}{change\+Status} ()
+\item 
+void \hyperlink{classManager_abaf6f51c102571e1497bb616a10a34fe}{check\+Errors} ()
+\item 
+void \hyperlink{classManager_a4ddeea31257de952e0808827d777dbf6}{draw\+GL} ()
+\item 
+void \hyperlink{classManager_ac87bc79103e440a13485b005b09522c8}{draw\+Objects} (vector$<$ Drawable $\ast$ $>$ to\+Draw)
+\item 
+void \hyperlink{classManager_a5eea80bf7833673735c5287b3d3a41bf}{draw\+On} (vector$<$ Drawable $\ast$ $>$ to\+Draw)
+\item 
+void \hyperlink{classManager_a5e70b531d3af13c1a6af84dcc84fa225}{init} ()
+\item 
+void \hyperlink{classManager_aa30c66daa7d2e904f4b0cd2f2e6761a3}{init\+Leap} ()
+\item 
+void \hyperlink{classManager_a6a9eea3ca980647e117e1c9c7a682b0c}{init\+Myo} ()
+\item 
+mat4 \hyperlink{classManager_a280a961fb5889169708d838cde76e174}{leap\+Transform} (mat4 model\+Matrix)
+\item 
+void \hyperlink{classManager_a8abce1582047cb434a87dbe2dbe9c00d}{manage\+Bluetooth} ()
+\item 
+void \hyperlink{classManager_a366f9a671838a633672bc51f9d258646}{manage\+Games} ()
+\item 
+void \hyperlink{classManager_a98ffad2b354a12650d074e604edeffa6}{manage\+Menu} ()
+\item 
+void \hyperlink{classManager_af8645d966523587f7d7853e8a1497ed4}{manage\+Myo} ()
+\item 
+void \hyperlink{classManager_abaa47fce892b3e7cb91cce4f22f6dc2c}{manage\+Settings} ()
+\item 
+void \hyperlink{classManager_ad2a81bcf9fe948180aba898f2a177a39}{manage\+ThreeD} ()
+\item 
+void \hyperlink{classManager_a4c13c8264c0e9e02c9652d1350c69186}{manage\+Videos} ()
+\item 
+void \hyperlink{classManager_a30e2453a8522192bcf0061491fb0e768}{play\+Video} (sfe\+::\+Movie $\ast$movie)
+\item 
+void \hyperlink{classManager_af8c67c221068e4e3ccccf1d5f70ba8ee}{run} ()
+\item 
+void \hyperlink{classManager_ab9652f47f396c929f9b05b3619bd3254}{splash\+Screen} ()
+\item 
+void \hyperlink{classManager_a23be264535544bde00ce3b9216f5839e}{window\+Events} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{classManager_ac0797572bb4f1bccef22e3d5d09a7bb5}{angleX}
+\item 
+float \hyperlink{classManager_a4477aa8adddce16ff4cfb67b4c989ffe}{angleY}
+\item 
+float \hyperlink{classManager_ae82e575227f9f2fa73492d189fc3f1f0}{angleZ}
+\item 
+\hyperlink{classBluetooth}{Bluetooth} \hyperlink{classManager_a8ea668a9304bd75db548cb554e1938a0}{bluetooth}
+\item 
+Clock \hyperlink{classManager_a5a0b1978a70cd9f61dc0992f8d0ff1a7}{c\+Deb}
+\item 
+\hyperlink{Global_8h_a94049c48a0d77b80bca0fcb5b1281516}{M\+A\+N\+A\+G\+E\+R\+\_\+\+S\+T\+A\+T\+US} \hyperlink{classManager_a85a5040629f23c6cb6d722ff8b82d7d8}{current\+Status}
+\item 
+bool \hyperlink{classManager_a578fc01b433137173003b232fd5d8b5c}{draw\+With\+GL}
+\item 
+bool \hyperlink{classManager_a0f72e89b86fbe7d83006e33f3bf65af6}{enter\+Pressed}
+\item 
+bool \hyperlink{classManager_aa4d6ae86cd8a720763c6a65ec11ee4b2}{escape\+Pressed}
+\item 
+bool \hyperlink{classManager_a8244d18155248161add39e851a749009}{first\+Myo\+Pose}
+\item 
+bool \hyperlink{classManager_aa5b7a47a6fbe9ceeb794becfe4b5f783}{fullscreen}
+\item 
+float \hyperlink{classManager_a993a1557e2721396eec0c996875e7d7a}{height3D}
+\item 
+Hub $\ast$ \hyperlink{classManager_aa5b648bc7e8a1f5a667b7eaf3aa08152}{hub}
+\item 
+Leap\+::\+Controller \hyperlink{classManager_a98fbc2dcc62ae1c3f576cb85d5e331f4}{leap\+Controller}
+\item 
+\hyperlink{classLeapListener}{Leap\+Listener} \hyperlink{classManager_a34352d48738b796043dd3af2a447c5d3}{leap\+Listener}
+\item 
+bool \hyperlink{classManager_a0b7d7eef1b25676ff98d5cd037aaa9ac}{load\+Check}
+\item 
+\hyperlink{classMenu}{Menu} \hyperlink{classManager_ae849624e14738867ea9f6fcffef3da24}{menu}
+\item 
+Myo $\ast$ \hyperlink{classManager_a3764298317afa9f0e59e4366c1aac0a6}{myo\+Armband}
+\item 
+\hyperlink{classMyoConnector}{Myo\+Connector} \hyperlink{classManager_a8117b9ff0ea4c66e1379e088a6d28c5e}{myo\+Connector}
+\item 
+string \hyperlink{classManager_a86e49f5468df074459dfb578d1c24cfa}{myo\+Current\+Pose}
+\item 
+vec3 \hyperlink{classManager_a335d41f08d1075e7622a1caa64df2bdc}{myo\+Directions}
+\item 
+string \hyperlink{classManager_ac3e8cf065d787b8a79bd631dd54cfbc6}{myo\+Last\+Pose}
+\item 
+thread \hyperlink{classManager_a2b4f07b099ad6839729bd03bbeea52ad}{myo\+Manager}
+\item 
+\hyperlink{classSettings}{Settings} \hyperlink{classManager_a1799e8219d94565f72625e6821eda993}{settings}
+\item 
+Clock \hyperlink{classManager_a99819b2b5c34b66e76762ae20e6c6f55}{t\+Deb}
+\item 
+\hyperlink{classThreeD}{ThreeD} \hyperlink{classManager_aec79717dcdb413187e068925497eda32}{threeD}
+\item 
+\hyperlink{classVideo}{Video} \hyperlink{classManager_ab8b44618fbef7c927598d8154a5415de}{video}
+\item 
+float \hyperlink{classManager_a23e4b935abf9df5d71e5bf9dc89a9062}{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+ON}
+\item 
+float \hyperlink{classManager_a835d170601628a807609db4f797c2382}{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+X}
+\item 
+float \hyperlink{classManager_a2d875780ce3f0925ccd4165312600c06}{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+Y}
+\item 
+float \hyperlink{classManager_aa1a80343a56401148926e13111041089}{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+X}
+\item 
+float \hyperlink{classManager_acccc2f78c0d94ca985fc83691daec707}{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+Y}
+\item 
+float \hyperlink{classManager_a48a66a40d7d6f25ca5373c104046e716}{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+X}
+\item 
+float \hyperlink{classManager_a30a44561824762281c6386bc8c395be1}{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+Y}
+\item 
+float \hyperlink{classManager_a186c67951bc370d8abcb7e4015dd8ff0}{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+X}
+\item 
+float \hyperlink{classManager_a48eceb962e4626042d65dee9eb396afa}{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+Y}
+\item 
+float \hyperlink{classManager_a6f253444bbaafa06701fda2d9cee9a29}{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+X}
+\item 
+float \hyperlink{classManager_a5ebf3e78513ad3b4f53dd04554091c11}{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+Y}
+\item 
+View \hyperlink{classManager_a1eeb8ba680636025d7b7c51cf5437bcd}{view\+Bottom}
+\item 
+float \hyperlink{classManager_aa8c3baaf60f70a4297c4f0dce0d07a7f}{view\+Height}
+\item 
+View \hyperlink{classManager_a554b1801bd4e3739883d2ab2515bc3bc}{view\+Left}
+\item 
+View \hyperlink{classManager_a053a04be419dfbf8c6ea09ca82f227b9}{view\+Right}
+\item 
+View \hyperlink{classManager_a2090b902817e39ca9d41955e6df815c0}{view\+Top}
+\item 
+float \hyperlink{classManager_a02b2d2ad1700f0791b74ae6b67c03f53}{view\+Width}
+\item 
+float \hyperlink{classManager_a6135e1c40a71a1bdbbbab15c84614de2}{width3D}
+\item 
+Render\+Window $\ast$ \hyperlink{classManager_a1ba39cb3b48db43ac88983af62d29ceb}{window}
+\item 
+float \hyperlink{classManager_a39946012d45458a913d1c1a4604be337}{zoom}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Manager@{Manager}!Manager@{Manager}}
+\index{Manager@{Manager}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{Manager()}{Manager()}}]{\setlength{\rightskip}{0pt plus 5cm}Manager\+::\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}{}\label{classManager_a1658ff9f18e38ccd9cb8b0b371b9c20b}
+
+
+\subsection{Member Function Documentation}
+\index{Manager@{Manager}!change\+Status@{change\+Status}}
+\index{change\+Status@{change\+Status}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{change\+Status()}{changeStatus()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::change\+Status (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a4c983bfe24e7bbda4126c674ec3b2bb7}{}\label{classManager_a4c983bfe24e7bbda4126c674ec3b2bb7}
+\index{Manager@{Manager}!check\+Errors@{check\+Errors}}
+\index{check\+Errors@{check\+Errors}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{check\+Errors()}{checkErrors()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::check\+Errors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_abaf6f51c102571e1497bb616a10a34fe}{}\label{classManager_abaf6f51c102571e1497bb616a10a34fe}
+\index{Manager@{Manager}!draw\+GL@{draw\+GL}}
+\index{draw\+GL@{draw\+GL}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{draw\+G\+L()}{drawGL()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::draw\+GL (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a4ddeea31257de952e0808827d777dbf6}{}\label{classManager_a4ddeea31257de952e0808827d777dbf6}
+\index{Manager@{Manager}!draw\+Objects@{draw\+Objects}}
+\index{draw\+Objects@{draw\+Objects}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{draw\+Objects(vector$<$ Drawable $\ast$ $>$ to\+Draw)}{drawObjects(vector< Drawable * > toDraw)}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::draw\+Objects (
+\begin{DoxyParamCaption}
+\item[{vector$<$ Drawable $\ast$ $>$}]{to\+Draw}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_ac87bc79103e440a13485b005b09522c8}{}\label{classManager_ac87bc79103e440a13485b005b09522c8}
+\index{Manager@{Manager}!draw\+On@{draw\+On}}
+\index{draw\+On@{draw\+On}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{draw\+On(vector$<$ Drawable $\ast$ $>$ to\+Draw)}{drawOn(vector< Drawable * > toDraw)}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::draw\+On (
+\begin{DoxyParamCaption}
+\item[{vector$<$ Drawable $\ast$ $>$}]{to\+Draw}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a5eea80bf7833673735c5287b3d3a41bf}{}\label{classManager_a5eea80bf7833673735c5287b3d3a41bf}
+\index{Manager@{Manager}!init@{init}}
+\index{init@{init}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{init()}{init()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a5e70b531d3af13c1a6af84dcc84fa225}{}\label{classManager_a5e70b531d3af13c1a6af84dcc84fa225}
+\index{Manager@{Manager}!init\+Leap@{init\+Leap}}
+\index{init\+Leap@{init\+Leap}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{init\+Leap()}{initLeap()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::init\+Leap (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_aa30c66daa7d2e904f4b0cd2f2e6761a3}{}\label{classManager_aa30c66daa7d2e904f4b0cd2f2e6761a3}
+\index{Manager@{Manager}!init\+Myo@{init\+Myo}}
+\index{init\+Myo@{init\+Myo}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{init\+Myo()}{initMyo()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::init\+Myo (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a6a9eea3ca980647e117e1c9c7a682b0c}{}\label{classManager_a6a9eea3ca980647e117e1c9c7a682b0c}
+\index{Manager@{Manager}!leap\+Transform@{leap\+Transform}}
+\index{leap\+Transform@{leap\+Transform}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{leap\+Transform(mat4 model\+Matrix)}{leapTransform(mat4 modelMatrix)}}]{\setlength{\rightskip}{0pt plus 5cm}mat4 Manager\+::leap\+Transform (
+\begin{DoxyParamCaption}
+\item[{mat4}]{model\+Matrix}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a280a961fb5889169708d838cde76e174}{}\label{classManager_a280a961fb5889169708d838cde76e174}
+\index{Manager@{Manager}!manage\+Bluetooth@{manage\+Bluetooth}}
+\index{manage\+Bluetooth@{manage\+Bluetooth}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{manage\+Bluetooth()}{manageBluetooth()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::manage\+Bluetooth (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a8abce1582047cb434a87dbe2dbe9c00d}{}\label{classManager_a8abce1582047cb434a87dbe2dbe9c00d}
+\index{Manager@{Manager}!manage\+Games@{manage\+Games}}
+\index{manage\+Games@{manage\+Games}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{manage\+Games()}{manageGames()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::manage\+Games (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a366f9a671838a633672bc51f9d258646}{}\label{classManager_a366f9a671838a633672bc51f9d258646}
+\index{Manager@{Manager}!manage\+Menu@{manage\+Menu}}
+\index{manage\+Menu@{manage\+Menu}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{manage\+Menu()}{manageMenu()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::manage\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a98ffad2b354a12650d074e604edeffa6}{}\label{classManager_a98ffad2b354a12650d074e604edeffa6}
+\index{Manager@{Manager}!manage\+Myo@{manage\+Myo}}
+\index{manage\+Myo@{manage\+Myo}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{manage\+Myo()}{manageMyo()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::manage\+Myo (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_af8645d966523587f7d7853e8a1497ed4}{}\label{classManager_af8645d966523587f7d7853e8a1497ed4}
+\index{Manager@{Manager}!manage\+Settings@{manage\+Settings}}
+\index{manage\+Settings@{manage\+Settings}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{manage\+Settings()}{manageSettings()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::manage\+Settings (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_abaa47fce892b3e7cb91cce4f22f6dc2c}{}\label{classManager_abaa47fce892b3e7cb91cce4f22f6dc2c}
+\index{Manager@{Manager}!manage\+ThreeD@{manage\+ThreeD}}
+\index{manage\+ThreeD@{manage\+ThreeD}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{manage\+Three\+D()}{manageThreeD()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::manage\+ThreeD (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_ad2a81bcf9fe948180aba898f2a177a39}{}\label{classManager_ad2a81bcf9fe948180aba898f2a177a39}
+\index{Manager@{Manager}!manage\+Videos@{manage\+Videos}}
+\index{manage\+Videos@{manage\+Videos}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{manage\+Videos()}{manageVideos()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::manage\+Videos (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a4c13c8264c0e9e02c9652d1350c69186}{}\label{classManager_a4c13c8264c0e9e02c9652d1350c69186}
+\index{Manager@{Manager}!play\+Video@{play\+Video}}
+\index{play\+Video@{play\+Video}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{play\+Video(sfe\+::\+Movie $\ast$movie)}{playVideo(sfe::Movie *movie)}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::play\+Video (
+\begin{DoxyParamCaption}
+\item[{sfe\+::\+Movie $\ast$}]{movie}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a30e2453a8522192bcf0061491fb0e768}{}\label{classManager_a30e2453a8522192bcf0061491fb0e768}
+\index{Manager@{Manager}!run@{run}}
+\index{run@{run}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{run()}{run()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_af8c67c221068e4e3ccccf1d5f70ba8ee}{}\label{classManager_af8c67c221068e4e3ccccf1d5f70ba8ee}
+\index{Manager@{Manager}!splash\+Screen@{splash\+Screen}}
+\index{splash\+Screen@{splash\+Screen}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{splash\+Screen()}{splashScreen()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::splash\+Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_ab9652f47f396c929f9b05b3619bd3254}{}\label{classManager_ab9652f47f396c929f9b05b3619bd3254}
+\index{Manager@{Manager}!window\+Events@{window\+Events}}
+\index{window\+Events@{window\+Events}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{window\+Events()}{windowEvents()}}]{\setlength{\rightskip}{0pt plus 5cm}void Manager\+::window\+Events (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a23be264535544bde00ce3b9216f5839e}{}\label{classManager_a23be264535544bde00ce3b9216f5839e}
+
+
+\subsection{Field Documentation}
+\index{Manager@{Manager}!angleX@{angleX}}
+\index{angleX@{angleX}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{angleX}{angleX}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::angleX\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_ac0797572bb4f1bccef22e3d5d09a7bb5}{}\label{classManager_ac0797572bb4f1bccef22e3d5d09a7bb5}
+\index{Manager@{Manager}!angleY@{angleY}}
+\index{angleY@{angleY}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{angleY}{angleY}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::angleY\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a4477aa8adddce16ff4cfb67b4c989ffe}{}\label{classManager_a4477aa8adddce16ff4cfb67b4c989ffe}
+\index{Manager@{Manager}!angleZ@{angleZ}}
+\index{angleZ@{angleZ}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{angleZ}{angleZ}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::angleZ\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_ae82e575227f9f2fa73492d189fc3f1f0}{}\label{classManager_ae82e575227f9f2fa73492d189fc3f1f0}
+\index{Manager@{Manager}!bluetooth@{bluetooth}}
+\index{bluetooth@{bluetooth}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{bluetooth}{bluetooth}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bluetooth} Manager\+::bluetooth\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a8ea668a9304bd75db548cb554e1938a0}{}\label{classManager_a8ea668a9304bd75db548cb554e1938a0}
+\index{Manager@{Manager}!c\+Deb@{c\+Deb}}
+\index{c\+Deb@{c\+Deb}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{c\+Deb}{cDeb}}]{\setlength{\rightskip}{0pt plus 5cm}Clock Manager\+::c\+Deb\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a5a0b1978a70cd9f61dc0992f8d0ff1a7}{}\label{classManager_a5a0b1978a70cd9f61dc0992f8d0ff1a7}
+\index{Manager@{Manager}!current\+Status@{current\+Status}}
+\index{current\+Status@{current\+Status}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{current\+Status}{currentStatus}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf M\+A\+N\+A\+G\+E\+R\+\_\+\+S\+T\+A\+T\+US} Manager\+::current\+Status\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a85a5040629f23c6cb6d722ff8b82d7d8}{}\label{classManager_a85a5040629f23c6cb6d722ff8b82d7d8}
+\index{Manager@{Manager}!draw\+With\+GL@{draw\+With\+GL}}
+\index{draw\+With\+GL@{draw\+With\+GL}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{draw\+With\+GL}{drawWithGL}}]{\setlength{\rightskip}{0pt plus 5cm}bool Manager\+::draw\+With\+GL\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a578fc01b433137173003b232fd5d8b5c}{}\label{classManager_a578fc01b433137173003b232fd5d8b5c}
+\index{Manager@{Manager}!enter\+Pressed@{enter\+Pressed}}
+\index{enter\+Pressed@{enter\+Pressed}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{enter\+Pressed}{enterPressed}}]{\setlength{\rightskip}{0pt plus 5cm}bool Manager\+::enter\+Pressed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a0f72e89b86fbe7d83006e33f3bf65af6}{}\label{classManager_a0f72e89b86fbe7d83006e33f3bf65af6}
+\index{Manager@{Manager}!escape\+Pressed@{escape\+Pressed}}
+\index{escape\+Pressed@{escape\+Pressed}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{escape\+Pressed}{escapePressed}}]{\setlength{\rightskip}{0pt plus 5cm}bool Manager\+::escape\+Pressed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_aa4d6ae86cd8a720763c6a65ec11ee4b2}{}\label{classManager_aa4d6ae86cd8a720763c6a65ec11ee4b2}
+\index{Manager@{Manager}!first\+Myo\+Pose@{first\+Myo\+Pose}}
+\index{first\+Myo\+Pose@{first\+Myo\+Pose}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{first\+Myo\+Pose}{firstMyoPose}}]{\setlength{\rightskip}{0pt plus 5cm}bool Manager\+::first\+Myo\+Pose\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a8244d18155248161add39e851a749009}{}\label{classManager_a8244d18155248161add39e851a749009}
+\index{Manager@{Manager}!fullscreen@{fullscreen}}
+\index{fullscreen@{fullscreen}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{fullscreen}{fullscreen}}]{\setlength{\rightskip}{0pt plus 5cm}bool Manager\+::fullscreen\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_aa5b7a47a6fbe9ceeb794becfe4b5f783}{}\label{classManager_aa5b7a47a6fbe9ceeb794becfe4b5f783}
+\index{Manager@{Manager}!height3D@{height3D}}
+\index{height3D@{height3D}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{height3D}{height3D}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::height3D\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a993a1557e2721396eec0c996875e7d7a}{}\label{classManager_a993a1557e2721396eec0c996875e7d7a}
+\index{Manager@{Manager}!hub@{hub}}
+\index{hub@{hub}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{hub}{hub}}]{\setlength{\rightskip}{0pt plus 5cm}Hub$\ast$ Manager\+::hub\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_aa5b648bc7e8a1f5a667b7eaf3aa08152}{}\label{classManager_aa5b648bc7e8a1f5a667b7eaf3aa08152}
+\index{Manager@{Manager}!leap\+Controller@{leap\+Controller}}
+\index{leap\+Controller@{leap\+Controller}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{leap\+Controller}{leapController}}]{\setlength{\rightskip}{0pt plus 5cm}Leap\+::\+Controller Manager\+::leap\+Controller\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a98fbc2dcc62ae1c3f576cb85d5e331f4}{}\label{classManager_a98fbc2dcc62ae1c3f576cb85d5e331f4}
+\index{Manager@{Manager}!leap\+Listener@{leap\+Listener}}
+\index{leap\+Listener@{leap\+Listener}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{leap\+Listener}{leapListener}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Leap\+Listener} Manager\+::leap\+Listener\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a34352d48738b796043dd3af2a447c5d3}{}\label{classManager_a34352d48738b796043dd3af2a447c5d3}
+\index{Manager@{Manager}!load\+Check@{load\+Check}}
+\index{load\+Check@{load\+Check}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{load\+Check}{loadCheck}}]{\setlength{\rightskip}{0pt plus 5cm}bool Manager\+::load\+Check\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a0b7d7eef1b25676ff98d5cd037aaa9ac}{}\label{classManager_a0b7d7eef1b25676ff98d5cd037aaa9ac}
+\index{Manager@{Manager}!menu@{menu}}
+\index{menu@{menu}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{menu}{menu}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Menu} Manager\+::menu\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_ae849624e14738867ea9f6fcffef3da24}{}\label{classManager_ae849624e14738867ea9f6fcffef3da24}
+\index{Manager@{Manager}!myo\+Armband@{myo\+Armband}}
+\index{myo\+Armband@{myo\+Armband}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{myo\+Armband}{myoArmband}}]{\setlength{\rightskip}{0pt plus 5cm}Myo$\ast$ Manager\+::myo\+Armband\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a3764298317afa9f0e59e4366c1aac0a6}{}\label{classManager_a3764298317afa9f0e59e4366c1aac0a6}
+\index{Manager@{Manager}!myo\+Connector@{myo\+Connector}}
+\index{myo\+Connector@{myo\+Connector}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{myo\+Connector}{myoConnector}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Myo\+Connector} Manager\+::myo\+Connector\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a8117b9ff0ea4c66e1379e088a6d28c5e}{}\label{classManager_a8117b9ff0ea4c66e1379e088a6d28c5e}
+\index{Manager@{Manager}!myo\+Current\+Pose@{myo\+Current\+Pose}}
+\index{myo\+Current\+Pose@{myo\+Current\+Pose}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{myo\+Current\+Pose}{myoCurrentPose}}]{\setlength{\rightskip}{0pt plus 5cm}string Manager\+::myo\+Current\+Pose\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a86e49f5468df074459dfb578d1c24cfa}{}\label{classManager_a86e49f5468df074459dfb578d1c24cfa}
+\index{Manager@{Manager}!myo\+Directions@{myo\+Directions}}
+\index{myo\+Directions@{myo\+Directions}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{myo\+Directions}{myoDirections}}]{\setlength{\rightskip}{0pt plus 5cm}vec3 Manager\+::myo\+Directions\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a335d41f08d1075e7622a1caa64df2bdc}{}\label{classManager_a335d41f08d1075e7622a1caa64df2bdc}
+\index{Manager@{Manager}!myo\+Last\+Pose@{myo\+Last\+Pose}}
+\index{myo\+Last\+Pose@{myo\+Last\+Pose}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{myo\+Last\+Pose}{myoLastPose}}]{\setlength{\rightskip}{0pt plus 5cm}string Manager\+::myo\+Last\+Pose\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_ac3e8cf065d787b8a79bd631dd54cfbc6}{}\label{classManager_ac3e8cf065d787b8a79bd631dd54cfbc6}
+\index{Manager@{Manager}!myo\+Manager@{myo\+Manager}}
+\index{myo\+Manager@{myo\+Manager}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{myo\+Manager}{myoManager}}]{\setlength{\rightskip}{0pt plus 5cm}thread Manager\+::myo\+Manager\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a2b4f07b099ad6839729bd03bbeea52ad}{}\label{classManager_a2b4f07b099ad6839729bd03bbeea52ad}
+\index{Manager@{Manager}!settings@{settings}}
+\index{settings@{settings}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{settings}{settings}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Settings} Manager\+::settings\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a1799e8219d94565f72625e6821eda993}{}\label{classManager_a1799e8219d94565f72625e6821eda993}
+\index{Manager@{Manager}!t\+Deb@{t\+Deb}}
+\index{t\+Deb@{t\+Deb}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{t\+Deb}{tDeb}}]{\setlength{\rightskip}{0pt plus 5cm}Clock Manager\+::t\+Deb\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a99819b2b5c34b66e76762ae20e6c6f55}{}\label{classManager_a99819b2b5c34b66e76762ae20e6c6f55}
+\index{Manager@{Manager}!threeD@{threeD}}
+\index{threeD@{threeD}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{threeD}{threeD}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ThreeD} Manager\+::threeD\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_aec79717dcdb413187e068925497eda32}{}\label{classManager_aec79717dcdb413187e068925497eda32}
+\index{Manager@{Manager}!video@{video}}
+\index{video@{video}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{video}{video}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Video} Manager\+::video\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_ab8b44618fbef7c927598d8154a5415de}{}\label{classManager_ab8b44618fbef7c927598d8154a5415de}
+\index{Manager@{Manager}!V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+ON@{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+ON}}
+\index{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+ON@{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+ON}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+ON}{VIEW_DIMENSION}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::\+V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+ON\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a23e4b935abf9df5d71e5bf9dc89a9062}{}\label{classManager_a23e4b935abf9df5d71e5bf9dc89a9062}
+\index{Manager@{Manager}!V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+X@{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+X}}
+\index{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+X@{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+X}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+X}{VIEW_DIMENSION_X}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::\+V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+X\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a835d170601628a807609db4f797c2382}{}\label{classManager_a835d170601628a807609db4f797c2382}
+\index{Manager@{Manager}!V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+Y@{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+Y}}
+\index{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+Y@{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+Y}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+Y}{VIEW_DIMENSION_Y}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::\+V\+I\+E\+W\+\_\+\+D\+I\+M\+E\+N\+S\+I\+O\+N\+\_\+Y\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a2d875780ce3f0925ccd4165312600c06}{}\label{classManager_a2d875780ce3f0925ccd4165312600c06}
+\index{Manager@{Manager}!V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+X@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+X}}
+\index{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+X@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+X}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+X}{VIEW_POSITION_BOTTOM_X}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::\+V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+X\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_aa1a80343a56401148926e13111041089}{}\label{classManager_aa1a80343a56401148926e13111041089}
+\index{Manager@{Manager}!V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+Y@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+Y}}
+\index{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+Y@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+Y}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+Y}{VIEW_POSITION_BOTTOM_Y}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::\+V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+B\+O\+T\+T\+O\+M\+\_\+Y\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_acccc2f78c0d94ca985fc83691daec707}{}\label{classManager_acccc2f78c0d94ca985fc83691daec707}
+\index{Manager@{Manager}!V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+X@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+X}}
+\index{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+X@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+X}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+X}{VIEW_POSITION_LEFT_X}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::\+V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+X\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a48a66a40d7d6f25ca5373c104046e716}{}\label{classManager_a48a66a40d7d6f25ca5373c104046e716}
+\index{Manager@{Manager}!V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+Y@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+Y}}
+\index{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+Y@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+Y}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+Y}{VIEW_POSITION_LEFT_Y}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::\+V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+L\+E\+F\+T\+\_\+Y\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a30a44561824762281c6386bc8c395be1}{}\label{classManager_a30a44561824762281c6386bc8c395be1}
+\index{Manager@{Manager}!V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+X@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+X}}
+\index{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+X@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+X}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+X}{VIEW_POSITION_RIGHT_X}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::\+V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+X\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a186c67951bc370d8abcb7e4015dd8ff0}{}\label{classManager_a186c67951bc370d8abcb7e4015dd8ff0}
+\index{Manager@{Manager}!V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+Y@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+Y}}
+\index{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+Y@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+Y}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+Y}{VIEW_POSITION_RIGHT_Y}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::\+V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+R\+I\+G\+H\+T\+\_\+Y\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a48eceb962e4626042d65dee9eb396afa}{}\label{classManager_a48eceb962e4626042d65dee9eb396afa}
+\index{Manager@{Manager}!V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+X@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+X}}
+\index{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+X@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+X}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+X}{VIEW_POSITION_TOP_X}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::\+V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+X\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a6f253444bbaafa06701fda2d9cee9a29}{}\label{classManager_a6f253444bbaafa06701fda2d9cee9a29}
+\index{Manager@{Manager}!V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+Y@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+Y}}
+\index{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+Y@{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+Y}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+Y}{VIEW_POSITION_TOP_Y}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::\+V\+I\+E\+W\+\_\+\+P\+O\+S\+I\+T\+I\+O\+N\+\_\+\+T\+O\+P\+\_\+Y\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a5ebf3e78513ad3b4f53dd04554091c11}{}\label{classManager_a5ebf3e78513ad3b4f53dd04554091c11}
+\index{Manager@{Manager}!view\+Bottom@{view\+Bottom}}
+\index{view\+Bottom@{view\+Bottom}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{view\+Bottom}{viewBottom}}]{\setlength{\rightskip}{0pt plus 5cm}View Manager\+::view\+Bottom\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a1eeb8ba680636025d7b7c51cf5437bcd}{}\label{classManager_a1eeb8ba680636025d7b7c51cf5437bcd}
+\index{Manager@{Manager}!view\+Height@{view\+Height}}
+\index{view\+Height@{view\+Height}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{view\+Height}{viewHeight}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::view\+Height\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_aa8c3baaf60f70a4297c4f0dce0d07a7f}{}\label{classManager_aa8c3baaf60f70a4297c4f0dce0d07a7f}
+\index{Manager@{Manager}!view\+Left@{view\+Left}}
+\index{view\+Left@{view\+Left}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{view\+Left}{viewLeft}}]{\setlength{\rightskip}{0pt plus 5cm}View Manager\+::view\+Left\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a554b1801bd4e3739883d2ab2515bc3bc}{}\label{classManager_a554b1801bd4e3739883d2ab2515bc3bc}
+\index{Manager@{Manager}!view\+Right@{view\+Right}}
+\index{view\+Right@{view\+Right}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{view\+Right}{viewRight}}]{\setlength{\rightskip}{0pt plus 5cm}View Manager\+::view\+Right\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a053a04be419dfbf8c6ea09ca82f227b9}{}\label{classManager_a053a04be419dfbf8c6ea09ca82f227b9}
+\index{Manager@{Manager}!view\+Top@{view\+Top}}
+\index{view\+Top@{view\+Top}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{view\+Top}{viewTop}}]{\setlength{\rightskip}{0pt plus 5cm}View Manager\+::view\+Top\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a2090b902817e39ca9d41955e6df815c0}{}\label{classManager_a2090b902817e39ca9d41955e6df815c0}
+\index{Manager@{Manager}!view\+Width@{view\+Width}}
+\index{view\+Width@{view\+Width}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{view\+Width}{viewWidth}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::view\+Width\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a02b2d2ad1700f0791b74ae6b67c03f53}{}\label{classManager_a02b2d2ad1700f0791b74ae6b67c03f53}
+\index{Manager@{Manager}!width3D@{width3D}}
+\index{width3D@{width3D}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{width3D}{width3D}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::width3D\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a6135e1c40a71a1bdbbbab15c84614de2}{}\label{classManager_a6135e1c40a71a1bdbbbab15c84614de2}
+\index{Manager@{Manager}!window@{window}}
+\index{window@{window}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{window}{window}}]{\setlength{\rightskip}{0pt plus 5cm}Render\+Window$\ast$ Manager\+::window\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a1ba39cb3b48db43ac88983af62d29ceb}{}\label{classManager_a1ba39cb3b48db43ac88983af62d29ceb}
+\index{Manager@{Manager}!zoom@{zoom}}
+\index{zoom@{zoom}!Manager@{Manager}}
+\subsubsection[{\texorpdfstring{zoom}{zoom}}]{\setlength{\rightskip}{0pt plus 5cm}float Manager\+::zoom\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classManager_a39946012d45458a913d1c1a4604be337}{}\label{classManager_a39946012d45458a913d1c1a4604be337}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Manager_8h}{Manager.\+h}\end{DoxyCompactItemize}

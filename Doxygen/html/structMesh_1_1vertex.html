@@ -98,6 +98,9 @@ $(document).ready(function(){initNavTree('structMesh_1_1vertex.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>It is a set of vectors which contains a position vector, a normal vector and a texture coordinate vector.  
+</p>
+
 <p><code>#include &lt;Mesh.h&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -119,6 +122,8 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>When lighting is enabled in OpenGL, the normal vectors are used to determine how much light is received at the specified vertex or surface.</p>
+<p>This lighting processing is performed at eye coordinate space, therefore, normal vectors in object coordinates are also transformed to eye coordinates with GL_MODELVIEW matrix, but in a different way as vertices do. </p>
 
 </div>
 </div>
@@ -131,6 +136,7 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>The actual point represented in the tridimensional space (x, y, z). </p>
 
 </div>
 </div>
@@ -143,11 +149,12 @@ Data Fields</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Texture coordinates specify the point in the texture image that will correspond to the vertex you are specifying them for. </p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>Mesh.h</li>
+<li><a class="el" href="Mesh_8h.html">Mesh.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -155,7 +162,7 @@ Data Fields</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classMesh.html">Mesh</a></li><li class="navelem"><a class="el" href="structMesh_1_1vertex.html">vertex</a></li>
-    <li class="footer">Generated on Thu Apr 21 2016 12:55:45 for Holum by
+    <li class="footer">Generated on Mon May 2 2016 23:02:55 for Holum by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>
