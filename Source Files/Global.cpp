@@ -9,6 +9,7 @@
 #include <Global.h>
 
 bool quit;
+bool MYO;
 
 string workingPath;
 
@@ -27,6 +28,8 @@ int frameRateLimit;
 
 extern void initGlobal() {
 	quit = false;
+    MYO = false;
+    
     workingPath = "Resource Files/";
     
     #ifdef SCREEN

@@ -42,8 +42,6 @@ void MyoConnector::onPose(Myo* myo, uint64_t timestamp, Pose pose) {
     if (pose != Pose::unknown && pose != Pose::rest) {
         myo->unlock(Myo::unlockHold);
         myo->notifyUserAction();
-    } else {
-        myo->unlock(Myo::unlockTimed);
     }
 }
 

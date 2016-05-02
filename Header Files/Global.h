@@ -18,6 +18,7 @@
 
 //#define MYO
 //#define LEAP
+//#define MYO
 #define LEAP_SCALE 15
 
 #define LEFT 1
@@ -26,6 +27,7 @@
 #define DOWN 4
 
 extern bool quit;
+extern bool MYO;
 
 extern string workingPath;
 

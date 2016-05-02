@@ -11,12 +11,10 @@
 
 Manager::Manager() {
     init();
-    #ifdef MYO
-        initMyo();
-    #endif
-    #ifdef LEAP
-        initLeap();
-    #endif
+	initMyo();
+	#ifdef LEAP
+		initLeap();
+	#endif
     splashScreen();
 	run();
 }
@@ -35,7 +33,7 @@ void Manager::splashScreen() {
 void Manager::initMyo() {
     try {
         hub = new Hub("com.holum.holum-project");
-        
+		hub->setLockingPolicy(Hub::lockingPolicyNone);
         myoArmband = hub->waitForMyo(1000);
         
         if (!myoArmband) {
@@ -48,8 +46,8 @@ void Manager::initMyo() {
 
         myoLastPose = "unknown";
         myoCurrentPose = "unknown";
-
-		int MYO; 
+		myoManager = thread(&Manager::manageMyo, this);
+		MYO = true;
     } catch (const exception& e) {
         #ifdef DEBUG
             cout << "Errore 011: Impossibile inizializzare Myo Armband." << endl;
@@ -79,7 +77,7 @@ void Manager::init() {
     window->setMouseCursorVisible(false);
 	window->setFramerateLimit(frameRateLimit);
     
-    VIEW_DIMENSION = 0.35f;
+    VIEW_DIMENSION = 0.32f;
     
 	VIEW_DIMENSION_X = (height / width) * VIEW_DIMENSION;
     VIEW_DIMENSION_Y = (width / height) * VIEW_DIMENSION;
@@ -126,6 +124,7 @@ void Manager::init() {
     
     angleX = 0;
     angleY = 0;
+	angleZ = 0;
     zoom = 44.6f;
 	drawWithGL = false;
 	enterPressed = false;
@@ -143,10 +142,8 @@ void Manager::init() {
 }
 
 void Manager::run() {
+	
     while (window->isOpen()) {
-        #ifdef MYO
-            hub->runOnce(1);
-        #endif
         windowEvents();
         checkErrors();
         switch (currentStatus) {
@@ -167,6 +164,11 @@ void Manager::run() {
                     bluetooth.closeSocket();
                     bluetoothManager.join();
                 #endif
+				quit = true;
+				if (MYO) {
+					hub->removeListener(&myoConnector);
+					myoManager.join();
+				}
 				window->close();
 				break;
             default:
@@ -268,6 +270,12 @@ void Manager::manageBluetooth() {
     #endif
 }
 
+void Manager::manageMyo() {
+	while (!quit) {
+		hub->runOnce(100);
+	}
+}
+
 void Manager::windowEvents() {
     #ifdef MYO
 		myoCurrentPose = myoConnector.getCurrentPose();
@@ -291,11 +299,12 @@ void Manager::windowEvents() {
 	Event event;
     while (window->pollEvent(event) || (myoCurrentPose != "unknown" && myoCurrentPose != "rest") || bluetooth.isAvailable()) {
         if (event.type == Event::Closed) {
-    		#ifdef MYO
-                hub->removeListener(&myoConnector);
-                delete hub;
-    		#endif
-            #ifdef _WIN32
+			quit = true;
+			if (MYO) {
+				hub->removeListener(&myoConnector);
+				myoManager.join();
+			}
+			#ifdef _WIN32
                 bluetooth.closeSocket();
                 bluetoothManager.join();
             #endif
@@ -319,7 +328,8 @@ void Manager::windowEvents() {
 				drawWithGL = false;
 				angleX = 0;
 				angleY = 0;
-				zoom = 45.0f;
+				angleZ = 0;
+				zoom = 44.6f;
 			}
 			else if (currentStatus == THREED_STATUS && !drawWithGL) {
 				if (!threeD.getRightAnimation() && !threeD.getLeftAnimation()) {
@@ -364,7 +374,7 @@ void Manager::windowEvents() {
 						}
 				}
 				else if (drawWithGL) {
-					angleY += 0.05f;
+					angleY += 0.01f;
 				}
             }
 			else if (currentStatus == SETTINGS_STATUS) {
@@ -401,7 +411,7 @@ void Manager::windowEvents() {
 						}
 				}
 				else if (drawWithGL) {
-					angleY -= 0.05f;
+					angleY -= 0.01f;
 				}
             }
 			else if (currentStatus == SETTINGS_STATUS) {
@@ -414,7 +424,7 @@ void Manager::windowEvents() {
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::Up) {
             if (currentStatus == THREED_STATUS) {
-                angleX += 0.1f;
+                angleX += 0.01f;
             }
 			else if (currentStatus == SETTINGS_STATUS) {
 				if (!settings.getScrollDownAnimation() && !settings.getScrollUpAnimation())
@@ -425,7 +435,7 @@ void Manager::windowEvents() {
         }
         if (event.type == Event::KeyPressed && event.key.code == Keyboard::Down) {
             if (currentStatus == THREED_STATUS) {
-                angleX -= 0.1f;
+                angleX -= 0.01f;
             }
 			else if (currentStatus == SETTINGS_STATUS) {
 				if (!settings.getScrollDownAnimation() && !settings.getScrollUpAnimation())
@@ -455,15 +465,15 @@ void Manager::windowEvents() {
 				vec3 currentMyoDirections = myoConnector.getDirections();
                 
 				if (((int)currentMyoDirections[0] + 9) % 18 > ((int)myoDirections[0] + 9) % 18 + 1) {
-					angleY += 0.01f;
+					angleZ += 0.01f;
 				}
 				else if (((int)currentMyoDirections[0] + 9) % 18 < ((int)myoDirections[0] + 9) % 18 - 1) {
-					angleY -= 0.01f;
+					angleZ -= 0.01f;
 				}
-				if (((int)currentMyoDirections[1] > 9 + 1)) {
+				else if (((int)currentMyoDirections[1] > 9)) {
 					angleX += 0.01f;
 				}
-				else if (((int)currentMyoDirections[1] < 9 - 1)) {
+				else if (((int)currentMyoDirections[1] < 9)) {
 					angleX -= 0.01f;
 				}
 			}
@@ -598,6 +608,7 @@ void Manager::drawGL() {
 	
     mat4 horizontalModel;
 	horizontalModel = rotate(horizontalModel, angleX, vec3(1.0f, 0.0f, 0.0f));
+	horizontalModel = rotate(horizontalModel, angleZ, vec3(0.0f, 0.0f, 1.0f));
 	horizontalModel = translate(horizontalModel, vec3(threeD.getModelHorizontalOffset(), threeD.getModelVerticalOffset(), threeD.getModelDepthOffset()));
     horizontalModel = rotate(horizontalModel, angleY, vec3(0.0f, 1.0f, 0.0f));
 
@@ -631,6 +642,7 @@ void Manager::drawGL() {
     
     mat4 verticalModel;
     verticalModel = rotate(verticalModel, angleX, vec3(1.0f, 0.0f, 0.0f));
+	verticalModel = rotate(verticalModel, angleZ, vec3(0.0f, 0.0f, 1.0f));
 	verticalModel = translate(verticalModel, vec3(threeD.getModelHorizontalOffset(), threeD.getModelVerticalOffset(), 0.0f));
     verticalModel = rotate(verticalModel, angleY, vec3(0.0f, 1.0f, 0.0f));
 
@@ -682,10 +694,10 @@ void Manager::playVideo(sfe::Movie* movie) {
     Clock clock;
     
     while (movie->getDuration() >= clock.getElapsedTime() && !(movie->getStatus() == sfe::Stopped)) {
-        #ifdef MYO
-            hub->runOnce(1);
-            myoCurrentPose = myoConnector.getCurrentPose();
-        #endif
+		if (MYO) {
+			myoCurrentPose = myoConnector.getCurrentPose();
+		}
+		
         Event event;
         if (window->pollEvent(event) || myoCurrentPose != "unknown" || myoCurrentPose != "rest" || bluetooth.isAvailable()) {
             if ((event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) || myoCurrentPose == "fist" || bluetooth.getDirection() == DOWN) {

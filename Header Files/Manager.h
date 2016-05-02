@@ -61,7 +61,8 @@ class Manager {
             thread bluetoothManager;
         #endif
         Bluetooth bluetooth;
-        
+		thread myoManager;
+
         Hub* hub;
         Myo* myoArmband;
         MyoConnector myoConnector;
@@ -74,6 +75,7 @@ class Manager {
     
         float angleX;
         float angleY;
+		float angleZ;
         float zoom;
 
 		bool drawWithGL;
@@ -92,6 +94,7 @@ class Manager {
 		void manageGames();
 		void manageSettings();
 		void manageBluetooth();
+		void manageMyo();
 		void windowEvents();
 		void changeStatus();
 		void drawOn(vector<Drawable*> toDraw);
