@@ -1,6 +1,6 @@
 # Holum
 
-![Holum](Resource Files/Other/holum.png)
+![Holum](Resource%20Files/Other/holum.png)
 
 ### Obiettivi del progetto
 Holum è un progetto che focalizza i suoi obiettivi su usabilità, intuitività ed efficienza. 
