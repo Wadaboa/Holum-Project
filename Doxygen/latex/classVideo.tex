@@ -2,6 +2,11 @@
 \label{classVideo}\index{Video@{Video}}
 
 
+The \hyperlink{classVideo}{Video} class describes the G\+UI and the functions relative to the video playback section.  
+
+
+
+
 {\ttfamily \#include $<$Video.\+h$>$}
 
 \subsection*{Public Member Functions}
@@ -138,7 +143,7 @@ vector$<$ \hyperlink{classFile}{File} $>$ \hyperlink{classVideo_ae6b3a3fcfb9d737
 \item[{int}]{video\+Name\+Len}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a9544892192e1b8baa83418c789bb9410}{}\label{classVideo_a9544892192e1b8baa83418c789bb9410}
-\index{Video@{Video}!check\+Positions@{check\+Positions}}
+It is used to check if the taken file is an actual video, by comparing the file\textquotesingle{}s extension to some of the most known video extensions, like {\itshape mp4}, {\itshape avi} and {\itshape mpeg}. \index{Video@{Video}!check\+Positions@{check\+Positions}}
 \index{check\+Positions@{check\+Positions}!Video@{Video}}
 \subsubsection[{\texorpdfstring{check\+Positions()}{checkPositions()}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::check\+Positions (
 \begin{DoxyParamCaption}
@@ -194,14 +199,14 @@ vector$<$ \hyperlink{classFile}{File} $>$ \hyperlink{classVideo_ae6b3a3fcfb9d737
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_abe9ac37aaef5921270d0d68d27fabe87}{}\label{classVideo_abe9ac37aaef5921270d0d68d27fabe87}
-\index{Video@{Video}!load\+Videos@{load\+Videos}}
+Called by the constructor, it used to initialize both the boolean variables and the video file\textquotesingle{}s properties. \index{Video@{Video}!load\+Videos@{load\+Videos}}
 \index{load\+Videos@{load\+Videos}!Video@{Video}}
 \subsubsection[{\texorpdfstring{load\+Videos()}{loadVideos()}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::load\+Videos (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_ad73b6ab89339073bc731c01c562734e8}{}\label{classVideo_ad73b6ab89339073bc731c01c562734e8}
-\index{Video@{Video}!set\+Down\+Animation@{set\+Down\+Animation}}
+It scans the entire \hyperlink{classVideo}{Video} directory and stores the retrived files in the apposite vector. \index{Video@{Video}!set\+Down\+Animation@{set\+Down\+Animation}}
 \index{set\+Down\+Animation@{set\+Down\+Animation}!Video@{Video}}
 \subsubsection[{\texorpdfstring{set\+Down\+Animation(bool down\+Animation)}{setDownAnimation(bool downAnimation)}}]{\setlength{\rightskip}{0pt plus 5cm}void Video\+::set\+Down\+Animation (
 \begin{DoxyParamCaption}
@@ -249,55 +254,67 @@ vector$<$ \hyperlink{classFile}{File} $>$ \hyperlink{classVideo_ae6b3a3fcfb9d737
 \index{Video@{Video}!animation\+Speed@{animation\+Speed}}
 \index{animation\+Speed@{animation\+Speed}!Video@{Video}}
 \subsubsection[{\texorpdfstring{animation\+Speed}{animationSpeed}}]{\setlength{\rightskip}{0pt plus 5cm}float Video\+::animation\+Speed\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_aa7fb4b457e5594265a89474824db2437}{}\label{classVideo_aa7fb4b457e5594265a89474824db2437}
-\index{Video@{Video}!animation\+Time@{animation\+Time}}
+It calculates the animation speed, to decide how many cycles the program has to do, in order to perform the animation correctly.
+
+
+\begin{DoxyCode}
+\hyperlink{classVideo_aa7fb4b457e5594265a89474824db2437}{animationSpeed} = \hyperlink{Global_8h_a48083b65ac9a863566dc3e3fff09a5b4}{height} / \hyperlink{classVideo_aa7fb4b457e5594265a89474824db2437}{animationSpeed};
+\end{DoxyCode}
+ \index{Video@{Video}!animation\+Time@{animation\+Time}}
 \index{animation\+Time@{animation\+Time}!Video@{Video}}
 \subsubsection[{\texorpdfstring{animation\+Time}{animationTime}}]{\setlength{\rightskip}{0pt plus 5cm}float Video\+::animation\+Time\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a76be94d2c8b95d4d3151fe1fdd00155b}{}\label{classVideo_a76be94d2c8b95d4d3151fe1fdd00155b}
-\index{Video@{Video}!down\+Animation@{down\+Animation}}
+It calculates the division between the framerate limit and a constant, which is 2.\+5 by default.
+
+
+\begin{DoxyCode}
+\hyperlink{classVideo_a76be94d2c8b95d4d3151fe1fdd00155b}{animationTime} = \hyperlink{Global_8h_aa6ad98e2da98fc8f04c67ddab2575bcc}{frameRateLimit} / 2.5f;
+\end{DoxyCode}
+ \index{Video@{Video}!down\+Animation@{down\+Animation}}
 \index{down\+Animation@{down\+Animation}!Video@{Video}}
 \subsubsection[{\texorpdfstring{down\+Animation}{downAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::down\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_aec0e8ade42cb0336539857309f1329ee}{}\label{classVideo_aec0e8ade42cb0336539857309f1329ee}
-\index{Video@{Video}!first@{first}}
+Checks if the program has to perform a down animation, whenever it exits from a video or the menu. \index{Video@{Video}!first@{first}}
 \index{first@{first}!Video@{Video}}
 \subsubsection[{\texorpdfstring{first}{first}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::first\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a8d16cd62917d62c5cda8df87f968c9be}{}\label{classVideo_a8d16cd62917d62c5cda8df87f968c9be}
-\index{Video@{Video}!first\+Video\+Position@{first\+Video\+Position}}
+Checks if it is the first time the current animation function gets called, since it is being called many times in a program cycle. \index{Video@{Video}!first\+Video\+Position@{first\+Video\+Position}}
 \index{first\+Video\+Position@{first\+Video\+Position}!Video@{Video}}
 \subsubsection[{\texorpdfstring{first\+Video\+Position}{firstVideoPosition}}]{\setlength{\rightskip}{0pt plus 5cm}int Video\+::first\+Video\+Position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a1061f9cbb975530d37e5ef0be54b386a}{}\label{classVideo_a1061f9cbb975530d37e5ef0be54b386a}
-\index{Video@{Video}!left\+Animation@{left\+Animation}}
+It keeps track of the central section of the menu, which is represented by the biggest thumbnail. \index{Video@{Video}!left\+Animation@{left\+Animation}}
 \index{left\+Animation@{left\+Animation}!Video@{Video}}
 \subsubsection[{\texorpdfstring{left\+Animation}{leftAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::left\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a9cc3dcc22a6e20b9f1dbc6340386c5d0}{}\label{classVideo_a9cc3dcc22a6e20b9f1dbc6340386c5d0}
-\index{Video@{Video}!left\+Position@{left\+Position}}
+Checks if the program has to perform a left animation, to navigate through the menu. \index{Video@{Video}!left\+Position@{left\+Position}}
 \index{left\+Position@{left\+Position}!Video@{Video}}
 \subsubsection[{\texorpdfstring{left\+Position}{leftPosition}}]{\setlength{\rightskip}{0pt plus 5cm}int Video\+::left\+Position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_aae5cccd35042dd9947906c0d25d1d6ca}{}\label{classVideo_aae5cccd35042dd9947906c0d25d1d6ca}
-\index{Video@{Video}!movie@{movie}}
+It keeps track of the left section of the menu, which is represented by a smaller thumbnail than the central one. \index{Video@{Video}!movie@{movie}}
 \index{movie@{movie}!Video@{Video}}
 \subsubsection[{\texorpdfstring{movie}{movie}}]{\setlength{\rightskip}{0pt plus 5cm}sfe\+::\+Movie Video\+::movie\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a7caa629bcd7defde560543a16fda097d}{}\label{classVideo_a7caa629bcd7defde560543a16fda097d}
 \index{Video@{Video}!n\+Video@{n\+Video}}
 \index{n\+Video@{n\+Video}!Video@{Video}}
 \subsubsection[{\texorpdfstring{n\+Video}{nVideo}}]{\setlength{\rightskip}{0pt plus 5cm}int Video\+::n\+Video\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_abeb02719d0e789cc53428317c1d8cb51}{}\label{classVideo_abeb02719d0e789cc53428317c1d8cb51}
-\index{Video@{Video}!out\+Position@{out\+Position}}
+It stores how many videos were loaded, after parsing them from the file system. \index{Video@{Video}!out\+Position@{out\+Position}}
 \index{out\+Position@{out\+Position}!Video@{Video}}
 \subsubsection[{\texorpdfstring{out\+Position}{outPosition}}]{\setlength{\rightskip}{0pt plus 5cm}int Video\+::out\+Position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_afa1d75f88328a80b477f2016dec95a10}{}\label{classVideo_afa1d75f88328a80b477f2016dec95a10}
-\index{Video@{Video}!right\+Animation@{right\+Animation}}
+It keeps track of the outer section of the menu, which is actually drawn to the window, but hidden from the user\textquotesingle{}s view. \index{Video@{Video}!right\+Animation@{right\+Animation}}
 \index{right\+Animation@{right\+Animation}!Video@{Video}}
 \subsubsection[{\texorpdfstring{right\+Animation}{rightAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::right\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_ab61a504587371180bb6533ed99e1a688}{}\label{classVideo_ab61a504587371180bb6533ed99e1a688}
-\index{Video@{Video}!right\+Position@{right\+Position}}
+Checks if the program has to perform a right animation, to navigate through the menu. \index{Video@{Video}!right\+Position@{right\+Position}}
 \index{right\+Position@{right\+Position}!Video@{Video}}
 \subsubsection[{\texorpdfstring{right\+Position}{rightPosition}}]{\setlength{\rightskip}{0pt plus 5cm}int Video\+::right\+Position\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a5edc214489dc7ffb30cbfe0849771537}{}\label{classVideo_a5edc214489dc7ffb30cbfe0849771537}
-\index{Video@{Video}!scale\+Factor@{scale\+Factor}}
+It keeps track of the right section of the menu, which is represented by a smaller thumbnail than the central one. \index{Video@{Video}!scale\+Factor@{scale\+Factor}}
 \index{scale\+Factor@{scale\+Factor}!Video@{Video}}
 \subsubsection[{\texorpdfstring{scale\+Factor}{scaleFactor}}]{\setlength{\rightskip}{0pt plus 5cm}float Video\+::scale\+Factor\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a9437d769e28b21103b07da7092569e2e}{}\label{classVideo_a9437d769e28b21103b07da7092569e2e}
-\index{Video@{Video}!step\+Counter@{step\+Counter}}
+It is used to draw the actual thumbnail\textquotesingle{}s scale and to modify it whenever a right or left animation is performed. \index{Video@{Video}!step\+Counter@{step\+Counter}}
 \index{step\+Counter@{step\+Counter}!Video@{Video}}
 \subsubsection[{\texorpdfstring{step\+Counter}{stepCounter}}]{\setlength{\rightskip}{0pt plus 5cm}int Video\+::step\+Counter\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a862be3ec8e981fe12e515c21e79f32c0}{}\label{classVideo_a862be3ec8e981fe12e515c21e79f32c0}
 \index{Video@{Video}!to\+Draw@{to\+Draw}}
 \index{to\+Draw@{to\+Draw}!Video@{Video}}
 \subsubsection[{\texorpdfstring{to\+Draw}{toDraw}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<$Drawable$\ast$$>$ Video\+::to\+Draw\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a6b8b02006dbbe4a6cc2b469024c383a8}{}\label{classVideo_a6b8b02006dbbe4a6cc2b469024c383a8}
-\index{Video@{Video}!up\+Animation@{up\+Animation}}
+It stores each and every S\+F\+ML object the window has to draw. \index{Video@{Video}!up\+Animation@{up\+Animation}}
 \index{up\+Animation@{up\+Animation}!Video@{Video}}
 \subsubsection[{\texorpdfstring{up\+Animation}{upAnimation}}]{\setlength{\rightskip}{0pt plus 5cm}bool Video\+::up\+Animation\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_a997f7ceb635d7897d2eed00cf6faaf19}{}\label{classVideo_a997f7ceb635d7897d2eed00cf6faaf19}
-\index{Video@{Video}!video\+Files@{video\+Files}}
+Checks if the program has to perform an up animation, the first time it enters the menu or a video. \index{Video@{Video}!video\+Files@{video\+Files}}
 \index{video\+Files@{video\+Files}!Video@{Video}}
 \subsubsection[{\texorpdfstring{video\+Files}{videoFiles}}]{\setlength{\rightskip}{0pt plus 5cm}vector$<${\bf File}$>$ Video\+::video\+Files\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classVideo_ae6b3a3fcfb9d7379aa39523a70dff6c7}{}\label{classVideo_ae6b3a3fcfb9d7379aa39523a70dff6c7}
-
+It stores each and every pointer to a video file, retrieved from the resources directory. 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

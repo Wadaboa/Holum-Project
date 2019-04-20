@@ -100,6 +100,9 @@ $(document).ready(function(){initNavTree('classVideo.html','');});
 </div><!--header-->
 <div class="contents">
 
+<p>The <a class="el" href="classVideo.html" title="The Video class describes the GUI and the functions relative to the video playback section...">Video</a> class describes the GUI and the functions relative to the video playback section.  
+</p>
+
 <p><code>#include &lt;Video.h&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -327,6 +330,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It is used to check if the taken file is an actual video, by comparing the file's extension to some of the most known video extensions, like <em>mp4</em>, <em>avi</em> and <em>mpeg</em>. </p>
 
 </div>
 </div>
@@ -455,6 +459,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Called by the constructor, it used to initialize both the boolean variables and the video file's properties. </p>
 
 </div>
 </div>
@@ -478,6 +483,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It scans the entire <a class="el" href="classVideo.html" title="The Video class describes the GUI and the functions relative to the video playback section...">Video</a> directory and stores the retrived files in the apposite vector. </p>
 
 </div>
 </div>
@@ -593,7 +599,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
+<p>It calculates the animation speed, to decide how many cycles the program has to do, in order to perform the animation correctly.</p>
+<div class="fragment"><div class="line"><a class="code" href="classVideo.html#aa7fb4b457e5594265a89474824db2437">animationSpeed</a> = <a class="code" href="Global_8h.html#a48083b65ac9a863566dc3e3fff09a5b4">height</a> / <a class="code" href="classVideo.html#aa7fb4b457e5594265a89474824db2437">animationSpeed</a>;</div></div><!-- fragment --> 
 </div>
 </div>
 <a class="anchor" id="a76be94d2c8b95d4d3151fe1fdd00155b"></a>
@@ -613,7 +620,8 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
+<p>It calculates the division between the framerate limit and a constant, which is 2.5 by default.</p>
+<div class="fragment"><div class="line"><a class="code" href="classVideo.html#a76be94d2c8b95d4d3151fe1fdd00155b">animationTime</a> = <a class="code" href="Global_8h.html#aa6ad98e2da98fc8f04c67ddab2575bcc">frameRateLimit</a> / 2.5f;</div></div><!-- fragment --> 
 </div>
 </div>
 <a class="anchor" id="aec0e8ade42cb0336539857309f1329ee"></a>
@@ -633,6 +641,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Checks if the program has to perform a down animation, whenever it exits from a video or the menu. </p>
 
 </div>
 </div>
@@ -653,6 +662,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Checks if it is the first time the current animation function gets called, since it is being called many times in a program cycle. </p>
 
 </div>
 </div>
@@ -673,6 +683,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It keeps track of the central section of the menu, which is represented by the biggest thumbnail. </p>
 
 </div>
 </div>
@@ -693,6 +704,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Checks if the program has to perform a left animation, to navigate through the menu. </p>
 
 </div>
 </div>
@@ -713,6 +725,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It keeps track of the left section of the menu, which is represented by a smaller thumbnail than the central one. </p>
 
 </div>
 </div>
@@ -753,6 +766,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It stores how many videos were loaded, after parsing them from the file system. </p>
 
 </div>
 </div>
@@ -773,6 +787,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It keeps track of the outer section of the menu, which is actually drawn to the window, but hidden from the user's view. </p>
 
 </div>
 </div>
@@ -793,6 +808,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Checks if the program has to perform a right animation, to navigate through the menu. </p>
 
 </div>
 </div>
@@ -813,6 +829,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It keeps track of the right section of the menu, which is represented by a smaller thumbnail than the central one. </p>
 
 </div>
 </div>
@@ -833,6 +850,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It is used to draw the actual thumbnail's scale and to modify it whenever a right or left animation is performed. </p>
 
 </div>
 </div>
@@ -873,6 +891,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It stores each and every SFML object the window has to draw. </p>
 
 </div>
 </div>
@@ -893,6 +912,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Checks if the program has to perform an up animation, the first time it enters the menu or a video. </p>
 
 </div>
 </div>
@@ -913,6 +933,7 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>It stores each and every pointer to a video file, retrieved from the resources directory. </p>
 
 </div>
 </div>
@@ -925,7 +946,7 @@ Private Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="classVideo.html">Video</a></li>
-    <li class="footer">Generated on Mon May 2 2016 23:02:55 for Holum by
+    <li class="footer">Generated on Thu May 5 2016 09:56:45 for Holum by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.11 </li>
   </ul>

@@ -64,10 +64,10 @@ class File {
         /*! Returns the thumbnail's path. */
         string getThumbnailPath();
     
-        /*! Sets the image's name. */
+        /*! Sets the the name of the image. */
         void setTitle(string title);
     
-        /*! Returns the image's name. */
+        /*! Returns the name of the image. */
         string getTitle();
     
         /*! Returns the thumbnail object. */

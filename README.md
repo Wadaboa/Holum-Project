@@ -1,4 +1,7 @@
 # Holum
+
+![Holum](Resource Files/Other/holum.png)
+
 ### Obiettivi del progetto
 Holum è un progetto che focalizza i suoi obiettivi su usabilità, intuitività ed efficienza. 
 È progettato per utenti di ogni età e possiede una varietà di caratteristiche che possono essere utilizzate per soddisfare una vasta gamma di interessi ed esigenze.
@@ -19,7 +22,7 @@ Il software dovrà poi essere accompagnato da un’appropriato **sistema piramid
 Questa struttura dovrà sorreggere un monitor, il quale si occuperà di visualizzare l’immagine prodotta dal software.
 Infine, la superficie riflettente della piramide, assieme alla suddivisione dell’immagine da visualizzare, dovrà creare il desiderato **effetto di tridimensionalità e profondità della proiezione nello spazio**.
 
-###Specifiche tecniche
+### Specifiche tecniche
 L’effetto utilizzato per la riproduzione delle immagini è conosciuto come **“Pepper’s Ghost”**, ovvero il “Fantasma di Pepper”: una tecnica illusoria utilizzata in teatro e in vari trucchi magici che consiste nell’utilizzo di una o più lastre di vetro, posizionate ad un angolo di 45˚ tra lo spettatore e la scena, unite a una particolare illuminazione, per dare l’illusione della rappresentazione nello spazio delle immagini proiettate.
 Il contenuto che verrà proiettato sarà riprodotto da un software appositamente programmato, utilizzando il linguaggio C++ e le librerie **SFML, sfeMovie, OpenGL, assimp** e altre.
 
@@ -40,14 +43,3 @@ I giochi presenti potranno essere selezionati dall’utente tramite un menù, si
 * **3D**: Sezione dedicata al caricamento e alla rappresentazione di un archivio di modelli 3D in formato OBJ, tramite le funzionalità offerte da OpenGL. 
 L’utente potrà interagire con il modello tramite un controller a sua scelta;
 * **Settings**: Gestione delle preferenze utente riguardanti l’interfaccia grafica, audio e dei controller.
-
-### Ruoli e responsabilità
-* **Eusebio Apopei** (Costruttore, Programmatore): Ha il ruolo di realizzare, sia in fase prototipale che definitiva, la struttura piramidale e quella reggente. Si occuperà anche di svolgere il compito di programmatore di parte del software, tra cui l'utility per sistema operativo Android.
-
-* **Davide Cosentino** (Grafico, Programmatore): Ha il ruolo di realizzare l'interfaccia grafica del programma e di sviluppare una parte del software, tra cui l'utility per sistema operativo Android.
-
-* **Alessio Falai** (Project Manager, Sviluppatore Software): Ha il ruolo di coordinare tutte le attività del progetto e di supervisionare il corretto svolgimento dei lavori. Si occuperà anche di svolgere il compito di analista e programmatore di parte del software e di interfacciare i dispositivi di HID (Human Interface Device) con il software generale.
-
-* **Lorenzo Pratesi** (Sviluppatore Software): Svolge il principale compito di analista e programmatore software del progetto. Si occuperà anche di interfacciare i dispositivi di HID (Human Interface Device) con il software generale.
-
-* **Vittorio Sodini** (Grafico, Programmatore): Ha il ruolo di realizzare l’interfaccia grafica del programma e di sviluppare una parte del software, tra cui l'utility per sistema operativo Android.
