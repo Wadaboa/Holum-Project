@@ -1,6 +1,8 @@
 # Holum
 
-![Holum](Resource%20Files/Other/holum.png)
+<p align="center">
+  <img width="460" height="300" src="https://github.com/Wadaboa/Holum-Project/blob/master/Resource%20Files/Other/holum.png">
+</p>
 
 ### Obiettivi del progetto
 Holum è un progetto che focalizza i suoi obiettivi su usabilità, intuitività ed efficienza. 
