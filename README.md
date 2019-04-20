@@ -1,7 +1,7 @@
 # Holum
 
 <p align="center">
-  <img width="460" height="300" src="https://github.com/Wadaboa/Holum-Project/blob/master/Resource%20Files/Other/holum.png">
+  <img src="https://github.com/Wadaboa/Holum-Project/blob/master/Resource%20Files/Other/holum.png">
 </p>
 
 ### Obiettivi del progetto
